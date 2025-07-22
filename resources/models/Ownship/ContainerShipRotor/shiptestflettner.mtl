@@ -10,7 +10,7 @@ illum 2
 map_Kd bridge_base_color_srgb.png
 map_Ns bridge_roughness_raw.png
 map_refl bridge_metallic_raw.png
-map_d bridge_Base_color_srgb.png
+map_d bridge_base_color_srgb.png
 map_Bump -bm 1.000000 bridge_normal_directx_raw.png
 
 newmtl Containers

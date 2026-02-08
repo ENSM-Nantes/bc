@@ -298,18 +298,21 @@ int main(int argc, char ** argv)
   IPROF_FUNC;
 #endif
 
+  bindtextdomain("my-domain", "../resources/lang/");
+  textdomain("my-domain");
+
   char cwd[1024]={0};
 
   if(0 != CHDIR("../../resources/"))//Launch from builded sources
     {
       if(0 != CHDIR("/usr/share/bridgecommand"))//Launch from install
 	{
-	  std::cout << "Bidge Commands not able to get resources files" << std::endl;
+	  std::cout << "Bridge Command is not able to get resources files" << std::endl;
 	  exit(-1);
 	}
     }
 
-  if(GETCWD(cwd, sizeof(cwd)) != NULL) printf("BC::Working Directory : %s\n", cwd);
+  if(GETCWD(cwd, sizeof(cwd)) != NULL) printf("BC::Working Directory: %s\n", cwd);
   
 
   //User read/write location - look in here first and the exe folder second for files
@@ -561,7 +564,7 @@ int main(int argc, char ** argv)
     #endif // _WIN32
   */
   if (device == 0) {
-    std::cerr << "Could not start - please check your graphics options." << std::endl;
+    std::cerr << _("Could not start - please check your graphics options.") << std::endl;
     return(EXIT_FAILURE); //Could not get file system
   }
 

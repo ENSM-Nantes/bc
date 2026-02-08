@@ -59,3 +59,8 @@ target_link_libraries(bridgecommand-bc PRIVATE
 	netcdf
 	${JSONCPP_LIBRARIES}
     )
+
+# add libintl for languages
+find_package(Intl REQUIRED)
+target_link_libraries(${PROJECT_NAME} PUBLIC ${Intl_LIBRARY})
+target_include_directories(${PROJECT_NAME} PUBLIC ${Intl_INCLUDE_DIRS})

@@ -137,7 +137,6 @@ void JoyStick::AxisProcess(int aJsNumber, float aRawValue, int aAxisNumber, sJsC
   SimulationModel* pModel = (SimulationModel*)aModel;
   float calibrateValue = 0;
   
-  //std::cout << "Axe " << (int)event.jaxis.axis << " = " << axisValue << std::endl;
   for (unsigned char j = 0; j < MAX_JS_AXIS; j++)
     {
       if (aJsMapping.entry[j].jsNumber == aJsNumber) //Right JS ?

@@ -125,6 +125,18 @@ sJsMapping getJoystickSetup(std::string iniFilename, sJsConf& aJsConf)
 {
   sJsMapping jsMapping;
 
+  //Conf
+  aJsConf.portRangeMin = IniFile::iniFileTof32(iniFilename, "portLever_rangeMin");
+  aJsConf.portRangeMax = IniFile::iniFileTof32(iniFilename, "portLever_rangeMax");
+  aJsConf.portRangeCenter = IniFile::iniFileTof32(iniFilename, "portLever_rangeCenter");
+  aJsConf.stbdRangeMin = IniFile::iniFileTof32(iniFilename, "stbdLever_rangeMin");
+  aJsConf.stbdRangeMax = IniFile::iniFileTof32(iniFilename, "stbdLever_rangeMax");
+  aJsConf.stbdRangeCenter = IniFile::iniFileTof32(iniFilename, "stbdLever_rangeCenter");
+  aJsConf.stbdRangeMin = IniFile::iniFileTof32(iniFilename, "rudder_rangeMin");
+  aJsConf.stbdRangeMax = IniFile::iniFileTof32(iniFilename, "rudder_rangeMax");
+  aJsConf.stbdRangeCenter = IniFile::iniFileTof32(iniFilename, "rudder_rangeCenter");
+  aJsConf.invertPort = (1 == IniFile::iniFileTou32(iniFilename, "invert_port")) ? true : false;
+  aJsConf.invertStbd = (1 == IniFile::iniFileTou32(iniFilename, "invert_stbd")) ? true : false;
   aJsConf.invertRudder = (1 == IniFile::iniFileTou32(iniFilename, "invert_rudder")) ? true : false; 
   aJsConf.eventId = IniFile::iniFileToString(iniFilename, "rpi_event_id");
   

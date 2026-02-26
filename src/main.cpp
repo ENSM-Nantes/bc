@@ -132,9 +132,9 @@ sJsMapping getJoystickSetup(std::string iniFilename, sJsConf& aJsConf)
   aJsConf.stbdRangeMin = IniFile::iniFileTof32(iniFilename, "stbdLever_rangeMin");
   aJsConf.stbdRangeMax = IniFile::iniFileTof32(iniFilename, "stbdLever_rangeMax");
   aJsConf.stbdRangeCenter = IniFile::iniFileTof32(iniFilename, "stbdLever_rangeCenter");
-  aJsConf.stbdRangeMin = IniFile::iniFileTof32(iniFilename, "rudder_rangeMin");
-  aJsConf.stbdRangeMax = IniFile::iniFileTof32(iniFilename, "rudder_rangeMax");
-  aJsConf.stbdRangeCenter = IniFile::iniFileTof32(iniFilename, "rudder_rangeCenter");
+  aJsConf.rudderRangeMin = IniFile::iniFileTof32(iniFilename, "rudder_rangeMin");
+  aJsConf.rudderRangeMax = IniFile::iniFileTof32(iniFilename, "rudder_rangeMax");
+  aJsConf.rudderRangeCenter = IniFile::iniFileTof32(iniFilename, "rudder_rangeCenter");
   aJsConf.invertPort = (1 == IniFile::iniFileTou32(iniFilename, "invert_port")) ? true : false;
   aJsConf.invertStbd = (1 == IniFile::iniFileTou32(iniFilename, "invert_stbd")) ? true : false;
   aJsConf.invertRudder = (1 == IniFile::iniFileTou32(iniFilename, "invert_rudder")) ? true : false; 

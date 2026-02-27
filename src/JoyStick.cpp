@@ -112,7 +112,7 @@ bool JoyStick::Init(void *aModel, void *aGuiMain)
         if (libevdev_has_event_code(mDevice, EV_ABS, axId))
         {
             int val = libevdev_get_event_value(mDevice, EV_ABS, axId);
-            //std::cout << "Axis " << code << " = " << val << std::endl;
+            //std::cout << "Axis " << axId << " = " << val << std::endl;
             JoyStick::AxisProcess(0, val, axId, mJsConf, mJsMapping, aModel);
         }
     }

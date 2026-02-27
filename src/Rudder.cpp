@@ -57,8 +57,9 @@ void Rudder::SetDelta(double aDelta, const double aDt)
 
   if(abs(aDelta) > mDeltaMax)
     aDelta = (aDelta/abs(aDelta))*mDeltaMax;
-  
-  rrSet = (aDelta - mDelta) / aDt;
+
+  if(0 != aDt)
+    rrSet = (aDelta - mDelta) / aDt;
 
   if(abs(rrSet) > mRrMax) mDelta += ((rrSet/abs(rrSet)) * mRrMax * aDt);
   else mDelta = aDelta;

@@ -22,7 +22,7 @@ public:
   /*Getter*/
   Eigen::Vector3d& getT(void);
   double getDelta(void) const;
-  double getDeltaMax(void);
+  double getDeltaMax(void) const;
   void PrintParams(void);
   
 private:

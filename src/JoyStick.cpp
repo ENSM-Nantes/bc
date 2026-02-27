@@ -40,7 +40,6 @@ bool JoyStick::Init(void *aModel, void *aGuiMain)
     
     if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0)
     {
-        SDL_JoystickEventState(SDL_ENABLE);
         std::cerr << "SDL_Init error : " << SDL_GetError() << std::endl;
         return false;
     }
@@ -52,6 +51,8 @@ bool JoyStick::Init(void *aModel, void *aGuiMain)
         SDL_Quit();
         return false;
     }
+    
+    SDL_JoystickEventState(SDL_ENABLE);
 
     std::cout << "::::::JoyStick Parameters::::::" << std::endl;
     for (unsigned char i = 0; i < mNumJoysticks; i++)
@@ -69,6 +70,16 @@ bool JoyStick::Init(void *aModel, void *aGuiMain)
         std::cout << "Axes : " << SDL_JoystickNumAxes(js) << std::endl;
         std::cout << "Buttons : " << SDL_JoystickNumButtons(js) << std::endl;
         std::cout << "POV : " << SDL_JoystickNumHats(js) << std::endl << std::endl;
+
+        //Init Axis
+        SDL_JoystickUpdate();
+        int numAxes = SDL_JoystickNumAxes(js);
+        for (int i = 0; i < numAxes; ++i)
+        {
+            short value = SDL_JoystickGetAxis(js, i);
+            std::cout << "Axis " << i << " = " << value << std::endl;
+            JoyStick::AxisProcess(0, value, i, mJsConf, mJsMapping, aModel);
+        }
 
         SDL_JoystickClose(js);
 
@@ -94,6 +105,17 @@ bool JoyStick::Init(void *aModel, void *aGuiMain)
 	
 	std::cout << "Device name : " << libevdev_get_name(mDevice) << std::endl;
 	std::cout << "Device ID : " << libevdev_get_id_bustype(mDevice) << ":" << libevdev_get_id_vendor(mDevice) << ":" << libevdev_get_id_product(mDevice) << std::endl;
+
+    //Axis initialisation
+    for (int axId = 0; axId < ABS_CNT; axId++)
+    {
+        if (libevdev_has_event_code(mDevice, EV_ABS, axId))
+        {
+            int val = libevdev_get_event_value(mDevice, EV_ABS, axId);
+            //std::cout << "Axis " << code << " = " << val << std::endl;
+            JoyStick::AxisProcess(0, val, axId, mJsConf, mJsMapping, aModel);
+        }
+    }
 
 	device = (void*)mDevice;
 #endif
@@ -197,7 +219,7 @@ void JoyStick::Process(void *aDevice, int aNumJoysticks, sJsConf& aJsConf, sJsMa
                     break;
 
                 case SDL_JOYAXISMOTION:
-                    //std::cout << "Axe " << (int)event.jaxis.axis << " = " << axisValue << std::endl;
+                    //std::cout << "Axe " << (int)event.jaxis.axis << " = " << event.jaxis.value << std::endl;
 		    AxisProcess(i, event.jaxis.value, (int)event.jaxis.axis, aJsConf, aJsMapping, aModel);
                     break;
 

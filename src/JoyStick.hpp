@@ -55,7 +55,18 @@ struct sJsMapping
 struct sJsConf
 {
   std::string eventId;
+  float portRangeMin;
+  float portRangeMax;
+  float portRangeCenter;
+  float stbdRangeMin;
+  float stbdRangeMax;
+  float stbdRangeCenter;
+  float rudderRangeMin;
+  float rudderRangeMax;
+  float rudderRangeCenter;
   bool invertRudder;
+  bool invertPort;
+  bool invertStbd;
 };
 
 class JoyStick
@@ -68,7 +79,9 @@ public:
   ~JoyStick();
 
   bool Init(void *aModel, void *aGuiMain);
-  static void Process(void *aDevice, int aNumJoysticks, sJsMapping& aJsMapping, void *aModel, void* aGuiMain);
+  static float GetCalibrateValue(float aRawValue, float aRangeMin, float aRangeMax, float aRangeCenter, bool aInvert);
+  static void AxisProcess(int aJsNumber, float aRawValue, int aAxisNumber, sJsConf& aJsConf, sJsMapping& aJsMapping, void *aModel);
+  static void Process(void *aDevice, int aNumJoysticks, sJsConf& aJsConf, sJsMapping& aJsMapping, void *aModel, void* aGuiMain);
 
 private:
 

@@ -40,7 +40,6 @@ bool JoyStick::Init(void *aModel, void *aGuiMain)
     
     if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0)
     {
-        SDL_JoystickEventState(SDL_ENABLE);
         std::cerr << "SDL_Init error : " << SDL_GetError() << std::endl;
         return false;
     }
@@ -52,6 +51,8 @@ bool JoyStick::Init(void *aModel, void *aGuiMain)
         SDL_Quit();
         return false;
     }
+    
+    SDL_JoystickEventState(SDL_ENABLE);
 
     std::cout << "::::::JoyStick Parameters::::::" << std::endl;
     for (unsigned char i = 0; i < mNumJoysticks; i++)
@@ -69,6 +70,16 @@ bool JoyStick::Init(void *aModel, void *aGuiMain)
         std::cout << "Axes : " << SDL_JoystickNumAxes(js) << std::endl;
         std::cout << "Buttons : " << SDL_JoystickNumButtons(js) << std::endl;
         std::cout << "POV : " << SDL_JoystickNumHats(js) << std::endl << std::endl;
+
+        //Init Axis
+        SDL_JoystickUpdate();
+        int numAxes = SDL_JoystickNumAxes(js);
+        for (int i = 0; i < numAxes; ++i)
+        {
+            short value = SDL_JoystickGetAxis(js, i);
+            std::cout << "Axis " << i << " = " << value << std::endl;
+            JoyStick::AxisProcess(0, value, i, mJsConf, mJsMapping, aModel);
+        }
 
         SDL_JoystickClose(js);
 
@@ -95,6 +106,17 @@ bool JoyStick::Init(void *aModel, void *aGuiMain)
 	std::cout << "Device name : " << libevdev_get_name(mDevice) << std::endl;
 	std::cout << "Device ID : " << libevdev_get_id_bustype(mDevice) << ":" << libevdev_get_id_vendor(mDevice) << ":" << libevdev_get_id_product(mDevice) << std::endl;
 
+    //Axis initialisation
+    for (int axId = 0; axId < ABS_CNT; axId++)
+    {
+        if (libevdev_has_event_code(mDevice, EV_ABS, axId))
+        {
+            int val = libevdev_get_event_value(mDevice, EV_ABS, axId);
+            //std::cout << "Axis " << axId << " = " << val << std::endl;
+            JoyStick::AxisProcess(0, val, axId, mJsConf, mJsMapping, aModel);
+        }
+    }
+
 	device = (void*)mDevice;
 #endif
 	
@@ -102,19 +124,78 @@ bool JoyStick::Init(void *aModel, void *aGuiMain)
     std::cout << "::::::::::::" << std::endl;
 
     
-    std::thread pollingTask(Process, device, std::ref(mNumJoysticks), std::ref(mJsMapping), aModel, aGuiMain);
+    std::thread pollingTask(Process, device, std::ref(mNumJoysticks), std::ref(mJsConf), std::ref(mJsMapping), aModel, aGuiMain);
     pollingTask.detach();
 
     return true;
 }
 
-void JoyStick::Process(void *aDevice, int aNumJoysticks, sJsMapping& aJsMapping, void* aModel, void* aGuiMain)
+float JoyStick::GetCalibrateValue(float aRawValue, float aRangeMin, float aRangeMax, float aRangeCenter, bool aInvert)
+{
+  float processValue = 0;
+
+  if(aRawValue > aRangeCenter)
+    {
+      processValue = (aRawValue - aRangeCenter) / (aRangeMax - aRangeCenter);
+    }
+  else
+    {
+      processValue = ((aRawValue - aRangeMin) / aRangeCenter) - 1;
+    }
+
+  if(aInvert)
+    processValue *= -1;
+
+  if(processValue > 1)
+    processValue = 1;
+  else if(processValue < -1)
+    processValue = -1;
+    
+  return processValue; 
+}
+
+void JoyStick::AxisProcess(int aJsNumber, float aRawValue, int aAxisNumber, sJsConf& aJsConf, sJsMapping& aJsMapping, void *aModel)
+{
+  SimulationModel* pModel = (SimulationModel*)aModel;
+  float calibrateValue = 0;
+  
+  for (unsigned char j = 0; j < MAX_JS_AXIS; j++)
+    {
+      if (aJsMapping.entry[j].jsNumber == aJsNumber) //Right JS ?
+	{
+	  if (aJsMapping.entry[j].type == AXIS) //Right Type ?
+	    { 
+	      if (aAxisNumber == aJsMapping.entry[j].channel) //Right Channel ?
+		{
+		  if(AXIS_PORT == j)//Port
+		    {
+		      calibrateValue = JoyStick::GetCalibrateValue(aRawValue, aJsConf.portRangeMin, aJsConf.portRangeMax, aJsConf.portRangeCenter, aJsConf.invertPort);
+		      pModel->getOwnShip()->setPortEngine(calibrateValue);
+		    }
+		  else if(AXIS_STBD == j) //Stbd
+		    {
+		      calibrateValue = JoyStick::GetCalibrateValue(aRawValue, aJsConf.stbdRangeMin, aJsConf.stbdRangeMax, aJsConf.stbdRangeCenter, aJsConf.invertStbd);
+		      pModel->getOwnShip()->setPortEngine(calibrateValue);
+		    }
+		  else if (AXIS_RUDDER == j) //Rudder
+		    {
+		      calibrateValue = JoyStick::GetCalibrateValue(aRawValue, aJsConf.rudderRangeMin, aJsConf.rudderRangeMax, aJsConf.rudderRangeCenter, aJsConf.invertRudder);    
+		      pModel->getOwnShip()->setWheel(calibrateValue*(pModel->getOwnShip()->getRudder().getDeltaMax()*180/M_PI));
+		    }
+		}
+	    }
+	}
+    }
+
+}
+
+
+void JoyStick::Process(void *aDevice, int aNumJoysticks, sJsConf& aJsConf, sJsMapping& aJsMapping, void* aModel, void* aGuiMain)
 {
     SDL_Joystick* js;
     SDL_Event event;
     SimulationModel* pModel = (SimulationModel*)aModel;
     GUIMain* pGuiMain = (GUIMain*)aGuiMain;
-    float axisValue = 0;
 
     while(true)
     {
@@ -138,26 +219,8 @@ void JoyStick::Process(void *aDevice, int aNumJoysticks, sJsMapping& aJsMapping,
                     break;
 
                 case SDL_JOYAXISMOTION:
-                    axisValue = event.jaxis.value / 32767.0f;
-                    //std::cout << "Axe " << (int)event.jaxis.axis << " = " << axisValue << std::endl;
-                    for (unsigned char j = 0; j < MAX_JS_AXIS; j++)
-                    {
-                        if (aJsMapping.entry[j].jsNumber == i) //Right JS ?
-                        {
-                            if (aJsMapping.entry[j].type == AXIS) //Right Type ?
-                            { 
-                                if ((int)event.jaxis.axis == aJsMapping.entry[j].channel) //Right Channel ?
-                                {
-                                    if(AXIS_PORT == j)//Port
-                                     pModel->getOwnShip()->setPortEngine(axisValue);
-                                    else if(AXIS_STBD == j) //Stbd
-                                     pModel->getOwnShip()->setPortEngine(axisValue);
-                                    else if (AXIS_RUDDER == j) //Rudder
-                                     pModel->getOwnShip()->setWheel(axisValue*(pModel->getOwnShip()->getRudder().getDeltaMax()*180/M_PI));
-                                }
-                            }
-                        }
-                    }
+                    //std::cout << "Axe " << (int)event.jaxis.axis << " = " << event.jaxis.value << std::endl;
+		    AxisProcess(i, event.jaxis.value, (int)event.jaxis.axis, aJsConf, aJsMapping, aModel);
                     break;
 
                 case SDL_JOYBUTTONDOWN:
@@ -256,27 +319,8 @@ void JoyStick::Process(void *aDevice, int aNumJoysticks, sJsMapping& aJsMapping,
 	      {
 		if (ev.type == EV_ABS)
 		  {
-		    axisValue = ev.value / 32767.0f;
-            //std::cout << "Axe " << (int)ev.code << " = " << axisValue << std::endl;
-		    for (unsigned char j = 0; j < MAX_JS_AXIS; j++)
-		      {
-                        if (aJsMapping.entry[j].jsNumber == i) //Right JS ?
-			  {
-                            if (aJsMapping.entry[j].type == AXIS) //Right Type ?
-			      { 
-                                if ((int)ev.code == aJsMapping.entry[j].channel) //Right Channel ?
-				  {
-				    if(AXIS_PORT == j)//Port
-                                     pModel->getOwnShip()->setPortEngine(axisValue);
-                                    else if(AXIS_STBD == j) //Stbd
-                                     pModel->getOwnShip()->setPortEngine(axisValue);
-                                    else if (AXIS_RUDDER == j) //Rudder
-                                     pModel->getOwnShip()->setWheel(axisValue*(pModel->getOwnShip()->getRudder().getDeltaMax()*180/M_PI));
-				  }
-			      }
-			  }
-		      }
-		    
+		    //std::cout << "Axe " << (int)ev.code << " = " << axisValue << std::endl;
+		    AxisProcess(i, ev.value, (int)ev.code, aJsConf, aJsMapping, aModel); 
 		  }
 	      }
 #endif

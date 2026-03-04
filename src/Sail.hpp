@@ -28,6 +28,7 @@ class Sail
   float (*GetPos(void))[3];
   void PrintParams(void);
   void UpdateMesh(void);
+  void SetOnOff(bool aOnOff);
   
   /*Polar file*/
   int OpenPolar(const std::string aPolarFile, std::string aVarNameX, std::string aVarNameY);
@@ -46,6 +47,7 @@ class Sail
   irr::scene::IMeshSceneNode* mSailsScene[SAILS_MAX];
 
   //Sail management
+  bool mOnOff;
   int mSailsCount;
   std::string mSailsType;
   std::string mSailsSize;

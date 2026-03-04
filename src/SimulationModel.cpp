@@ -973,6 +973,20 @@ void SimulationModel::updateFromNetwork(eCmdMsg aMsgType, void* aDataCmd)
 
 	break;
       }
+    case E_CMD_MESSAGE_ROTOR:
+      {
+	sRotorCtrl *dataRotor = (sRotorCtrl*)aDataCmd;
+	std::string ownShipTypeSail = mOwnShip->getSail().GetType();
+        unsigned int ownShipCountSail = mOwnShip->getSail().GetCount();
+
+	if(ownShipTypeSail == "Rotor" && ownShipCountSail > 0)
+	  {
+	    mOwnShip->getSail().SetOnOff(dataRotor->onOff);
+	  }
+
+	break;
+      }
+
     case E_CMD_MESSAGE_UNKNOWN:
     default:
       {	

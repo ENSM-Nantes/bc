@@ -6,6 +6,7 @@
 
 Sail::Sail(void)
 {
+  mOnOff = false;
   mDimCountX = 0;
   mDimCountY = 0;
   mSailsCount = 0;
@@ -171,9 +172,15 @@ float (*Sail::GetPos(void))[3]
   return mSailsPos;
 }
 
+void Sail::SetOnOff(bool aOnOff)
+{
+  mOnOff = aOnOff;
+}
+
+
 void Sail::UpdateMesh(void)
 {
-  if(GetType() == "Rotor")
+  if(GetType() == "Rotor" && mOnOff)
     {
       static float angle = 0.0;
 

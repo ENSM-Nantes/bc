@@ -12,7 +12,8 @@ sParseHeader tParseHeader[MAX_HEADER_MSG] = {{"MC", &Message::ParseMapController
 					     {"SC", &Message::ParseScenario},
 					     {"SD", &Message::ParseShutDown},
 					     {"MH", &Message::ParseMultiPlayer},
-					     {"WI", &Message::ParseWindInjection}
+					     {"WI", &Message::ParseWindInjection},
+					     {"RT", &Message::ParseRotor}
 };
 
 
@@ -459,6 +460,27 @@ eCmdMsg Message::ParseWindInjection(std::string& aMsg, void** aCmdData)
 eCmdMsg Message::ParseShutDown(std::string& aMsg, void** aCmdData)
 {
   return E_CMD_MESSAGE_SHUTDOWN;
+}
+
+eCmdMsg Message::ParseRotor(std::string& aMsg, void** aCmdData)
+{
+  static sRotorCtrl rotorCtrl; 
+  if(aMsg == "1")
+    {
+      rotorCtrl.onOff = true;
+    }
+  else if(aMsg == "0")
+    {
+      rotorCtrl.onOff = false;
+    }
+  else
+    {
+      return E_CMD_MESSAGE_UNKNOWN;
+    }
+
+  *aCmdData = (void*)&rotorCtrl;
+  
+  return E_CMD_MESSAGE_ROTOR;
 }
 
 

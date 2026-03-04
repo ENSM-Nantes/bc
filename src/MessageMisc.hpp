@@ -1,7 +1,7 @@
 #ifndef MESSAGE_MISC_HPP
 #define MESSAGE_MISC_HPP
 
-#define MAX_HEADER_MSG (7)
+#define MAX_HEADER_MSG (8)
 #define MAX_RECORD_BC_MSG (13)
 
 /*****************Enum cmds*****************************/
@@ -22,6 +22,7 @@ typedef enum{
   E_CMD_MESSAGE_SHUTDOWN,
   E_CMD_MESSAGE_MULTIPLAYER_COMMAND,
   E_CMD_MESSAGE_WIND_INJECTION,
+  E_CMD_MESSAGE_ROTOR,
   E_CMD_MESSAGE_UNKNOWN=0x99
 }eCmdMsg;
 
@@ -171,5 +172,10 @@ typedef struct{
   unsigned int overrideMode;
   float overrideData;
 }sCtrlOv;
+
+typedef struct{
+  bool onOff ;
+}sRotorCtrl;
+
 
 #endif

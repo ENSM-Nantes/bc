@@ -22,6 +22,7 @@ int Message::Process(std::string& aMsg)
   if(aMsg.substr(0,2) == "MH")  return E_MSG_TO_MASTER_MP;
   if(aMsg.substr(0,2) == "OS")  return E_MSG_TO_WI;
   if(aMsg.substr(0,2) == "WI")  return E_MSG_TO_MASTER | E_MSG_TO_MC;
+  if(aMsg.substr(0,2) == "RT")  return E_MSG_TO_MASTER;
 
   return E_MSG_TO_UNKNOW_HOST;
 }

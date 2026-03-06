@@ -7,6 +7,8 @@
 Sail::Sail(void)
 {
   mOnOff = false;
+  mWaitForStop = false;
+  mWaitForStart = false;
   mDimCountX = 0;
   mDimCountY = 0;
   mSailsCount = 0;
@@ -174,23 +176,87 @@ float (*Sail::GetPos(void))[3]
 
 void Sail::SetOnOff(bool aOnOff)
 {
-  mOnOff = aOnOff;
+  if(!mWaitForStop && !mWaitForStart)
+    mOnOff = aOnOff;
 }
 
-
-void Sail::UpdateMesh(void)
+void Sail::UpdateMesh(irr::IrrlichtDevice *aDev)
 {
-  if(GetType() == "Rotor" && mOnOff)
+  static float time = 0, timeStart = 0, timeStop = 0, timeOn = 0, timeOff = 0;
+  
+  if(GetType() == "Rotor")
     {
-      static float angle = 0.0;
+      static float angle = 0, angleRotSec = 0, speedCoeff = 0;
+      static bool initStart = false, initStop = false, initSimu = false;
+      
+      time = aDev->getTimer()->getTime() / 1000.0f;
+      angleRotSec = 360.0f / aDev->getVideoDriver()->getFPS();
 
-      angle += 20;
+      //std::cout << "time : " << time << std::endl;
+      //std::cout << "angleRotSec : " << angleRotSec << std::endl;
+      
+      if(mOnOff && !mWaitForStop)
+	{
+	  initStop = true;
+	  mWaitForStart = true;
+	  
+	  if(initStart)
+	    {
+	      initSimu = true;
+	      initStart = false;
+	      timeStart = time;
+	    }
+
+	  timeOn = time - timeStart;
+
+	  if(timeOn < ROTOR_TIME_TO_MAX_SPEED)
+	    {
+	      speedCoeff = timeOn/ROTOR_TIME_TO_MAX_SPEED;
+	      //std::cout << "angle : " << angle << std::endl;
+	    }
+	  else
+	    {
+	      speedCoeff = 1;
+	      mWaitForStart = false;
+	    }
+	  
+	  angle += angleRotSec*ROTOR_MAX_SPEED*speedCoeff;
+	  
+	  //std::cout << "timeOn : " << timeOn << std::endl;
+	}
+      else if(!mOnOff && !mWaitForStart && initSimu)
+	{
+	  initStart = true;
+	  mWaitForStop = true;
+
+	  if(initStop)
+	    {
+	      initStop = false;
+	      timeStop = time;
+	    }
+	  
+	  timeOff = time - timeStop;
+
+	  if(timeOff < ROTOR_TIME_TO_MAX_SPEED)
+	    {
+	      speedCoeff = 1 - (timeOff/ROTOR_TIME_TO_MAX_SPEED);
+	      //std::cout << "angle : " << angle << std::endl;
+	    }
+	  else
+	    {
+	      speedCoeff = 0;
+	      mWaitForStop = false;
+	    }
+	      
+	  angle += angleRotSec*ROTOR_MAX_SPEED*speedCoeff;	    
+	}
+      
       irr::core::vector3df rotation(0, angle, 0);
 
-      for (int i = 0; i < GetCount(); i++)
-        {
+      for(int i = 0; i < GetCount(); i++)
+	{
 	  GetMeshScene(i)->setRotation(rotation);
-        }
+	}  
     }
   else
     {

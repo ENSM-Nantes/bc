@@ -383,7 +383,7 @@ void OwnShip::Update(sTime& aTime, float aTideHeight, float aWeather, Wind *aWin
     }
 
   /*Sails dyn*/
-  mSails.UpdateMesh();
+  mSails.UpdateMesh(mDevice);
 
   /*Print Pos & Rot*/
   /*  std::cout << "::::::Pos & Rot::::::" << std::endl;

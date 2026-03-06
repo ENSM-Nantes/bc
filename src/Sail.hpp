@@ -9,6 +9,8 @@
 
 #define TOTAL_SAIL_DIM_COUNT (5)
 #define SAILS_MAX (4)
+#define ROTOR_TIME_TO_MAX_SPEED (15)
+#define ROTOR_MAX_SPEED (3)
 
 class Sail
 {
@@ -27,7 +29,7 @@ class Sail
   std::string GetSize(void);
   float (*GetPos(void))[3];
   void PrintParams(void);
-  void UpdateMesh(void);
+  void UpdateMesh(irr::IrrlichtDevice *aDev);
   void SetOnOff(bool aOnOff);
   
   /*Polar file*/
@@ -46,8 +48,12 @@ class Sail
   //Mesh Sails
   irr::scene::IMeshSceneNode* mSailsScene[SAILS_MAX];
 
-  //Sail management
+  //Rotor
   bool mOnOff;
+  bool mWaitForStop;
+  bool mWaitForStart;
+
+  //Sail management
   int mSailsCount;
   std::string mSailsType;
   std::string mSailsSize;

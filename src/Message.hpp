@@ -20,7 +20,7 @@ public:
   eCmdMsg ParseOwnShip(std::string& aMsg, void** aCmdData);
   eCmdMsg ParseScenario(std::string& aMsg, void** aCmdData);
   eCmdMsg ParseShutDown(std::string& aMsg, void** aCmdData);
-  eCmdMsg ParseRotor(std::string& aMsg, void** aCmdData);
+  eCmdMsg ParseSailManagement(std::string& aMsg, void** aCmdData);
   eCmdMsg ParseWindInjection(std::string& aMsg, void** aCmdData);
   std::string& KeepAliveShort(void);
   std::string& KeepAlive(void);

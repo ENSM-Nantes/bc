@@ -503,6 +503,7 @@ if (mOwnShip->getPosition().getLength() > 1000)
       mOffsetPosition.X -= deltaX;
       mOffsetPosition.Z -= deltaZ;
 
+      mOwnShip->setOffsetPos(mOffsetPosition);
       std::cout << "::::::Offset Pos::::::" << std::endl;
       std::cout << "mOffsetPosition.X : " << mOffsetPosition.X << std::endl;
       std::cout << "mOffsetPosition.Z : " << mOffsetPosition.Z << std::endl;

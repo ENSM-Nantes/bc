@@ -60,7 +60,7 @@ OwnShip::OwnShip()
   mRoll = 0;             
   mPortEngine = 0;       
   mStbdEngine = 0;       
-  
+  mOffsetPos = {0, 0, 0};  
 }
 
 OwnShip::~OwnShip()
@@ -428,6 +428,7 @@ void OwnShip::setWheel(float aWheel)
   }*/
 
 
+
 void OwnShip::setPortEngine(float aPort)
 {
   mControlMode = MODE_ENGINE; // Switch to engine and rudder mode
@@ -454,6 +455,12 @@ void OwnShip::setStbdEngine(float aStbd)
     mStbdEngine = -1;
 }
 
+void OwnShip::setOffsetPos(irr::core::vector3d<int64_t> aOffsetPos)
+{
+  mOffsetPos = aOffsetPos;
+}
+
+irr::core::vector3d<int64_t> OwnShip::getOffsetPos(void) {return mOffsetPos;}
 float OwnShip::getPortEngine() const {return mPortEngine;}
 float OwnShip::getStbdEngine() const {return mStbdEngine;}
 float OwnShip::getWheel() const {return mWheel;}

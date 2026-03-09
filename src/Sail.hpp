@@ -31,6 +31,7 @@ class Sail
   void PrintParams(void);
   void UpdateMesh(irr::IrrlichtDevice *aDev);
   void SetOnOff(bool aOnOff);
+  void SetRotDirection(std::string aRotDirection);
   
   /*Polar file*/
   int OpenPolar(const std::string aPolarFile, std::string aVarNameX, std::string aVarNameY);
@@ -52,7 +53,8 @@ class Sail
   bool mOnOff;
   bool mWaitForStop;
   bool mWaitForStart;
-
+  int mRotDirection;
+  
   //Sail management
   int mSailsCount;
   std::string mSailsType;

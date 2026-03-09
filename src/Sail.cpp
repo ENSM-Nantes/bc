@@ -9,6 +9,7 @@ Sail::Sail(void)
   mOnOff = false;
   mWaitForStop = false;
   mWaitForStart = false;
+  mRotDirection = 1;
   mDimCountX = 0;
   mDimCountY = 0;
   mSailsCount = 0;
@@ -177,8 +178,25 @@ float (*Sail::GetPos(void))[3]
 void Sail::SetOnOff(bool aOnOff)
 {
   if(!mWaitForStop && !mWaitForStart)
-    mOnOff = aOnOff;
+    {
+      mOnOff = aOnOff;
+      //std::cout << "mWaitForStop : " << mWaitForStop << std::endl;
+      //std::cout << "mWaitForStart : " << mWaitForStart << std::endl;
+      //std::cout << "mOnOff : " << mOnOff << std::endl;
+    }
 }
+
+void Sail::SetRotDirection(std::string aRotDirection)
+{
+  if(!mWaitForStop && !mWaitForStart)
+    {
+      if(aRotDirection == "left")
+	mRotDirection = -1;
+      else
+	mRotDirection = 1;
+    }
+}
+
 
 void Sail::UpdateMesh(irr::IrrlichtDevice *aDev)
 {
@@ -187,7 +205,7 @@ void Sail::UpdateMesh(irr::IrrlichtDevice *aDev)
   if(GetType() == "Rotor")
     {
       static float angle = 0, angleRotSec = 0, speedCoeff = 0;
-      static bool initStart = false, initStop = false, initSimu = false;
+      static bool initStart = true, initStop = false, initSimu = false;
       
       time = aDev->getTimer()->getTime() / 1000.0f;
       angleRotSec = 360.0f / aDev->getVideoDriver()->getFPS();
@@ -212,12 +230,16 @@ void Sail::UpdateMesh(irr::IrrlichtDevice *aDev)
 	  if(timeOn < ROTOR_TIME_TO_MAX_SPEED)
 	    {
 	      speedCoeff = timeOn/ROTOR_TIME_TO_MAX_SPEED;
-	      //std::cout << "angle : " << angle << std::endl;
+	      std::cout << "timeOn : " << timeOn << std::endl;
+	      std::cout << "time : " << time << std::endl;
+	      std::cout << "timeStart : " << timeStart << std::endl;
+	      //std::cout << "mWaitForStart : " << mWaitForStart << std::endl;
 	    }
 	  else
 	    {
 	      speedCoeff = 1;
 	      mWaitForStart = false;
+	      //std::cout << "mWaitForStart : " << mWaitForStart << std::endl;
 	    }
 	  
 	  angle += angleRotSec*ROTOR_MAX_SPEED*speedCoeff;
@@ -240,6 +262,7 @@ void Sail::UpdateMesh(irr::IrrlichtDevice *aDev)
 	  if(timeOff < ROTOR_TIME_TO_MAX_SPEED)
 	    {
 	      speedCoeff = 1 - (timeOff/ROTOR_TIME_TO_MAX_SPEED);
+	      std::cout << "timeOff : " << timeOff << std::endl;
 	      //std::cout << "angle : " << angle << std::endl;
 	    }
 	  else
@@ -251,7 +274,7 @@ void Sail::UpdateMesh(irr::IrrlichtDevice *aDev)
 	  angle += angleRotSec*ROTOR_MAX_SPEED*speedCoeff;	    
 	}
       
-      irr::core::vector3df rotation(0, angle, 0);
+      irr::core::vector3df rotation(0, mRotDirection*angle, 0);
 
       for(int i = 0; i < GetCount(); i++)
 	{

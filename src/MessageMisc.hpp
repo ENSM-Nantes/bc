@@ -1,6 +1,8 @@
 #ifndef MESSAGE_MISC_HPP
 #define MESSAGE_MISC_HPP
 
+#include <string>
+
 #define MAX_HEADER_MSG (8)
 #define MAX_RECORD_BC_MSG (13)
 
@@ -174,7 +176,8 @@ typedef struct{
 }sCtrlOv;
 
 typedef struct{
-  bool onOff ;
+  bool onOff;
+  std::string rotDir;
 }sRotorCtrl;
 
 

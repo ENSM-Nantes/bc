@@ -982,6 +982,7 @@ void SimulationModel::updateFromNetwork(eCmdMsg aMsgType, void* aDataCmd)
 	if(ownShipTypeSail == "Rotor" && ownShipCountSail > 0)
 	  {
 	    mOwnShip->getSail().SetOnOff(dataRotor->onOff);
+	    mOwnShip->getSail().SetRotDirection(dataRotor->rotDir);
 	  }
 
 	break;

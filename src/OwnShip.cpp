@@ -105,7 +105,7 @@ void OwnShip::InitOwnShipParams(OwnShipData aOwnShipData, Json::Value aJsonRoot)
   double xG = 0, iZ = 0, jZ = 0;
 
   //Init Speed
-  mMu0 << aJsonRoot["initialSpeed"][0].asFloat(), aJsonRoot["initialSpeed"][1].asFloat(), aJsonRoot["initialSpeed"][2].asFloat();
+  mMu0 << aOwnShipData.initialSpeed*KTS_TO_MPS, 0, 0;
   
   mM = RHO_SW * mGeoParams.volume;
   mMX = 0.5 * RHO_SW * pow(mGeoParams.lPP, 2) * mGeoParams.d * mAddedMassParams.mpX;

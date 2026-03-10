@@ -14,7 +14,8 @@ void Fsm::Run(void)
 {
   int retEvent = -1;
   bool isRunning = false;
-  unsigned short timeout = 0, watchdog = 0;
+  unsigned short timeout = 0, watchdog = 0, pingCounter = 0;
+
   
   if(0 == mCom.InitCom())
     {
@@ -61,6 +62,14 @@ void Fsm::Run(void)
 		mCom.SetState(E_SERVER_DISCONNECTED);
 		std::cout << "Watchog!" << std::endl;
 	      }
+
+	    if(pingCounter == 1000)
+	      {
+		mCom.PingAllClients();
+		pingCounter = 0;
+	      }
+
+	    pingCounter++;
 	    break;
 	  }
 

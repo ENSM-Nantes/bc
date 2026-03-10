@@ -12,7 +12,8 @@ sParseHeader tParseHeader[MAX_HEADER_MSG] = {{"MC", &Message::ParseMapController
 					     {"SC", &Message::ParseScenario},
 					     {"SD", &Message::ParseShutDown},
 					     {"MH", &Message::ParseMultiPlayer},
-					     {"WI", &Message::ParseWindInjection}
+					     {"WI", &Message::ParseWindInjection},
+					     {"SA", &Message::ParseSailManagement}
 };
 
 
@@ -459,6 +460,35 @@ eCmdMsg Message::ParseWindInjection(std::string& aMsg, void** aCmdData)
 eCmdMsg Message::ParseShutDown(std::string& aMsg, void** aCmdData)
 {
   return E_CMD_MESSAGE_SHUTDOWN;
+}
+
+eCmdMsg Message::ParseSailManagement(std::string& aMsg, void** aCmdData)
+{
+  static sRotorCtrl rotorCtrl = {false, "right"}; 
+  if(aMsg == "RT1")
+    {
+      rotorCtrl.onOff = true;
+    }
+  else if(aMsg == "RT0")
+    {
+      rotorCtrl.onOff = false;
+    }
+  else if(aMsg == "RTR")
+    {
+      rotorCtrl.rotDir = "right";
+    }
+  else if(aMsg == "RTL")
+    {
+      rotorCtrl.rotDir = "left";
+    }
+  else
+    {
+      return E_CMD_MESSAGE_UNKNOWN;
+    }
+
+  *aCmdData = (void*)&rotorCtrl;
+  
+  return E_CMD_MESSAGE_ROTOR;
 }
 
 
@@ -946,23 +976,23 @@ std::string& Message::KeepAliveShort(void)
   msg.clear();
   msg = "OS"; //Own ship only
   //1 Position, speed etc
-  msg.append(Utilities::lexical_cast<std::string>(pModel->getTerrain()->zToLat(posZ)));
+  msg.append(std::to_string(pModel->getTerrain()->zToLat(posZ)));
   msg.append(",");
-  msg.append(Utilities::lexical_cast<std::string>(pModel->getTerrain()->xToLong(posX)));
+  msg.append(std::to_string(pModel->getTerrain()->xToLong(posX)));
   msg.append(",");
-  msg.append(Utilities::lexical_cast<std::string>(pModel->getOwnShip()->getHeading()));
+  msg.append(std::to_string(pModel->getOwnShip()->getHeading()));
   msg.append(",");
-  msg.append(Utilities::lexical_cast<std::string>(pModel->getOwnShip()->getRateOfTurn()));
+  msg.append(std::to_string(pModel->getOwnShip()->getRateOfTurn()));
   msg.append(",");
-  msg.append(Utilities::lexical_cast<std::string>(pModel->getOwnShip()->getSpeedThroughWater()*MPS_TO_KTS));
+  msg.append(std::to_string(pModel->getOwnShip()->getSpeedThroughWater()*MPS_TO_KTS));
   msg.append(",");
-  msg.append(Utilities::lexical_cast<std::string>(pModel->getWind()->getTrueDirection()));
+  msg.append(std::to_string(pModel->getWind()->getTrueDirection()));
   msg.append(",");
-  msg.append(Utilities::lexical_cast<std::string>(pModel->getWind()->getTrueSpeed()));
+  msg.append(std::to_string(pModel->getWind()->getTrueSpeed()));
   msg.append(",");
-  msg.append(Utilities::lexical_cast<std::string>(fabs(pModel->getWind()->getApparentDir()) * irr::core::RADTODEG));
+  msg.append(std::to_string(fabs(pModel->getWind()->getApparentDir()) * irr::core::RADTODEG));
   msg.append(",");
-  msg.append(Utilities::lexical_cast<std::string>(pModel->getWind()->getApparentSpd()));
+  msg.append(std::to_string(pModel->getWind()->getApparentSpd()));
 
   return msg;
 }

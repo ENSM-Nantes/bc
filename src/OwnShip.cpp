@@ -60,7 +60,7 @@ OwnShip::OwnShip()
   mRoll = 0;             
   mPortEngine = 0;       
   mStbdEngine = 0;       
-  
+  mOffsetPos = {0, 0, 0};  
 }
 
 OwnShip::~OwnShip()
@@ -105,7 +105,7 @@ void OwnShip::InitOwnShipParams(OwnShipData aOwnShipData, Json::Value aJsonRoot)
   double xG = 0, iZ = 0, jZ = 0;
 
   //Init Speed
-  mMu0 << aJsonRoot["initialSpeed"][0].asFloat(), aJsonRoot["initialSpeed"][1].asFloat(), aJsonRoot["initialSpeed"][2].asFloat();
+  mMu0 << aOwnShipData.initialSpeed*KTS_TO_MPS, 0, 0;
   
   mM = RHO_SW * mGeoParams.volume;
   mMX = 0.5 * RHO_SW * pow(mGeoParams.lPP, 2) * mGeoParams.d * mAddedMassParams.mpX;
@@ -383,7 +383,7 @@ void OwnShip::Update(sTime& aTime, float aTideHeight, float aWeather, Wind *aWin
     }
 
   /*Sails dyn*/
-  mSails.UpdateMesh();
+  mSails.UpdateMesh(mDevice);
 
   /*Print Pos & Rot*/
   /*  std::cout << "::::::Pos & Rot::::::" << std::endl;
@@ -428,6 +428,7 @@ void OwnShip::setWheel(float aWheel)
   }*/
 
 
+
 void OwnShip::setPortEngine(float aPort)
 {
   mControlMode = MODE_ENGINE; // Switch to engine and rudder mode
@@ -454,6 +455,12 @@ void OwnShip::setStbdEngine(float aStbd)
     mStbdEngine = -1;
 }
 
+void OwnShip::setOffsetPos(irr::core::vector3d<int64_t> aOffsetPos)
+{
+  mOffsetPos = aOffsetPos;
+}
+
+irr::core::vector3d<int64_t> OwnShip::getOffsetPos(void) {return mOffsetPos;}
 float OwnShip::getPortEngine() const {return mPortEngine;}
 float OwnShip::getStbdEngine() const {return mStbdEngine;}
 float OwnShip::getWheel() const {return mWheel;}

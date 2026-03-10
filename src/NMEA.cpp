@@ -411,8 +411,8 @@ void NMEA::updateNMEA(sTime& aTime)
     Utilities::round(mOwnShip->getPortEngine()*100)  // idx=2, even (port)
   };
     
-  float posZ = mOwnShip->getPosition().Z;
-  float posX = mOwnShip->getPosition().X;
+  float posZ = mOwnShip->getPosition().Z + mOwnShip->getOffsetPos().Z ;
+  float posX = mOwnShip->getPosition().X + mOwnShip->getOffsetPos().X ;
 
   irr::f32 lat = mTerrain->zToLat(posZ);
   irr::f32 lon = mTerrain->xToLong(posX);

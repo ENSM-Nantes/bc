@@ -30,6 +30,7 @@ class Com
 
   int InitCom(void);
   int WaitEvent(unsigned short aTimeout);
+  void PingAllClients(void);
   
   eServState GetState(void);
   void SetState(eServState aState);

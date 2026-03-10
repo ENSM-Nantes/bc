@@ -171,11 +171,25 @@ int Com::ClientMsg(const char *aData, size_t aDataSize)
   return 0;
 }
 
+void Com::PingAllClients(void)
+{
+  for(unsigned char i=0; i<mClientCounter; i++)
+    {
+      if(NULL != mPeerClient[i])
+	{
+	  if(mPeerClient[i]->address.host != 0)
+	    {
+	      enet_peer_ping(mPeerClient[i]);    
+	    }
+	}
+    }
+}
+
 
 void Com::SendMsg(eTarget aTarget)
 {
   mPacket = enet_packet_create(mEvent.packet->data, mEvent.packet->dataLength, ENET_PACKET_FLAG_RELIABLE);
-
+  
   for(unsigned char i=0; i<mClientCounter; i++)
     {
       if(NULL != mPeerClient[i])
@@ -183,7 +197,7 @@ void Com::SendMsg(eTarget aTarget)
 	  if(mPeerClient[i]->address.host != 0 && mTypeClient[i] == aTarget)
 	    {
 	      enet_peer_send(mPeerClient[i], 0, mPacket);
-	      //std::cout << "Send Message ! size : " << mEvent.packet->dataLength << std::endl;
+	      //std::cout << "Send Message : Data : " << mEvent.packet->data  << " - Size : " << mEvent.packet->dataLength << " - Target : " << aTarget << std::endl;
 	    }
 	}
     }

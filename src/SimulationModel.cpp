@@ -478,11 +478,14 @@ void SimulationModel::update()
   mWater->update(mTideHeight,mCamera->getPosition(),mLight->getLightLevel(), mWeather);
 
   //Keep Ownship near origin to more precision 
-if (mOwnShip->getPosition().getLength() > 1000)
+  if(mOwnShip->getPosition().getLength() > 1000)
     {
       irr::core::vector3df ownShipPos = mOwnShip->getPosition();
       irr::s32 deltaX = -1*(irr::s32)ownShipPos.X;
       irr::s32 deltaZ = -1*(irr::s32)ownShipPos.Z;
+      //std::cout << "deltaX : " << deltaX << std::endl;
+      //std::cout << "deltaZ : " << deltaZ << std::endl;
+
       //Round to nearest 1000 metres - (multiple of water tile width, to avoid jumps here)
       deltaX = 500.0*Utilities::round(deltaX/500.0);
       deltaZ = 500.0*Utilities::round(deltaZ/500.0);
@@ -503,6 +506,7 @@ if (mOwnShip->getPosition().getLength() > 1000)
       mOffsetPosition.X -= deltaX;
       mOffsetPosition.Z -= deltaZ;
 
+      mOwnShip->setOffsetPos(mOffsetPosition);
       std::cout << "::::::Offset Pos::::::" << std::endl;
       std::cout << "mOffsetPosition.X : " << mOffsetPosition.X << std::endl;
       std::cout << "mOffsetPosition.Z : " << mOffsetPosition.Z << std::endl;
@@ -973,6 +977,21 @@ void SimulationModel::updateFromNetwork(eCmdMsg aMsgType, void* aDataCmd)
 
 	break;
       }
+    case E_CMD_MESSAGE_ROTOR:
+      {
+	sRotorCtrl *dataRotor = (sRotorCtrl*)aDataCmd;
+	std::string ownShipTypeSail = mOwnShip->getSail().GetType();
+        unsigned int ownShipCountSail = mOwnShip->getSail().GetCount();
+
+	if(ownShipTypeSail == "Rotor" && ownShipCountSail > 0)
+	  {
+	    mOwnShip->getSail().SetOnOff(dataRotor->onOff);
+	    mOwnShip->getSail().SetRotDirection(dataRotor->rotDir);
+	  }
+
+	break;
+      }
+
     case E_CMD_MESSAGE_UNKNOWN:
     default:
       {	

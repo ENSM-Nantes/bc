@@ -66,10 +66,16 @@ bool Autopilot::receiveAPB(APB sentence)
     relativeBearing += 360.0;
   }
 
+  std::cout << "bearingToSteer : " << bearingToSteer << std::endl;
+  std::cout << "currentHeading : " << currentHeading << std::endl;
+  std::cout << "relativeBearing : " << relativeBearing << std::endl;
+
   float rot = ((OwnShip*)mOwnShip)->getRateOfTurn() * DEG_IN_RAD;
   float dampening = 1.0;
+  float timeUntilOvershoot = 0;
+  
   if (rot != 0.0) {
-    float timeUntilOvershoot = relativeBearing / rot;
+    timeUntilOvershoot = relativeBearing / rot;
     if (0 <= timeUntilOvershoot && timeUntilOvershoot < 15) {
       // linear scale from no dampening at 15s to steering into the
       // opposite direction at less than 2.0
@@ -77,9 +83,15 @@ bool Autopilot::receiveAPB(APB sentence)
     }
   }
 
+  std::cout << "rot : " << rot << std::endl;
+  std::cout << "timeUntilOvershoot : " << timeUntilOvershoot << std::endl;
+  std::cout << "dampening : " << dampening << std::endl;
+
   // set wheel to val between -30.0 (>=60 deg L) and 30.0 (>=60 deg R) (setWheel clamps vals)
   float wheel = (relativeBearing / 60.0) * 30.0;
 
+  std::cout << "wheel : " << wheel << std::endl;
+  
   // Normal case, just set the wheel
   ((OwnShip*)mOwnShip)->setWheel(wheel * dampening);
 

@@ -57,7 +57,7 @@ bool Autopilot::receiveAPB(APB sentence)
   char directionToTrack = sentence.direction;
 
   float bearingToSteer = Angles::normaliseAngle(sentence.heading_to_dest);
-  float currentHeading = Angles::normaliseAngle(((OwnShip*)mOwnShip)->getHeading());
+  float currentHeading = Angles::normaliseAngle(((OwnShip*)mOwnShip)->getHeading()*irr::core::RADTODEG);
   float relativeBearing = bearingToSteer - currentHeading;
   if (relativeBearing >= 180.0) {
     relativeBearing -= 360.0;
@@ -65,11 +65,12 @@ bool Autopilot::receiveAPB(APB sentence)
   if (relativeBearing <= -180.0) {
     relativeBearing += 360.0;
   }
-
-  float rot = ((OwnShip*)mOwnShip)->getRateOfTurn() * DEG_IN_RAD;
+  float rot = ((OwnShip*)mOwnShip)->getRateOfTurn();
   float dampening = 1.0;
+  float timeUntilOvershoot = 0;
+  
   if (rot != 0.0) {
-    float timeUntilOvershoot = relativeBearing / rot;
+    timeUntilOvershoot = relativeBearing / rot;
     if (0 <= timeUntilOvershoot && timeUntilOvershoot < 15) {
       // linear scale from no dampening at 15s to steering into the
       // opposite direction at less than 2.0
@@ -79,7 +80,7 @@ bool Autopilot::receiveAPB(APB sentence)
 
   // set wheel to val between -30.0 (>=60 deg L) and 30.0 (>=60 deg R) (setWheel clamps vals)
   float wheel = (relativeBearing / 60.0) * 30.0;
-
+  
   // Normal case, just set the wheel
   ((OwnShip*)mOwnShip)->setWheel(wheel * dampening);
 
@@ -93,11 +94,11 @@ bool Autopilot::receiveRMB(RMB sentence)
   if (!AUTOPILOT_ENABLED) return false;
    
   float destWaypointLat = parseNmeaLat(
-					  sentence.dest_waypoint_latitude,
-					  sentence.dest_waypoint_latitude_dir);
+				       sentence.dest_waypoint_latitude,
+				       sentence.dest_waypoint_latitude_dir);
   float destWaypointLong = parseNmeaLong(
-					    sentence.dest_waypoint_longitude,
-					    sentence.dest_waypoint_longitude_dir);
+					 sentence.dest_waypoint_longitude,
+					 sentence.dest_waypoint_longitude_dir);
 
   if (destWaypointLat != INVALID_LAT && destWaypointLong != INVALID_LONG) {
     currentWaypointPos[0] = destWaypointLat;
@@ -130,7 +131,7 @@ bool Autopilot::receiveRMB(RMB sentence)
     throttle = std::max(0.1, throttle * (-3.6 * leg_progress + 3.7));
   }
   ((OwnShip*)mOwnShip)->setPortEngine(throttle);
-   ((OwnShip*)mOwnShip)->setStbdEngine(throttle);
+  ((OwnShip*)mOwnShip)->setStbdEngine(throttle);
   return false;
 }
 

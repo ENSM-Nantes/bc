@@ -564,7 +564,6 @@ int main(int argc, char ** argv)
   irr::f32 aspect3d = (irr::f32)graphicsWidth3d / (irr::f32)graphicsHeight3d;
 
   std::cout << "graphicsWidth: "<< graphicsWidth << " graphicsHeight: " << graphicsHeight << std::endl;
-
   //Choose scenario
   std::string scenarioName = "";
   std::string hostname = "";

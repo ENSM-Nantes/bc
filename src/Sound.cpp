@@ -59,6 +59,7 @@ void Sound::load(std::string aBasePath)
       setOwnShipSounds();
     }
   
+  
   soundLoaded = false;
 
   char buf[1024];
@@ -88,7 +89,7 @@ void Sound::load(std::string aBasePath)
 
   data.fileWave = sf_open(mBwavePath.c_str(), SFM_READ, &data.infoWave);
   if (sf_error(data.fileWave) != SF_ERR_NO_ERROR) {
-    std::cerr << "sf_error on waveSoundFile " << mBwavePath.c_str() << std::endl;
+    std::cerr << "sf_error on waveSoundFile " << mBwavePath.c_str() << " Error: " << sf_strerror(data.fileWave) << std::endl;
     return;
   }
 
@@ -218,10 +219,10 @@ void Sound::setAlarm(bool alarmState)
 
 void Sound::setOwnShipSounds(void)
 {
-  std::string parts[16] = {"/Engine.wav","/engine.wav","sounds/Engine.wav","sounds/engine.wav",
-			   "/Bwave.wav","/bwave.wav","sounds/Bwave.wav","sounds/bwave.wav",
-			   "/Horn.wav","/horn.wav","sounds/Horn.wav","sounds/horn.wav",
-			   "/Alarm.wav","/alarm.wav","sounds/Alarm.wav","sounds/alarm.wav",
+  std::string parts[16] = {"Engine.wav","engine.wav","sounds/Engine.wav","sounds/engine.wav",
+			   "Bwave.wav","bwave.wav","sounds/Bwave.wav","sounds/bwave.wav",
+			   "Horn.wav","horn.wav","sounds/Horn.wav","sounds/horn.wav",
+			   "Alarm.wav","alarm.wav","sounds/Alarm.wav","sounds/alarm.wav",
   };
   
   std::string *pSoundPath;
@@ -241,26 +242,46 @@ void Sound::setOwnShipSounds(void)
       soundPath = mBasePath;
       soundPath.append(parts[i]);
       file.open(soundPath.c_str());
-      if(file.good()) *pSoundPath = soundPath;
-
+      if(file.good())
+	{
+	  *pSoundPath = soundPath;
+	  file.close();
+	}
+      std::cout << "soundPath 1: " << soundPath << std::endl;
+      std::cout << "pSoundPath 1: " << *pSoundPath << std::endl;
       //Lower case
       soundPath = mBasePath;
       soundPath.append(parts[i+1]);  
       file.open(soundPath.c_str());
-      if(file.good()) *pSoundPath = soundPath;
-
+      if(file.good())
+	{
+	  *pSoundPath = soundPath;
+	  file.close();
+	}
+      std::cout << "soundPath 2: " << soundPath << std::endl;
+      std::cout << "pSoundPath 2: " << *pSoundPath << std::endl;
       //Default if not define into model folder
 
       //Upper case
       soundPath = parts[i+2];
       file.open(soundPath.c_str());
-      if(file.good()) *pSoundPath = soundPath;
-
+      if(file.good())
+	{
+	  *pSoundPath = soundPath;
+	   file.close();
+	}
+      std::cout << "soundPath 3: " << soundPath << std::endl;
+      std::cout << "pSoundPath 3: " << *pSoundPath << std::endl;
       //Lower case
       soundPath = parts[i+3];
       file.open(soundPath.c_str());
-      if(file.good()) *pSoundPath = soundPath;
-
+      if(file.good())
+	{
+	  *pSoundPath = soundPath;
+	   file.close();
+	}
+      std::cout << "soundPath 4: " << soundPath << std::endl;
+      std::cout << "pSoundPath 4: " << *pSoundPath << std::endl;
     }
 }
 

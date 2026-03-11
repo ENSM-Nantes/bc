@@ -57,7 +57,7 @@ bool Autopilot::receiveAPB(APB sentence)
   char directionToTrack = sentence.direction;
 
   float bearingToSteer = Angles::normaliseAngle(sentence.heading_to_dest);
-  float currentHeading = Angles::normaliseAngle(((OwnShip*)mOwnShip)->getHeading());
+  float currentHeading = Angles::normaliseAngle(((OwnShip*)mOwnShip)->getHeading()*irr::core::RADTODEG);
   float relativeBearing = bearingToSteer - currentHeading;
   if (relativeBearing >= 180.0) {
     relativeBearing -= 360.0;
@@ -70,7 +70,7 @@ bool Autopilot::receiveAPB(APB sentence)
   std::cout << "currentHeading : " << currentHeading << std::endl;
   std::cout << "relativeBearing : " << relativeBearing << std::endl;
 
-  float rot = ((OwnShip*)mOwnShip)->getRateOfTurn() * DEG_IN_RAD;
+  float rot = ((OwnShip*)mOwnShip)->getRateOfTurn();
   float dampening = 1.0;
   float timeUntilOvershoot = 0;
   

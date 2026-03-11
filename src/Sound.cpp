@@ -247,8 +247,7 @@ void Sound::setOwnShipSounds(void)
 	  *pSoundPath = soundPath;
 	  file.close();
 	}
-      std::cout << "soundPath 1: " << soundPath << std::endl;
-      std::cout << "pSoundPath 1: " << *pSoundPath << std::endl;
+
       //Lower case
       soundPath = mBasePath;
       soundPath.append(parts[i+1]);  
@@ -258,8 +257,6 @@ void Sound::setOwnShipSounds(void)
 	  *pSoundPath = soundPath;
 	  file.close();
 	}
-      std::cout << "soundPath 2: " << soundPath << std::endl;
-      std::cout << "pSoundPath 2: " << *pSoundPath << std::endl;
       //Default if not define into model folder
 
       //Upper case
@@ -270,8 +267,7 @@ void Sound::setOwnShipSounds(void)
 	  *pSoundPath = soundPath;
 	   file.close();
 	}
-      std::cout << "soundPath 3: " << soundPath << std::endl;
-      std::cout << "pSoundPath 3: " << *pSoundPath << std::endl;
+      
       //Lower case
       soundPath = parts[i+3];
       file.open(soundPath.c_str());
@@ -280,8 +276,7 @@ void Sound::setOwnShipSounds(void)
 	  *pSoundPath = soundPath;
 	   file.close();
 	}
-      std::cout << "soundPath 4: " << soundPath << std::endl;
-      std::cout << "pSoundPath 4: " << *pSoundPath << std::endl;
+      
     }
 }
 

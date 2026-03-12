@@ -993,7 +993,13 @@ std::string& Message::KeepAliveShort(void)
   msg.append(std::to_string(fabs(pModel->getWind()->getApparentDir()) * irr::core::RADTODEG));
   msg.append(",");
   msg.append(std::to_string(pModel->getWind()->getApparentSpd()));
-
+  msg.append(",");
+  msg.append(std::to_string(pModel->getOwnShip()->getSail().GetOnOff()));
+  msg.append(",");
+  msg.append(std::to_string(pModel->getOwnShip()->getSail().GetRotDirection()));
+  msg.append(",");
+  msg.append(std::to_string(pModel->getOwnShip()->getSail().GetRotSpeed()));
+  
   return msg;
 }
 
@@ -1005,4 +1011,5 @@ std::string& Message::ShutDown(void)
   msg = "SD"; 
   return msg;
 }
+
 

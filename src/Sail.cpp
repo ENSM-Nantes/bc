@@ -197,6 +197,20 @@ void Sail::SetRotDirection(std::string aRotDirection)
     }
 }
 
+float Sail::GetRotSpeed(void)
+{
+  return mRotSpeed;
+}
+
+bool Sail::GetOnOff(void)
+{
+  return mOnOff;
+}
+
+int Sail::GetRotDirection(void)
+{
+  return mRotDirection;
+}
 
 void Sail::UpdateMesh(irr::IrrlichtDevice *aDev)
 {
@@ -273,6 +287,8 @@ void Sail::UpdateMesh(irr::IrrlichtDevice *aDev)
 	      
 	  angle += angleRotSec*ROTOR_MAX_SPEED*speedCoeff;	    
 	}
+
+      mRotSpeed = speedCoeff*ROTOR_MAX_SPEED;
       
       irr::core::vector3df rotation(0, mRotDirection*angle, 0);
 

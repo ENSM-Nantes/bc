@@ -1,0 +1,597 @@
+# This file was created by OSM2World 0.5.0-SNAPSHOT - https://osm2world.org
+
+
+newmtl ASPHALT_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Asphalt010\Asphalt010_Color.png
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Asphalt010\Asphalt010_Color.png
+Ni 1
+illum 2
+
+newmtl WOOD_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Wood026\Wood026_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Wood026\Wood026_Color.jpg
+Ni 1
+illum 2
+
+newmtl STEEL_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Metal002\Metal002_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Metal002\Metal002_Color.jpg
+Ni 1
+illum 2
+
+newmtl MAT_0_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Asphalt010\Asphalt010_Color.png
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Asphalt010\Asphalt010_Color.png
+Ni 1
+illum 2
+
+newmtl MAT_0_1
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\road_marking_crossing.png
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\road_marking_crossing.png
+Ni 1
+illum 2
+
+newmtl TREE_BILLBOARD_CONIFEROUS_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka -clamp on C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\arbaro_tree_coniferous.png
+map_Kd -clamp on C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\arbaro_tree_coniferous.png
+map_d -clamp on C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\arbaro_tree_coniferous.png
+Ni 1
+illum 2
+
+newmtl TREE_BILLBOARD_BROAD_LEAVED_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka -clamp on C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\arbaro_tree_broad_leaved.png
+map_Kd -clamp on C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\arbaro_tree_broad_leaved.png
+map_d -clamp on C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\arbaro_tree_broad_leaved.png
+Ni 1
+illum 2
+
+newmtl GRAVEL_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Gravel004\Gravel004_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Gravel004\Gravel004_Color.jpg
+Ni 1
+illum 2
+
+newmtl PAVING_STONE_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\PavingStones072\PavingStones072_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\PavingStones072\PavingStones072_Color.jpg
+Ni 1
+illum 2
+
+newmtl KERB_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\KnerrKerb0001.png
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\KnerrKerb0001.png
+Ni 1
+illum 2
+
+newmtl MAT_1_0
+Ns 92.156863
+Ka 0.4 0.0 0.0
+Kd 0.4 0.0 0.0
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl CONCRETE_0
+Ns 92.156863
+Ka 0.27450982 0.27450982 0.27450982
+Kd 0.27450982 0.27450982 0.27450982
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Concrete034\Concrete034_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Concrete034\Concrete034_Color.jpg
+Ni 1
+illum 2
+
+newmtl ROAD_MARKING_DASHED_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Asphalt010\Asphalt010_Color.png
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Asphalt010\Asphalt010_Color.png
+Ni 1
+illum 2
+
+newmtl ROAD_MARKING_DASHED_1
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\road_marking_dash.png
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\road_marking_dash.png
+Ni 1
+illum 2
+
+newmtl RED_ROAD_MARKING_0
+Ns 92.156863
+Ka 0.5019608 0.26666668 0.26666668
+Kd 0.5019608 0.26666668 0.26666668
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Asphalt010\Asphalt010_Color.png
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Asphalt010\Asphalt010_Color.png
+Ni 1
+illum 2
+
+newmtl MAT_2_0
+Ns 92.156863
+Ka 0.49019608 0.4509804 0.02745098
+Kd 0.49019608 0.4509804 0.02745098
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl ROAD_MARKING_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl MAT_3_0
+Ns 92.156863
+Ka 0.09019608 0.16078432 0.07058824
+Kd 0.09019608 0.16078432 0.07058824
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl MAT_4_0
+Ns 92.156863
+Ka 0.19607843 0.07450981 0.05490196
+Kd 0.19607843 0.07450981 0.05490196
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl MAT_5_0
+Ns 92.156863
+Ka 0.0 0.0 0.5019608
+Kd 0.0 0.0 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl EARTH_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Ground042\Ground042_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Ground042\Ground042_Color.jpg
+Ni 1
+illum 2
+
+newmtl GRASS_PAVER_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\PavingStones053\PavingStones053_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\PavingStones053\PavingStones053_Color.jpg
+Ni 1
+illum 2
+
+newmtl SETT_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\PavingStones033\PavingStones033_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\PavingStones033\PavingStones033_Color.jpg
+Ni 1
+illum 2
+
+newmtl ADVERTISING_POSTER_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\OSM2World_Domposter.png
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\OSM2World_Domposter.png
+Ni 1
+illum 2
+
+newmtl GRASS_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Ground003\Ground003_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Ground003\Ground003_Color.jpg
+Ni 1
+illum 2
+
+newmtl MAT_6_0
+Ns 92.156863
+Ka 0.0 0.05882353 0.29411766
+Kd 0.0 0.05882353 0.29411766
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Fabric032\Fabric032_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Fabric032\Fabric032_Color.jpg
+Ni 1
+illum 2
+
+newmtl FLAGCLOTH_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Fabric032\Fabric032_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Fabric032\Fabric032_Color.jpg
+Ni 1
+illum 2
+
+newmtl MAT_7_0
+Ns 92.156863
+Ka 0.46666667 0.07058824 0.105882354
+Kd 0.46666667 0.07058824 0.105882354
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Fabric032\Fabric032_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Fabric032\Fabric032_Color.jpg
+Ni 1
+illum 2
+
+newmtl MAT_8_0
+Ns 92.156863
+Ka 0.4117647 0.39215687 0.3764706
+Kd 0.4117647 0.39215687 0.3764706
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl MAT_9_0
+Ns 92.156863
+Ka 0.5019608 0.4 0.0
+Kd 0.5019608 0.4 0.0
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl CHAIN_LINK_FENCE_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Fence006\Fence006_Color.png
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Fence006\Fence006_Color.png
+map_d C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Fence006\Fence006_Color.png
+Ni 1
+illum 2
+
+newmtl MAT_10_0
+Ns 92.156863
+Ka 0.36862746 0.3882353 0.4
+Kd 0.36862746 0.3882353 0.4
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl STONE_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Bricks008\Bricks008_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Bricks008\Bricks008_Color.jpg
+Ni 1
+illum 2
+
+newmtl MAT_11_0
+Ns 92.156863
+Ka 0.3764706 0.3764706 0.3764706
+Kd 0.3764706 0.3764706 0.3764706
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl HEDGE_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\Grass-2048.JPG
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\Grass-2048.JPG
+Ni 1
+illum 2
+
+newmtl MAT_12_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\PavingStones072\PavingStones072_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\PavingStones072\PavingStones072_Color.jpg
+Ni 1
+illum 2
+
+newmtl MAT_12_1
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\road_marking_dash.png
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\road_marking_dash.png
+Ni 1
+illum 2
+
+newmtl BUILDING_DEFAULT_0
+Ns 92.156863
+Ka 0.5019608 0.4509804 0.27450982
+Kd 0.5019608 0.4509804 0.27450982
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Plaster002\Plaster002_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Plaster002\Plaster002_Color.jpg
+Ni 1
+illum 2
+
+newmtl ROOF_DEFAULT_0
+Ns 92.156863
+Ka 0.4 0.0 0.0
+Kd 0.4 0.0 0.0
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\RoofingTiles010\RoofingTiles010_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\RoofingTiles010\RoofingTiles010_Color.jpg
+Ni 1
+illum 2
+
+newmtl WATER_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\P1140080E_Water.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\P1140080E_Water.jpg
+Ni 1
+illum 2
+
+newmtl GLASS_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\custom\Glass\Glass_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\custom\Glass\Glass_Color.jpg
+Ni 1
+illum 2
+
+newmtl PLASTIC_0
+Ns 92.156863
+Ka 0.46666667 0.46666667 0.46666667
+Kd 0.46666667 0.46666667 0.46666667
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Plastic010\Plastic010_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Plastic010\Plastic010_Color.jpg
+Ni 1
+illum 2
+
+newmtl ROCK_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Rock034\Rock034_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Rock034\Rock034_Color.jpg
+Ni 1
+illum 2
+
+newmtl SAND_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Ground033\Ground033_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Ground033\Ground033_Color.jpg
+Ni 1
+illum 2
+
+newmtl ENTRANCE_DEFAULT_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\DE19F1FreisingDoor00005_small.png
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\DE19F1FreisingDoor00005_small.png
+Ni 1
+illum 2
+
+newmtl GARAGE_DOOR_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\DE20F1GarageDoor00001.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\DE20F1GarageDoor00001.jpg
+Ni 1
+illum 2
+
+newmtl WOOD_WALL_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\WoodSiding008\WoodSiding008_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\WoodSiding008\WoodSiding008_Color.jpg
+Ni 1
+illum 2
+
+newmtl MAT_13_0
+Ns 92.156863
+Ka 0.28235295 0.3882353 0.45490196
+Kd 0.28235295 0.3882353 0.45490196
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl MAT_14_0
+Ns 92.156863
+Ka 0.5019608 0.47843137 0.5019608
+Kd 0.5019608 0.47843137 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl MAT_15_0
+Ns 92.156863
+Ka 0.3529412 0.3529412 0.3529412
+Kd 0.3529412 0.3529412 0.3529412
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl MAT_16_0
+Ns 92.156863
+Ka 0.08627451 0.08627451 0.08627451
+Kd 0.08627451 0.08627451 0.08627451
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl MAT_17_0
+Ns 92.156863
+Ka 0.5019608 0.039215688 0.05490196
+Kd 0.5019608 0.039215688 0.05490196
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl MAT_18_0
+Ns 92.156863
+Ka 0.5019608 0.27450982 0.0
+Kd 0.5019608 0.27450982 0.0
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl MAT_19_0
+Ns 92.156863
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl MAT_20_0
+Ns 92.156863
+Ka 0.0 0.5019608 0.0
+Kd 0.0 0.5019608 0.0
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1
+illum 2
+
+newmtl BRICK_0
+Ns 92.156863
+Ka 0.5019608 0.5019608 0.5019608
+Kd 0.5019608 0.5019608 0.5019608
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Bricks029\Bricks029_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Bricks029\Bricks029_Color.jpg
+Ni 1
+illum 2
+
+newmtl MAT_21_0
+Ns 92.156863
+Ka 0.41568628 0.41568628 0.41568628
+Kd 0.41568628 0.41568628 0.41568628
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+map_Ka C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Plaster002\Plaster002_Color.jpg
+map_Kd C:\Users\florent.richard-adm\OSM2World\OSM2World-latest-bin\textures\cc0textures\Plaster002\Plaster002_Color.jpg
+Ni 1
+illum 2
+

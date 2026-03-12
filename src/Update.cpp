@@ -50,6 +50,7 @@ void Update::UpdateNetwork(void* aModel, Network* aNet, OperatingMode::Mode aMod
 	  aNet->SendMessage(msgKeepAliveScn);
 	}
       else if(pModel->getLoopNumber() % 40 == 0)
+	{
 	  std::string msgKeepAliveShort = outMsg.KeepAliveShort();
 	  aNet->SendMessage(msgKeepAliveShort);
 	}

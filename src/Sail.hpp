@@ -9,8 +9,8 @@
 
 #define TOTAL_SAIL_DIM_COUNT (5)
 #define SAILS_MAX (4)
-#define ROTOR_TIME_TO_MAX_SPEED (15)
-#define ROTOR_MAX_SPEED (3)
+#define ROTOR_TIME_TO_MAX_SPEED (30)
+#define ROTOR_MAX_SPEED (3.12)
 
 class Sail
 {

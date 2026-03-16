@@ -178,9 +178,9 @@ public:
 	}
 	if (id == SHIP_ED_BUTTON) {
 #ifdef _WIN32
-	  ShellExecute(NULL, NULL, "ShipEditor.exe", NULL, NULL, SW_SHOW);
+	  ShellExecute(NULL, NULL, "C:\Program Files\ShipEditor\build\ShipEditor.exe", NULL, NULL, SW_SHOW);
 #else
-	  execl("../../../ShipEditor/build/ShipEditor", "ShipEditor", NULL);
+	  execl("../../../ShipEditor/res/launch.sh", "ShipEditor", NULL);
 #endif
 	}
       }
@@ -215,26 +215,6 @@ int main (int argc, char ** argv)
 
   if(GETCWD(cwd, sizeof(cwd)) != NULL) printf("Launcher::Working Directory : %s\n", cwd);
     
-  //Mac OS:
-  //Find starting folder
-#ifdef __APPLE__
-  char exePath[1024];
-  uint32_t pathSize = sizeof(exePath);
-  std::string exeFolderPath = "";
-  if (_NSGetExecutablePath(exePath, &pathSize) == 0) {
-    std::string exePathString(exePath);
-    size_t pos = exePathString.find_last_of("\\/");
-    if (std::string::npos != pos) {
-      exeFolderPath = exePathString.substr(0, pos);
-    }
-  }
-  //change up from BridgeCommand.app/Contents/MacOS to ../Resources
-  exeFolderPath.append("/../Resources");
-  //change to this path now
-  chdir(exeFolderPath.c_str());
-  //Note, we use this again after the createDevice call
-#endif
-
   //User read/write location - look in here first and the exe folder second for files
   userFolder = Utilities::getUserDir();
 

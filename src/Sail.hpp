@@ -9,8 +9,8 @@
 
 #define TOTAL_SAIL_DIM_COUNT (5)
 #define SAILS_MAX (4)
-#define ROTOR_TIME_TO_MAX_SPEED (15)
-#define ROTOR_MAX_SPEED (3)
+#define ROTOR_TIME_TO_MAX_SPEED (30)
+#define ROTOR_MAX_SPEED (3.12)
 
 class Sail
 {
@@ -30,8 +30,12 @@ class Sail
   float (*GetPos(void))[3];
   void PrintParams(void);
   void UpdateMesh(irr::IrrlichtDevice *aDev);
+  /*Rotor*/
   void SetOnOff(bool aOnOff);
   void SetRotDirection(std::string aRotDirection);
+  float GetRotSpeed(void);
+  bool GetOnOff(void);
+  int GetRotDirection(void);
   
   /*Polar file*/
   int OpenPolar(const std::string aPolarFile, std::string aVarNameX, std::string aVarNameY);
@@ -54,6 +58,7 @@ class Sail
   bool mWaitForStop;
   bool mWaitForStart;
   int mRotDirection;
+  float mRotSpeed;
   
   //Sail management
   int mSailsCount;

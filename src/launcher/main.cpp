@@ -30,11 +30,6 @@
 #include <unistd.h>
 #endif
 
-//Mac OS:
-#ifdef __APPLE__
-#include <mach-o/dyld.h>
-#endif
-
 // Irrlicht Namespaces
 //using namespace irr;
 
@@ -54,9 +49,10 @@ const irr::s32 INI_BC_BUTTON = 6;
 const irr::s32 INI_MC_BUTTON = 7;
 const irr::s32 INI_RP_BUTTON = 8;
 const irr::s32 INI_MH_BUTTON = 9;
-const irr::s32 DOC_BUTTON = 10;
-const irr::s32 USER_BUTTON = 11;
-const irr::s32 EXIT_BUTTON = 12;
+const irr::s32 SHIP_ED_BUTTON = 10;
+const irr::s32 DOC_BUTTON = 11;
+const irr::s32 USER_BUTTON = 12;
+const irr::s32 EXIT_BUTTON = 13;
 
 std::string userFolder;
 
@@ -81,27 +77,17 @@ public:
 	  ShellExecute(NULL, NULL, "bridgecommand-bc.exe", NULL, NULL, SW_SHOW);
 	  //_execl("./bridgecommand-bc.exe", "bridgecommand-bc.exe", NULL);
 #else
-#ifdef __APPLE__
-	  //APPLE
-	  execl("../MacOS/bc.app/Contents/MacOS/bc", "bc", NULL);
-#else
-	  //Other (assumed posix)
 	  execl("./bridgecommand-bc", "bridgecommand-bc", NULL);
 #endif
-#endif
+
 	}
 	if (id == MC_BUTTON) {
 #ifdef _WIN32
 	  ShellExecute(NULL, NULL, "bridgecommand-mc.exe", NULL, NULL, SW_SHOW);
 	  //_execl("./bridgecommand-mc.exe", "bridgecommand-mc.exe", NULL);
 #else
-#ifdef __APPLE__
-	  //APPLE
-	  execl("../MacOS/mc.app/Contents/MacOS/mc", "mc", NULL);
-#else
 	  //Other (assumed posix)
 	  execl("./bridgecommand-mc", "bridgecommand-mc", NULL);
-#endif
 #endif
 	}
 	if (id == RP_BUTTON) {
@@ -109,13 +95,8 @@ public:
 	  ShellExecute(NULL, NULL, "bridgecommand-rp.exe", NULL, NULL, SW_SHOW);
 	  //_execl("./bridgecommand-rp.exe", "bridgecommand-rp.exe", NULL);
 #else
-#ifdef __APPLE__
-	  //APPLE
-	  execl("../MacOS/rp.app/Contents/MacOS/rp", "rp", NULL);
-#else
 	  //Other (assumed posix)
 	  execl("./bridgecommand-rp", "bridgecommand-rp", NULL);
-#endif
 #endif
 	}
 	if (id == ED_BUTTON) {
@@ -123,13 +104,8 @@ public:
 	  ShellExecute(NULL, NULL, "bridgecommand-ed.exe", NULL, NULL, SW_SHOW);
 	  //_execl("./bridgecommand-ed.exe", "bridgecommand-ed.exe", NULL);
 #else
-#ifdef __APPLE__
-	  //APPLE
-	  execl("../MacOS/ed.app/Contents/MacOS/ed", "ed", NULL);
-#else
 	  //Other (assumed posix)
 	  execl("./bridgecommand-ed", "bridgecommand-ed", NULL);
-#endif
 #endif
 	}
 	if (id == MH_BUTTON) {
@@ -137,13 +113,8 @@ public:
 	  ShellExecute(NULL, NULL, "bridgecommand-mh.exe", NULL, NULL, SW_SHOW);
 	  //_execl("./bridgecommand-mh.exe", "bridgecommand-mh.exe", NULL);
 #else
-#ifdef __APPLE__
-	  //APPLE
-	  execl("../MacOS/mh.app/Contents/MacOS/mh", "mh", NULL);
-#else
 	  //Other (assumed posix)
 	  execl("./bridgecommand-mh", "bridgecommand-mh", NULL);
-#endif
 #endif
 	}
 	if (id == INI_BC_BUTTON) {
@@ -151,13 +122,8 @@ public:
 	  ShellExecute(NULL, NULL, "bridgecommand-ini.exe", NULL, NULL, SW_SHOW);
 	  //_execl("./bridgecommand-ini.exe", "bridgecommand-ini.exe", NULL);
 #else
-#ifdef __APPLE__
-	  //APPLE
-	  execl("../MacOS/ini.app/Contents/MacOS/ini", "ini", NULL);
-#else
 	  //Other (assumed posix)
 	  execl("./bridgecommand-ini", "bridgecommand-ini", NULL);
-#endif
 #endif
 	}
 	if (id == INI_MC_BUTTON) {
@@ -165,13 +131,8 @@ public:
 	  ShellExecute(NULL, NULL, "bridgecommand-ini.exe", "-M", NULL, SW_SHOW);
 	  //_execl("./bridgecommand-ini.exe", "bridgecommand-ini.exe", "-M", NULL);
 #else
-#ifdef __APPLE__
-	  //APPLE
-	  execl("../MacOS/ini.app/Contents/MacOS/ini", "ini", "-M", NULL);
-#else
 	  //Other (assumed posix)
 	  execl("./bridgecommand-ini", "bridgecommand-ini", "-M", NULL);
-#endif
 #endif
 	}
 	if (id == INI_RP_BUTTON) {
@@ -179,13 +140,8 @@ public:
 	  ShellExecute(NULL, NULL, "bridgecommand-ini.exe", "-R", NULL, SW_SHOW);
 	  //_execl("./bridgecommand-ini.exe", "bridgecommand-ini.exe", "-R", NULL);
 #else
-#ifdef __APPLE__
-	  //APPLE
-	  execl("../MacOS/ini.app/Contents/MacOS/ini", "ini", "-R", NULL);
-#else
 	  //Other (assumed posix)
 	  execl("./bridgecommand-ini", "bridgecommand-ini", "-R", NULL);
-#endif
 #endif
 	}
 	if (id == INI_MH_BUTTON) {
@@ -193,13 +149,8 @@ public:
 	  ShellExecute(NULL, NULL, "bridgecommand-ini.exe", "-H", NULL, SW_SHOW);
 	  //_execl("./bridgecommand-ini.exe", "bridgecommand-ini.exe", "-H", NULL);
 #else
-#ifdef __APPLE__
-	  //APPLE
-	  execl("../MacOS/ini.app/Contents/MacOS/ini", "ini", "-H", NULL);
-#else
 	  //Other (assumed posix)
 	  execl("./bridgecommand-ini", "bridgecommand-ini", "-H", NULL);
-#endif
 #endif
 	}
 	if (id == DOC_BUTTON) {
@@ -209,14 +160,9 @@ public:
 	  //Sleep(5000);
 	  //exit(EXIT_SUCCESS);
 #else
-#ifdef __APPLE__
-	  //APPLE
-	  execl("/usr/bin/open", "open", "../Resources/doc/index.html", NULL);
-#else
 	  execl("/usr/bin/xdg-open", "xdg-open", "doc/index.html", NULL);
 	  //If execuation gets to this point, it has failed to launch help. Try to fall back to online documentation	 
 	  execl("/usr/bin/xdg-open", "xdg-open", "https://www.bridgecommand.co.uk/Documentation", NULL);
-#endif
 #endif
 	}
 	if (id == USER_BUTTON) {
@@ -226,14 +172,15 @@ public:
 	  //Sleep(5000);
 	  //exit(EXIT_SUCCESS);
 #else
-#ifdef __APPLE__
-	  //APPLE
-	  std::cout << userFolder << std::endl;
-	  execl("/usr/bin/open", "open", userFolder.c_str(), NULL);
-#else
 	  //Other (assumed posix)
 	  execl("/usr/bin/xdg-open", "xdg-open", userFolder.c_str(), NULL);
 #endif
+	}
+	if (id == SHIP_ED_BUTTON) {
+#ifdef _WIN32
+	  ShellExecute(NULL, NULL, "C:\Program Files\ShipEditor\build\ShipEditor.exe", NULL, NULL, SW_SHOW);
+#else
+	  execl("../../../ShipEditor/res/launch.sh", "ShipEditor", NULL);
 #endif
 	}
       }
@@ -268,26 +215,6 @@ int main (int argc, char ** argv)
 
   if(GETCWD(cwd, sizeof(cwd)) != NULL) printf("Launcher::Working Directory : %s\n", cwd);
     
-  //Mac OS:
-  //Find starting folder
-#ifdef __APPLE__
-  char exePath[1024];
-  uint32_t pathSize = sizeof(exePath);
-  std::string exeFolderPath = "";
-  if (_NSGetExecutablePath(exePath, &pathSize) == 0) {
-    std::string exePathString(exePath);
-    size_t pos = exePathString.find_last_of("\\/");
-    if (std::string::npos != pos) {
-      exeFolderPath = exePathString.substr(0, pos);
-    }
-  }
-  //change up from BridgeCommand.app/Contents/MacOS to ../Resources
-  exeFolderPath.append("/../Resources");
-  //change to this path now
-  chdir(exeFolderPath.c_str());
-  //Note, we use this again after the createDevice call
-#endif
-
   //User read/write location - look in here first and the exe folder second for files
   userFolder = Utilities::getUserDir();
 
@@ -296,7 +223,7 @@ int main (int argc, char ** argv)
 
   if(Utilities::pathExists(userFolder + "bc5.ini"))
     {
-        iniFilename = userFolder + "bc5.ini";
+      iniFilename = userFolder + "bc5.ini";
     }
   
   std::string modifier = IniFile::iniFileToString(iniFilename, "lang");
@@ -322,7 +249,7 @@ int main (int argc, char ** argv)
   }
 
   irr::u32 graphicsWidth = 300;
-  irr::u32 graphicsHeight = 620;
+  irr::u32 graphicsHeight = 650;
   irr::u32 graphicsDepth = 32;
   bool fullScreen = false;
 
@@ -390,6 +317,12 @@ int main (int argc, char ** argv)
   y1 = y2 + 3*bR; y2 = y1 +   bH; irr::gui::IGUIButton* launchED    = device->getGUIEnvironment()->addButton(irr::core::rect<irr::s32>(x1,y1,x2,y2),0,ED_BUTTON,language.translate("startED").c_str()); //i18n
   launchED->setImage(driver->getTexture("media/startED.png"));
   launchED->setUseAlphaChannel();
+
+  y1 = y2 + bR; y2 = y1 +   bH; irr::gui::IGUIButton* launchSE    = device->getGUIEnvironment()->addButton(irr::core::rect<irr::s32>(x1,y1,x2,y2),0,SHIP_ED_BUTTON,language.translate("startSE").c_str()); //i18n
+  launchSE->setImage(driver->getTexture("media/startSE.png"));
+  launchSE->setUseAlphaChannel();
+
+  
   y1 = y2 +   bR; y2 = y1 +   bH; irr::gui::IGUIButton* launchMC    = device->getGUIEnvironment()->addButton(irr::core::rect<irr::s32>(x1,y1,x2,y2),0,MC_BUTTON,language.translate("startMC").c_str()); //i18n
   launchMC->setImage(driver->getTexture("media/startMC.png"));
   launchMC->setUseAlphaChannel();

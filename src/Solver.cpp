@@ -71,6 +71,8 @@ Eigen::VectorXd Solver::DiffEq(const Eigen::VectorXd& aVectEtaMu)
       mT += mShip->getSail().getT();
     }
 
+  if(mShip->getNumberProp() > 1)
+    mT += mShip->getPropeller().getT();
   
   vMuP = mShip->getInvMatM() * (mT - (matC * vMu));
   
@@ -115,12 +117,34 @@ void Solver::SolveRk4(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu)
   if(ySol[2] > (2*M_PI))
     ySol[2] = ySol[2] - (2*M_PI);
 
-   if(ySol[2] < 0)
+  if(ySol[2] < 0)
     ySol[2] = ySol[2] + (2*M_PI);
-  
+
   mEta << ySol[0], ySol[1], ySol[2];
   mMu << ySol[3], ySol[4], ySol[5];
 
+}
+
+void Solver::SolveYaw(void)
+{
+  Eigen::Vector3d fPropPort = {0,0,0};
+  Eigen::Vector3d fPropStbd = {0,0,0};
+  static float yawAcc = 0, yawRot = 0, yawAngle = 0; 
+  
+  if(mShip->getNumberProp() > 1)
+    {
+      fPropStbd = mShip->getPropeller("starboard").getT();
+      fPropPort = mShip->getPropeller("port").getT();
+
+      yawAcc = ((1 - mShip->getPropeller().getDeductionFactor()) *
+		  (mShip->getGeoParams().propSpacing/2) *
+		  (fPropStbd[0] - fPropPort[0])) /
+	          mShip->getMatM()(2,2);
+      yawRot += yawAcc * mDt;
+      yawAngle += yawRot * mDt;
+
+      //mMu[1] += yawRot
+    }
 }
 
 Eigen::Vector3d Solver::getEta(void) const {return mEta;}

@@ -87,6 +87,7 @@ int Ship::InitShipParams(const Json::Value& aJsonRoot)
       mGeoParams.volume = aJsonRoot["geoParams"]["subwaterVolume"].asFloat();
       mGeoParams.xG = aJsonRoot["geoParams"]["longGravityCenter"].asFloat();
       mGeoParams.cB = aJsonRoot["geoParams"]["blockCoef"].asFloat();
+      mGeoParams.propSpacing = aJsonRoot["propeller"]["spacing"].asFloat();
       PrintGeoParams();
 
       //Added-Mass Params
@@ -352,4 +353,5 @@ Eigen::Vector3d Ship::getMu0(void){return mMu0;}
 Eigen::Vector3d Ship::getMu(void){return mMu;}
 Eigen::Vector3d Ship::getEta(void){return mEta;}
 Eigen::Matrix3d& Ship::getInvMatM(void){return mInvMatM;}
+Eigen::Matrix3d& Ship::getMatM(void){return mMatM;}
 unsigned char Ship::getNumberProp(void){return mNumberProp;}

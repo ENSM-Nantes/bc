@@ -192,8 +192,8 @@ void OtherShip::update(irr::f32 deltaTime, irr::f32 scenarioTime, irr::f32 tideH
     }
 
     
-    mEta[1] = mEta[1] + sin(mEta[2]*irr::core::DEGTORAD)*mMu[0]*deltaTime;
-    mEta[0] = mEta[0] + cos(mEta[2]*irr::core::DEGTORAD)*mMu[0]*deltaTime;
+    mEta[1] = mEta[1] + sin(mEta[2]*irr::core::RADTODEG)*mMu[0]*deltaTime;
+    mEta[0] = mEta[0] + cos(mEta[2]*irr::core::RADTODEG)*mMu[0]*deltaTime;
     double yPos = tideHeight+mHeightCorrection;
 
     //Set position & speed by calling ship methods

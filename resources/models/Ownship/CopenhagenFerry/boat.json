@@ -111,13 +111,13 @@
 		"backwardEff" : 0.69999998807907104,
 		"diameter" : 4.1999998092651367,
 		"forwardRotDir" : "right",
-		"k0" : 0.29300001263618469,
-		"k1" : -0.27500000596046448,
-		"k2" : -0.13899999856948853,
+		"k0" : 0.35,
+		"k1" : -0.30,
+		"k2" : -0.10,
 		"longPosition" : -0.47999998927116394,
 		"nominalWake" : 0.20000000298023224,
 		"number" : 2,
-		"thrustFactor" : 0.27000001072883606
+		"thrustFactor" : 0.15
 	},
 	"radar" : 
 	{
@@ -152,7 +152,7 @@
 		"maxAngle" : 0.61000001430511475,
 		"maxSpeed" : 0.05000000074505806,
 		"spanLength" : 4.1999998092651367,
-		"steeringResistanceFactor" : 0.38999998569488525,
+		"steeringResistanceFactor" : 0.25,
 		"wakeFractionRatio" : 0.80400002002716064
 	},
 	"sail" : 

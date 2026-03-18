@@ -117,7 +117,8 @@
 		"longPosition" : -0.47999998927116394,
 		"nominalWake" : 0.20000000298023224,
 		"number" : 2,
-		"thrustFactor" : 0.15
+		"thrustFactor" : 0.15,
+		"spacing" : 8
 	},
 	"radar" : 
 	{

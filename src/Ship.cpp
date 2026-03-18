@@ -58,6 +58,7 @@ void Ship::PrintGeoParams(void)
   std::cout << "Subwater volume : " << mGeoParams.volume << std::endl;
   std::cout << "Longitudinal coordinate of center of gravity of ship : " << mGeoParams.xG << std::endl;
   std::cout << "Coefficient Block : " << mGeoParams.cB << std::endl;
+  std::cout << "Spacing beetween 2 propeller : " << mGeoParams.propSpacing << std::endl;
   std::cout << "::::::::::::" << std::endl;
 }
 

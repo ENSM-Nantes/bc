@@ -60,8 +60,8 @@ Eigen::VectorXd Solver::DiffEq(const Eigen::VectorXd& aVectEtaMu)
     (mShip->getM() + mShip->getMX())*vMu[2], 0, 0, xG*mShip->getM()*vMu[2], 0, 0;
   
   mShip->getHull().ComputeT(vMu, RHO_SW, mShip->getGeoParams());
-  mShip->getPropeller().ComputeT(vMu, RHO_SW, mShip->getGeoParams());
-  mShip->getRudder().ComputeT(vMu, RHO_SW, mShip->getGeoParams(), mShip->getPropeller());
+  mShip->getPropeller("port").ComputeT(vMu, RHO_SW, mShip->getGeoParams());
+  mShip->getRudder().ComputeT(vMu, RHO_SW, mShip->getGeoParams(), mShip->getPropeller("port"));
 
   mT << mShip->getHull().getT() + mShip->getPropeller().getT() + mShip->getRudder().getT();
   
@@ -72,8 +72,11 @@ Eigen::VectorXd Solver::DiffEq(const Eigen::VectorXd& aVectEtaMu)
     }
 
   if(mShip->getNumberProp() > 1)
-    mT += mShip->getPropeller().getT();
-  
+    {
+      mShip->getPropeller("starboard").ComputeT(vMu, RHO_SW, mShip->getGeoParams());
+      mT += mShip->getPropeller("starboard").getT();
+    }
+      
   vMuP = mShip->getInvMatM() * (mT - (matC * vMu));
   
   catVect.resize(vEtaP.size() + vMuP.size());
@@ -120,6 +123,8 @@ void Solver::SolveRk4(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu)
   if(ySol[2] < 0)
     ySol[2] = ySol[2] + (2*M_PI);
 
+  SolveYaw();
+  
   mEta << ySol[0], ySol[1], ySol[2];
   mMu << ySol[3], ySol[4], ySol[5];
 
@@ -143,7 +148,12 @@ void Solver::SolveYaw(void)
       yawRot += yawAcc * mDt;
       yawAngle += yawRot * mDt;
 
-      //mMu[1] += yawRot
+      mMu[1] += yawRot;
+      std::cout << "mShip->getPropeller().getDeductionFactor() " << mShip->getPropeller().getDeductionFactor() << std::endl;
+      std::cout << "mShip->getGeoParams().propSpacing " << mShip->getGeoParams().propSpacing << std::endl;
+      std::cout << "fPropStbd[0] " << fPropStbd[0] << std::endl;
+      std::cout << "fPropPort[0] " << fPropPort[0] << std::endl;
+      std::cout << "yawRot : " << yawRot << std::endl;
     }
 }
 

@@ -125,12 +125,11 @@ void Solver::SolveRk4(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu)
 
   if(ySol[2] < 0)
     ySol[2] = ySol[2] + (2*M_PI);
-
-  SolveYaw();
   
   mEta << ySol[0], ySol[1], ySol[2];
   mMu << ySol[3], ySol[4], ySol[5];
 
+  SolveYaw();
 }
 
 void Solver::SolveYaw(void)
@@ -152,11 +151,11 @@ void Solver::SolveYaw(void)
       yawAngle += yawRot * mDt;
 
       mMu[1] += yawRot;
-      std::cout << "mShip->getPropeller().getDeductionFactor() " << mShip->getPropeller().getDeductionFactor() << std::endl;
+      /*std::cout << "mShip->getPropeller().getDeductionFactor() " << mShip->getPropeller().getDeductionFactor() << std::endl;
       std::cout << "mShip->getGeoParams().propSpacing " << mShip->getGeoParams().propSpacing << std::endl;
       std::cout << "fPropStbd[0] " << fPropStbd[0] << std::endl;
       std::cout << "fPropPort[0] " << fPropPort[0] << std::endl;
-      std::cout << "yawRot : " << yawRot << std::endl;
+      std::cout << "yawRot : " << yawRot << std::endl;*/
     }
 }
 

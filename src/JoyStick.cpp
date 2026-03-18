@@ -175,7 +175,7 @@ void JoyStick::AxisProcess(int aJsNumber, float aRawValue, int aAxisNumber, sJsC
 		  else if(AXIS_STBD == j) //Stbd
 		    {
 		      calibrateValue = JoyStick::GetCalibrateValue(aRawValue, aJsConf.stbdRangeMin, aJsConf.stbdRangeMax, aJsConf.stbdRangeCenter, aJsConf.invertStbd);
-		      pModel->getOwnShip()->setPortEngine(calibrateValue);
+		      pModel->getOwnShip()->setStbdEngine(calibrateValue);
 		    }
 		  else if (AXIS_RUDDER == j) //Rudder
 		    {

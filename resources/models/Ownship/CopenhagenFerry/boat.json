@@ -116,7 +116,8 @@
 		"k2" : -0.13899999856948853,
 		"longPosition" : -0.47999998927116394,
 		"nominalWake" : 0.25,
-		"number" : 2,
+	    "number" : 2,
+	    "spacing" : 8,
 		"thrustFactor" : 0.27000001072883606
 	},
 	"radar" : 

@@ -67,8 +67,11 @@ Eigen::VectorXd Solver::DiffEq(const Eigen::VectorXd& aVectEtaMu)
   
   if(mShip->getSail().GetCount() > 0)
     {
-      mShip->getSail().ComputeT();
-      mT += mShip->getSail().getT();
+      if(mShip->getSail().GetOnOff())
+	{
+	  mShip->getSail().ComputeT();
+	  mT += mShip->getSail().getT();
+	}
     }
 
   if(mShip->getNumberProp() > 1)

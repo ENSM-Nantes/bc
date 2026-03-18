@@ -6,7 +6,8 @@
 		"draugth": 8,
 		"subwaterVolume": 25000,
 		"longGravityCenter": 1.1,
-		"blockCoef": 0.81 
+	        "blockCoef": 0.81
+	
     },
     "hull": {
 		"xp0": 0.022,
@@ -33,7 +34,7 @@
 		"pZ": 0.011 
     },
     "propeller": {
-		"number": 1,
+		"number": 2,
 		"diameter": 4.2,
 		"thrustFactor": 0.22, 
 		"longPosition": -0.48,
@@ -42,7 +43,8 @@
 		"k1": -0.275,
 		"k2": -0.139,
 		"forwardRotDir": "right",
-		"backwardEff": 0.67 
+	"backwardEff": 0.67,
+	"spacing" : 20
     },
     "rudder": {
 		"spanLength": 15.8, 

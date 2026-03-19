@@ -19,6 +19,7 @@ public:
   
   /*Getter*/
   Eigen::Vector3d getT(void) const ;
+  double getDeductionFactor(void) const ;
   double getDiameter(void) const ;
   double getWakeFraction(void) const ;
   double getLongPos(void) const ;

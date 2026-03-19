@@ -65,7 +65,7 @@ bool Autopilot::receiveAPB(APB sentence)
   if (relativeBearing <= -180.0) {
     relativeBearing += 360.0;
   }
-  float rot = ((OwnShip*)mOwnShip)->getRateOfTurn();
+  float rot = ((OwnShip*)mOwnShip)->getRateOfTurn()*irr::core::RADTODEG;
   float dampening = 1.0;
   float timeUntilOvershoot = 0;
   

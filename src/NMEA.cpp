@@ -422,7 +422,7 @@ void NMEA::updateNMEA(sTime& aTime)
   irr::f32 spdWater = mOwnShip->getSpeedThroughWater() * MPS_TO_KTS;
   irr::f32 latSpeed = mOwnShip->getLateralSpeed();
   irr::f32 hdg = mOwnShip->getHeading()*irr::core::RADTODEG;
-  irr::f32 rot = mOwnShip->getRateOfTurn()*60;
+  irr::f32 rot = mOwnShip->getRateOfTurn()*irr::core::RADTODEG*60;
 
   irr::f32 depth = mOwnShip->getDepth(mTerrain);
 

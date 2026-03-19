@@ -152,7 +152,7 @@ sJsMapping getJoystickSetup(std::string iniFilename, sJsConf& aJsConf)
   jsMapping.entry[2].jsNumber = IniFile::iniFileTou32(iniFilename, "rudder_js_number");
   //Stbd
   jsMapping.entry[1].type = AXIS;
-  jsMapping.entry[1].channel = IniFile::iniFileTou32(iniFilename, "stbdLever_channe")-1;
+  jsMapping.entry[1].channel = IniFile::iniFileTou32(iniFilename, "stbdLever_channel")-1;
   jsMapping.entry[1].jsNumber = IniFile::iniFileTou32(iniFilename, "stbd_js_number");
 
   //POV

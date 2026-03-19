@@ -246,8 +246,16 @@ irr::f32 Ship::getHeightCorrection() const
 
 irr::f32 Ship::getDepth(Terrain *aTerrain) const
 {
+  float height = 0;
   if(NULL != aTerrain)
-    return -1 * aTerrain->getHeight(mEta[1], mEta[0]) + getPosition().Y;
+    {
+      height = aTerrain->getHeight(mEta[1], mEta[0]) + getPosition().Y;
+
+      if(height > 200)
+	return 200;
+      else
+	return -1 * height;
+    }
   else
     return -1;
 }

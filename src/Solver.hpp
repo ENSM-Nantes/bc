@@ -20,7 +20,6 @@ public:
   /*Process*/
   int Init(Ship* aShip);
   void SolveRk4(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu);
-  void SolveYaw(void);
   
   /*Getter*/
   Eigen::Vector3d getEta(void) const;
@@ -33,7 +32,7 @@ private:
 
   Eigen::VectorXd DiffEq(const Eigen::VectorXd& aVectEtaMu);
 
-  Eigen::Vector3d mT; //Result Force
+  Eigen::Vector3d mT; //Result Force X, Y, Z
   double mDt; //Time delta
   Eigen::Vector3d mEta; //Pos vector
   Eigen::Vector3d mMu; //Speed vector

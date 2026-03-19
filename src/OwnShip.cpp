@@ -386,10 +386,10 @@ void OwnShip::Update(sTime& aTime, float aTideHeight, float aWeather, Wind *aWin
   mSails.UpdateMesh(mDevice);
 
   /*Print Pos & Rot*/
-  /*  std::cout << "::::::Pos & Rot::::::" << std::endl;
+  /*std::cout << "::::::Pos & Rot::::::" << std::endl;
   std::cout << "mMu[0] : Speed on Z : " << mMu[0] << std::endl;
-  std::cout << "mMu[1] :  Rate of turn : " << mMu[1] << std::endl;
-  std::cout << "mMu[2] :  Speed on X (m/s) : " << mMu[2] << std::endl;
+  std::cout << "mMu[1] :  Speed on X (m/s) : " << mMu[1] << std::endl;
+  std::cout << "mMu[2] :  Rate of turn (rad/s) : " << mMu[2] << std::endl;
   std::cout << "mEta[0] : Z position : " << mEta[0] << std::endl;
   std::cout << "mEta[1] : X position : " << mEta[1] << std::endl;
   std::cout << "mEta[2] : Heading (rad) : " << mEta[2] << std::endl;*/
@@ -403,7 +403,7 @@ void OwnShip::Update(sTime& aTime, float aTideHeight, float aWeather, Wind *aWin
 void OwnShip::setRateOfTurn(float rateOfTurn)
 {
   mControlMode = MODE_AUTO; // Switch to controlled mode
-  mMu[1] = rateOfTurn;
+  mMu[2] = rateOfTurn;
 }
 
 void OwnShip::setWheel(float aWheel)

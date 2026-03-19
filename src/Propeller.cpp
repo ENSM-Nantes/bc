@@ -124,6 +124,7 @@ void Propeller::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sG
 
 Eigen::Vector3d Propeller::getT(void) const {return mT;}
 double Propeller::getDiameter(void) const {return mDiam;}
+double Propeller::getDeductionFactor(void) const {return mTfactor;}
 double Propeller::getWakeFraction(void) const {return mW0fraction;}
 double Propeller::getLongPos(void) const {return mXp;}
 double Propeller::getRevs(void) const {return mNrps;}

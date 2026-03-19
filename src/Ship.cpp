@@ -259,7 +259,7 @@ irr::f32 Ship::getSpeedThroughWater() const
 
 irr::f32 Ship::getLateralSpeed() const
 {
-  return mMu[2]; 
+  return mMu[1]; 
 }
 
 
@@ -291,7 +291,7 @@ void Ship::setSpeed(irr::f32 spd)
 
 irr::f32 Ship::getRateOfTurn() const
 {
-  return mMu[1];
+  return mMu[2];
 }
 
 irr::f32 Ship::getHeading() const

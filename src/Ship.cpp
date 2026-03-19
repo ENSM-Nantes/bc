@@ -58,6 +58,7 @@ void Ship::PrintGeoParams(void)
   std::cout << "Subwater volume : " << mGeoParams.volume << std::endl;
   std::cout << "Longitudinal coordinate of center of gravity of ship : " << mGeoParams.xG << std::endl;
   std::cout << "Coefficient Block : " << mGeoParams.cB << std::endl;
+  std::cout << "Spacing beetween 2 propeller : " << mGeoParams.propSpacing << std::endl;
   std::cout << "::::::::::::" << std::endl;
 }
 
@@ -87,6 +88,7 @@ int Ship::InitShipParams(const Json::Value& aJsonRoot)
       mGeoParams.volume = aJsonRoot["geoParams"]["subwaterVolume"].asFloat();
       mGeoParams.xG = aJsonRoot["geoParams"]["longGravityCenter"].asFloat();
       mGeoParams.cB = aJsonRoot["geoParams"]["blockCoef"].asFloat();
+      mGeoParams.propSpacing = aJsonRoot["propeller"]["spacing"].asFloat();
       PrintGeoParams();
 
       //Added-Mass Params
@@ -244,8 +246,16 @@ irr::f32 Ship::getHeightCorrection() const
 
 irr::f32 Ship::getDepth(Terrain *aTerrain) const
 {
+  float height = 0;
   if(NULL != aTerrain)
-    return -1 * aTerrain->getHeight(mEta[1], mEta[0]) + getPosition().Y;
+    {
+      height = aTerrain->getHeight(mEta[1], mEta[0]) + getPosition().Y;
+
+      if(height > 200)
+	return 200;
+      else
+	return -1 * height;
+    }
   else
     return -1;
 }
@@ -257,7 +267,7 @@ irr::f32 Ship::getSpeedThroughWater() const
 
 irr::f32 Ship::getLateralSpeed() const
 {
-  return mMu[2]; 
+  return mMu[1]; 
 }
 
 
@@ -289,7 +299,7 @@ void Ship::setSpeed(irr::f32 spd)
 
 irr::f32 Ship::getRateOfTurn() const
 {
-  return mMu[1];
+  return mMu[2];
 }
 
 irr::f32 Ship::getHeading() const
@@ -352,4 +362,5 @@ Eigen::Vector3d Ship::getMu0(void){return mMu0;}
 Eigen::Vector3d Ship::getMu(void){return mMu;}
 Eigen::Vector3d Ship::getEta(void){return mEta;}
 Eigen::Matrix3d& Ship::getInvMatM(void){return mInvMatM;}
+Eigen::Matrix3d& Ship::getMatM(void){return mMatM;}
 unsigned char Ship::getNumberProp(void){return mNumberProp;}

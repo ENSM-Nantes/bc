@@ -116,7 +116,7 @@ protected:
   Eigen::Matrix3d mInvMatM; //Inverse mass matrix
   Eigen::Vector3d mMu0; //Initial speed
   //Dynamic params
-  Eigen::Vector3d mMu; //mMu[0] : Speed on Z (m/s); mMu[1] :  Rate of turn  (deg/s); mMu[2] : Speed on X (m/s) 
+  Eigen::Vector3d mMu; //mMu[0] : Speed on Z (m/s); mMu[1] : Speed on X (m/s)  ; mMu[2] :  Rate of turn  (rad/s)
   Eigen::Vector3d mEta; //mEta[0] : Z position ; mEta[1] : X position ; mEta[2] : Heading
   double mSpeedThroughWater;
   float mAngleCorrectionRoll;

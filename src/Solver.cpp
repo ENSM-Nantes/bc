@@ -150,7 +150,7 @@ void Solver::SolveYaw(void)
       yawRot += yawAcc * mDt;
       yawAngle += yawRot * mDt;
 
-      mMu[1] += yawRot;
+      mMu[2] += yawRot;
       /*std::cout << "mShip->getPropeller().getDeductionFactor() " << mShip->getPropeller().getDeductionFactor() << std::endl;
       std::cout << "mShip->getGeoParams().propSpacing " << mShip->getGeoParams().propSpacing << std::endl;
       std::cout << "fPropStbd[0] " << fPropStbd[0] << std::endl;

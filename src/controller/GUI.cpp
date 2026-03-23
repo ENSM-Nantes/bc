@@ -356,8 +356,8 @@ void GUIMain::drawInformationOnMap(const irr::f32& time, const irr::s32& mapOffs
     }
 
     //Heading line
-    irr::s32 hdgLineX = ownRelPosX + width/10*sin(ownShipHeading * RAD_IN_DEG);
-    irr::s32 hdgLineY = ownRelPosY + width/10*cos(ownShipHeading * RAD_IN_DEG);
+    irr::s32 hdgLineX = ownRelPosX + width/10*sin(ownShipHeading);
+    irr::s32 hdgLineY = ownRelPosY + width/10*cos(ownShipHeading);
     irr::core::position2d<irr::s32> hdgStart (screenCentreX + ownRelPosX, screenCentreY - ownRelPosY);
     irr::core::position2d<irr::s32> hdgEnd   (screenCentreX + hdgLineX  , screenCentreY - hdgLineY  );
     device->getVideoDriver()->draw2DLine(hdgStart,hdgEnd, ownShipColour.getInterpolated(black, getBrightnessScaling()));

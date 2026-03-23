@@ -1,0 +1,188 @@
+{
+	"addedMass" : 
+	{
+		"pX" : 0.022,
+		"pY" : 0.223,
+		"pZ" : 0.011
+	},
+	"depthSounder" : 
+	{
+		"maxDepth" : 200.0,
+		"number" : true
+	},
+	"engine" : 
+	{
+		"brand" : "Unknow",
+		"fuelCons" : 22.0,
+		"number" : 1,
+		"power" : 20000.0,
+		"rpmMax" : 91.8,
+		"type" : "XXXX"
+	},
+	"general" : 
+	{
+		"boatName" : "CopenhagenFerry",
+		"imgName" : "CopenhagenFerry.jpg"
+	},
+	"geoParams" : 
+	{
+		"blockCoef" : 0.81,
+		"breadth" : 58,
+		"draugth" : 20.8,
+		"length" : 320,
+		"longGravityCenter" : 0.035,
+		"rho" : 1025.0,
+		"subwaterVolume" : 312622
+	},
+	"gps" : 
+	{
+		"number" : true
+	},
+	"hull" : 
+	{
+		"npR" : -0.049,
+		"npRRR" : -0.0013,
+		"npV" : -0.137,
+		"npVRR" : 0.055,
+		"npVVR" : -0.294,
+		"npVVV" : -0.03,
+		"xp0" : -0.022,
+		"xpRR" : 0.011,
+		"xpVR" : 0.002,
+		"xpVV" : -0.04,
+		"xpVVVV" : 0.771,
+		"ypR" : 0.083,
+		"ypRRR" : 0.008,
+		"ypV" : -0.315,
+		"ypVRR" : -0.391,
+		"ypVVR" : 0.379,
+		"ypVVV" : -1.607
+	},
+	"initialSpeed" : 
+	[
+		0,
+		0,
+		0
+	],
+	"mesh" : 
+	{
+		"angleCorrection" : 0,
+		"makeTransparent" : false,
+		"name" : "CopenhagenFerry.obj",
+		"numberOfViews" : 5,
+		"scaleFactor" : 1.0,
+		"views" : 
+		[
+			[
+				0.0,
+				25.0,
+				70.0,
+				false
+			],
+			[
+				50.0,
+				40.0,
+				0.0,
+				false
+			],
+			[
+				-50.0,
+				40.0,
+				0.0,
+				false
+			],
+			[
+				0.0,
+				50.0,
+				-50.0,
+				false
+			],
+			[
+				0.0,
+				200.0,
+				0.0,
+				true
+			]
+		],
+		"yCorrection" : -5.8000001907348633
+	},
+	"propeller" : 
+	{
+		"backwardEff" : 0.69999998807907104,
+		"diameter" : 9.86,
+		"forwardRotDir" : "right",
+		"k0" : 0.2931,
+		"k1" : -0.2753,
+		"k2" : -0.1385,
+		"longPosition" : -0.47999998927116394,
+		"nominalWake" : 0.35,
+		"number" : 1,
+		"thrustFactor" : 0.22,
+		"spacing" : 0
+	},
+	"radar" : 
+	{
+		"number" : 1,
+		"pos" : 
+		[
+			0.0,
+			-10.0,
+			0.0
+		],
+		"size" : 1.0,
+		"tilt" : 0.0
+	},
+	"rotIndicator" : 
+	{
+		"number" : true
+	},
+	"rudder" : 
+	{
+	    "areaMobPart" : 112,5,
+		"aspectRatio" : 1.827,
+		"expConstUr" : 0.5,
+		"flowCoef" : 
+		[
+			0.395,
+			0.64
+		],
+		"forceIncreaseFactor" : 0.312,
+		"longCoordinatePos" : -0.464,
+		"longCoordinateRatio" : -0.5,
+		"longLateralForce" : -0.71,
+		"maxAngle" : 0.61,
+		"maxSpeed" : 0.0407,
+		"spanLength" : 15.8,
+		"steeringResistanceFactor" : 0.387,
+		"wakeFractionRatio" : 1.09
+	},
+	"sail" : 
+	{
+		"number" : 0,
+		"pos" : 
+		[
+			[
+				78.0,
+				12.5,
+				8.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			]
+		],
+		"size" : "30x5",
+		"type" : "Rotor"
+	}
+}

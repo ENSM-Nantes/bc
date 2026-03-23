@@ -138,7 +138,7 @@
 	},
 	"rudder" : 
 	{
-	    "areaMobPart" : 112,5,
+	    "areaMobPart" : 112.5,
 		"aspectRatio" : 1.827,
 		"expConstUr" : 0.5,
 		"flowCoef" : 

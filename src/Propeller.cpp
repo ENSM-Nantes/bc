@@ -40,7 +40,7 @@ void Propeller::SetRevs(const double aNrps)
   if(aNrps < 0)
     {
       if(0 == ChangeRotDir("backwards"))
-	mNrps = abs(aNrps);
+	mNrps = std::abs(aNrps);
       else
 	mNrps = 0;
     }

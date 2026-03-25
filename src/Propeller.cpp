@@ -85,6 +85,7 @@ void Propeller::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sG
   double betap = 0, wp = 0, up = 0, jp = 0;
   double kt = 0, tp = 0, xp = 0;
 
+  // ***** H. Yasukawa and Y. Yoshimura 2015 *******
   u = pow((pow(aMu[0], 2) + pow(aMu[1], 2)), 0.5);
 
   if(0 != aMu[0] && 0 != u)
@@ -98,19 +99,19 @@ void Propeller::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sG
       beta = 0;
     }  
   
-  betap = beta - (mXp * rp);
+  betap = beta - (mXp * rp);  /*Equation (15)*/
 
-  wp = mW0fraction * exp(-4 * pow(betap, 2));
+  wp = mW0fraction * exp(-4 * pow(betap, 2));  /*Equation (12)*/
   up = aMu[0] * (1-wp);
 
   if(0 != mNrps)
-    jp = up / (mNrps * mDiam);
+    jp = up / (mNrps * mDiam);  /*Equation (11)*/
   else
     jp = 0;
   
-  kt = mK0 + (mK1*jp) + (mK2*pow(jp, 2));
-  tp = aRho * pow(mNrps, 2) * pow(mDiam, 4) * kt;
-  xp = (1-mTfactor) * tp;
+  kt = mK0 + (mK1*jp) + (mK2*pow(jp, 2));  /*Equation (10)*/
+  tp = aRho * pow(mNrps, 2) * pow(mDiam, 4) * kt;  /*Equation (9)*/
+  xp = (1-mTfactor) * tp;  /*Equation (8)*/
 
   //Add a efficiency factor for backwards
   if(mForwardRotDir != mCurrentRotDir)
@@ -119,7 +120,7 @@ void Propeller::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sG
   mT << xp, 0, 0;
 
   //std::cout << "***Propeller mT :" << mT << std::endl;
-  return;
+  //************
 }
 
 Eigen::Vector3d Propeller::getT(void) const {return mT;}

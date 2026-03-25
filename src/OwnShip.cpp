@@ -115,6 +115,7 @@ void OwnShip::InitOwnShipParams(OwnShipData aOwnShipData, Json::Value aJsonRoot)
   iZ = mM * pow((0.25 * mGeoParams.lPP), 2);
   jZ = 0.5 * RHO_SW * pow(mGeoParams.lPP, 4) * mGeoParams.d * mAddedMassParams.jpZ;
 
+  /*Sukas 2019 - Equation 16a - Mass matrix*/
   mMatM << mM+mMX, 0, 0,
     0, mM+mMY, xG*mM,
     0, xG*mM, iZ+(mM*pow(xG, 2))+jZ;

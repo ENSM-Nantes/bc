@@ -72,7 +72,8 @@ void Rudder::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoP
   double kt = 0, eta = 0, tmpur = 0, ur = 0;
   double betar = 0, gammar = 0, vr = 0, alphar = 0;
   double falpha = 0, Fn =0, xr = 0, xh = 0, Xr = 0, Yr = 0, Nr = 0;
-  
+
+  // ***** H. Yasukawa and Y. Yoshimura 2015 *******
   u = pow((pow(aMu[0], 2) + pow(aMu[1], 2)), 0.5);
 
   if(0 != aMu[0])
@@ -85,57 +86,59 @@ void Rudder::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoP
   else
     u = 0;
 
-  betap = beta - (aProp.getLongPos() * rp);
-  
-  wp = aProp.getWakeFraction() * exp(-4 * pow(betap, 2));
+  betap = beta - (aProp.getLongPos() * rp);/*Equation (15)*/
+  wp = aProp.getWakeFraction() * exp(-4 * pow(betap, 2));/*Equation (12)*/
   up = aMu[0] * (1-wp);
 
   if(0 != aProp.getRevs() && 0 != aProp.getDiameter())
-    jp = up / (aProp.getRevs() * aProp.getDiameter());
+    jp = up / (aProp.getRevs() * aProp.getDiameter());/*Equation (11)*/
   else
     jp = 0;
   
-  kt = aProp.getPolynomialCoef(0) + (aProp.getPolynomialCoef(1)*jp) + (aProp.getPolynomialCoef(2)*pow(jp, 2));
+  kt = aProp.getPolynomialCoef(0) + (aProp.getPolynomialCoef(1)*jp) + (aProp.getPolynomialCoef(2)*pow(jp, 2)); /*Equation (10)*/
 
   if(0 != mHr)
-    eta = aProp.getDiameter() / mHr;
+    eta = aProp.getDiameter() / mHr;/*Equation (40)*/
   else
     eta = 0;
 
   if(0 != jp)
-    tmpur = 1 + mKappa * (pow(1 + (8*kt/(M_PI*pow(jp, 2)) ), 0.5) - 1);
+    tmpur = 1 + mKappa * (pow(1 + (8*kt/(M_PI*pow(jp, 2)) ), 0.5) - 1);/*Equation (25 - 1)*/
   else
     tmpur = 0;
 
-  ur = mEpsilon * up * pow((eta * pow(tmpur, 2) + (1-eta)), 0.5);
-  betar = beta - (mLpR * rp);
+  ur = mEpsilon * up * pow((eta * pow(tmpur, 2) + (1-eta)), 0.5);/*Equation (25 - 2)*/
+  betar = beta - (mLpR * rp);/*Equation (24)*/
 
   if(betar < 0) gammar = mGammaR[0];
   else gammar = mGammaR[1];
 
-  vr = u * gammar * betar;
+  vr = u * gammar * betar;/*Equation (23)*/
   if(0 != ur)
-    alphar = mDelta - atan(vr/ur);
+    alphar = mDelta - atan(vr/ur);/*Equation (21)*/
   else
     alphar = 0;
   
-  ur = pow((pow(ur, 2) + pow(vr, 2)), 0.5);
+  ur = pow((pow(ur, 2) + pow(vr, 2)), 0.5);/*Equation (20)*/
 
   if(0 != mLambdaR) lambdar = mLambdaR;
   else lambdar = pow(mHr, 2)/mAr;
 
-  falpha = 6.13 * lambdar / (lambdar + 2.25);
-  Fn = 0.5 * aRho * mAr * pow(ur, 2) * falpha * sin(alphar);
+  falpha = 6.13 * lambdar / (lambdar + 2.25);/*Equation (38)*/
+  
+  Fn = 0.5 * aRho * mAr * pow(ur, 2) * falpha * sin(alphar);  /*Equation (19)*/
+
   xr = mXpR * aGeo.lPP;
   xh = mXpH * aGeo.lPP;
 
+  /*Equation (18)*/
   Xr = -(1 - mTr) * Fn * sin(mDelta);
   Yr = -(1 + mAh) * Fn * cos(mDelta);
   Nr = -(xr + mAh * xh) * Fn * cos(mDelta);
 
   mT << Xr, Yr, Nr;
   //std::cout << "****Rudder mT :" << mT << std::endl; 
-  return;
+  //*************
 }
 
 Eigen::Vector3d& Rudder::getT(void){return mT;}

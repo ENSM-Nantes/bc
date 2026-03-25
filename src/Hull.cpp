@@ -59,6 +59,7 @@ void Hull::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoPar
   double u = 0, kf = 0, km = 0, vp = 0;
   double rp = 0, xph = 0, yph = 0, nph = 0;
 
+  // ***** H. Yasukawa and Y. Yoshimura 2015 *******
   u = pow((pow(aMu[0], 2) + pow(aMu[1], 2)), 0.5);
   kf = 0.5 * aRho * aGeo.lPP * aGeo.d * pow(u , 2);
   km = 0.5 * aRho * pow(aGeo.lPP, 2) * aGeo.d * pow(u , 2);
@@ -74,6 +75,7 @@ void Hull::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoPar
       rp = 0;
     }
 
+  /*Equation (6) and (7)*/
   xph = -mXp0 + (mXpVV * pow(vp, 2)) + (mXpVR * vp * rp) + (mXpRR * pow(rp, 2)) + (mXpVVVV * pow(vp, 4));
   
   yph = (mYpV * vp) + (mYpR * rp) + (mYpVVV * pow(vp, 3)) + (mYpVVR * pow(vp, 2) * rp) + (mYpVRR * pow(rp, 2) * vp) + (mYpRRR * pow(rp, 3));
@@ -83,7 +85,7 @@ void Hull::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoPar
   mT << kf*xph, kf*yph, km*nph;
 
   //std::cout << "****Hull mT :" << mT << std::endl; 
-  return;
+  //************
 }
 
 Eigen::Vector3d& Hull::getT(void){return mT;}

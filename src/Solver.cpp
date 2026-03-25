@@ -56,6 +56,8 @@ Eigen::VectorXd Solver::DiffEq(const Eigen::VectorXd& aVectEtaMu)
   vEtaP = matRotPsi * vMu;
 
   xG = mShip->getGeoParams().xG;
+
+  /*Sukas 2019 - Equation 16b - Coriolis matrix*/
   matC << 0, -(mShip->getM() + mShip->getMY())*vMu[2], -xG*mShip->getM()*vMu[2],
     (mShip->getM() + mShip->getMX())*vMu[2], 0, 0, xG*mShip->getM()*vMu[2], 0, 0;
   
@@ -63,6 +65,7 @@ Eigen::VectorXd Solver::DiffEq(const Eigen::VectorXd& aVectEtaMu)
   mShip->getPropeller("port").ComputeT(vMu, RHO_SW, mShip->getGeoParams());
   mShip->getRudder().ComputeT(vMu, RHO_SW, mShip->getGeoParams(), mShip->getPropeller("port"));
 
+  /*Sukas 2019 - Equation 14*/
   mT << mShip->getHull().getT() + mShip->getPropeller().getT() + mShip->getRudder().getT();
   
   if(mShip->getSail().GetCount() > 0)
@@ -93,7 +96,7 @@ Eigen::VectorXd Solver::DiffEq(const Eigen::VectorXd& aVectEtaMu)
       mT -= tYaw;
     }
       
-  vMuP = mShip->getInvMatM() * (mT - (matC * vMu));
+  vMuP = mShip->getInvMatM() * (mT - (matC * vMu));/*Sukas 2019 : Equation 15*/
   
   catVect.resize(vEtaP.size() + vMuP.size());
   catVect << vEtaP, vMuP;

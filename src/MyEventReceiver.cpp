@@ -934,7 +934,7 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
 
 
                 case irr::KEY_KEY_J:
-                    break;
+		    break;
 
                 case irr::KEY_KEY_L:
                     break;

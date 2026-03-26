@@ -943,6 +943,13 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
                     break;
 
                 case irr::KEY_KEY_K:
+		  static float acc = 1;
+		  acc++;
+		  model->setAccelerator(acc);
+
+		  if(acc == 10)
+		    acc=0;
+		  
                     break;
 
                 // Camera look

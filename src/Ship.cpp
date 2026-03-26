@@ -59,6 +59,7 @@ void Ship::PrintGeoParams(void)
   std::cout << "Longitudinal coordinate of center of gravity of ship : " << mGeoParams.xG << std::endl;
   std::cout << "Coefficient Block : " << mGeoParams.cB << std::endl;
   std::cout << "Spacing beetween 2 propeller : " << mGeoParams.propSpacing << std::endl;
+  std::cout << "Spacing beetween 2 rudder : " << mGeoParams.rudSpacing << std::endl;
   std::cout << "::::::::::::" << std::endl;
 }
 
@@ -89,6 +90,7 @@ int Ship::InitShipParams(const Json::Value& aJsonRoot)
       mGeoParams.xG = aJsonRoot["geoParams"]["longGravityCenter"].asFloat();
       mGeoParams.cB = aJsonRoot["geoParams"]["blockCoef"].asFloat();
       mGeoParams.propSpacing = aJsonRoot["propeller"]["spacing"].asFloat();
+      mGeoParams.rudSpacing = aJsonRoot["rudder"]["spacing"].asFloat();
       PrintGeoParams();
 
       //Added-Mass Params
@@ -145,7 +147,10 @@ int Ship::InitShipParams(const Json::Value& aJsonRoot)
 	}
 
       //Rudder
-      mRudder.Init(aJsonRoot["rudder"]["spanLength"].asFloat(),
+      mNumberRud = aJsonRoot["rudder"]["number"].asInt();
+      for(unsigned char i=0;i<mNumberRud;i++)
+	{
+	  mRudder[i].Init(aJsonRoot["rudder"]["spanLength"].asFloat(),
 		   aJsonRoot["rudder"]["areaMobPart"].asFloat(),
 		   aJsonRoot["rudder"]["longCoordinateRatio"].asFloat(),
 		   aJsonRoot["rudder"]["forceIncreaseFactor"].asFloat(),
@@ -158,9 +163,9 @@ int Ship::InitShipParams(const Json::Value& aJsonRoot)
 		   {aJsonRoot["rudder"]["flowCoef"][0].asFloat(), aJsonRoot["rudder"]["flowCoef"][1].asFloat()},
 		   aJsonRoot["rudder"]["maxSpeed"].asFloat(),
 		   aJsonRoot["rudder"]["maxAngle"].asFloat()
-		   );
-      mRudder.PrintParams();
-
+		       );
+	  mRudder[i].PrintParams();
+	}
       //Sail
       int sailNumber = aJsonRoot["sail"]["number"].asInt();
       float sailPos[SAILS_MAX][3] = {0};
@@ -195,8 +200,9 @@ int Ship::InitShipParams(const std::string& aType)
       mHull.Init(0.022,-0.04, 0.002, 0.011, 0.771, -0.315, 0.083, -1.607, 0.379, -0.391, 0.008, -0.137, -0.049, -0.03, -0.294, 0.055, -0.013);
       mAddedMassParams = {0.022, 0.223, 0.011};
       mNumberProp=1;
+      mNumberRud=1;
       mProp[0].Init(9.86, 0.22, -0.48, 0.35, 0.293, -0.275, -0.139, "right", 0.67);
-      mRudder.Init(15.8, 112.5, -0.5, 0.312, 0.387, -0.464, 1.09, 0.5, -0.71, 1.827, {0.395, 0.64}, 0.0407, 0.61);
+      mRudder[0].Init(15.8, 112.5, -0.5, 0.312, 0.387, -0.464, 1.09, 0.5, -0.71, 1.827, {0.395, 0.64}, 0.0407, 0.61);
       // mShipWindParams = {4910, 1624, 750, 375, 160, 0, 1.225, 0 * 15.5 * 0.514, 90};
       mEngine[0].Init("Caterpillar", "9M32C", 4500, 170, 177);
     }
@@ -350,10 +356,16 @@ Propeller& Ship::getPropeller(std::string aNProp)
     return mProp[1];
 }
 
+Rudder& Ship::getRudder(std::string aNRud)
+{
+  if(aNRud == "mono" || aNRud == "port")
+    return mRudder[0];
+  else
+    return mRudder[1];
+}
+
 
 Hull& Ship::getHull(void){return mHull;}
-Rudder& Ship::getRudder(void) {return mRudder;}
-
 sGeoParams& Ship::getGeoParams(void){return mGeoParams;}
 double Ship::getM(void){return mM;}
 double Ship::getMX(void){return mMX;}
@@ -364,3 +376,4 @@ Eigen::Vector3d Ship::getEta(void){return mEta;}
 Eigen::Matrix3d& Ship::getInvMatM(void){return mInvMatM;}
 Eigen::Matrix3d& Ship::getMatM(void){return mMatM;}
 unsigned char Ship::getNumberProp(void){return mNumberProp;}
+unsigned char Ship::getNumberRud(void){return mNumberRud;}

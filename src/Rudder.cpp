@@ -71,7 +71,7 @@ void Rudder::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoP
   double betap = 0, wp = 0, up = 0, jp = 0;
   double kt = 0, eta = 0, tmpur = 0, ur = 0;
   double betar = 0, gammar = 0, vr = 0, alphar = 0;
-  double falpha = 0, Fn =0, xr = 0, xh = 0, Xr = 0, Yr = 0, Nr = 0;
+  double falpha = 0, xr = 0, xh = 0, Xr = 0, Yr = 0, Nr = 0;
 
   // ***** H. Yasukawa and Y. Yoshimura 2015 *******
   u = pow((pow(aMu[0], 2) + pow(aMu[1], 2)), 0.5);
@@ -126,15 +126,15 @@ void Rudder::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoP
 
   falpha = 6.13 * lambdar / (lambdar + 2.25);/*Equation (38)*/
   
-  Fn = 0.5 * aRho * mAr * pow(ur, 2) * falpha * sin(alphar);  /*Equation (19)*/
+  mFn = 0.5 * aRho * mAr * pow(ur, 2) * falpha * sin(alphar);  /*Equation (19)*/
 
   xr = mXpR * aGeo.lPP;
   xh = mXpH * aGeo.lPP;
 
   /*Equation (18)*/
-  Xr = -(1 - mTr) * Fn * sin(mDelta);
-  Yr = -(1 + mAh) * Fn * cos(mDelta);
-  Nr = -(xr + mAh * xh) * Fn * cos(mDelta);
+  Xr = -(1 - mTr) * mFn * sin(mDelta);
+  Yr = -(1 + mAh) * mFn * cos(mDelta);
+  Nr = -(xr + mAh * xh) * mFn * cos(mDelta);
 
   mT << Xr, Yr, Nr;
   //std::cout << "****Rudder mT :" << mT << std::endl; 
@@ -144,4 +144,6 @@ void Rudder::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoP
 Eigen::Vector3d& Rudder::getT(void){return mT;}
 
 double Rudder::getDelta(void) const {return mDelta;}
+double Rudder::getNormalForce(void) const {return mFn;}
 double Rudder::getDeltaMax(void) const {return mDeltaMax;}
+double Rudder::getDeductionFactor(void) const {return mTr;}

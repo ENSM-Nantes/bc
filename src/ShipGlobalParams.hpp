@@ -11,7 +11,8 @@ struct sGeoParams{
   double volume; //subwater volume 
   double xG; //Longitudinal coordinate of center of gravity of ship
   double cB; //Coefficient Block
-  double propSpacing; //length between 2 propeller  
+  double propSpacing; //length between 2 propeller
+  double rudSpacing; //length between 2 rudder  
 };
 
 struct sAddedMassParams{

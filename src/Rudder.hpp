@@ -23,10 +23,13 @@ public:
   Eigen::Vector3d& getT(void);
   double getDelta(void) const;
   double getDeltaMax(void) const;
+  double getDeductionFactor(void) const;
+  double getNormalForce(void) const ;
   void PrintParams(void);
   
 private:
 
+  double mFn; //Normal force
   double mHr; //Span lenght
   double mAr; //Area of mobile part
   double mXpR; //Rudder longitudinal coordinate ratio  

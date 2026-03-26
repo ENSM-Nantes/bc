@@ -34,6 +34,7 @@
     },
     "propeller": {
 	"number": 1,
+	"spacing" : 0,
 	"diameter": 9.86,
 	"thrustFactor": 0.22, 
 	"longPosition": -0.48,
@@ -45,6 +46,8 @@
 	"backwardEff": 0.67 
     },
     "rudder": {
+	"number" : 1,
+	"spacing" : 0,
 	"spanLength": 15.8, 
 	"areaMobPart": 112.5,
 	"longCoordinateRatio": -0.5,

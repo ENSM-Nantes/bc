@@ -22,7 +22,7 @@
 
 class AIS {
     public: 
-  static std::tuple<std::string, int> generateClassAReport(void *aOtherShips, void *aTerrain, unsigned long long aTimeStamp, unsigned int);
+  static std::tuple<std::string, int> generateClassAReport(void *aOtherShips, float aDeltaZ, float aDeltaX, void *aTerrain, unsigned long long aTimeStamp, unsigned int);
         static std::vector<unsigned int> getReadyShips(void *aOtherShips, unsigned int);
 
     private:

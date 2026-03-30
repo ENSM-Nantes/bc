@@ -54,17 +54,7 @@ std::vector<unsigned int> AIS::getReadyShips(void *aOtherShips, unsigned int now
     unsigned int reportingInterval;
     float shipSpeed = pOtherShips->getSpeed(ship);
 
-    // TODO: take into account course changes
-    // TODO: take into account transmission range in the case of huge maps
-    if (shipSpeed <= 0) {
-      reportingInterval = 180000; // 3 mins when moored
-    } else if (shipSpeed <= 14 * KTS_TO_MPS) {
-      reportingInterval = 10000; // 10 seconds under 14 knots
-    } else if (shipSpeed <= 23 * KTS_TO_MPS) {
-      reportingInterval = 6000; // 6 seconds under 23 knots
-    } else {
-      reportingInterval = 2000; // 2 seconds over 23 knots
-    }
+    reportingInterval = 2000;
 
     // random delay to reporting to avoid coalescence of reports after a while
     if (elapsed_time >= reportingInterval + (rand() % 500)) {
@@ -82,9 +72,6 @@ std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float 
   bool done = false;
   unsigned int heading = (unsigned int) pOtherShips->getHeading(ship);
   unsigned int mmsi = pOtherShips->getMMSI(ship);
-
-  static float deltaX = aDeltaX;
-  static float deltaZ = aDeltaZ;
   
   if (mmsi == 0) {
     // mmsi is not set, give the ship a vanity mmsi
@@ -112,8 +99,8 @@ std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float 
 
   // BC internal coordinate system
 
-  float posX = pOtherShips->getPosition(ship).X + deltaX;
-  float posZ = pOtherShips->getPosition(ship).Z + deltaZ;
+  float posX = pOtherShips->getPosition(ship).X + aDeltaX;
+  float posZ = pOtherShips->getPosition(ship).Z + aDeltaZ;
  
   float shipLong = pTerrain->xToLong(posX);
   float shipLat  = pTerrain->zToLat(posZ);

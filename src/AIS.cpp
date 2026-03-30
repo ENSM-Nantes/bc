@@ -75,7 +75,7 @@ std::vector<unsigned int> AIS::getReadyShips(void *aOtherShips, unsigned int now
   return readyShips;
 }
 
-std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, void *aTerrain, unsigned long long aTimeStamp, unsigned int ship)
+std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float aDeltaZ, float aDeltaX, void *aTerrain, unsigned long long aTimeStamp, unsigned int ship)
 {  
   OtherShips *pOtherShips = (OtherShips*)aOtherShips;
   Terrain *pTerrain = (Terrain*)aTerrain;
@@ -111,8 +111,8 @@ std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, void *
 
   // BC internal coordinate system
 
-  float posX = pOtherShips->getPosition(ship).X;
-  float posZ = pOtherShips->getPosition(ship).Z;
+  float posX = pOtherShips->getPosition(ship).X + aDeltaX;
+  float posZ = pOtherShips->getPosition(ship).Z + aDeltaZ;
  
   float shipLong = pTerrain->xToLong(posX);
   float shipLat  = pTerrain->zToLat(posZ);

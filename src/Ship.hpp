@@ -88,7 +88,8 @@ public:
   unsigned char getNumberProp(void);
   unsigned char getNumberRud(void);
   Sail& getSail(void);
-
+  Engine& getEngine(std::string aNEngine = "mono");
+  
   //Print Ship params
   void PrintGeoParams(void);
   void PrintAddedMassParams(void);

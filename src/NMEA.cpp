@@ -406,9 +406,9 @@ void NMEA::updateNMEA(sTime& aTime)
 
   irr::f32 rudderAngle = mOwnShip->getRudder().getDelta()*180/PI;
 
-  int engineRPM[] = {
-    Utilities::round(mOwnShip->getStbdEngine()*100), // idx=1, odd (starboard)
-    Utilities::round(mOwnShip->getPortEngine()*100)  // idx=2, even (port)
+  double engineRPM[] = {
+    mOwnShip->getPortEngine()*mOwnShip->getEngine("port").getRpmMax()/60,  
+    mOwnShip->getStbdEngine()*mOwnShip->getEngine("starboard").getRpmMax()/60 
   };
     
   float posZ = mOwnShip->getPosition().Z + mOwnShip->getOffsetPos().Z ;
@@ -423,9 +423,9 @@ void NMEA::updateNMEA(sTime& aTime)
   irr::f32 latSpeed = mOwnShip->getLateralSpeed();
   irr::f32 hdg = mOwnShip->getHeading()*irr::core::RADTODEG;
   irr::f32 rot = mOwnShip->getRateOfTurn()*irr::core::RADTODEG*60;
-
+  irr::f32 pitch = mOwnShip->getPitch();
+  irr::f32 roll = mOwnShip->getRoll();
   irr::f32 depth = mOwnShip->getDepth(mTerrain);
-
   irr::f32 windDirection = mWind->getTrueDirection();
   irr::f32 windSpeed = mWind->getTrueSpeed();
   irr::f32 apparentWindDir = mWind->getApparentDir() * irr::core::RADTODEG;
@@ -441,6 +441,14 @@ void NMEA::updateNMEA(sTime& aTime)
   irr::u8 latDegrees = (int) lat;
   irr::u8 lonDegrees = (int) lon;
 
+  irr::f32 xUp = mOwnShip->getGeoParams().lPP/2 - mOwnShip->getGeoParams().xG;
+  irr::f32 xDown = -mOwnShip->getGeoParams().lPP/2 - mOwnShip->getGeoParams().xG;
+  irr::f32 latSpeedUp = latSpeed + mOwnShip->getRateOfTurn() * xUp;
+  irr::f32 latSpeedDown = latSpeed + mOwnShip->getRateOfTurn() * xDown;
+
+  latSpeedUp = latSpeedUp / 0.51444;
+  latSpeedDown = latSpeedDown / 0.51444;
+  
 
   switch (currentMessageType) { // EN 61162-1:2011
   case RMC: // 8.3.69 Recommended minimum navigation information
@@ -471,17 +479,20 @@ void NMEA::updateNMEA(sTime& aTime)
     {
       std::string messageToSend = "";
       
-      snprintf(messageBuffer, maxSentenceChars, "$IIRPM,S,%d,%d,100,A", 1, engineRPM[0]); // 'S' is for shaft, '100' is pitch (fixed)
+      snprintf(messageBuffer, maxSentenceChars, "$IIRPM,S,%d,%.1f,%.1f,A", 1, engineRPM[0], mOwnShip->getEngine("port").getRpmMax()/60); // 'S' is for shaft, 
       messageToSend.append(addChecksum(std::string(messageBuffer)));
       
       messageQueue.push_back(messageToSend);
       
       messageToSend.clear();
 
-      snprintf(messageBuffer, maxSentenceChars, "$IIRPM,S,%d,%d,100,A", 2, engineRPM[1]); // 'S' is for shaft, '100' is pitch (fixed)
-      messageToSend.append(addChecksum(std::string(messageBuffer)));
+      if(mOwnShip->getNumberProp() > 1)
+	{
+	  snprintf(messageBuffer, maxSentenceChars, "$IIRPM,S,%d,%.1f,%.1f,A", 2, engineRPM[1], mOwnShip->getEngine("starboard").getRpmMax()/60); // 'S' is for shaft, 
+	  messageToSend.append(addChecksum(std::string(messageBuffer)));
 
-      messageQueue.push_back(messageToSend);
+	  messageQueue.push_back(messageToSend);
+	}
       break;
     }
   case TTM: // 8.3.85 Tracked target message
@@ -595,10 +606,17 @@ void NMEA::updateNMEA(sTime& aTime)
     } 
   case VTG:
     {
-      snprintf(messageBuffer,maxSentenceChars,"$VDVTG,0,T,0,M,%.1f,N,0,K",latSpeed);
+      snprintf(messageBuffer,maxSentenceChars,"$VDVTG,0,T,0,M,%.1f,N,%.1f,K",latSpeedUp, latSpeedDown);
       messageQueue.push_back(addChecksum(std::string(messageBuffer)));
       break;
     }
+  case XDR:
+    {
+      snprintf(messageBuffer,maxSentenceChars,"$IIXDR,A,%.1f,D,ROLL,A,%.1f,D,PITCH", roll, pitch);
+      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
+      break;
+    }
+
     /*
       case VTG: // 8.3.98 Course over ground and ground speed
       snprintf(messageBuffer,maxSentenceChars,"$VDVTG,");

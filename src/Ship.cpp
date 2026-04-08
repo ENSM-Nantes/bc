@@ -364,6 +364,13 @@ Rudder& Ship::getRudder(std::string aNRud)
     return mRudder[1];
 }
 
+Engine& Ship::getEngine(std::string aNEngine)
+{
+  if(aNEngine == "mono" || aNEngine == "port")
+    return mEngine[0];
+  else
+    return mEngine[1];
+}
 
 Hull& Ship::getHull(void){return mHull;}
 sGeoParams& Ship::getGeoParams(void){return mGeoParams;}

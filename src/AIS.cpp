@@ -110,7 +110,9 @@ std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float 
 
   float posX = pOtherShips->getPosition(ship).X + deltaX;
   float posZ = pOtherShips->getPosition(ship).Z + deltaZ;
- 
+
+  //std::cout << "delta Z : " << deltaZ << std::endl;
+  
   float shipLong = pTerrain->xToLong(posX);
   float shipLat  = pTerrain->zToLat(posZ);
 

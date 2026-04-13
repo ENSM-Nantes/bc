@@ -65,7 +65,7 @@ std::vector<unsigned int> AIS::getReadyShips(void *aOtherShips, unsigned int now
   return readyShips;
 }
 
-std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, float aDeltaZ, float aDeltaX, void *aTerrain, unsigned long long aTimeStamp, unsigned int ship)
+std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int ship)
 {  
   OtherShips *pOtherShips = (OtherShips*)aOtherShips;
   Terrain *pTerrain = (Terrain*)aTerrain;
@@ -99,16 +99,8 @@ std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float 
 
   float posX=0, posZ=0;
 
-  if(aOffsetPosZ + aDeltaZ == 0)
-    {
-      posX = pOtherShips->getPosition(ship).X + aOffsetPosX;
-      posZ = pOtherShips->getPosition(ship).Z + aOffsetPosZ;
-    }
-  else
-    {
-      posX = pOtherShips->getPosition(ship).X + aOffsetPosX - aDeltaX;
-      posZ = pOtherShips->getPosition(ship).Z + aOffsetPosZ - aDeltaZ;
-    }
+  posX = pOtherShips->getPosition(ship).X + aOffsetPosX;
+  posZ = pOtherShips->getPosition(ship).Z + aOffsetPosZ;
   
   float shipLong = pTerrain->xToLong(posX);
   float shipLat  = pTerrain->zToLat(posZ);

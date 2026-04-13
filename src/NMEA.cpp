@@ -356,7 +356,7 @@ void NMEA::updateNMEA(sTime& aTime)
       std::string data;
       int fillBits;
       bool done;
-      std::tie(data, fillBits) = AIS::generateClassAReport(mOtherShips, mOwnShip->getOffsetPos().Z, mOwnShip->getOffsetPos().X, mTerrain, aTime.absoluteTime, ship);
+      std::tie(data, fillBits) = AIS::generateClassAReport(mOtherShips, mOwnShip->getOffsetZ(), mOwnShip->getOffsetX(), mTerrain, aTime.absoluteTime, ship);
 
       snprintf(messageBuffer,maxSentenceChars,"!AIVDM,%d,%d,,%c,%s,%d",
 	       fragments,

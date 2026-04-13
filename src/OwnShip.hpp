@@ -76,9 +76,11 @@ public:
   std::string getBasePath() const;
 
   irr::f32 getShipMass() const;
-  void setOffsetPos(irr::core::vector3d<int64_t> aOffsetPos);
+  void setOffsetPos(irr::core::vector3d<int64_t> aOffsetPos, int aDeltaX, int aDeltaZ);
   irr::core::vector3d<int64_t> getOffsetPos(void);
- 
+  int  getOffsetX(void);
+  int  getOffsetZ(void);
+  
 protected:
 private:
   irr::f32 requiredEngineProportion(irr::f32 speed);
@@ -113,8 +115,10 @@ private:
 
   // Dynamics parameters
   irr::core::vector3d<int64_t>  mOffsetPos;
+  int mDeltaX;
+  int mDeltaZ;
   
-  //Devices
+  //Devicexs
   bool mHasGps;
   bool mHasDepthSounder;
   float mMaxSounderDepth;

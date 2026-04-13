@@ -20,7 +20,7 @@
 #include "Constants.hpp"
 #include "OtherShips.hpp"
 #include "Terrain.hpp"
-
+#include <iostream>
 
 int AIS::currentShip = 0;
 bool AIS::initialized = false;
@@ -65,7 +65,7 @@ std::vector<unsigned int> AIS::getReadyShips(void *aOtherShips, unsigned int now
   return readyShips;
 }
 
-std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float aDeltaZ, float aDeltaX, void *aTerrain, unsigned long long aTimeStamp, unsigned int ship)
+std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, float aDeltaZ, float aDeltaX, void *aTerrain, unsigned long long aTimeStamp, unsigned int ship)
 {  
   OtherShips *pOtherShips = (OtherShips*)aOtherShips;
   Terrain *pTerrain = (Terrain*)aTerrain;
@@ -97,12 +97,18 @@ std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float 
   // getOtherShipSpeed returns speed in m/s, multiply by 1.9438445 to get knots
   unsigned int speed = std::min<int>((int) 10.0f * MPS_TO_KTS * pOtherShips->getSpeed(ship), 1022);
 
-  // BC internal coordinate system
+  float posX=0, posZ=0;
 
-  float posX = pOtherShips->getPosition(ship).X + aDeltaX;
-  float posZ = pOtherShips->getPosition(ship).Z + aDeltaZ;
-
-  // std::cout << "delta Z : " << deltaZ << std::endl
+  if(aOffsetPosZ + aDeltaZ == 0)
+    {
+      posX = pOtherShips->getPosition(ship).X + aOffsetPosX;
+      posZ = pOtherShips->getPosition(ship).Z + aOffsetPosZ;
+    }
+  else
+    {
+      posX = pOtherShips->getPosition(ship).X + aOffsetPosX - aDeltaX;
+      posZ = pOtherShips->getPosition(ship).Z + aOffsetPosZ - aDeltaZ;
+    }
   
   float shipLong = pTerrain->xToLong(posX);
   float shipLat  = pTerrain->zToLat(posZ);

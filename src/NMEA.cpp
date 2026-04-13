@@ -404,8 +404,13 @@ void NMEA::updateNMEA(sTime& aTime)
   const char *min  = minuteString.c_str();
   const char *sec  =secondsString.c_str();
 
-  irr::f32 rudderAngle = mOwnShip->getRudder().getDelta()*180/PI;
-
+  double rudderAngleS = 99;
+  if(mOwnShip->getNumberRud() > 1)
+    rudderAngleS = mOwnShip->getRudder("starboard").getDelta()*180/PI;
+  
+  double rudderAngleP = mOwnShip->getRudder("port").getDelta()*180/PI;
+  
+  
   double engineRPM[] = {
     mOwnShip->getPortEngine()*mOwnShip->getEngine("port").getRpmMax()/60,  
     mOwnShip->getStbdEngine()*mOwnShip->getEngine("starboard").getRpmMax()/60 
@@ -471,7 +476,7 @@ void NMEA::updateNMEA(sTime& aTime)
     }
   case RSA: // 8.3.73 Rudder sensor angle
     {    
-      snprintf(messageBuffer,maxSentenceChars,"$IIRSA,%.1f,A,,V",rudderAngle); // starboard (or single), A is valid, port sensor is null, thus V for invalid
+      snprintf(messageBuffer,maxSentenceChars,"$IIRSA,%.1f,A,%.1f,A,V",rudderAngleS, rudderAngleP);
       messageQueue.push_back(addChecksum(std::string(messageBuffer)));
       break;
     }

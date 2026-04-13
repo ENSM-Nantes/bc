@@ -72,15 +72,6 @@ std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float 
   bool done = false;
   unsigned int heading = (unsigned int) pOtherShips->getHeading(ship);
   unsigned int mmsi = pOtherShips->getMMSI(ship);
-  static float deltaX = 0, deltaZ = 0;
-  static bool init = false;
-
-  if(!init)
-    {
-      init = true;
-      deltaX = aDeltaX;
-      deltaZ = aDeltaZ;
-    }
   
   if (mmsi == 0) {
     // mmsi is not set, give the ship a vanity mmsi
@@ -108,10 +99,10 @@ std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float 
 
   // BC internal coordinate system
 
-  float posX = pOtherShips->getPosition(ship).X + deltaX;
-  float posZ = pOtherShips->getPosition(ship).Z + deltaZ;
+  float posX = pOtherShips->getPosition(ship).X + aDeltaX;
+  float posZ = pOtherShips->getPosition(ship).Z + aDeltaZ;
 
-  //std::cout << "delta Z : " << deltaZ << std::endl;
+  // std::cout << "delta Z : " << deltaZ << std::endl
   
   float shipLong = pTerrain->xToLong(posX);
   float shipLat  = pTerrain->zToLat(posZ);

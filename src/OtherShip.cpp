@@ -210,7 +210,7 @@ void OtherShip::update(irr::f32 deltaTime, irr::f32 scenarioTime, irr::f32 tideH
     mShipScene->setPosition(irr::core::vector3df(mEta[1],yPos,mEta[0]));
     // DEE_DEC22 vvvv allows modelling of trim , list and models derived from other coordinate systems
     //ship->setRotation(irr::core::vector3df(angleCorrectionPitch, hdg+angleCorrection, angleCorrectionRoll)); //Global vectors
-    mShipScene->setRotation(irr::core::vector3df(mAngleCorrectionPitch, mEta[2]+mAngleCorrection, mAngleCorrectionRoll)); //Global vectors
+    mShipScene->setRotation(Angles::irrAnglesFromYawPitchRoll((mEta[2]+mAngleCorrection)*180/PI, mAngleCorrectionPitch,  mAngleCorrectionRoll)); //Global vectors
     // DEE_DEC22 ^^^^
 
     //for each light, find range and angle

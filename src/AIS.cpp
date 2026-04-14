@@ -70,7 +70,7 @@ std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float 
   OtherShips *pOtherShips = (OtherShips*)aOtherShips;
   Terrain *pTerrain = (Terrain*)aTerrain;
   bool done = false;
-  unsigned int heading = (unsigned int) pOtherShips->getHeading(ship);
+  unsigned int heading = (unsigned int) (pOtherShips->getHeading(ship) * 180/PI);
   unsigned int mmsi = pOtherShips->getMMSI(ship);
   
   if (mmsi == 0) {

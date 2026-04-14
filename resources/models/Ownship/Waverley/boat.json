@@ -1,0 +1,190 @@
+{
+	"addedMass" : 
+	{
+		"pX" : 0.015944194048643112,
+		"pY" : 0.11310294270515442,
+		"pZ" : 0.0095390118658542633
+	},
+	"depthSounder" : 
+	{
+		"maxDepth" : 200.0,
+		"number" : true
+	},
+	"engine" : 
+	{
+		"brand" : "xxxx",
+		"fuelCons" : 22.0,
+		"number" : 2,
+		"power" : 18000.0,
+		"rpmMax" : 170.0,
+		"type" : "xxxx"
+	},
+	"general" : 
+	{
+		"boatName" : "Waverley",
+		"imgName" : "Waverley.jpg"
+	},
+	"geoParams" : 
+	{
+		"blockCoef" : 0.6,
+		"breadth" : 24.799999237060547,
+		"draugth" : 2.0,
+		"length" : 156.44999694824219,
+		"longGravityCenter" : 10.43,
+		"rho" : 1025.0,
+		"subwaterVolume" : 6000
+	},
+	"gps" : 
+	{
+		"number" : true
+	},
+	"hull" : 
+	{
+		"npR" : -0.035535812377929688,
+		"npRRR" : -0.036185361444950104,
+		"npV" : -0.076701819896697998,
+		"npVRR" : -0.33456754684448242,
+		"npVVR" : -0.63714927434921265,
+		"npVVV" : -0.31499999761581421,
+		"xp0" : 0.02199999988079071,
+		"xpRR" : -0.047896452248096466,
+		"xpVR" : 0.041719116270542145,
+		"xpVV" : -0.088852673768997192,
+		"xpVVVV" : 0.57055288553237915,
+		"ypR" : 0.047601372003555298,
+		"ypRRR" : -0.050999999046325684,
+		"ypV" : -0.23144491016864777,
+		"ypVRR" : -0.93010079860687256,
+		"ypVVR" : -0.75,
+		"ypVVV" : -0.68706655502319336
+	},
+	"initialSpeed" : 
+	[
+		0,
+		0,
+		0
+	],
+	"mesh" : 
+	{
+		"angleCorrection" : 0,
+		"makeTransparent" : false,
+		"name" : "boat.x",
+		"numberOfViews" : 4,
+		"scaleFactor" : 0.3038,
+		"views" : 
+		[
+			[
+				0.0,
+				39.0,
+				56.8,
+				false
+			],
+			[
+				-15.5,
+				39.7,
+				60.0,
+				false
+			],
+			[
+				15.5,
+				39.7,
+				60.0,
+				false
+			],
+			[
+				0.0,
+				400.0,
+				-30.0,
+				true
+			],
+			[
+				0.0,
+				0.0,
+				0.0,
+				false
+			]
+		],
+		"yCorrection" : -15
+	},
+	"propeller" : 
+	{
+		"backwardEff" : 0.69999998807907104,
+		"diameter" : 2.1999998092651367,
+		"forwardRotDir" : "right",
+		"k0" : 0.35,
+		"k1" : -0.30,
+		"k2" : -0.10,
+		"longPosition" : -0.47999998927116394,
+		"nominalWake" : 0.20000000298023224,
+		"number" : 2,
+		"thrustFactor" : 0.15,
+		"spacing" : 8
+	},
+	"radar" : 
+	{
+		"number" : 1,
+		"pos" : 
+		[
+			0.0,
+			-10.0,
+			0.0
+		],
+		"size" : 1.0,
+		"tilt" : 0.0
+	},
+	"rotIndicator" : 
+	{
+		"number" : true
+	},
+	"rudder" : 
+	{
+	    "number" : 2,
+	    "spacing" : 8,
+	    "areaMobPart" : 20.0,
+		"aspectRatio" : 0.89999997615814209,
+		"expConstUr" : 0.16714480519294739,
+		"flowCoef" : 
+		[
+			0.30327260787300447,
+			0.30327260787300447
+		],
+		"forceIncreaseFactor" : 0.28533077239990234,
+		"longCoordinatePos" : -0.89999997615814209,
+		"longCoordinateRatio" : -0.5,
+		"longLateralForce" : -0.40000000596046448,
+		"maxAngle" : 0.61000001430511475,
+		"maxSpeed" : 0.05000000074505806,
+		"spanLength" : 4.1999998092651367,
+		"steeringResistanceFactor" : 0.25,
+		"wakeFractionRatio" : 0.80400002002716064
+	},
+	"sail" : 
+	{
+		"number" : 1,
+		"pos" : 
+		[
+			[
+				0.5,
+				26.5,
+				3.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			]
+		],
+		"size" : "30x5",
+		"type" : "Rotor"
+	}
+}

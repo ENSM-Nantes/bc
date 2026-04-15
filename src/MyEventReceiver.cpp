@@ -803,7 +803,7 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
         }
 
     } // GUI Event
-
+    static float acc = 1;
     // From keyboard
     if (event.EventType == irr::EET_KEY_INPUT_EVENT && event.KeyInput.PressedDown)
     {
@@ -943,7 +943,7 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
                     break;
 
                 case irr::KEY_KEY_K:
-		  static float acc = 1;
+		  
 		  acc++;
 		  model->setAccelerator(acc);
 

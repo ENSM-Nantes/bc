@@ -1,12 +1,12 @@
 {
     "initialSpeed": [ 0, 0, 0 ],
     "geoParams": {
-	"length": 50, 
-	"breadth": 8,
+	"length": 32, 
+	"breadth": 5,
 	"draugth": 2,
 	"subwaterVolume": 3126,
 	"longGravityCenter": 1.1,
-	"blockCoef": 0.3
+	"blockCoef": 0.4 
     },
     "hull": {
 	"xp0": 0.022,
@@ -67,7 +67,7 @@
 	"brand": "xxxx", 
 	"type": "xxx",
 	"power": 4500,
-	"rpmMax": 500,
+	"rpmMax": 5000,
 	"fuelCons": 177 
     },
     "sail": {
@@ -99,19 +99,18 @@
 	"tilt": 0
     },
     "mesh": {
-	"name": "boat1.x",
+	"name": "boat.X",
 	"makeTransparent" : 1,
-	"scaleFactor": 0.30,
-	"yCorrection": -2.8,
+	"scaleFactor": 1.0,
+	"yCorrection": -4.3,
 	"angleCorrection": 0,
 	"numberOfViews": 4,
 	"views":
 	[
-	    [ -0.6, 11.1, -15.8, 0 ],
-	    [ 5.2, 12, -17.8, 0 ],
-	    [ -5.2, 12, -17.8, 0 ],
-	    [ -0.6, 350, -5.8, 1 ],
-		[ 0, 0, 0, 0 ]
+	    [ 0, 10.25, 3.62, 0 ],
+	    [ -1.8, 10.2, 3.2, 0 ],
+	    [ 1.8, 10.2, 3.2, 0 ],
+	    [ 0, 350, 0, 1 ]
 	]
     }
     

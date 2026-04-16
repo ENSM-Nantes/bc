@@ -6,7 +6,7 @@
 struct libevdev;
 
 #define MAX_JS (5)
-#define MAX_JS_ENTRY (18)
+#define MAX_JS_ENTRY (20)
 #define MAX_JS_AXIS (3)
 #define MAX_JS_POV (0)
 #define MAX_JS_BUTTON (MAX_JS_ENTRY - MAX_JS_AXIS - MAX_JS_POV)
@@ -30,7 +30,9 @@ enum eJsEntryChannel
     BUTTON_LOOK_UP,
     BUTTON_LOOK_DOWN,
     BUTTON_ALARM,
-    BUTTON_ACK_ALARM
+    BUTTON_ACK_ALARM,
+    BUTTON_START_SAIL,
+    BUTTON_ACCEL
 };
 
 enum eJsEntryType

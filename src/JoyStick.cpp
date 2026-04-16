@@ -38,7 +38,7 @@ bool JoyStick::Init(void *aModel, void *aGuiMain)
     SDL_Joystick* js;
     void *device;
     
-    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0)
+    if(SDL_Init(SDL_INIT_JOYSTICK) < 0)
     {
         std::cerr << "SDL_Init error : " << SDL_GetError() << std::endl;
         return false;
@@ -196,6 +196,9 @@ void JoyStick::Process(void *aDevice, int aNumJoysticks, sJsConf& aJsConf, sJsMa
     SDL_Event event;
     SimulationModel* pModel = (SimulationModel*)aModel;
     GUIMain* pGuiMain = (GUIMain*)aGuiMain;
+    static unsigned char hornBtnState = 0, lookLeftBtnState = 0, lookRightBtnState = 0, lookUpBtnState = 0, lookDownBtnState = 0, sailOnOffState = 0;
+    static float acc = 1;
+
 
     while(true)
     {
@@ -210,17 +213,19 @@ void JoyStick::Process(void *aDevice, int aNumJoysticks, sJsConf& aJsConf, sJsMa
                 return;
             }
 
+            SDL_JoystickUpdate();
+
             while (SDL_PollEvent(&event))
             {
-                //std::cout << "Event type: " << event.type << std::endl;
-                switch (event.type) 
+                std::cout << "Event type: " << event.type << std::endl;
+                switch (event.type)
                 {
                 case SDL_QUIT:
                     break;
 
                 case SDL_JOYAXISMOTION:
                     //std::cout << "Axe " << (int)event.jaxis.axis << " = " << event.jaxis.value << std::endl;
-		    AxisProcess(i, event.jaxis.value, (int)event.jaxis.axis, aJsConf, aJsMapping, aModel);
+                    AxisProcess(i, event.jaxis.value, (int)event.jaxis.axis, aJsConf, aJsMapping, aModel);
                     break;
 
                 case SDL_JOYBUTTONDOWN:
@@ -234,7 +239,18 @@ void JoyStick::Process(void *aDevice, int aNumJoysticks, sJsConf& aJsConf, sJsMa
                                 if ((int)event.jbutton.button == aJsMapping.entry[j].channel) //Right Button ?
                                 {
                                     if (BUTTON_HORN == j)//Horn
-                                        pModel->getSound()->startHorn();
+                                    {
+                                        if (!hornBtnState)
+                                        {
+                                            pModel->getSound()->startHorn();
+                                            hornBtnState = 1;
+                                        }
+                                        else
+                                        {
+                                            pModel->getSound()->endHorn();
+                                            hornBtnState = 0;
+                                        }
+                                    }
                                     else if (BUTTON_CHANGE_VIEW == j)//change view
                                     {
                                         pModel->getCamera()->changeView();
@@ -264,66 +280,108 @@ void JoyStick::Process(void *aDevice, int aNumJoysticks, sJsConf& aJsConf, sJsMa
                                         pModel->setZoom(false);
                                     }
                                     else if (BUTTON_LOOK_LEFT == j)
-                                        pModel->getCamera()->setPanSpeed(-5);
+                                    {
+                                        if (!lookLeftBtnState)
+                                        {
+                                            pModel->getCamera()->setPanSpeed(-5);
+                                            lookLeftBtnState = 1;
+                                        }
+                                        else 
+                                        {
+                                            pModel->getCamera()->setPanSpeed(0);
+                                            lookLeftBtnState = 0;
+                                        }
+                                    }
                                     else if (BUTTON_LOOK_RIGHT == j)
-                                        pModel->getCamera()->setPanSpeed(5);
+                                    {
+                                        if (!lookRightBtnState)
+                                        {
+                                            pModel->getCamera()->setPanSpeed(5);
+                                            lookRightBtnState = 1;
+                                        }
+                                        else
+                                        {
+                                            pModel->getCamera()->setPanSpeed(0);
+                                            lookRightBtnState = 0;
+                                        }
+                                    }
                                     else if (BUTTON_LOOK_UP == j)
-                                        pModel->getCamera()->setVerticalPanSpeed(5);
+                                    {
+                                        if (!lookUpBtnState)
+                                        {
+                                            pModel->getCamera()->setVerticalPanSpeed(5);
+                                            lookUpBtnState = 1;
+                                        }
+                                        else
+                                        {
+                                            pModel->getCamera()->setVerticalPanSpeed(0);
+                                            lookUpBtnState = 0;
+                                        }
+                                    }
                                     else if (BUTTON_LOOK_DOWN == j)
-                                        pModel->getCamera()->setVerticalPanSpeed(-5);
+                                    {
+                                        if (!lookDownBtnState)
+                                        {
+                                            pModel->getCamera()->setVerticalPanSpeed(-5);
+                                            lookDownBtnState = 1;
+                                        }
+                                        else
+                                        {
+                                            pModel->getCamera()->setVerticalPanSpeed(0);
+                                            lookDownBtnState = 0;
+                                        }
+                                    }
+                                    else if (BUTTON_ACCEL == j)
+                                    {
+                                        pModel->setAccelerator(acc);
+                                        acc *= 2;
+
+                                        if (acc == 16)
+                                            acc = 1;
+                                    }
+                                    else if (BUTTON_START_SAIL == j)
+                                    {
+                                        if (!sailOnOffState)
+                                        {
+                                            pModel->getOwnShip()->getSail().SetOnOff(true);
+                                            sailOnOffState = 1;
+                                        }
+                                        else 
+                                        {
+                                            pModel->getOwnShip()->getSail().SetOnOff(false);
+                                            sailOnOffState = 0;
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
                     break;
 
-                case SDL_JOYBUTTONUP:
-                    //std::cout << "Button " << (int)event.jbutton.button << " release" << std::endl;
-                    for (unsigned char j = MAX_JS_AXIS + MAX_JS_POV; j < MAX_JS_ENTRY; j++)
-                    {
-                        if (aJsMapping.entry[j].jsNumber == i) //Right JS ?
-                        {
-                            if (aJsMapping.entry[j].type == BUTTON) //Right Type ?
-                            {
-                                if ((int)event.jbutton.button == aJsMapping.entry[j].channel) //Right Button ?
-                                {
-                                    if (BUTTON_HORN == j)//Horn
-                                        pModel->getSound()->endHorn();
-                                    else if (BUTTON_LOOK_LEFT == j)
-                                        pModel->getCamera()->setPanSpeed(0);
-                                    else if (BUTTON_LOOK_RIGHT == j)
-                                        pModel->getCamera()->setPanSpeed(0);
-                                    else if (BUTTON_LOOK_UP == j)
-                                        pModel->getCamera()->setVerticalPanSpeed(0);
-                                    else if (BUTTON_LOOK_DOWN == j)
-                                        pModel->getCamera()->setVerticalPanSpeed(0);
-                                }
-                            }
-                        }
-                    }
-                    break;
 
                 case SDL_JOYHATMOTION:
                     //std::cout << "Pov " << (int)event.jhat.hat << " = " << (int)event.jhat.value << std::endl;
                     break;
                 }
             }
-            SDL_JoystickClose(js);
 
-	    //On RPI5 event from axis is not catched, so libevdev is used
+
+            //On RPI5 event from axis is not catched, so libevdev is used
 #ifndef _WIN32
-	    struct input_event ev;
-	    int rc = libevdev_next_event((struct libevdev*)aDevice, LIBEVDEV_READ_FLAG_NORMAL, &ev);
+            struct input_event ev;
+            int rc = libevdev_next_event((struct libevdev*)aDevice, LIBEVDEV_READ_FLAG_NORMAL, &ev);
 
-	    if (rc == 0)
-	      {
-		if (ev.type == EV_ABS)
-		  {
-		    //std::cout << "Axe " << (int)ev.code << " = " << axisValue << std::endl;
-		    AxisProcess(i, ev.value, (int)ev.code, aJsConf, aJsMapping, aModel); 
-		  }
-	      }
+            if (rc == 0)
+            {
+                if (ev.type == EV_ABS)
+                {
+                    //std::cout << "Axe " << (int)ev.code << " = " << axisValue << std::endl;
+                    AxisProcess(i, ev.value, (int)ev.code, aJsConf, aJsMapping, aModel);
+                }
+            }
 #endif
+
+            SDL_JoystickClose(js);
         }
     }
 }

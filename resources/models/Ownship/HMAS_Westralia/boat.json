@@ -99,7 +99,7 @@
 	"tilt": 0
     },
     "mesh": {
-	"name": "boat.x",
+	"name": "boat.obj",
 	"makeTransparent" : 0,
 	"scaleFactor": 0.30,
 	"yCorrection": -26.4,
@@ -107,7 +107,7 @@
 	"numberOfViews": 5,
 	"views":
 	[
-	    [ 0, 115.5, 151.3, 0 ],
+	    [ 0, 115.5, -151.3, 0 ],
 	    [-2, 107.5, -145.3, 0 ],
 	    [ 42.9, 108.5, -140, 0 ],
 	    [ -42.9, 108.5, -140, 0 ],

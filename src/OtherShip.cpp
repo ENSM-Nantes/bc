@@ -188,20 +188,29 @@ void OtherShip::update(irr::f32 deltaTime, irr::f32 scenarioTime, irr::f32 tideH
         std::vector<Leg>::size_type currentLeg = findCurrentLeg(scenarioTime);
 
         mMu[0] = legs[currentLeg].speed*KTS_TO_MPS;
-        mEta[2] = legs[currentLeg].bearing;
+        mEta[2] = legs[currentLeg].bearing*irr::core::DEGTORAD;
     }
 
     
-    mEta[1] = mEta[1] + sin(mEta[2]*irr::core::RADTODEG)*mMu[0]*deltaTime;
-    mEta[0] = mEta[0] + cos(mEta[2]*irr::core::RADTODEG)*mMu[0]*deltaTime;
+    mEta[1] = mEta[1] + sin(mEta[2])*mMu[0]*deltaTime;
+    mEta[0] = mEta[0] + cos(mEta[2])*mMu[0]*deltaTime;
     double yPos = tideHeight+mHeightCorrection;
+
+
+    /*std::cout << "::::::Pos & Rot::::::" << std::endl;
+    std::cout << "mMu[0] : Speed on Z : " << mMu[0] << std::endl;
+    std::cout << "mMu[1] :  Speed on X (m/s) : " << mMu[1] << std::endl;
+    std::cout << "mMu[2] :  Rate of turn (rad/s) : " << mMu[2] << std::endl;
+    std::cout << "mEta[0] : Z position : " << mEta[0] << std::endl;
+    std::cout << "mEta[1] : X position : " << mEta[1] << std::endl;
+    std::cout << "mEta[2] : Heading (rad) : " << mEta[2] << std::endl;*/
 
     //Set position & speed by calling ship methods
     //setPosition(irr::core::vector3df(xPos,yPos,zPos));
     mShipScene->setPosition(irr::core::vector3df(mEta[1],yPos,mEta[0]));
     // DEE_DEC22 vvvv allows modelling of trim , list and models derived from other coordinate systems
     //ship->setRotation(irr::core::vector3df(angleCorrectionPitch, hdg+angleCorrection, angleCorrectionRoll)); //Global vectors
-    mShipScene->setRotation(irr::core::vector3df(mAngleCorrectionPitch, mEta[2]+mAngleCorrection, mAngleCorrectionRoll)); //Global vectors
+    mShipScene->setRotation(Angles::irrAnglesFromYawPitchRoll((mEta[2]+mAngleCorrection)*180/PI, mAngleCorrectionPitch,  mAngleCorrectionRoll)); //Global vectors
     // DEE_DEC22 ^^^^
 
     //for each light, find range and angle

@@ -30,7 +30,7 @@
 		"breadth" : 24.799999237060547,
 		"draugth" : 6.0,
 		"length" : 156.44999694824219,
-		"longGravityCenter" : 68.0,
+		"longGravityCenter" : 10.43,
 		"rho" : 1025.0,
 		"subwaterVolume" : 11707.7900390625
 	},
@@ -138,7 +138,9 @@
 	},
 	"rudder" : 
 	{
-		"areaMobPart" : 20.0,
+	    "number" : 2,
+	    "spacing" : 8,
+	    "areaMobPart" : 20.0,
 		"aspectRatio" : 0.89999997615814209,
 		"expConstUr" : 0.16714480519294739,
 		"flowCoef" : 

@@ -60,7 +60,9 @@ OwnShip::OwnShip()
   mRoll = 0;             
   mPortEngine = 0;       
   mStbdEngine = 0;       
-  mOffsetPos = {0, 0, 0};  
+  mOffsetPos = {0, 0, 0};
+  mDeltaX = 0;
+  mDeltaZ = 0;
 }
 
 OwnShip::~OwnShip()
@@ -364,7 +366,8 @@ void OwnShip::Update(sTime& aTime, float aTideHeight, float aWeather, Wind *aWin
 	}
 
       //Apply rudder angle
-      mRudder.SetDelta((mWheel*PI)/180, deltaTime);
+      for(unsigned char i = 0;i<getNumberRud();i++)
+	mRudder[i].SetDelta((mWheel*PI)/180, deltaTime);
       
     }
  
@@ -412,13 +415,18 @@ void OwnShip::setWheel(float aWheel)
   mControlMode = MODE_ENGINE; // Switch to engine and rudder mode
 
   mWheel = aWheel;
-  if (mWheel < -(mRudder.getDeltaMax())*180/PI)
+
+  for(unsigned char i=0;i<getNumberRud();i++)
     {
-      mWheel = -(mRudder.getDeltaMax()*180/PI);
-    }
-  if (mWheel > mRudder.getDeltaMax()*180/PI)
-    {
-      mWheel = mRudder.getDeltaMax()*180/PI;
+      if(mWheel < -(mRudder[i].getDeltaMax())*180/PI)
+	{
+	  mWheel = -(mRudder[i].getDeltaMax()*180/PI);
+	}
+      
+      if(mWheel > mRudder[i].getDeltaMax()*180/PI)
+	{
+	  mWheel = mRudder[i].getDeltaMax()*180/PI;
+	}
     }
 }
 
@@ -456,12 +464,16 @@ void OwnShip::setStbdEngine(float aStbd)
     mStbdEngine = -1;
 }
 
-void OwnShip::setOffsetPos(irr::core::vector3d<int64_t> aOffsetPos)
+void OwnShip::setOffsetPos(irr::core::vector3d<int64_t> aOffsetPos, int aDeltaX, int aDeltaZ)
 {
   mOffsetPos = aOffsetPos;
+  mDeltaX = aDeltaX;
+  mDeltaZ = aDeltaZ;
 }
 
 irr::core::vector3d<int64_t> OwnShip::getOffsetPos(void) {return mOffsetPos;}
+int  OwnShip::getOffsetX(void) {return mDeltaX;}
+int  OwnShip::getOffsetZ(void) {return mDeltaZ;}
 float OwnShip::getPortEngine() const {return mPortEngine;}
 float OwnShip::getStbdEngine() const {return mStbdEngine;}
 float OwnShip::getWheel() const {return mWheel;}

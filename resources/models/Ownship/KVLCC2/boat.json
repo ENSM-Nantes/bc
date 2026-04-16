@@ -138,6 +138,8 @@
 	},
 	"rudder" : 
 	{
+	    "number" : 1,
+	    "spacing" : 0,
 	    "areaMobPart" : 112.5,
 		"aspectRatio" : 1.827,
 		"expConstUr" : 0.5,

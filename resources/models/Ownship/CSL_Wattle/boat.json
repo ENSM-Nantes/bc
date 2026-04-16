@@ -99,7 +99,7 @@
 	"tilt": 0
     },
     "mesh": {
-	"name": "boat.x",
+	"name": "boat.obj",
 	"makeTransparent" : 1,
 	"scaleFactor": 0.30,
 	"yCorrection": -12,

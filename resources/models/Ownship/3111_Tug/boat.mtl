@@ -1,0 +1,1156 @@
+# File produced by Open Asset Import Library (http://www.assimp.sf.net)
+# (assimp v5.3.0)
+
+newmtl Material__36
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd orange.jpg
+
+newmtl Material__37
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd black.bmp
+
+newmtl Material__62
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd black.bmp
+
+newmtl Material__127
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd black.bmp
+
+newmtl Material__140
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd funnel.JPG
+
+newmtl Material__101
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd funnel.JPG
+
+newmtl Material__153
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd black.bmp
+
+newmtl Material__49
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd black.bmp
+
+newmtl Material__75
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd white.jpg
+
+newmtl Material__88
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd white.jpg
+
+newmtl Material__114
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd white.jpg
+
+newmtl Material__473
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd super1.bmp
+
+newmtl Material__475
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd black.bmp
+
+newmtl Material__282
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd keel.bmp
+
+newmtl Material__283
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd brass.bmp
+
+newmtl Material__126
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd keel.bmp
+
+newmtl Material__242
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd hullr.bmp
+
+newmtl Material__243
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd hulll.bmp
+
+newmtl Material__203
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd upperr.bmp
+
+newmtl Material__204
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd upperl.bmp
+
+newmtl Material__216
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd strakes.bmp
+
+newmtl Material__229
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd strakes.bmp
+
+newmtl Material__174
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd super1.bmp
+
+newmtl Material__434
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd deck.bmp
+
+newmtl Material__512
+Kd 0.588 0.588 0.588
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+
+newmtl Material__501
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd deck.bmp
+
+newmtl Material__686
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd glass.bmp
+
+newmtl Material__1118
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd table.jpg
+
+newmtl Material__961
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd floor.bmp
+
+newmtl Material__1113
+Kd 0.588 0.588 0.588
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+
+newmtl Material__1130
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd wall.jpg
+
+newmtl Material__790
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd liferaft.bmp
+
+newmtl Material__79
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd strakes.bmp
+
+newmtl Material__80
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd rubber.bmp
+
+newmtl Material__81
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd rubber.bmp
+
+newmtl Material__109
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd yellow.jpg
+
+newmtl Material__110
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd rubber.bmp
+
+newmtl Material__83
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd yellow.jpg
+
+newmtl Material__84
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd rubber.bmp
+
+newmtl Material__96
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd rubber.bmp
+
+newmtl Material__124
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd deck.bmp
+
+newmtl Material__396
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd black.bmp
+
+newmtl Material__397
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd wires.jpg
+
+newmtl Material__409
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd funnel.JPG
+
+newmtl Material__474
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd yellow.jpg
+
+newmtl Material__357
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd black.bmp
+
+newmtl Material__358
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd wires.jpg
+
+newmtl Material__370
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd funnel.JPG
+
+newmtl Material__383
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd funnel.JPG
+
+newmtl Material__516
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd super1.bmp
+
+newmtl Material__171
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd chrome-pipe.jpg
+
+newmtl Material__176
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd super1.bmp
+
+newmtl Material__178
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd strakes.bmp
+
+newmtl Material__173
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd chrome-pipe.jpg
+
+newmtl Material__172
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd chrome-pipe.jpg
+
+newmtl Material__177
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd super1.bmp
+
+newmtl Material__190
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd strakes.bmp
+
+newmtl Material__870
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd funnel1.bmp
+
+newmtl Material__529
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd super1.bmp
+
+newmtl Material__530
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd super1.bmp
+
+newmtl Material__528
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd super1.bmp
+
+newmtl Material__531
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd deck.bmp
+
+newmtl Material__869
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd funnel.JPG
+
+newmtl Material__856
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd door.bmp
+
+newmtl Material__857
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd liferaft.bmp
+
+newmtl Material__175
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd super1.bmp
+
+newmtl Material__446
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd deck.bmp
+
+newmtl Material__1010
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd wall.jpg
+
+newmtl Material__1023
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd wall.jpg
+
+newmtl Material__973
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd floor.bmp
+
+newmtl Material__604
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd floor.bmp
+
+newmtl Material__949
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd floor.bmp
+
+newmtl Material__1036
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd wall.jpg
+
+newmtl Material__946
+Kd 0.588 0.588 0.588
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+
+newmtl Material__935
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd super1.bmp
+
+newmtl Material__710
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd liferaft.bmp
+
+newmtl Material__721
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd liferaft.bmp
+
+newmtl Material__722
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd black.bmp
+
+newmtl Material__1144
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd wall.jpg
+
+newmtl Material__11394
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd mobmark.JPG
+
+newmtl Material__41
+Kd 0.584299982 0.584299982 0.584299982
+Ks 0 0 0
+Ke 0 0 0
+Ns 19.6000004
+illum 2
+
+newmtl Material__11382
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd black.bmp
+
+newmtl Material__11369
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd black.bmp
+
+newmtl Material__11357
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd ring.JPG
+
+newmtl Material__553
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd liferaft.bmp
+
+newmtl Material__566
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd black.bmp
+
+newmtl Material__578
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd Teak.JPG
+
+newmtl Material__591
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd black.bmp
+
+newmtl Material__638
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd liferaft.bmp
+
+newmtl Material__674
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd port.jpg
+
+newmtl Material__650
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd black.bmp
+
+newmtl Material__30931
+Kd 0.588 0.588 0.588
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+
+newmtl Material__30952
+Kd 0.588 0.588 0.588
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+
+newmtl Material__30953
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd black.bmp
+
+newmtl Material__625
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd black.bmp
+
+newmtl Material__662
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd stbd.jpg
+
+newmtl Material__202
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd glass.bmp
+
+newmtl Material__995
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd liferaft.bmp
+
+newmtl Material__996
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd rubber.bmp
+
+newmtl Material__805
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd liferaft.bmp
+
+newmtl Material__804
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd liferaft.bmp
+
+newmtl Material__754
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd black.bmp
+
+newmtl Material__755
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd port.jpg
+
+newmtl Material__806
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd cent.jpg
+
+newmtl Material__709
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd liferaft.bmp
+
+newmtl Material__708
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd liferaft.bmp
+
+newmtl Material__832
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd cent.jpg
+
+newmtl Material__819
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd cent.jpg
+
+newmtl Material__34872
+Kd 0.588 0.588 0.588
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+
+newmtl Material__802
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd liferaft.bmp
+
+newmtl Material__803
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd liferaft.bmp
+
+newmtl Material__777
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd liferaft.bmp
+
+newmtl Material__778
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd glass.bmp
+
+newmtl Material__1076
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd LEATHER.JPG
+
+newmtl Material__1077
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd funnel.JPG
+
+newmtl Material__1089
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd table.jpg
+
+newmtl Material__1324
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd table.jpg
+
+newmtl Material__1050
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd table.jpg
+
+newmtl Material__1051
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd tabletop.jpg
+
+newmtl Material__1065
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd tabletop.jpg
+
+newmtl Material__1189
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd black.bmp
+
+newmtl Material__1254
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd buttons.jpg
+
+newmtl Material__1186
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd black.bmp
+
+newmtl Material__1190
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd override.bmp
+
+newmtl Material__1202
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd bluebut.bmp
+
+newmtl Material__1215
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd bluebut.bmp
+
+newmtl Material__1278
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd greenbut.bmp
+
+newmtl Material__1241
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd vhf.jpg
+
+newmtl Material__1185
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd black.bmp
+
+newmtl Material__1290
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd pilot2.jpg
+
+newmtl Material__1188
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd black.bmp
+
+newmtl Material__1302
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd radiobut.bmp
+
+newmtl Material__1187
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd black.bmp
+
+newmtl Material__1266
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd blackbut.bmp
+
+newmtl Material__1326
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd lcd.jpg
+
+newmtl Material__1325
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd lcd.jpg
+
+newmtl Material__1155
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd lcd.jpg
+
+newmtl Material__1166
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd black.bmp
+
+newmtl Material__1337
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd LEATHER.JPG
+
+newmtl Material__40356
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd smoke.bmp
+
+newmtl Material__49665
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd console3.bmp
+
+newmtl Material__49784
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 9.99999905
+illum 2
+map_Kd console16.bmp
+
+newmtl Material__1348
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd greenbut.bmp
+
+newmtl Material__1362
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd dial.JPG
+
+newmtl Material__1361
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 10
+illum 2
+map_Kd wall.jpg
+

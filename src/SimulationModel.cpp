@@ -506,7 +506,9 @@ void SimulationModel::update()
       mOffsetPosition.X -= deltaX;
       mOffsetPosition.Z -= deltaZ;
 
-      mOwnShip->setOffsetPos(mOffsetPosition);
+      mOwnShip->setOffsetPos(mOffsetPosition, deltaX, deltaZ);
+      
+      
       std::cout << "::::::Offset Pos::::::" << std::endl;
       std::cout << "mOffsetPosition.X : " << mOffsetPosition.X << std::endl;
       std::cout << "mOffsetPosition.Z : " << mOffsetPosition.Z << std::endl;

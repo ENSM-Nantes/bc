@@ -20,7 +20,7 @@
 #include "Constants.hpp"
 #include "OtherShips.hpp"
 #include "Terrain.hpp"
-
+#include <iostream>
 
 int AIS::currentShip = 0;
 bool AIS::initialized = false;
@@ -54,17 +54,7 @@ std::vector<unsigned int> AIS::getReadyShips(void *aOtherShips, unsigned int now
     unsigned int reportingInterval;
     float shipSpeed = pOtherShips->getSpeed(ship);
 
-    // TODO: take into account course changes
-    // TODO: take into account transmission range in the case of huge maps
-    if (shipSpeed <= 0) {
-      reportingInterval = 180000; // 3 mins when moored
-    } else if (shipSpeed <= 14 * KTS_TO_MPS) {
-      reportingInterval = 10000; // 10 seconds under 14 knots
-    } else if (shipSpeed <= 23 * KTS_TO_MPS) {
-      reportingInterval = 6000; // 6 seconds under 23 knots
-    } else {
-      reportingInterval = 2000; // 2 seconds over 23 knots
-    }
+    reportingInterval = 2000;
 
     // random delay to reporting to avoid coalescence of reports after a while
     if (elapsed_time >= reportingInterval + (rand() % 500)) {
@@ -75,16 +65,14 @@ std::vector<unsigned int> AIS::getReadyShips(void *aOtherShips, unsigned int now
   return readyShips;
 }
 
-std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, void *aTerrain, unsigned long long aTimeStamp, unsigned int ship)
+std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int ship)
 {  
   OtherShips *pOtherShips = (OtherShips*)aOtherShips;
   Terrain *pTerrain = (Terrain*)aTerrain;
-
   bool done = false;
-
-  unsigned int heading = (unsigned int) pOtherShips->getHeading(ship);
+  unsigned int heading = (unsigned int) (pOtherShips->getHeading(ship) * 180/PI);
   unsigned int mmsi = pOtherShips->getMMSI(ship);
-
+  
   if (mmsi == 0) {
     // mmsi is not set, give the ship a vanity mmsi
     mmsi = mmsis[ship % (sizeof(mmsis) / sizeof(mmsis[0]))] + (ship % 10000);
@@ -109,11 +97,11 @@ std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, void *
   // getOtherShipSpeed returns speed in m/s, multiply by 1.9438445 to get knots
   unsigned int speed = std::min<int>((int) 10.0f * MPS_TO_KTS * pOtherShips->getSpeed(ship), 1022);
 
-  // BC internal coordinate system
+  float posX=0, posZ=0;
 
-  float posX = pOtherShips->getPosition(ship).X;
-  float posZ = pOtherShips->getPosition(ship).Z;
- 
+  posX = pOtherShips->getPosition(ship).X + aOffsetPosX;
+  posZ = pOtherShips->getPosition(ship).Z + aOffsetPosZ;
+  
   float shipLong = pTerrain->xToLong(posX);
   float shipLat  = pTerrain->zToLat(posZ);
 

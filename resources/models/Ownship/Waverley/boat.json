@@ -68,7 +68,7 @@
 	{
 		"angleCorrection" : 0,
 		"makeTransparent" : false,
-		"name" : "boat.x",
+		"name" : "boat.obj",
 		"numberOfViews" : 4,
 		"scaleFactor" : 0.3038,
 		"views" : 
@@ -160,13 +160,13 @@
 	},
 	"sail" : 
 	{
-		"number" : 1,
+		"number" : 0,
 		"pos" : 
 		[
 			[
-				0.5,
-				26.5,
-				3.0
+				0,
+				0,
+				0
 			],
 			[
 				0.0,
@@ -184,7 +184,7 @@
 				0.0
 			]
 		],
-		"size" : "30x5",
-		"type" : "Rotor"
+		"size" : "xxxx",
+		"type" : "xxx"
 	}
 }

@@ -4,9 +4,9 @@
 	"length": 32, 
 	"breadth": 5,
 	"draugth": 2,
-	"subwaterVolume": 3126,
+	"subwaterVolume": 312,
 	"longGravityCenter": 1.1,
-	"blockCoef": 0.4 
+	"blockCoef": 0.3 
     },
     "hull": {
 	"xp0": 0.022,
@@ -67,7 +67,7 @@
 	"brand": "xxxx", 
 	"type": "xxx",
 	"power": 4500,
-	"rpmMax": 5000,
+	"rpmMax": 300,
 	"fuelCons": 177 
     },
     "sail": {

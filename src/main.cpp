@@ -220,6 +220,14 @@ sJsMapping getJoystickSetup(std::string iniFilename, sJsConf& aJsConf)
   jsMapping.entry[17].channel = IniFile::iniFileTou32(iniFilename, "ack_alarm_button") - 1;
   jsMapping.entry[17].jsNumber = IniFile::iniFileTou32(iniFilename, "ack_alarm_js_number");
 
+  jsMapping.entry[18].type = BUTTON;
+  jsMapping.entry[18].channel = IniFile::iniFileTou32(iniFilename, "start_sail_button") - 1;
+  jsMapping.entry[18].jsNumber = IniFile::iniFileTou32(iniFilename, "start_sail_button_js_number");
+
+  jsMapping.entry[19].type = BUTTON;
+  jsMapping.entry[19].channel = IniFile::iniFileTou32(iniFilename, "accelerator_button") - 1;
+  jsMapping.entry[19].jsNumber = IniFile::iniFileTou32(iniFilename, "accelerator_button_js_number");
+
 
   return jsMapping;
 }

@@ -1,0 +1,4056 @@
+# File produced by Open Asset Import Library (http://www.assimp.sf.net)
+# (assimp v5.3.0)
+
+newmtl material70853
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd sleeve.bmp
+
+newmtl material70863
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material70870
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material70877
+Kd 0.501960993 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material70884
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd bowname2.bmp
+
+newmtl material70894
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd bowname1.bmp
+
+newmtl material70904
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material70914
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departboard1.bmp
+
+newmtl material70924
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departboard2.bmp
+
+newmtl material70934
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material70941
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material70948
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material70955
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material70962
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material70969
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd funnel.jpg
+
+newmtl material70979
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material70986
+Kd 0 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material70993
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gangway_mesh.bmp
+
+newmtl material71003
+Kd 0.701960981 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material71010
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material71020
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd head.bmp
+
+newmtl material71030
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material71040
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd hull.bmp
+
+newmtl material71050
+Kd 1 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material71057
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd hull2.jpg
+
+newmtl material71067
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd lifeboat.jpg
+
+newmtl material71077
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd liferafts.jpg
+
+newmtl material71087
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd maindeck.jpg
+
+newmtl material71097
+Kd 0.501960993 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material71104
+Kd 0.235293999 0.235293999 0.235293999
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material71111
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd namerear.bmp
+
+newmtl material71121
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd paddles_both.bmp
+
+newmtl material71131
+Kd 1 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material71138
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd roundwindc.bmp
+
+newmtl material71148
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd roundwinda.bmp
+
+newmtl material71158
+Kd 0 0 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material71165
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material71172
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd lifeseat.bmp
+
+newmtl material71182
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph3.bmp
+
+newmtl material71192
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph4.bmp
+
+newmtl material71202
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph3.bmp
+
+newmtl material71212
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph4.bmp
+
+newmtl material71222
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd skin.bmp
+
+newmtl material71232
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd stantions.jpg
+
+newmtl material71242
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material71252
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material71262
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material71269
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material71276
+Kd 1 1 1
+Ks 1 1 1
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material71286
+Kd 1 1 1
+Ks 1 1 1
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material71296
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd vents.jpg
+
+newmtl material71306
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wavbent1.bmp
+
+newmtl material71316
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wavbent2.bmp
+
+newmtl material71326
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material71336
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wheelhouse.jpg
+
+newmtl material71346
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material71353
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71363
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71373
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71383
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71393
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71403
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71413
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71423
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71433
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71443
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71453
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71463
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71473
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71483
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71493
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71503
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71513
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material71523
+Kd 0.247059003 0.247059003 0.247059003
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material71530
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material111715
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd sleeve.bmp
+
+newmtl material111725
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material111732
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material111739
+Kd 0.501960993 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material111746
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd bowname2.bmp
+
+newmtl material111756
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd bowname1.bmp
+
+newmtl material111766
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material111776
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departboard1.bmp
+
+newmtl material111786
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departboard2.bmp
+
+newmtl material111796
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material111803
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material111810
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material111817
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material111824
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material111831
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd funnel.jpg
+
+newmtl material111841
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material111848
+Kd 0 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material111855
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gangway_mesh.bmp
+
+newmtl material111865
+Kd 0.701960981 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material111872
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material111882
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd head.bmp
+
+newmtl material111892
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material111902
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd hull.bmp
+
+newmtl material111912
+Kd 1 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material111919
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd hull2.jpg
+
+newmtl material111929
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd lifeboat.jpg
+
+newmtl material111939
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd liferafts.jpg
+
+newmtl material111949
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd maindeck.jpg
+
+newmtl material111959
+Kd 0.501960993 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material111966
+Kd 0.235293999 0.235293999 0.235293999
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material111973
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd namerear.bmp
+
+newmtl material111983
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd paddles_both.bmp
+
+newmtl material111993
+Kd 1 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material112000
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd roundwindc.bmp
+
+newmtl material112010
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd roundwinda.bmp
+
+newmtl material112020
+Kd 0 0 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material112027
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material112034
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd lifeseat.bmp
+
+newmtl material112044
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph3.bmp
+
+newmtl material112054
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph4.bmp
+
+newmtl material112064
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph3.bmp
+
+newmtl material112074
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph4.bmp
+
+newmtl material112084
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd skin.bmp
+
+newmtl material112094
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd stantions.jpg
+
+newmtl material112104
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material112114
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material112124
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material112131
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material112138
+Kd 1 1 1
+Ks 1 1 1
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material112148
+Kd 1 1 1
+Ks 1 1 1
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material112158
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd vents.jpg
+
+newmtl material112168
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wavbent1.bmp
+
+newmtl material112178
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wavbent2.bmp
+
+newmtl material112188
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material112198
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wheelhouse.jpg
+
+newmtl material112208
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material112215
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112225
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112235
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112245
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112255
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112265
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112275
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112285
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112295
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112305
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112315
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112325
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112335
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112345
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112355
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112365
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112375
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material112385
+Kd 0.247059003 0.247059003 0.247059003
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material112392
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material127173
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd sleeve.bmp
+
+newmtl material127183
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127190
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127197
+Kd 0.501960993 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127204
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd bowname2.bmp
+
+newmtl material127214
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd bowname1.bmp
+
+newmtl material127224
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material127234
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departboard1.bmp
+
+newmtl material127244
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departboard2.bmp
+
+newmtl material127254
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127261
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127268
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127275
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127282
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127289
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd funnel.jpg
+
+newmtl material127299
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127306
+Kd 0 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127313
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gangway_mesh.bmp
+
+newmtl material127323
+Kd 0.701960981 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127330
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material127340
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd head.bmp
+
+newmtl material127350
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material127360
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd hull.bmp
+
+newmtl material127370
+Kd 1 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127377
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd hull2.jpg
+
+newmtl material127387
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd lifeboat.jpg
+
+newmtl material127397
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd liferafts.jpg
+
+newmtl material127407
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd maindeck.jpg
+
+newmtl material127417
+Kd 0.501960993 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127424
+Kd 0.235293999 0.235293999 0.235293999
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127431
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd namerear.bmp
+
+newmtl material127441
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd paddles_both.bmp
+
+newmtl material127451
+Kd 1 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127458
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd roundwindc.bmp
+
+newmtl material127468
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd roundwinda.bmp
+
+newmtl material127478
+Kd 0 0 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127485
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127492
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd lifeseat.bmp
+
+newmtl material127502
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph3.bmp
+
+newmtl material127512
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph4.bmp
+
+newmtl material127522
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph3.bmp
+
+newmtl material127532
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph4.bmp
+
+newmtl material127542
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd skin.bmp
+
+newmtl material127552
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd stantions.jpg
+
+newmtl material127562
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material127572
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material127582
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127589
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127596
+Kd 1 1 1
+Ks 1 1 1
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material127606
+Kd 1 1 1
+Ks 1 1 1
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material127616
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd vents.jpg
+
+newmtl material127626
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wavbent1.bmp
+
+newmtl material127636
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wavbent2.bmp
+
+newmtl material127646
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material127656
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wheelhouse.jpg
+
+newmtl material127666
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127673
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127683
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127693
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127703
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127713
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127723
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127733
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127743
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127753
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127763
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127773
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127783
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127793
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127803
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127813
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127823
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127833
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material127843
+Kd 0.247059003 0.247059003 0.247059003
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material127850
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material154059
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd sleeve.bmp
+
+newmtl material154069
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154076
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154083
+Kd 0.501960993 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154090
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd bowname2.bmp
+
+newmtl material154100
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd bowname1.bmp
+
+newmtl material154110
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material154120
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departboard1.bmp
+
+newmtl material154130
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departboard2.bmp
+
+newmtl material154140
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154147
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154154
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154161
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154168
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154175
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd funnel.jpg
+
+newmtl material154185
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154192
+Kd 0 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154199
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gangway_mesh.bmp
+
+newmtl material154209
+Kd 0.701960981 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154216
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material154226
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd head.bmp
+
+newmtl material154236
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material154246
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd hull.bmp
+
+newmtl material154256
+Kd 1 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154263
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd hull2.jpg
+
+newmtl material154273
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd lifeboat.jpg
+
+newmtl material154283
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd liferafts.jpg
+
+newmtl material154293
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd maindeck.jpg
+
+newmtl material154303
+Kd 0.501960993 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154310
+Kd 0.235293999 0.235293999 0.235293999
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154317
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd namerear.bmp
+
+newmtl material154327
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd paddles_both.bmp
+
+newmtl material154337
+Kd 1 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154344
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd roundwindc.bmp
+
+newmtl material154354
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd roundwinda.bmp
+
+newmtl material154364
+Kd 0 0 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154371
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154378
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd lifeseat.bmp
+
+newmtl material154388
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph3.bmp
+
+newmtl material154398
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph4.bmp
+
+newmtl material154408
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph3.bmp
+
+newmtl material154418
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph4.bmp
+
+newmtl material154428
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd skin.bmp
+
+newmtl material154438
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd stantions.jpg
+
+newmtl material154448
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material154458
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material154468
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154475
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154482
+Kd 1 1 1
+Ks 1 1 1
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material154492
+Kd 1 1 1
+Ks 1 1 1
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material154502
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd vents.jpg
+
+newmtl material154512
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wavbent1.bmp
+
+newmtl material154522
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wavbent2.bmp
+
+newmtl material154532
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material154542
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wheelhouse.jpg
+
+newmtl material154552
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154559
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154569
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154579
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154589
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154599
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154609
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154619
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154629
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154639
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154649
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154659
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154669
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154679
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154689
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154699
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154709
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154719
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material154729
+Kd 0.247059003 0.247059003 0.247059003
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material154736
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material163764
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd sleeve.bmp
+
+newmtl material163774
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material163781
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material163788
+Kd 0.501960993 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material163795
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd bowname2.bmp
+
+newmtl material163805
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd bowname1.bmp
+
+newmtl material163815
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material163825
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departboard1.bmp
+
+newmtl material163835
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departboard2.bmp
+
+newmtl material163845
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material163852
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material163859
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material163866
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material163873
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material163880
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd funnel.jpg
+
+newmtl material163890
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material163897
+Kd 0 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material163904
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gangway_mesh.bmp
+
+newmtl material163914
+Kd 0.701960981 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material163921
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material163931
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd head.bmp
+
+newmtl material163941
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material163951
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd hull.bmp
+
+newmtl material163961
+Kd 1 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material163968
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd hull2.jpg
+
+newmtl material163978
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd lifeboat.jpg
+
+newmtl material163988
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd liferafts.jpg
+
+newmtl material163998
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd maindeck.jpg
+
+newmtl material164008
+Kd 0.501960993 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material164015
+Kd 0.235293999 0.235293999 0.235293999
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material164022
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd namerear.bmp
+
+newmtl material164032
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd paddles_both.bmp
+
+newmtl material164042
+Kd 1 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material164049
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd roundwindc.bmp
+
+newmtl material164059
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd roundwinda.bmp
+
+newmtl material164069
+Kd 0 0 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material164076
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material164083
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd lifeseat.bmp
+
+newmtl material164093
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph3.bmp
+
+newmtl material164103
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph4.bmp
+
+newmtl material164113
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph3.bmp
+
+newmtl material164123
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph4.bmp
+
+newmtl material164133
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd skin.bmp
+
+newmtl material164143
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd stantions.jpg
+
+newmtl material164153
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material164163
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material164173
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material164180
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material164187
+Kd 1 1 1
+Ks 1 1 1
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material164197
+Kd 1 1 1
+Ks 1 1 1
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material164207
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd vents.jpg
+
+newmtl material164217
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wavbent1.bmp
+
+newmtl material164227
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wavbent2.bmp
+
+newmtl material164237
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material164247
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wheelhouse.jpg
+
+newmtl material164257
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material164264
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164274
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164284
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164294
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164304
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164314
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164324
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164334
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164344
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164354
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164364
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164374
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164384
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164394
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164404
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164414
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164424
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material164434
+Kd 0.247059003 0.247059003 0.247059003
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material164441
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material174984
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd sleeve.bmp
+
+newmtl material174994
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175001
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175008
+Kd 0.501960993 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175015
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd bowname2.bmp
+
+newmtl material175025
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd bowname1.bmp
+
+newmtl material175035
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material175045
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departboard1.bmp
+
+newmtl material175055
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departboard2.bmp
+
+newmtl material175065
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175072
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175079
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175086
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175093
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175100
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd funnel.jpg
+
+newmtl material175110
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175117
+Kd 0 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175124
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gangway_mesh.bmp
+
+newmtl material175134
+Kd 0.701960981 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175141
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material175151
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd head.bmp
+
+newmtl material175161
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material175171
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd hull.bmp
+
+newmtl material175181
+Kd 1 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175188
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd hull2.jpg
+
+newmtl material175198
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd lifeboat.jpg
+
+newmtl material175208
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd liferafts.jpg
+
+newmtl material175218
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd maindeck.jpg
+
+newmtl material175228
+Kd 0.501960993 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175235
+Kd 0.235293999 0.235293999 0.235293999
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175242
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd namerear.bmp
+
+newmtl material175252
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd paddles_both.bmp
+
+newmtl material175262
+Kd 1 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175269
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd roundwindc.bmp
+
+newmtl material175279
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd roundwinda.bmp
+
+newmtl material175289
+Kd 0 0 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175296
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175303
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd lifeseat.bmp
+
+newmtl material175313
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph3.bmp
+
+newmtl material175323
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph4.bmp
+
+newmtl material175333
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph3.bmp
+
+newmtl material175343
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph4.bmp
+
+newmtl material175353
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd skin.bmp
+
+newmtl material175363
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd stantions.jpg
+
+newmtl material175373
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material175383
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material175393
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175400
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175407
+Kd 1 1 1
+Ks 1 1 1
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material175417
+Kd 1 1 1
+Ks 1 1 1
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material175427
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd vents.jpg
+
+newmtl material175437
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wavbent1.bmp
+
+newmtl material175447
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wavbent2.bmp
+
+newmtl material175457
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material175467
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wheelhouse.jpg
+
+newmtl material175477
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175484
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175494
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175504
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175514
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175524
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175534
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175544
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175554
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175564
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175574
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175584
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175594
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175604
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175614
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175624
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175634
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175644
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material175654
+Kd 0.247059003 0.247059003 0.247059003
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material175661
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material184070
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd sleeve.bmp
+
+newmtl material184080
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184087
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184094
+Kd 0.501960993 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184101
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd bowname2.bmp
+
+newmtl material184111
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd bowname1.bmp
+
+newmtl material184121
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material184131
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departboard1.bmp
+
+newmtl material184141
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departboard2.bmp
+
+newmtl material184151
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184158
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184165
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184172
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184179
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184186
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd funnel.jpg
+
+newmtl material184196
+Kd 0 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184203
+Kd 0 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184210
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gangway_mesh.bmp
+
+newmtl material184220
+Kd 0.701960981 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184227
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material184237
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd head.bmp
+
+newmtl material184247
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material184257
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd hull.bmp
+
+newmtl material184267
+Kd 1 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184274
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd hull2.jpg
+
+newmtl material184284
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd lifeboat.jpg
+
+newmtl material184294
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd liferafts.jpg
+
+newmtl material184304
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd maindeck.jpg
+
+newmtl material184314
+Kd 0.501960993 0.25097999 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184321
+Kd 0.235293999 0.235293999 0.235293999
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184328
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd namerear.bmp
+
+newmtl material184338
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd paddles_both.bmp
+
+newmtl material184348
+Kd 1 0 0
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184355
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd roundwindc.bmp
+
+newmtl material184365
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd roundwinda.bmp
+
+newmtl material184375
+Kd 0 0 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184382
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184389
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd lifeseat.bmp
+
+newmtl material184399
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph3.bmp
+
+newmtl material184409
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph4.bmp
+
+newmtl material184419
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph3.bmp
+
+newmtl material184429
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd telegraph4.bmp
+
+newmtl material184439
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd skin.bmp
+
+newmtl material184449
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd stantions.jpg
+
+newmtl material184459
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material184469
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material184479
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184486
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184493
+Kd 1 1 1
+Ks 1 1 1
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material184503
+Kd 1 1 1
+Ks 1 1 1
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd gold.bmp
+
+newmtl material184513
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd vents.jpg
+
+newmtl material184523
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wavbent1.bmp
+
+newmtl material184533
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wavbent2.bmp
+
+newmtl material184543
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+
+newmtl material184553
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd wheelhouse.jpg
+
+newmtl material184563
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184570
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184580
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184590
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184600
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184610
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184620
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184630
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184640
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184650
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184660
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184670
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184680
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184690
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184700
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184710
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184720
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184730
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd windows.bmp
+
+newmtl material184740
+Kd 0.247059003 0.247059003 0.247059003
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+
+newmtl material184747
+Kd 1 1 1
+Ks 0 0 0
+Ke 0 0 0
+Ns 51.2000008
+illum 2
+map_Kd departwood.bmp
+

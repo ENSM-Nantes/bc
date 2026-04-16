@@ -244,9 +244,9 @@ void Sail::UpdateMesh(irr::IrrlichtDevice *aDev)
 	  if(timeOn < ROTOR_TIME_TO_MAX_SPEED)
 	    {
 	      speedCoeff = timeOn/ROTOR_TIME_TO_MAX_SPEED;
-	      std::cout << "timeOn : " << timeOn << std::endl;
-	      std::cout << "time : " << time << std::endl;
-	      std::cout << "timeStart : " << timeStart << std::endl;
+	      //std::cout << "timeOn : " << timeOn << std::endl;
+	      //std::cout << "time : " << time << std::endl;
+	      //std::cout << "timeStart : " << timeStart << std::endl;
 	      //std::cout << "mWaitForStart : " << mWaitForStart << std::endl;
 	    }
 	  else
@@ -276,7 +276,7 @@ void Sail::UpdateMesh(irr::IrrlichtDevice *aDev)
 	  if(timeOff < ROTOR_TIME_TO_MAX_SPEED)
 	    {
 	      speedCoeff = 1 - (timeOff/ROTOR_TIME_TO_MAX_SPEED);
-	      std::cout << "timeOff : " << timeOff << std::endl;
+	      //std::cout << "timeOff : " << timeOff << std::endl;
 	      //std::cout << "angle : " << angle << std::endl;
 	    }
 	  else

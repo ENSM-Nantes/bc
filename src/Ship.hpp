@@ -83,11 +83,13 @@ public:
 
   //Boat parts
   Propeller& getPropeller(std::string aNProp = "mono");
+  Rudder& getRudder(std::string aNRud = "mono");
   Hull& getHull(void);
-  Rudder& getRudder(void);
   unsigned char getNumberProp(void);
+  unsigned char getNumberRud(void);
   Sail& getSail(void);
-
+  Engine& getEngine(std::string aNEngine = "mono");
+  
   //Print Ship params
   void PrintGeoParams(void);
   void PrintAddedMassParams(void);
@@ -124,9 +126,10 @@ protected:
   
   //Boat parts
   unsigned char mNumberProp;
+  unsigned char mNumberRud;
   Propeller mProp[2];
   Hull mHull;
-  Rudder mRudder;
+  Rudder mRudder[2];
   Sail mSails;
   Engine mEngine[2];
 

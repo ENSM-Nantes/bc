@@ -803,7 +803,7 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
         }
 
     } // GUI Event
-    static float acc = 1;
+    static float acc = 1, sailOnOffState = 0;
     // From keyboard
     if (event.EventType == irr::EET_KEY_INPUT_EVENT && event.KeyInput.PressedDown)
     {
@@ -930,6 +930,16 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
                     break;
 
                 case irr::KEY_KEY_W:
+                    if (!sailOnOffState)
+                    {
+                        model->getOwnShip()->getSail().SetOnOff(true);
+                        sailOnOffState = 1;
+                    }
+                    else
+                    {
+                        model->getOwnShip()->getSail().SetOnOff(false);
+                        sailOnOffState = 0;
+                    }
                     break;
 
 

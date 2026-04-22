@@ -87,6 +87,9 @@ int Ship::InitShipParams(const Json::Value& aJsonRoot)
       mGeoParams.b = aJsonRoot["geoParams"]["breadth"].asFloat();
       mGeoParams.d = aJsonRoot["geoParams"]["draugth"].asFloat();
       mGeoParams.volume = aJsonRoot["geoParams"]["subwaterVolume"].asFloat();
+      mGeoParams.zG = aJsonRoot["geoParams"]["altGravityCenter"].asFloat();
+      mGeoParams.kM = aJsonRoot["geoParams"]["KM"].asFloat();
+      mGeoParams.gM = aJsonRoot["geoParams"]["GM"].asFloat();
       mGeoParams.xG = aJsonRoot["geoParams"]["longGravityCenter"].asFloat();
       mGeoParams.cB = aJsonRoot["geoParams"]["blockCoef"].asFloat();
       mGeoParams.propSpacing = aJsonRoot["propeller"]["spacing"].asFloat();
@@ -116,7 +119,17 @@ int Ship::InitShipParams(const Json::Value& aJsonRoot)
 		 aJsonRoot["hull"]["npVVV"].asFloat(),
 		 aJsonRoot["hull"]["npVVR"].asFloat(),
 		 aJsonRoot["hull"]["npVRR"].asFloat(),
-		 aJsonRoot["hull"]["npRRR"].asFloat()
+		 aJsonRoot["hull"]["npRRR"].asFloat(),
+		 aJsonRoot["hull"]["kpG"].asFloat(),
+		 aJsonRoot["hull"]["kpB"].asFloat(),
+		 aJsonRoot["hull"]["kpR"].asFloat(),
+		 aJsonRoot["hull"]["kpBBG"].asFloat(),
+		 aJsonRoot["hull"]["kpBRG"].asFloat(),
+		 aJsonRoot["hull"]["kpRRG"].asFloat(),
+		 aJsonRoot["hull"]["kpBBB"].asFloat(),
+		 aJsonRoot["hull"]["kpBBR"].asFloat(),
+		 aJsonRoot["hull"]["kpBRR"].asFloat(),
+		 aJsonRoot["hull"]["kpRRR"].asFloat()
 		 );
       mHull.PrintParams();
 
@@ -197,7 +210,7 @@ int Ship::InitShipParams(const std::string& aType)
   if("kvlcc2" == aType)
     {
       mGeoParams = {320, 58, 20.8, 312622, 11.1, 0.81};
-      mHull.Init(0.022,-0.04, 0.002, 0.011, 0.771, -0.315, 0.083, -1.607, 0.379, -0.391, 0.008, -0.137, -0.049, -0.03, -0.294, 0.055, -0.013);
+      mHull.Init(0.022,-0.04, 0.002, 0.011, 0.771, -0.315, 0.083, -1.607, 0.379, -0.391, 0.008, -0.137, -0.049, -0.03, -0.294, 0.055, -0.013, -0.0185, -0.2586, 0.0532, 0.2229, 0.5374, -0.0928, -0.7293, 1.1474, -0.3351, -0.0132);
       mAddedMassParams = {0.022, 0.223, 0.011};
       mNumberProp=1;
       mNumberRud=1;
@@ -347,6 +360,10 @@ void Ship::setMu(Eigen::Vector3d aMu)
   mMu = aMu;
 }
 
+void Ship::setRollAngle(double aRollAngle)
+{
+  mRollAngle = aRollAngle; 
+}
 
 Propeller& Ship::getPropeller(std::string aNProp)
 {
@@ -384,3 +401,6 @@ Eigen::Matrix3d& Ship::getInvMatM(void){return mInvMatM;}
 Eigen::Matrix3d& Ship::getMatM(void){return mMatM;}
 unsigned char Ship::getNumberProp(void){return mNumberProp;}
 unsigned char Ship::getNumberRud(void){return mNumberRud;}
+double Ship::getRollAngle(void){return mRollAngle;}
+double Ship::getIxx(void){return mIx;}
+double Ship::getJxx(void){return mJx;}

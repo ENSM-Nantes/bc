@@ -14,11 +14,13 @@ public:
   /*Process*/
   void Init(double aXp0, double aXpVV, double aXpVR, double aXpRR, double aXpVVVV, double aYpV, double aYpR, double aYpVVV,
 		double aYpVVR, double aYpVRR, double aYpRRR, double aNpV, double aNpR, double aNpVVV, double aNpVVR,
-		double aNpVRR, double aNpRRR);
-  void ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoParams& aGeo);
+		double aNpVRR, double aNpRRR, double aKpG, double aKpB, double aKpR, double aKpBBG, double aKpBRG,
+		double aKpRRG, double aKpBBB, double aKpBBR, double aKpBRR, double aKpRRR);
+  void ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoParams& aGeo, double aRollAngle);
 
   /*Getter*/
   Eigen::Vector3d& getT(void);
+  double getKh(void);
   void PrintParams(void);
   
 private: 
@@ -40,8 +42,19 @@ private:
   double mNpVVR;
   double mNpVRR;
   double mNpRRR;
+  double mKpG;
+  double mKpB;
+  double mKpR;
+  double mKpBBG;
+  double mKpBRG;
+  double mKpRRG;
+  double mKpBBB;
+  double mKpBBR;
+  double mKpBRR;
+  double mKpRRR;
   
   Eigen::Vector3d mT;
+  double mKh;
 };
 
 #endif

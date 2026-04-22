@@ -25,6 +25,7 @@ public:
   double getDeltaMax(void) const;
   double getDeductionFactor(void) const;
   double getNormalForce(void) const ;
+  double getSpanLength(void) const ;
   void PrintParams(void);
   
 private:

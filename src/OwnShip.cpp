@@ -50,14 +50,12 @@ OwnShip::OwnShip()
   mWheel=0;
   mIsTransparent = false;
     
-  mRollPeriod = 0;       
-  mRollAngle = 0;        
   mPitchPeriod = 0;      
   mPitchAngle = 0;       
   mBuffetPeriod = 0;     
   mBuffet = 0;           
   mPitch = 0;            
-  mRoll = 0;             
+  mRollAngle = 0;             
   mPortEngine = 0;       
   mStbdEngine = 0;       
   mOffsetPos = {0, 0, 0};
@@ -108,7 +106,8 @@ void OwnShip::InitOwnShipParams(OwnShipData aOwnShipData, Json::Value aJsonRoot)
 
   //Init Speed
   mMu0 << aOwnShipData.initialSpeed*KTS_TO_MPS, 0, 0;
-  
+
+  //Mass matrix parameters
   mM = RHO_SW * mGeoParams.volume;
   mMX = 0.5 * RHO_SW * pow(mGeoParams.lPP, 2) * mGeoParams.d * mAddedMassParams.mpX;
   mMY = 0.5 * RHO_SW * pow(mGeoParams.lPP, 2) * mGeoParams.d * mAddedMassParams.mpY;
@@ -116,17 +115,22 @@ void OwnShip::InitOwnShipParams(OwnShipData aOwnShipData, Json::Value aJsonRoot)
   xG = mGeoParams.xG;
   iZ = mM * pow((0.25 * mGeoParams.lPP), 2);
   jZ = 0.5 * RHO_SW * pow(mGeoParams.lPP, 4) * mGeoParams.d * mAddedMassParams.jpZ;
-
+  
   /*Sukas 2019 - Equation 16a - Mass matrix*/
   mMatM << mM+mMX, 0, 0,
     0, mM+mMY, xG*mM,
     0, xG*mM, iZ+(mM*pow(xG, 2))+jZ;
 
   mInvMatM = mMatM.inverse();
-  mMu = mMu0;
 
+  //Init Speed and init position
+  mMu = mMu0;
   mEta << mTerrain->latToZ(aOwnShipData.initialLat), mTerrain->longToX(aOwnShipData.initialLong), aOwnShipData.initialBearing*PI/180;
 
+  //Roll parameters
+  mIx = mM*pow((0.3*mGeoParams.b), 2);
+  mJx = 0.25*mIx;
+  
   std::cout << "::::::Initial Pos informations::::::" << std::endl;
   std::cout << "Initial Latitude : " << aOwnShipData.initialLat << std::endl;
   std::cout << "Initial Longitude : " << aOwnShipData.initialLong << std::endl;
@@ -299,11 +303,7 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
   mShipScene->updateAbsolutePosition();
 
   //Define Constants --> TODO:Process it in different way
-  mRollAngle = 0.1;
   mBuffet = 0.3;
-
-  if(mRollPeriod == 0)
-      mRollPeriod = 8;
 
   if(mPitchPeriod == 0)
       mPitchPeriod = 12;
@@ -381,10 +381,6 @@ void OwnShip::Update(sTime& aTime, float aTideHeight, float aWeather, Wind *aWin
     {
       mPitch = aWeather * mPitchAngle * sin(aTime.scenarioTime * 2 * PI / mPitchPeriod);
     }
-  if(mRollPeriod > 0)
-    {
-      mRoll = aWeather * mRollAngle * sin(aTime.scenarioTime * 2 * PI / mRollPeriod);
-    }
 
   /*Sails dyn*/
   mSails.UpdateMesh(mDevice);
@@ -400,7 +396,7 @@ void OwnShip::Update(sTime& aTime, float aTideHeight, float aWeather, Wind *aWin
   
   /*Update OwnShip position/rotation*/
   mShipScene->setPosition(irr::core::vector3df(mEta[1], yPos, mEta[0]));
-  mShipScene->setRotation(Angles::irrAnglesFromYawPitchRoll(mEta[2]*180/PI, mPitch, mRoll));
+  mShipScene->setRotation(Angles::irrAnglesFromYawPitchRoll(mEta[2]*180/PI, mPitch, mRollAngle*180/PI));
   
 }
 
@@ -478,7 +474,6 @@ float OwnShip::getPortEngine() const {return mPortEngine;}
 float OwnShip::getStbdEngine() const {return mStbdEngine;}
 float OwnShip::getWheel() const {return mWheel;}
 float OwnShip::getPitch() const {return mPitch;}
-float OwnShip::getRoll() const {return mRoll;}
 float OwnShip::getShipMass() const {return mM;}
 std::string OwnShip::getBasePath() const {return basePath;}
 irr::core::vector3df OwnShip::getRadarPosition() const {return mRadarPos;}

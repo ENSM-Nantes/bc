@@ -401,11 +401,11 @@ int main(int argc, char ** argv)
   std::string nmeaUDPListenPortConning = IniFile::iniFileToString(iniFilename, "NMEA_UDPListenPort_Conning");
 
   //OpenCpn
-  std::string nmeaComPortOpCpn = IniFile::iniFileToString(iniFilename, "NMEA_ComPort_OpenCpn");
-  irr::u32 nmeaBaudrateOpCpn = IniFile::iniFileTou32(iniFilename, "NMEA_Baudrate_OpenCpn", 4800);
-  std::string nmeaUDPAddrOpCpn = IniFile::iniFileToString(iniFilename, "NMEA_UDPAddress_OpenCpn");
-  std::string nmeaUDPPortOpCpn = IniFile::iniFileToString(iniFilename, "NMEA_UDPPort_OpenCpn");
-  std::string nmeaUDPListenPortOpCpn = IniFile::iniFileToString(iniFilename, "NMEA_UDPListenPort_OpenCpn");
+  std::string nmeaComPortOpCpn = IniFile::iniFileToString(iniFilename, "NMEA_ComPort_ECDIS");
+  irr::u32 nmeaBaudrateOpCpn = IniFile::iniFileTou32(iniFilename, "NMEA_Baudrate_ECDIS", 4800);
+  std::string nmeaUDPAddrOpCpn = IniFile::iniFileToString(iniFilename, "NMEA_UDPAddress_ECDIS");
+  std::string nmeaUDPPortOpCpn = IniFile::iniFileToString(iniFilename, "NMEA_UDPPort_ECDIS");
+  std::string nmeaUDPListenPortOpCpn = IniFile::iniFileToString(iniFilename, "NMEA_UDPListenPort_ECDIS");
 
   //VDR
   std::string nmeaComPortVDR = IniFile::iniFileToString(iniFilename, "NMEA_ComPort_VDR");

@@ -380,34 +380,26 @@ void NMEA::updateNMEA(sTime& aTime)
 
   data.clear();
 
-  static long counter = 0;
+  std::tie(data, fillBits) = AIS::generateClassAReportOS(mOwnShip, mOwnShip->getOffsetPos().Z, mOwnShip->getOffsetPos().X, mTerrain, aTime.absoluteTime);
 
-  if(counter == 400)
-  { 
-    std::tie(data, fillBits) = AIS::generateClassAReportOS(mOwnShip, mOwnShip->getOffsetPos().Z, mOwnShip->getOffsetPos().X, mTerrain, aTime.absoluteTime);
-
-    snprintf(messageBuffer, maxSentenceChars, "!AIVD0,%d,%d,,%c,%s,%d",
+  snprintf(messageBuffer, maxSentenceChars, "!AIVD0,%d,%d,,%c,%s,%d",
       fragments,
       fragmentNumber,
       radioChannel,
       data.c_str(),
       fillBits
-    );
+  );
 
-    messageToSend.append(addChecksum(std::string(messageBuffer)));
+  messageToSend.append(addChecksum(std::string(messageBuffer)));
 
-    if (messageToSend.length() > 800) { // ensure we don't build too big of a UDP packet
+  if (messageToSend.length() > 800) { // ensure we don't build too big of a UDP packet
       messageQueue.push_back(messageToSend);
       messageToSend = "";
-    }
-
-    if (messageToSend != "") {
-      messageQueue.push_back(messageToSend);
-    }
-    counter = 0;
   }
 
-  counter++;
+  if (messageToSend != "") {
+      messageQueue.push_back(messageToSend);
+  }
 
   // if sufficient time elapsed since the last sensor report was sent,
   // construct and send sentence(s) for the next sensor

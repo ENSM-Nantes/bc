@@ -340,12 +340,6 @@ void NMEA::updateNMEA(sTime& aTime)
   }
   
   irr::u32 now = aTime.currentTime;
-  int fragments = 1;
-  int fragmentNumber = 1;
-  char radioChannel = 'B';
-  std::string data;
-  int fillBits;
-  bool done;
 
   // AIS messages are scheduled based on amount of otherShips and their speed
   // check each frame if a new report should be sent
@@ -356,7 +350,12 @@ void NMEA::updateNMEA(sTime& aTime)
     for (auto ship : readyShips) {
       // 8.3.90 AIS VHF data-link message (6-bit, iaw ITU-R M.1371)
       // Position Report Class A
-      
+      int fragments = 1;
+      int fragmentNumber = 1;
+      char radioChannel = 'B';
+      std::string data;
+      int fillBits;
+      bool done;
       std::tie(data, fillBits) = AIS::generateClassAReport(mOtherShips, mOwnShip->getOffsetPos().Z, mOwnShip->getOffsetPos().X, mTerrain, aTime.absoluteTime, ship);
 
       snprintf(messageBuffer,maxSentenceChars,"!AIVDM,%d,%d,,%c,%s,%d",
@@ -377,37 +376,6 @@ void NMEA::updateNMEA(sTime& aTime)
       messageQueue.push_back(messageToSend);
     }
   }
-
-  data.clear();
-
-  static long counter = 0;
-
-  if(counter == 400)
-  { 
-    std::tie(data, fillBits) = AIS::generateClassAReportOS(mOwnShip, mOwnShip->getOffsetPos().Z, mOwnShip->getOffsetPos().X, mTerrain, aTime.absoluteTime);
-
-    snprintf(messageBuffer, maxSentenceChars, "!AIVD0,%d,%d,,%c,%s,%d",
-      fragments,
-      fragmentNumber,
-      radioChannel,
-      data.c_str(),
-      fillBits
-    );
-
-    messageToSend.append(addChecksum(std::string(messageBuffer)));
-
-    if (messageToSend.length() > 800) { // ensure we don't build too big of a UDP packet
-      messageQueue.push_back(messageToSend);
-      messageToSend = "";
-    }
-
-    if (messageToSend != "") {
-      messageQueue.push_back(messageToSend);
-    }
-    counter = 0;
-  }
-
-  counter++;
 
   // if sufficient time elapsed since the last sensor report was sent,
   // construct and send sentence(s) for the next sensor

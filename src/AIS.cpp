@@ -18,7 +18,6 @@
 #include <tuple>
 #include "AIS.hpp"
 #include "Constants.hpp"
-#include "OwnShip.hpp"
 #include "OtherShips.hpp"
 #include "Terrain.hpp"
 #include <iostream>
@@ -211,131 +210,6 @@ std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float 
   // int fillBits = (6 - (168 % 6)) % 6;
 
   return std::make_tuple(payload, 0);
-}
-
-
-std::tuple<std::string, int> AIS::generateClassAReportOS(void* aOwnShip, float aOffsetPosZ, float aOffsetPosX, void* aTerrain, unsigned long long aTimeStamp)
-{
-    OwnShip* pOwnShip = (OwnShip*)aOwnShip;
-    Terrain* pTerrain = (Terrain*)aTerrain;
-    bool done = false;
-    unsigned int heading = (unsigned int)(pOwnShip->getHeading() * 180 / PI);
-    unsigned int mmsi = 123456789;
-
-    unsigned int speed = std::min<int>((int)10.0f * MPS_TO_KTS * pOwnShip->getSpeed(), 1022);
-
-    float posX = 0, posZ = 0;
-
-    posX = aOffsetPosX;
-    posZ = aOffsetPosZ;
-
-    float shipLong = pTerrain->xToLong(posX);
-    float shipLat = pTerrain->zToLat(posZ);
-
-    unsigned int timestamp = aTimeStamp % 60;
-
-    // fill class A report fields
-
-  // 0-5: message type, set to 0b000001 for normal class A position report
-    classAReport[5] = 1;
-
-    // 6-7 repeat indicator, set to 0b11 to signify do not repeat
-    classAReport[6] = 1;
-    classAReport[7] = 1;
-
-    // 8-37 MMSI, 9-decimal digit in 30 bit field
-    for (int i = 0; i < 30; i++) {
-        classAReport[8 + 29 - i] = mmsi % 2;
-        mmsi >>= 1;
-    }
-
-    // 38-41 navigation status
-    // set to 0b0000 for underway using engine
-    classAReport[38] = 0;
-    classAReport[39] = 0;
-    classAReport[40] = 0;
-    classAReport[41] = 0;
-    if (speed == 0) {
-        // if not moving, set to 0b0001 for anchored
-        classAReport[41] = 1;
-    }
-
-    // 42-49 rate of turn, set to 0x80 for no turn information available
-    // TODO: add rate of turn of other ships 
-    classAReport[42] = 1;
-    for (int i = 43; i <= 49; i++) {
-        classAReport[i] = 0;
-    }
-
-    // 50-59 speed over ground, 10 bit field
-    for (int i = 0; i < 10; i++) {
-        classAReport[50 + 9 - i] = speed % 2;
-        speed >>= 1;
-    }
-
-    // 60 position accuracy, set to 0b1 to indicate DGPS-quality fix, since
-    // shipLong and shipLat have 5 decimals giving a 1m resolution.
-    classAReport[60] = 1;
-
-    // 61-88 longitude in a 28-bit field encoding a signed integer representing a float with a
-    // resolution of 0.0001 corresponding to the longitude in minutes
-    int longitude = (int)600000.0f * shipLong;
-    bool longIsNeg = longitude < 0;
-    for (int i = 0; i < 28; i++) {
-        classAReport[61 + 27 - i] = longitude % 2;
-        longitude >>= 1;
-    }
-    if (longIsNeg) classAReport[61] = 1; // set the sign bit
-
-    // 89-115 latitude in a 27-bit field encoding a signed integer representing a float with a
-    // resolution of 0.0001 corresponding to the latitude in minutes
-    int latitude = (int)600000.0f * shipLat;
-    bool latIsNeg = latitude < 0;
-    for (int i = 0; i < 27; i++) {
-        classAReport[89 + 26 - i] = latitude % 2;
-        latitude >>= 1;
-    }
-    if (latIsNeg) classAReport[89] = 1; // set the sign bit
-
-    // 116-127 course over ground, 12 bit field, unsigned int representing a float with
-    // a resolution of 0.1 corresponding to the course over ground in degrees relative to true north
-    unsigned int cog = 10 * heading;
-    for (int i = 0; i < 12; i++) {
-        classAReport[116 + 11 - i] = cog % 2;
-        cog >>= 1;
-    }
-
-    // 128-136 true heading, 9 bit field, unsigned int
-    for (int i = 0; i < 9; i++) {
-        classAReport[128 + 8 - i] = heading % 2;
-        heading >>= 1;
-    }
-
-    // 137-142 timestamp, 6 bit field, unsigned int corresponding to the seconds of current UTC time
-    for (int i = 0; i < 6; i++) {
-        classAReport[137 + 5 - i] = timestamp % 2;
-        timestamp >>= 1;
-    }
-
-    // 143-144 maneuver indicator, set to 0b00 for no special maneuver
-    classAReport[143] = 0;
-    classAReport[144] = 1;
-
-    // 145-147 not used
-
-    // 148 RAIM flag, set to 0b0 for unset
-    classAReport[148] = 0;
-
-    // 149-167 radio status, 19 bit field, unsigned integer for radio diagnostic, leave as 0 for now
-
-    // convert bit sequence to armored ASCII
-    std::string payload = bitsToArmoredASCII(classAReport);
-
-    // number of bits we need to append to get the payload length to a multiple of 6
-    // always 0 since we always generate a class A Report of length 168
-    // int fillBits = (6 - (168 % 6)) % 6;
-
-    return std::make_tuple(payload, 0);
 }
 
 std::string AIS::bitsToArmoredASCII(std::vector<bool> bits) {

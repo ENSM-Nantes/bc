@@ -70,7 +70,8 @@
 	"kpBBB" : -0.7293,
 	"kpBBR" : 1.1474,
 	"kpBRR" : -0.3351,
-	"kpRRR" : -0.0132
+	"kpRRR" : -0.0132,
+	"invertRoll" : true
 	
     },
     "initialSpeed" : 

@@ -173,14 +173,21 @@ void Solver::SolveRk4(Eigen::Vector3d aEta, Eigen::Vector3d aMu)
 
 void Solver::SolveRoll(void)
 {
-  static double speedRoll = 0, angleRoll = 0, prevSpeedLat = mMu[1];
+  static double speedRoll = 0, angleRoll = 0, prevSpeedLat = 0;
   double accRoll = 0, accLat = 0;
   double c44 = 0, b44 = 0;
   double zR = 0, zH = 0;
+  static bool init = false;
   
   //***** 4-DOF MathematicalModel for manoeuvring simulation including roll motion
   if(mDt > 0)
     {
+      if (!init)
+      {
+          prevSpeedLat = mMu[1];
+          init = true;
+      }
+
       accLat = (prevSpeedLat-mMu[1])/mDt;
       zR = mShip->getGeoParams().d - (mShip->getRudder().getSpanLength()/2);
       zH = mShip->getGeoParams().d/2;

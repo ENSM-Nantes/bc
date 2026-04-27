@@ -406,9 +406,9 @@ void NMEA::updateNMEA(sTime& aTime)
 
   double rudderAngleS = 99;
   if(mOwnShip->getNumberRud() > 1)
-    rudderAngleS = mOwnShip->getRudder("starboard").getDelta()*180/PI;
+    rudderAngleS = -mOwnShip->getRudder("starboard").getDelta()*180/PI;
   
-  double rudderAngleP = mOwnShip->getRudder("port").getDelta()*180/PI;
+  double rudderAngleP = -mOwnShip->getRudder("port").getDelta()*180/PI;
   
   
   double engineRPM[] = {
@@ -428,8 +428,8 @@ void NMEA::updateNMEA(sTime& aTime)
   irr::f32 latSpeed = mOwnShip->getLateralSpeed();
   irr::f32 hdg = mOwnShip->getHeading()*irr::core::RADTODEG;
   irr::f32 rot = mOwnShip->getRateOfTurn()*irr::core::RADTODEG*60;
-  irr::f32 pitch = mOwnShip->getPitch();
-  irr::f32 roll = mOwnShip->getRollAngle();
+  irr::f32 pitch = mOwnShip->getPitch() * irr::core::RADTODEG;
+  irr::f32 roll = mOwnShip->getRollAngle() * irr::core::RADTODEG;
   irr::f32 depth = mOwnShip->getDepth(mTerrain);
   irr::f32 windDirection = mWind->getTrueDirection();
   irr::f32 windSpeed = mWind->getTrueSpeed();

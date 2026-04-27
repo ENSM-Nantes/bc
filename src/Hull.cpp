@@ -3,7 +3,7 @@
 
 Hull::Hull(void)
 {
-  Init(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+  Init(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,false);
   mT << 0, 0, 0;
   mKh = 0;
 }
@@ -11,7 +11,7 @@ Hull::Hull(void)
 void Hull::Init(double aXp0, double aXpVV, double aXpVR, double aXpRR, double aXpVVVV, double aYpV, double aYpR, double aYpVVV,
 		double aYpVVR, double aYpVRR, double aYpRRR, double aNpV, double aNpR, double aNpVVV, double aNpVVR,
 		double aNpVRR, double aNpRRR, double aKpG, double aKpB, double aKpR, double aKpBBG, double aKpBRG,
-		double aKpRRG, double aKpBBB, double aKpBBR, double aKpBRR, double aKpRRR)
+		double aKpRRG, double aKpBBB, double aKpBBR, double aKpBRR, double aKpRRR, bool aInvertRoll)
 {
   mXp0 = aXp0;
   mXpVV = aXpVV;
@@ -40,6 +40,7 @@ void Hull::Init(double aXp0, double aXpVV, double aXpVR, double aXpRR, double aX
   mKpBBR = aKpBBR;
   mKpBRR = aKpBRR;
   mKpRRR = aKpRRR;
+  mInvertRoll = aInvertRoll;
 }
 
 void Hull::PrintParams(void)
@@ -127,3 +128,4 @@ void Hull::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoPar
 
 Eigen::Vector3d& Hull::getT(void){return mT;}
 double Hull::getKh(void){return mKh;}
+bool Hull::getInvertRoll(void) { return mInvertRoll; }

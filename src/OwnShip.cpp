@@ -393,10 +393,15 @@ void OwnShip::Update(sTime& aTime, float aTideHeight, float aWeather, Wind *aWin
   std::cout << "mEta[0] : Z position : " << mEta[0] << std::endl;
   std::cout << "mEta[1] : X position : " << mEta[1] << std::endl;
   std::cout << "mEta[2] : Heading (rad) : " << mEta[2] << std::endl;*/
+
+  /*Sign correction*/
+  int signRoll = -1;
+  if (mNumberProp == 1)
+      signRoll = 1;
   
   /*Update OwnShip position/rotation*/
   mShipScene->setPosition(irr::core::vector3df(mEta[1], yPos, mEta[0]));
-  mShipScene->setRotation(Angles::irrAnglesFromYawPitchRoll(mEta[2]*180/PI, mPitch, mRollAngle*180/PI));
+  mShipScene->setRotation(Angles::irrAnglesFromYawPitchRoll(mEta[2]*180/PI, mPitch, mRollAngle*signRoll*(180/PI)));
   
 }
 

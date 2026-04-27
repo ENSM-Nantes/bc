@@ -27,9 +27,9 @@
     },
     "geoParams" : 
     {
-	"GM" : 1.0,
+	"GM" : 1.9,
         "KM" : 11.0,
-        "altGravityCenter" : -4.0,
+        "altGravityCenter" : -3.1,
 	"blockCoef" : 0.5,
 	"breadth" : 24.799999237060547,
 	"draugth" : 6.0,

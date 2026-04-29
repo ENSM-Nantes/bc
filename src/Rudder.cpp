@@ -147,3 +147,4 @@ double Rudder::getDelta(void) const {return mDelta;}
 double Rudder::getNormalForce(void) const {return mFn;}
 double Rudder::getDeltaMax(void) const {return mDeltaMax;}
 double Rudder::getDeductionFactor(void) const {return mTr;}
+double Rudder::getSpanLength(void) const {return mHr;}

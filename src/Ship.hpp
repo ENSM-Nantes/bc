@@ -71,7 +71,9 @@ public:
   double getM(void);
   double getMY(void);
   double getMX(void);
-
+  double getIxx(void);
+  double getJxx(void);
+  
   Eigen::Vector3d getMu0(void);
   Eigen::Matrix3d& getMatM(void);
   Eigen::Matrix3d& getInvMatM(void);
@@ -80,7 +82,9 @@ public:
   Eigen::Vector3d getMu(void);
   void setEta(Eigen::Vector3d aEta);
   void setMu(Eigen::Vector3d aMu);
-
+  double getRollAngle(void);
+  void setRollAngle(double aRollAngle);
+  
   //Boat parts
   Propeller& getPropeller(std::string aNProp = "mono");
   Rudder& getRudder(std::string aNRud = "mono");
@@ -104,26 +108,32 @@ protected:
   //Mesh Correction
   float mHeightCorrection;
   float mAngleCorrection;
+  float mAngleCorrectionRoll;
+  float mAngleCorrectionPitch;
   float mScaleFactor;
   
   //Global Ship params
   sGeoParams mGeoParams; 
   sAddedMassParams mAddedMassParams;
 
-  //Computed values
+  //Computed values - 3DOF 
   double mM; //Mass
   double mMX; //Mass on Z
   double mMY; //Mass on X
   Eigen::Matrix3d mMatM; //Mass matrix
   Eigen::Matrix3d mInvMatM; //Inverse mass matrix
   Eigen::Vector3d mMu0; //Initial speed
+  
+  //Computed values - 4DOF (Roll)
+  double mIx;
+  double mJx;
+  double mRollAngle;
+  
   //Dynamic params
   Eigen::Vector3d mMu; //mMu[0] : Speed on Z (m/s); mMu[1] : Speed on X (m/s)  ; mMu[2] :  Rate of turn  (rad/s)
   Eigen::Vector3d mEta; //mEta[0] : Z position ; mEta[1] : X position ; mEta[2] : Heading
   double mSpeedThroughWater;
-  float mAngleCorrectionRoll;
-  float mAngleCorrectionPitch;
-  
+
   //Boat parts
   unsigned char mNumberProp;
   unsigned char mNumberRud;

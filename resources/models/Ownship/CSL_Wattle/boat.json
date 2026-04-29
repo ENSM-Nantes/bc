@@ -70,6 +70,12 @@
 	"rpmMax": 170,
 	"fuelCons": 177 
     },
+	"general" : 
+    {
+	"boatName" : "CSL_Wattle",
+	"imgName" : "CSL_Wattle.jpg",
+	"type" : "BulkCarrier"
+    },
     "sail": {
 	"number": 0, 
 	"type": "", 
@@ -99,7 +105,7 @@
 	"tilt": 0
     },
     "mesh": {
-	"name": "boat.obj",
+	"name": "CSL_Wattle.obj",
 	"makeTransparent" : 1,
 	"scaleFactor": 0.30,
 	"yCorrection": -12,

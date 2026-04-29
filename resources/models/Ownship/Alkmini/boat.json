@@ -1,179 +1,198 @@
 {
-    "addedMass" : 
-    {
-	"pX" : 0.015944194048643112,
-	"pY" : 0.11310294270515442,
-	"pZ" : 0.0095390118658542633
-    },
-    "depthSounder" : 
-    {
-	"maxDepth" : 200.0,
-	"number" : true
-    },
-    "engine" : 
-    {
-	"brand" : "Caterpillar",
-	"fuelCons" : 22.0,
-	"number" : 2,
-	"power" : 18000.0,
-	"rpmMax" : 170.0,
-	"type" : "9M32C"
-    },
-    "general" : 
-    {
-	"boatName" : "Alkmini",
-	"imgName" : "boat.jpg",
-	"type" : "Ferry"
-    },
-    "geoParams" : 
-    {
-	"GM" : 1.0,
-        "KM" : 11.0,
-        "altGravityCenter" : -4.0,
-	"blockCoef" : 0.5,
-	"breadth" : 24.799999237060547,
-	"draugth" : 6.0,
-	"length" : 156.44999694824219,
-	"longGravityCenter" : 10.43,
-	"rho" : 1025.0,
-	"subwaterVolume" : 11707.7900390625
-    },
-    "gps" : 
-    {
-	"number" : true
-    },
-    "hull" : 
-    {
-	"npR" : -0.035535812377929688,
-	"npRRR" : -0.036185361444950104,
-	"npV" : -0.076701819896697998,
-	"npVRR" : -0.33456754684448242,
-	"npVVR" : -0.63714927434921265,
-	"npVVV" : -0.31499999761581421,
-	"xp0" : 0.02199999988079071,
-	"xpRR" : -0.047896452248096466,
-	"xpVR" : 0.041719116270542145,
-	"xpVV" : -0.088852673768997192,
-	"xpVVVV" : 0.57055288553237915,
-	"ypR" : 0.047601372003555298,
-	"ypRRR" : -0.050999999046325684,
-	"ypV" : -0.23144491016864777,
-	"ypVRR" : -0.93010079860687256,
-	"ypVVR" : -0.75,
-	"ypVVV" : -0.68706655502319336,
-	"kpG" : -0.0185,
-	"kpB" : -0.2586,
-	"kpR" : 0.0532,
-	"kpBBG" : 0.2229,
-	"kpBRG" : 0.5374,
-	"kpRRG" : -0.0928,
-	"kpBBB" : -0.7293,
-	"kpBBR" : 1.1474,
-	"kpBRR" : -0.3351,
-	"kpRRR" : -0.0132,
-	"invertRoll" : false
-	
-    },
-    "initialSpeed" : 
-    [
-	0,
-	0,
-	0
-    ],
-    "propeller" : 
-    {
-	"backwardEff" : 0.69999998807907104,
-	"diameter" : 4.1999998092651367,
-	"forwardRotDir" : "right",
-	"k0" : 0.35,
-	"k1" : -0.30,
-	"k2" : -0.10,
-	"longPosition" : -0.47999998927116394,
-	"nominalWake" : 0.20000000298023224,
-	"number" : 1,
-	"thrustFactor" : 0.15,
-	"spacing" : 8
-    },
-    "radar" : 
-    {
-	"number" : 1,
-	"pos" : 
+	"addedMass" : 
+	{
+		"pX" : 0.015944194048643112,
+		"pY" : 0.11310294270515442,
+		"pZ" : 0.0095390118658542633
+	},
+	"depthSounder" : 
+	{
+		"maxDepth" : 200.0,
+		"number" : true
+	},
+	"engine" : 
+	{
+		"brand" : "Caterpillar",
+		"fuelCons" : 22.0,
+		"number" : 2,
+		"power" : 18000.0,
+		"rpmMax" : 170.0,
+		"type" : "9M32C"
+	},
+	"general" : 
+	{
+		"boatName" : "Alkmini",
+		"imgName" : "Alkmini.jpg",
+		"type" : "CruiseLiner"
+	},
+	"geoParams" : 
+	{
+		"GM" : 1.0,
+		"KM" : 11.0,
+		"altGravityCenter" : -4.0,
+		"blockCoef" : 0.5,
+		"breadth" : 24.799999237060547,
+		"draugth" : 6.0,
+		"length" : 156.44999694824219,
+		"longGravityCenter" : 10.430000305175781,
+		"rho" : 1025.0,
+		"subwaterVolume" : 11707.7900390625
+	},
+	"gps" : 
+	{
+		"number" : true
+	},
+	"hull" : 
+	{
+		"kpB" : -0.25859999656677246,
+		"kpBBB" : -0.72930002212524414,
+		"kpBBG" : 0.22290000319480896,
+		"kpBBR" : 1.1474000215530396,
+		"kpBRG" : 0.5374000072479248,
+		"kpBRR" : -0.33509999513626099,
+		"kpG" : -0.018500000238418579,
+		"kpR" : 0.053199999034404755,
+		"kpRRG" : -0.092799998819828033,
+		"kpRRR" : -0.013199999928474426,
+		"npR" : -0.035535812377929688,
+		"npRRR" : -0.036185361444950104,
+		"npV" : -0.076701819896697998,
+		"npVRR" : -0.33456754684448242,
+		"npVVR" : -0.63714927434921265,
+		"npVVV" : -0.31499999761581421,
+		"xp0" : 0.02199999988079071,
+		"xpRR" : -0.0062771732918918133,
+		"xpVR" : 0.041719116270542145,
+		"xpVV" : -0.088852673768997192,
+		"xpVVVV" : 0.57055288553237915,
+		"ypR" : 0.047601372003555298,
+		"ypRRR" : -0.050999999046325684,
+		"ypV" : -0.23144491016864777,
+		"ypVRR" : -0.93010079860687256,
+		"ypVVR" : -0.75,
+		"ypVVV" : -0.68706655502319336
+	},
+	"initialSpeed" : 
 	[
-	    0.0,
-	    -10.0,
-	    0.0
-	],
-	"size" : 1.0,
-	"tilt" : 0.0
-    },
-    "rotIndicator" : 
-    {
-	"number" : true
-    },
-    "rudder" : 
-    {
-	"number" : 1,
-	"spacing" : 8,
-	"areaMobPart" : 20.0,
-	"aspectRatio" : 0.89999997615814209,
-	"expConstUr" : 0.16714480519294739,
-	"flowCoef" : 
-	[
-	    0.30327260787300447,
-	    0.30327260787300447
-	],
-	"forceIncreaseFactor" : 0.28533077239990234,
-	"longCoordinatePos" : -0.89999997615814209,
-	"longCoordinateRatio" : -0.5,
-	"longLateralForce" : -0.40000000596046448,
-	"maxAngle" : 0.61000001430511475,
-	"maxSpeed" : 0.05000000074505806,
-	"spanLength" : 4.1999998092651367,
-	"steeringResistanceFactor" : 0.25,
-	"wakeFractionRatio" : 0.80400002002716064
-    },
-    "sail" : 
-    {
-	"number" : 0,
-	"pos" : 
-	[
-	    [
 		0,
 		0,
 		0
-	    ],
-	    [
-		0.0,
-		0.0,
-		0.0
-	    ],
-	    [
-		0.0,
-		0.0,
-		0.0
-	    ],
-	    [
-		0.0,
-		0.0,
-		0.0
-	    ]
 	],
-	"size" : "XXX",
-	"type" : "XXX"
-    },
-    "mesh": {
-	"name": "boat.x",
-	"makeTransparent" : 1,
-	"scaleFactor": 0.3048,
-	"yCorrection": -18,
-	"angleCorrection": 0,
-	"numberOfViews": 4,
-	"views":
-	[
-	    [ 0, 100.5, 185.5, 0 ],
-	    [ 50, 99.3, 182.8, 0 ],
-	    [ -50, 99.3, 182.8, 0 ],
-	    [ 0, 900, 0, 1 ]
-	]
-    } 
+	"mesh" : 
+	{
+		"angleCorrection" : 0,
+		"makeTransparent" : true,
+		"name" : "Alkmini.x",
+		"numberOfViews" : 4,
+		"scaleFactor" : 0.30480000376701355,
+		"views" : 
+		[
+			[
+				0.0,
+				100.5,
+				185.5,
+				false
+			],
+			[
+				50.0,
+				99.300003051757812,
+				182.80000305175781,
+				false
+			],
+			[
+				-50.0,
+				99.300003051757812,
+				182.80000305175781,
+				false
+			],
+			[
+				0.0,
+				900.0,
+				0.0,
+				true
+			]
+		],
+		"yCorrection" : -18.0
+	},
+	"propeller" : 
+	{
+		"backwardEff" : 0.69999998807907104,
+		"diameter" : 4.1999998092651367,
+		"forwardRotDir" : "right",
+		"k0" : 0.29300001263618469,
+		"k1" : -0.27500000596046448,
+		"k2" : -0.13899999856948853,
+		"longPosition" : -0.47999998927116394,
+		"nominalWake" : 0.20000000298023224,
+		"number" : 1,
+		"spacing" : 8.0,
+		"thrustFactor" : 0.27000001072883606
+	},
+	"radar" : 
+	{
+		"number" : 1,
+		"pos" : 
+		[
+			0.0,
+			-10.0,
+			0.0
+		],
+		"size" : 1.0,
+		"tilt" : 0.0
+	},
+	"rotIndicator" : 
+	{
+		"number" : true
+	},
+	"rudder" : 
+	{
+		"areaMobPart" : 20.0,
+		"aspectRatio" : 0.89999997615814209,
+		"expConstUr" : 0.16714480519294739,
+		"flowCoef" : 
+		[
+			0.30327260787300447,
+			0.30327260787300447
+		],
+		"forceIncreaseFactor" : 0.28533077239990234,
+		"longCoordinatePos" : -0.89999997615814209,
+		"longCoordinateRatio" : -0.5,
+		"longLateralForce" : -0.40000000596046448,
+		"maxAngle" : 0.61000001430511475,
+		"maxSpeed" : 0.05000000074505806,
+		"number" : 1,
+		"spacing" : 8.0,
+		"spanLength" : 4.1999998092651367,
+		"steeringResistanceFactor" : 0.38999998569488525,
+		"wakeFractionRatio" : 0.80400002002716064
+	},
+	"sail" : 
+	{
+		"number" : 0,
+		"pos" : 
+		[
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			]
+		],
+		"size" : "XXX",
+		"type" : "XXX"
+	}
 }

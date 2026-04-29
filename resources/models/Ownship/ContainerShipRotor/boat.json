@@ -67,6 +67,12 @@
 	"rpmMax": 170,
 	"fuelCons": 177 
     },
+	"general" : 
+    {
+	"boatName" : "ContainerShipRotor",
+	"imgName" : "ContainerShipRotor.jpg",
+	"type" : "Container"
+    },
     "sail": {
 	"number": 2, 
 	"type": "Rotor", 
@@ -96,7 +102,7 @@
 	"tilt": 0
     },
     "mesh": {
-	"name": "shiptestflettner.obj",
+	"name": "ContainerShipRotor.obj",
 	"makeTransparent" : 0, 
 	"scaleFactor": 3,
 	"yCorrection": -1,

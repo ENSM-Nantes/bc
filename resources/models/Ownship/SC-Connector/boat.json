@@ -165,7 +165,7 @@
 		"longCoordinatePos" : -0.89999997615814209,
 		"longCoordinateRatio" : -0.5,
 		"longLateralForce" : -0.40000000596046448,
-		"maxAngle" : 35.0,
+		"maxAngle" : 0.61,
 		"maxSpeed" : 0.23000000417232513,
 		"number" : 1,
 		"spacing" : 0.0,

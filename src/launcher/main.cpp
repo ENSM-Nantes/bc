@@ -178,7 +178,11 @@ public:
 	}
 	if (id == SHIP_ED_BUTTON) {
 #ifdef _WIN32
-	  ShellExecute(NULL, NULL, "C:\Program Files\ShipEditor\build\ShipEditor.exe", NULL, NULL, SW_SHOW);
+		char oldDir[1024];
+		GetCurrentDirectory(1024, oldDir);
+		SetCurrentDirectory("C:\\Program Files\\ShipEditor\\res");
+		ShellExecute(NULL, NULL, "C:\\Program Files\\ShipEditor\\build\\ShipEditor.exe", NULL, NULL, SW_SHOW);
+		SetCurrentDirectory(oldDir);
 #else
 	  execl("../../../ShipEditor/res/launch.sh", "ShipEditor", NULL);
 #endif

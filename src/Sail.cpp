@@ -313,7 +313,7 @@ void Sail::PrintParams(void)
   std::cout << "Position on boat : " << std::endl;
   for(unsigned char i=0;i<mSailsCount;i++)
     {
-      std::cout << "Sail n°1 : " << std::endl;
+      std::cout << "Sail n°" << i << " : " << std::endl;
       std::cout << "--> X : " << mSailsPos[i][0] << std::endl;
       std::cout << "--> Y : " << mSailsPos[i][1] << std::endl;
       std::cout << "--> Z : " << mSailsPos[i][2] << std::endl;

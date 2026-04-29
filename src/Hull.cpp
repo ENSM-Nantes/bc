@@ -3,13 +3,15 @@
 
 Hull::Hull(void)
 {
-  Init(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+  Init(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,false);
   mT << 0, 0, 0;
+  mKh = 0;
 }
 
 void Hull::Init(double aXp0, double aXpVV, double aXpVR, double aXpRR, double aXpVVVV, double aYpV, double aYpR, double aYpVVV,
 		double aYpVVR, double aYpVRR, double aYpRRR, double aNpV, double aNpR, double aNpVVV, double aNpVVR,
-		double aNpVRR, double aNpRRR)
+		double aNpVRR, double aNpRRR, double aKpG, double aKpB, double aKpR, double aKpBBG, double aKpBRG,
+		double aKpRRG, double aKpBBB, double aKpBBR, double aKpBRR, double aKpRRR, bool aInvertRoll)
 {
   mXp0 = aXp0;
   mXpVV = aXpVV;
@@ -28,6 +30,17 @@ void Hull::Init(double aXp0, double aXpVV, double aXpVR, double aXpRR, double aX
   mNpVVR = aNpVVR;
   mNpVRR = aNpVRR;
   mNpRRR = aNpRRR;
+  mKpG = aKpG;
+  mKpB = aKpB;
+  mKpR = aKpR;
+  mKpBBG = aKpBBG;
+  mKpBRG = aKpBRG;
+  mKpRRG = aKpRRG;
+  mKpBBB = aKpBBB;
+  mKpBBR = aKpBBR;
+  mKpBRR = aKpBRR;
+  mKpRRR = aKpRRR;
+  mInvertRoll = aInvertRoll;
 }
 
 void Hull::PrintParams(void)
@@ -50,13 +63,23 @@ void Hull::PrintParams(void)
   std::cout << "NpVVR : " << mNpVVR << std::endl;
   std::cout << "NpVRR : " << mNpVRR << std::endl;
   std::cout << "NpRRR : " << mNpRRR << std::endl;
+  std::cout << "KpG : " << mKpG << std::endl;
+  std::cout << "KpB : " << mKpB << std::endl;
+  std::cout << "KpR : " << mKpR << std::endl;
+  std::cout << "KpBBG : " << mKpBBG << std::endl;
+  std::cout << "KpBRG : " << mKpBRG << std::endl;
+  std::cout << "KpRRG : " << mKpRRG << std::endl;
+  std::cout << "KpBB : " << mKpBBB << std::endl;
+  std::cout << "KpBBR : " << mKpBBR << std::endl;
+  std::cout << "KpBRR : " << mKpBRR << std::endl;
+  std::cout << "KpRRR : " << mKpRRR << std::endl;
   std::cout << "::::::::::::" << std::endl;
 }
 
 
-void Hull::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoParams& aGeo)
+void Hull::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoParams& aGeo, double aRollAngle)
 {
-  double u = 0, kf = 0, km = 0, vp = 0;
+  double u = 0, kf = 0, km = 0, kr = 0, vp = 0, beta = 0;
   double rp = 0, xph = 0, yph = 0, nph = 0;
 
   // ***** H. Yasukawa and Y. Yoshimura 2015 *******
@@ -64,6 +87,11 @@ void Hull::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoPar
   kf = 0.5 * aRho * aGeo.lPP * aGeo.d * pow(u , 2);
   km = 0.5 * aRho * pow(aGeo.lPP, 2) * aGeo.d * pow(u , 2);
 
+  if(0 != aMu[0])
+    beta = atan(-(aMu[1])/aMu[0]);
+  else
+    beta = 0;
+  
   if(0 !=  u)
     {
       vp = aMu[1] / u;
@@ -84,8 +112,20 @@ void Hull::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoPar
 
   mT << kf*xph, kf*yph, km*nph;
 
+
+  //***** 4-DOF MathematicalModel for manoeuvring simulation including roll motion
+  kr = 0.5 * aRho  * aGeo.lPP * pow(aGeo.d, 2) * pow(u , 2);
+  mKh = kr * ((mKpG * aRollAngle) + (mKpB * beta) + (mKpR * rp) +
+	      (mKpBBG * (beta*beta) * aRollAngle) + (mKpBRG * beta * rp * aRollAngle) + (mKpRRG * (rp*rp) * aRollAngle) +
+	      (mKpBBB * pow(beta, 3)) + (mKpBBR * (beta*beta) * rp) + (mKpBRR * beta * (rp*rp)) + (mKpRRR * pow(rp, 3))
+	      );
+  
+
+  
   //std::cout << "****Hull mT :" << mT << std::endl; 
   //************
 }
 
 Eigen::Vector3d& Hull::getT(void){return mT;}
+double Hull::getKh(void){return mKh;}
+bool Hull::getInvertRoll(void) { return mInvertRoll; }

@@ -99,18 +99,16 @@ private:
   
   bool mShowDebugData;
   
-  irr::f32 mRollPeriod;       // Roll period (s)  DEE this should be dynamically loaded
-  irr::f32 mRollAngle;        // Roll Angle (deg)
+  //Old var members --> To remove with true process
   irr::f32 mPitchPeriod;      // Roll period (s)
   irr::f32 mPitchAngle;       // Roll Angle (deg)
   irr::f32 mBuffetPeriod;     // Yaw period (s)
   irr::f32 mBuffet;           // How much ship is buffeted by waves (undefined units)
   irr::f32 mPitch;            //(deg)
-  irr::f32 mRoll;             //(deg)
+               
   irr::f32 mPortEngine;       //-1 to + 1
   irr::f32 mStbdEngine;       //-1 to + 1
   irr::f32 mWheel;             //-30 to + 30
-              //-30 to + 30
   bool mSingleEngine;
 
   // Dynamics parameters
@@ -118,7 +116,7 @@ private:
   int mDeltaX;
   int mDeltaZ;
   
-  //Devicexs
+  //Devices
   bool mHasGps;
   bool mHasDepthSounder;
   float mMaxSounderDepth;

@@ -458,7 +458,7 @@ void SimulationModel::update()
   mLines->update(mTime);
 
   //Solver Man 3Ddl
-  mSolver->SolveRk4(mTime, mOwnShip->getEta(), mOwnShip->getMu());
+  mSolver->Run(mTime, mOwnShip->getEta(), mOwnShip->getMu());
 
   //update own ship
   mOwnShip->Update(mTime, mTideHeight, mWeather, mWind, mSolver, mOffsetPosition);

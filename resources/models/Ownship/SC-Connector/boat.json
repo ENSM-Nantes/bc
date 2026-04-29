@@ -1,0 +1,205 @@
+{
+	"addedMass" : 
+	{
+		"pX" : 0.02055654302239418,
+		"pY" : 0.16217817366123199,
+		"pZ" : 0.0092623289674520493
+	},
+	"depthSounder" : 
+	{
+		"maxDepth" : 200.0,
+		"number" : true
+	},
+	"engine" : 
+	{
+		"brand" : "MAN",
+		"fuelCons" : 186.0,
+		"number" : 1,
+		"power" : 5600.0,
+		"rpmMax" : 185.0,
+		"type" : "10 L 32/44 CR-T2"
+	},
+	"general" : 
+	{
+		"boatName" : "SC-Connector",
+		"imgName" : "SC-Connector.jpg",
+		"type" : "Ferry"
+	},
+	"geoParams" : 
+	{
+		"GM" : 0.89999997615814209,
+		"KM" : 10.899999618530273,
+		"altGravityCenter" : -2.9099998474121094,
+		"blockCoef" : 0.64999997615814209,
+		"breadth" : 22.700000762939453,
+		"draugth" : 7.0900001525878906,
+		"length" : 142.60000610351562,
+		"longGravityCenter" : 5.0799999237060547,
+		"rho" : 1025.0,
+		"subwaterVolume" : 14818.5400390625
+	},
+	"gps" : 
+	{
+		"number" : true
+	},
+	"hull" : 
+	{
+		"kpB" : -0.25859999656677246,
+		"kpBBB" : -0.72930002212524414,
+		"kpBBG" : 0.22290000319480896,
+		"kpBBR" : 1.1474000215530396,
+		"kpBRG" : 0.5374000072479248,
+		"kpBRR" : -0.33509999513626099,
+		"kpG" : -0.018500000238418579,
+		"kpR" : 0.053199999034404755,
+		"kpRRG" : -0.092799998819828033,
+		"kpRRR" : -0.013199999928474426,
+		"npR" : -0.043808940798044205,
+		"npRRR" : -0.030132189393043518,
+		"npV" : -0.099438987672328949,
+		"npVRR" : -0.26290088891983032,
+		"npVVR" : -0.59961956739425659,
+		"npVVV" : -0.21150001883506775,
+		"xp0" : 0.02199999988079071,
+		"xpRR" : -0.0065725105814635754,
+		"xpVR" : 0.044548105448484421,
+		"xpVV" : -0.061008073389530182,
+		"xpVVVV" : 0.40881210565567017,
+		"ypR" : 0.062013890594244003,
+		"ypRRR" : -0.050999999046325684,
+		"ypV" : -0.30105814337730408,
+		"ypVRR" : -0.68165642023086548,
+		"ypVVR" : -0.75,
+		"ypVVV" : -0.68215864896774292,
+		"invertRoll" : true
+	},
+	"initialSpeed" : 
+	[
+		0,
+		0,
+		0
+	],
+	"mesh" : 
+	{
+		"angleCorrection" : 0,
+		"makeTransparent" : false,
+		"name" : "SC-Connector.obj",
+		"numberOfViews" : 1,
+		"scaleFactor" : 1.0,
+		"views" : 
+		[
+			[
+				0.0,
+				25.0,
+				70.0,
+				false
+			],
+			[
+				0.0,
+				0.0,
+				0.0,
+				false
+			],
+			[
+				0.0,
+				0.0,
+				0.0,
+				false
+			],
+			[
+				0.0,
+				0.0,
+				0.0,
+				false
+			],
+			[
+				0.0,
+				0.0,
+				0.0,
+				false
+			]
+		],
+		"yCorrection" : -5.8000001907348633
+	},
+	"propeller" : 
+	{
+		"backwardEff" : 0.68999999761581421,
+		"diameter" : 4.9000000953674316,
+		"forwardRotDir" : "right",
+		"k0" : 0.29300001263618469,
+		"k1" : -0.27500000596046448,
+		"k2" : -0.13899999856948853,
+		"longPosition" : -0.47999998927116394,
+		"nominalWake" : 0.27499997615814209,
+		"number" : 1,
+		"spacing" : 0.0,
+		"thrustFactor" : 0.27000001072883606
+	},
+	"radar" : 
+	{
+		"number" : 1,
+		"pos" : 
+		[
+			0.0,
+			-10.0,
+			0.0
+		],
+		"size" : 1.0,
+		"tilt" : 0.0
+	},
+	"rotIndicator" : 
+	{
+		"number" : true
+	},
+	"rudder" : 
+	{
+		"areaMobPart" : 20.25,
+		"aspectRatio" : 1.2200000286102295,
+		"expConstUr" : 0.18443563580513,
+		"flowCoef" : 
+		[
+			0.3531507558724718,
+			0.3531507558724718
+		],
+		"forceIncreaseFactor" : 0.37249645590782166,
+		"longCoordinatePos" : -0.89999997615814209,
+		"longCoordinateRatio" : -0.5,
+		"longLateralForce" : -0.40000000596046448,
+		"maxAngle" : 0.61,
+		"maxSpeed" : 0.23000000417232513,
+		"number" : 1,
+		"spacing" : 0.0,
+		"spanLength" : 4.9629998207092285,
+		"steeringResistanceFactor" : 0.38999998569488525,
+		"wakeFractionRatio" : 0.94049996137619019
+	},
+	"sail" : 
+	{
+		"number" : 2,
+		"pos" : 
+		[
+			[
+				0.5,
+				26.5,
+				3.0
+			],
+			[
+				0.5,
+				26.5,
+				3.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			]
+		],
+		"size" : "30x5",
+		"type" : "Rotor"
+	}
+}

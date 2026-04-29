@@ -61,7 +61,7 @@ Eigen::VectorXd Solver::DiffEq(const Eigen::VectorXd& aVectEtaMu)
   matC << 0, -(mShip->getM() + mShip->getMY())*vMu[2], -xG*mShip->getM()*vMu[2],
     (mShip->getM() + mShip->getMX())*vMu[2], 0, 0, xG*mShip->getM()*vMu[2], 0, 0;
   
-  mShip->getHull().ComputeT(vMu, RHO_SW, mShip->getGeoParams());
+  mShip->getHull().ComputeT(vMu, RHO_SW, mShip->getGeoParams(), mShip->getRollAngle());
   mShip->getPropeller("port").ComputeT(vMu, RHO_SW, mShip->getGeoParams());
   mShip->getRudder().ComputeT(vMu, RHO_SW, mShip->getGeoParams(), mShip->getPropeller("port"));
 
@@ -125,10 +125,19 @@ void Solver::SetDeltaT(double aDt)
   mDt = aDt;
 }
 
-void Solver::SolveRk4(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu)
+void Solver::Run(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu)
 {
   float aDt = aTime.deltaTime;
+  SetDeltaT(aDt);
+
+  SolveRk4(aEta, aMu);
+  SolveRoll();
   
+}
+  
+void Solver::SolveRk4(Eigen::Vector3d aEta, Eigen::Vector3d aMu)
+{
+   
   Eigen::VectorXd y(VECTOR_SIZE_DIFF_EQ);
   Eigen::VectorXd tmp(VECTOR_SIZE_DIFF_EQ);
   Eigen::VectorXd dy1(VECTOR_SIZE_DIFF_EQ);
@@ -137,7 +146,6 @@ void Solver::SolveRk4(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu)
   Eigen::VectorXd dy4(VECTOR_SIZE_DIFF_EQ);
   Eigen::VectorXd ySol(VECTOR_SIZE_DIFF_EQ);
   
-  SetDeltaT(aDt);
   y << aEta, aMu;
 
   dy1 = DiffEq(y);
@@ -162,6 +170,56 @@ void Solver::SolveRk4(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu)
   mMu << ySol[3], ySol[4], ySol[5];
 }
 
+
+void Solver::SolveRoll(void)
+{
+  static double speedRoll = 0, angleRoll = 0, prevSpeedLat = 0;
+  double accRoll = 0, accLat = 0;
+  double c44 = 0, b44 = 0;
+  double zR = 0, zH = 0;
+  static bool init = false;
+  
+  //***** 4-DOF MathematicalModel for manoeuvring simulation including roll motion
+  if(mDt > 0)
+    {
+      if (!init)
+      {
+          prevSpeedLat = mMu[1];
+          init = true;
+      }
+
+      accLat = (prevSpeedLat-mMu[1])/mDt;
+      zR = mShip->getGeoParams().d - (mShip->getRudder().getSpanLength()/2);
+      zH = mShip->getGeoParams().d/2;
+  
+      //Equation (5)
+      c44 = 9.81*mShip->getM()*mShip->getGeoParams().gM;
+      b44 = (2 * 0.031/PI) * pow((9.81*mShip->getM()*(mShip->getIxx()+mShip->getJxx())), 0.5); 
+  
+      //Equation (4)  
+      accRoll = (
+		 mShip->getHull().getKh() +
+		 (mShip->getGeoParams().zG * mShip->getHull().getT()[1]) -
+		 (b44*speedRoll) -
+		 (c44*mShip->getRollAngle()) -
+		 ((zR-mShip->getGeoParams().zG)*mShip->getRudder().getT()[1]) +
+		 ((zH-mShip->getGeoParams().zG)*(mShip->getMY()*accLat + mShip->getMX()*mMu[0]*mMu[2]))
+		 )
+	/(mShip->getIxx()+mShip->getJxx());
+      
+      prevSpeedLat = mMu[1];
+    }
+  
+  speedRoll += accRoll*mDt;
+  angleRoll += speedRoll*mDt;
+  mShip->setRollAngle(angleRoll);
+  /* std::cout << "accRoll : " << accRoll << std::endl;
+  std::cout << "speedRoll : " << speedRoll << std::endl;
+  std::cout << "roll angle : " << angleRoll << std::endl;
+  std::cout << "Kh : " << mShip->getHull().getKh() << std::endl;
+  std::cout << "Yr : " << mShip->getRudder().getT()[1] << std::endl;
+  std::cout << "Yh : " << mShip->getHull().getT()[1] << std::endl;*/
+}
 
 Eigen::Vector3d Solver::getEta(void) const {return mEta;}
 Eigen::Vector3d Solver::getMu(void) const {return mMu;}

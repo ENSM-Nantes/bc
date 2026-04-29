@@ -70,6 +70,12 @@
 	"rpmMax": 500,
 	"fuelCons": 177 
     },
+	"general" : 
+    {
+	"boatName" : "Protis",
+	"imgName" : "Protis.jpg",
+	"type" : "TODO"
+    },
     "sail": {
 	"number": 0, 
 	"type": "", 
@@ -99,7 +105,7 @@
 	"tilt": 0
     },
     "mesh": {
-	"name": "boat.x",
+	"name": "Protis.x",
 	"makeTransparent" : 1,
 	"scaleFactor": 0.30,
 	"yCorrection": -3,

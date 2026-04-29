@@ -21,8 +21,8 @@
     },
     "general" : 
     {
-	"boatName" : "CopenhagenFerry",
-	"imgName" : "CopenhagenFerry.jpg",
+	"boatName" : "KVLCC2",
+	"imgName" : "KVLCC2.jpg",
 	"type" : "Container"
     },
     "geoParams" : 
@@ -82,7 +82,7 @@
     {
 	"angleCorrection" : 0,
 	"makeTransparent" : false,
-	"name" : "CopenhagenFerry.obj",
+	"name" : "KVLCC2.obj",
 	"numberOfViews" : 5,
 	"scaleFactor" : 1.0,
 	"views" : 

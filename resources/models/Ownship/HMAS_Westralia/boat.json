@@ -70,6 +70,12 @@
 	"rpmMax": 170,
 	"fuelCons": 177 
     },
+	"general" : 
+    {
+	"boatName" : "HMAS_Westralia",
+	"imgName" : "HMAS_Westralia.jpg",
+	"type" : "Cargo"
+    },
     "sail": {
 	"number": 0, 
 	"type": "", 
@@ -99,7 +105,7 @@
 	"tilt": 0
     },
     "mesh": {
-	"name": "boat.obj",
+	"name": "HMAS_Westralia.obj",
 	"makeTransparent" : 0,
 	"scaleFactor": 0.30,
 	"yCorrection": -26.4,

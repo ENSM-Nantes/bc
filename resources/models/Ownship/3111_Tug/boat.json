@@ -70,6 +70,12 @@
 	"rpmMax": 500,
 	"fuelCons": 177 
     },
+	"general" : 
+    {
+	"boatName" : "3111_Tug",
+	"imgName" : "3111_Tug.jpg",
+	"type" : "Tug"
+    },
     "sail": {
 	"number": 0, 
 	"type": "", 
@@ -99,7 +105,7 @@
 	"tilt": 0
     },
     "mesh": {
-	"name": "boat.obj",
+	"name": "3111_Tug.obj",
 	"makeTransparent" : 1,
 	"scaleFactor": 1.0,
 	"yCorrection": -4.3,

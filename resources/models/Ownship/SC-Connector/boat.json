@@ -23,7 +23,7 @@
 	{
 		"boatName" : "SC-Connector",
 		"imgName" : "SC-Connector.jpg",
-		"type" : "Ferry"
+		"type" : "RoRo"
 	},
 	"geoParams" : 
 	{
@@ -70,8 +70,7 @@
 		"ypV" : -0.30105814337730408,
 		"ypVRR" : -0.68165642023086548,
 		"ypVVR" : -0.75,
-		"ypVVV" : -0.68215864896774292,
-		"invertRoll" : true
+		"ypVVV" : -0.68215864896774292
 	},
 	"initialSpeed" : 
 	[
@@ -92,30 +91,6 @@
 				0.0,
 				25.0,
 				70.0,
-				false
-			],
-			[
-				0.0,
-				0.0,
-				0.0,
-				false
-			],
-			[
-				0.0,
-				0.0,
-				0.0,
-				false
-			],
-			[
-				0.0,
-				0.0,
-				0.0,
-				false
-			],
-			[
-				0.0,
-				0.0,
-				0.0,
 				false
 			]
 		],
@@ -165,7 +140,7 @@
 		"longCoordinatePos" : -0.89999997615814209,
 		"longCoordinateRatio" : -0.5,
 		"longLateralForce" : -0.40000000596046448,
-		"maxAngle" : 0.61,
+		"maxAngle" : 0.61000001430511475,
 		"maxSpeed" : 0.23000000417232513,
 		"number" : 1,
 		"spacing" : 0.0,

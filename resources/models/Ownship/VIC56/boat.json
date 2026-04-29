@@ -1,118 +1,192 @@
 {
-    "initialSpeed": [ 0, 0, 0 ],
-    "geoParams": {
-	"length": 50, 
-	"breadth": 8,
-	"draugth": 2,
-	"subwaterVolume": 3126,
-	"longGravityCenter": 1.1,
-	"blockCoef": 0.3
-    },
-    "hull": {
-	"xp0": 0.022,
-	"xpVV": -0.04,
-	"xpVR": 0.002,
-	"xpRR": 0.011,
-	"xpVVVV": 0.771,
-	"ypV": -0.315,
-	"ypR": 0.083,
-	"ypVVV": -1.607,
-	"ypVVR": 0.379,
-	"ypVRR": -0.391,
-	"ypRRR": 0.008,
-	"npV": -0.137,
-	"npR": -0.049,
-	"npVVV": -0.03,
-	"npVVR": -0.294,
-	"npVRR": 0.055,
-	"npRRR": -0.013 
-    },
-    "addedMass": {
-	"pX": 0.022, 
-	"pY": 0.223,
-	"pZ": 0.011 
-    },
-    "propeller": {
-	"number": 1,
-	"spacing" : 0,
-	"diameter": 2,
-	"thrustFactor": 0.22, 
-	"longPosition": -0.48,
-	"nominalWake": 0.35,
-	"k0": 0.293,
-	"k1": -0.275,
-	"k2": -0.139,
-	"forwardRotDir": "right",
-	"backwardEff": 0.67 
-    },
-    "rudder": {
-	"number" : 1,
-	"spacing" : 0,
-	"spanLength": 15.8, 
-	"areaMobPart": 12.5,
-	"longCoordinateRatio": -0.5,
-	"forceIncreaseFactor": 0.312,
-	"steeringResistanceFactor": 0.387,
-	"longLateralForce": -0.464,
-	"wakeFractionRatio": 1.09,
-	"expConstUr": 0.5,
-	"longCoordinatePos": -0.71,
-	"aspectRatio": 1.827,
-	"flowCoef": [ 0.395 , 0.64 ],
-	"maxSpeed": 0.0407,
-	"maxAngle": 0.61 
-    },
-    "engine": {
-	"number": 1, 
-	"brand": "xxxx", 
-	"type": "xxx",
-	"power": 4500,
-	"rpmMax": 500,
-	"fuelCons": 177 
-    },
-    "sail": {
-	"number": 0, 
-	"type": "", 
-	"size": "",
-	"pos":
+	"addedMass" : 
+	{
+		"pX" : 0.12503999471664429,
+		"pY" : 1.0371720790863037,
+		"pZ" : 0.13414062559604645
+	},
+	"depthSounder" : 
+	{
+		"maxDepth" : 200.0,
+		"number" : true
+	},
+	"engine" : 
+	{
+		"brand" : "xxxx",
+		"fuelCons" : 177.0,
+		"number" : 1,
+		"power" : 4500.0,
+		"rpmMax" : 500.0,
+		"type" : "xxx"
+	},
+	"general" : 
+	{
+		"boatName" : "VIC56",
+		"imgName" : "VIC56.jpg",
+		"type" : "Cargo"
+	},
+	"geoParams" : 
+	{
+		"GM" : 0.0,
+		"KM" : 0.0,
+		"altGravityCenter" : 2.0,
+		"blockCoef" : 0.30000001192092896,
+		"breadth" : 8.0,
+		"draugth" : 2.0,
+		"length" : 50.0,
+		"longGravityCenter" : 1.1000000238418579,
+		"rho" : 1025.0,
+		"subwaterVolume" : 3126.0
+	},
+	"gps" : 
+	{
+		"number" : true
+	},
+	"hull" : 
+	{
+		"kpB" : -0.13670000433921814,
+		"kpBBB" : -1.4351999759674072,
+		"kpBBG" : 0.28189998865127563,
+		"kpBBR" : 1.163599967956543,
+		"kpBRG" : 0.29969999194145203,
+		"kpBRR" : -0.42329999804496765,
+		"kpG" : -0.029899999499320984,
+		"kpR" : 0.008500000461935997,
+		"kpRRG" : -0.048700001090764999,
+		"kpRRR" : 0.036299999803304672,
+		"npR" : -0.036800000816583633,
+		"npRRR" : -0.043999999761581421,
+		"npV" : -0.079999998211860657,
+		"npVRR" : -0.42612498998641968,
+		"npVVR" : -0.68559998273849487,
+		"npVVV" : -0.45299997925758362,
+		"xp0" : 0.02199999988079071,
+		"xpRR" : -0.018897784873843193,
+		"xpVR" : 1.0254920721054077,
+		"xpVV" : -0.12479999661445618,
+		"xpVVVV" : 0.77935999631881714,
+		"ypR" : 0.086520001292228699,
+		"ypRRR" : -0.050999999046325684,
+		"ypV" : -0.19286370277404785,
+		"ypVRR" : -1.247499942779541,
+		"ypVVR" : -0.75,
+		"ypVVV" : -0.67624998092651367
+	},
+	"initialSpeed" : 
 	[
-	    [ 0, 0, 0 ],
-	    [ 0, 0, 0 ],
-	    [ 0, 0, 0 ],
-	    [ 0, 0, 0 ]
-	]
-    },
-    "depthSounder": {
-	"number": 1, 
-	"maxDepth": 200 
-    },
-    "gps": {
-	"number": 1 
-    },
-    "rotIndicator": {
-	"number": 1 
-    },
-    "radar": {
-	"number": 1,
-	"pos": [ 0, -10, 0 ],
-	"size": 1,
-	"tilt": 0
-    },
-    "mesh": {
-	"name": "Model.3ds",
-	"makeTransparent" :0,
-	"scaleFactor": 0.30,
-	"yCorrection": -8,
-	"angleCorrection": 0,
-	"numberOfViews": 3,
-	"views":
-	[
-	    [ 3.7, 24.05, -9.8, 0 ],
-	    [ -3.7, 24.05, -9.8, 0 ],
-	    [ 0, 350, -9.8, 1 ]
-	]
-    }
-    
-
-    
+		0,
+		0,
+		0
+	],
+	"mesh" : 
+	{
+		"angleCorrection" : 0,
+		"makeTransparent" : false,
+		"name" : "VIC56.3ds",
+		"numberOfViews" : 3,
+		"scaleFactor" : 0.30000001192092896,
+		"views" : 
+		[
+			[
+				3.7000000476837158,
+				24.049999237060547,
+				-9.8000001907348633,
+				false
+			],
+			[
+				-3.7000000476837158,
+				24.049999237060547,
+				-9.8000001907348633,
+				false
+			],
+			[
+				0.0,
+				350.0,
+				-9.8000001907348633,
+				true
+			]
+		],
+		"yCorrection" : -8.0
+	},
+	"propeller" : 
+	{
+		"backwardEff" : 0.67000001668930054,
+		"diameter" : 2.0,
+		"forwardRotDir" : "right",
+		"k0" : 0.29300001263618469,
+		"k1" : -0.27500000596046448,
+		"k2" : -0.13899999856948853,
+		"longPosition" : -0.47999998927116394,
+		"nominalWake" : 0.10000000894069672,
+		"number" : 1,
+		"spacing" : 0.0,
+		"thrustFactor" : 0.27000001072883606
+	},
+	"radar" : 
+	{
+		"number" : 1,
+		"pos" : 
+		[
+			0.0,
+			-10.0,
+			0.0
+		],
+		"size" : 1.0,
+		"tilt" : 0.0
+	},
+	"rotIndicator" : 
+	{
+		"number" : true
+	},
+	"rudder" : 
+	{
+		"areaMobPart" : 12.5,
+		"aspectRatio" : 1.8270000219345093,
+		"expConstUr" : 0.14857316017150879,
+		"flowCoef" : 
+		[
+			0.23888000392913822,
+			0.23888000392913822
+		],
+		"forceIncreaseFactor" : 0.17280000448226929,
+		"longCoordinatePos" : -0.89999997615814209,
+		"longCoordinateRatio" : -0.5,
+		"longLateralForce" : -0.40000000596046448,
+		"maxAngle" : 0.61000001430511475,
+		"maxSpeed" : 0.040699999779462814,
+		"number" : 1,
+		"spacing" : 0.0,
+		"spanLength" : 15.800000190734863,
+		"steeringResistanceFactor" : 0.38999998569488525,
+		"wakeFractionRatio" : 0.62200003862380981
+	},
+	"sail" : 
+	{
+		"number" : 0,
+		"pos" : 
+		[
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			]
+		],
+		"size" : "",
+		"type" : ""
+	}
 }

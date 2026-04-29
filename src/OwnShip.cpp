@@ -242,7 +242,6 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
   else
     return -2;
   
-  
   /*Load Sails*/
   if(mSails.GetCount() > 0)
     { 
@@ -256,11 +255,10 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
 	{
 	  sailMesh[i] = smgr->getMesh(meshFile.c_str());
 	  mSails.SetMeshScene(smgr->addMeshSceneNode(sailMesh[i]));
-	          
 	  mSails.GetMeshScene(i)->setParent(mShipScene);
 	  mSails.GetMeshScene(i)->setPosition(irr::core::vector3df(mSails.GetPos()[i][0], mSails.GetPos()[i][1], mSails.GetPos()[i][2])); 
 	  mSails.GetMeshScene(i)->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
-
+       
 	  if(mSails.GetMeshScene(i)->getMaterialCount() > 0)
 	    {
 	      for (unsigned int mat = 0; mat < mShipScene->getMaterialCount(); mat++)
@@ -271,7 +269,6 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
 	    }
 	}
     }
-
 
   mShipScene->setMaterialFlag(irr::video::EMF_FOG_ENABLE, true);
   mShipScene->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true); // Normalise normals on scaled meshes, for correct lighting
@@ -309,7 +306,6 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
       mPitchPeriod = 12;
 
   mBuffetPeriod = 8;
-
   
   mControlMode = MODE_ENGINE;
 

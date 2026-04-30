@@ -1,126 +1,205 @@
 {
-    "initialSpeed": [ 0, 0, 0 ],
-    "geoParams": {
-	"length": 320, 
-	"breadth": 58,
-	"draugth": 20.8,
-	"subwaterVolume": 312622,
-	"longGravityCenter": 11.1,
-	"blockCoef": 0.81 
-    },
-    "hull": {
-	"xp0": 0.022,
-	"xpVV": -0.04,
-	"xpVR": 0.002,
-	"xpRR": 0.011,
-	"xpVVVV": 0.771,
-	"ypV": -0.315,
-	"ypR": 0.083,
-	"ypVVV": -1.607,
-	"ypVVR": 0.379,
-	"ypVRR": -0.391,
-	"ypRRR": 0.008,
-	"npV": -0.137,
-	"npR": -0.049,
-	"npVVV": -0.03,
-	"npVVR": -0.294,
-	"npVRR": 0.055,
-	"npRRR": -0.013 
-    },
-    "addedMass": {
-	"pX": 0.022, 
-	"pY": 0.223,
-	"pZ": 0.011 
-    },
-    "propeller": {
-	"number": 1,
-	"spacing" : 0,
-	"diameter": 9.86,
-	"thrustFactor": 0.22, 
-	"longPosition": -0.48,
-	"nominalWake": 0.35,
-	"k0": 0.293,
-	"k1": -0.275,
-	"k2": -0.139,
-	"forwardRotDir": "right",
-	"backwardEff": 0.67 
-    },
-    "rudder": {
-	"number" : 1,
-	"spacing" : 0,
-	"spanLength": 15.8, 
-	"areaMobPart": 112.5,
-	"longCoordinateRatio": -0.5,
-	"forceIncreaseFactor": 0.312,
-	"steeringResistanceFactor": 0.387,
-	"longLateralForce": -0.464,
-	"wakeFractionRatio": 1.09,
-	"expConstUr": 0.5,
-	"longCoordinatePos": -0.71,
-	"aspectRatio": 1.827,
-	"flowCoef": [ 0.395 , 0.64 ],
-	"maxSpeed": 0.0407,
-	"maxAngle": 0.61 
-    },
-    "engine": {
-	"number": 1, 
-	"brand": "Caterpillar", 
-	"type": "9M32C",
-	"power": 4500,
-	"rpmMax": 170,
-	"fuelCons": 177 
-    },
+	"addedMass" : 
+	{
+		"pX" : 0.029355281963944435,
+		"pY" : 0.22422604262828827,
+		"pZ" : 0.011218443512916565
+	},
+	"depthSounder" : 
+	{
+		"maxDepth" : 200.0,
+		"number" : true
+	},
+	"engine" : 
+	{
+		"brand" : "Caterpillar",
+		"fuelCons" : 177.0,
+		"number" : 1,
+		"power" : 4500.0,
+		"rpmMax" : 170.0,
+		"type" : "9M32C"
+	},
 	"general" : 
-    {
-	"boatName" : "HMAS_Westralia",
-	"imgName" : "HMAS_Westralia.jpg",
-	"type" : "Cargo"
-    },
-    "sail": {
-	"number": 0, 
-	"type": "", 
-	"size": "",
-	"pos":
+	{
+		"boatName" : "HMAS_Westralia",
+		"imgName" : "HMAS_Westralia.jpg",
+		"type" : "Cargo"
+	},
+	"geoParams" : 
+	{
+		"GM" : 0.0,
+		"KM" : 0.0,
+		"altGravityCenter" : 20.799999237060547,
+		"blockCoef" : 0.81000000238418579,
+		"breadth" : 58.0,
+		"draugth" : 20.799999237060547,
+		"length" : 320.0,
+		"longGravityCenter" : 11.100000381469727,
+		"rho" : 0.0,
+		"subwaterVolume" : 312622.0
+	},
+	"gps" : 
+	{
+		"number" : true
+	},
+	"hull" : 
+	{
+		"invertRoll" : false,
+		"kpB" : -0.13670000433921814,
+		"kpBBB" : -1.4351999759674072,
+		"kpBBG" : 0.28189998865127563,
+		"kpBBR" : 1.163599967956543,
+		"kpBRG" : 0.29969999194145203,
+		"kpBRR" : -0.42329999804496765,
+		"kpG" : -0.029899999499320984,
+		"kpR" : 0.008500000461935997,
+		"kpRRG" : -0.048700001090764999,
+		"kpRRR" : 0.036299999803304672,
+		"npR" : -0.053299997001886368,
+		"npRRR" : -0.019296875223517418,
+		"npV" : -0.12999999523162842,
+		"npVRR" : -0.17662069201469421,
+		"npVVR" : -0.53244060277938843,
+		"npVVV" : -0.10109999775886536,
+		"xp0" : 0.02199999988079071,
+		"xpRR" : -0.012256903573870659,
+		"xpVR" : 0.023814171552658081,
+		"xpVV" : -0.011165627278387547,
+		"xpVVVV" : 0.11929251253604889,
+		"ypR" : 0.088083893060684204,
+		"ypRRR" : -0.050999999046325684,
+		"ypV" : -0.40974101424217224,
+		"ypVRR" : -0.38255172967910767,
+		"ypVVR" : -0.75,
+		"ypVVV" : -0.54068964719772339
+	},
+	"initialSpeed" : 
 	[
-	    [ 0, 0, 0 ],
-	    [ 0, 0, 0 ],
-	    [ 0, 0, 0 ],
-	    [ 0, 0, 0 ]
-	]
-    },
-    "depthSounder": {
-	"number": 1, 
-	"maxDepth": 200 
-    },
-    "gps": {
-	"number": 1 
-    },
-    "rotIndicator": {
-	"number": 1 
-    },
-    "radar": {
-	"number": 1,
-	"pos": [ 0, 0, 0 ],
-	"size": 1,
-	"tilt": 0
-    },
-    "mesh": {
-	"name": "HMAS_Westralia.obj",
-	"makeTransparent" : 0,
-	"scaleFactor": 0.30,
-	"yCorrection": -26.4,
-	"angleCorrection": 0,
-	"numberOfViews": 5,
-	"views":
-	[
-	    [ 0, 115.5, -151.3, 0 ],
-	    [-2, 107.5, -145.3, 0 ],
-	    [ 42.9, 108.5, -140, 0 ],
-	    [ -42.9, 108.5, -140, 0 ],
-		[ 0, 1200, -50, 1 ]
-	]
-    }
-    
-
-    
+		0,
+		0,
+		0
+	],
+	"mesh" : 
+	{
+		"angleCorrection" : 0,
+		"makeTransparent" : false,
+		"name" : "HMAS_Westralia.obj",
+		"numberOfViews" : 5,
+		"scaleFactor" : 0.30000001192092896,
+		"views" : 
+		[
+			[
+				0.0,
+				115.5,
+				-151.30000305175781,
+				false
+			],
+			[
+				-2.0,
+				107.5,
+				-145.30000305175781,
+				false
+			],
+			[
+				42.900001525878906,
+				108.5,
+				-140.0,
+				false
+			],
+			[
+				-42.900001525878906,
+				108.5,
+				-140.0,
+				false
+			],
+			[
+				0.0,
+				1200.0,
+				-50.0,
+				true
+			]
+		],
+		"yCorrection" : -26.399999618530273
+	},
+	"propeller" : 
+	{
+		"backwardEff" : 0.67000001668930054,
+		"diameter" : 9.8599996566772461,
+		"forwardRotDir" : "right",
+		"k0" : 0.29300001263618469,
+		"k1" : -0.27500000596046448,
+		"k2" : -0.13899999856948853,
+		"longPosition" : -0.47999998927116394,
+		"nominalWake" : 0.35499998927116394,
+		"number" : 1,
+		"spacing" : 0.0,
+		"thrustFactor" : 0.27000001072883606
+	},
+	"radar" : 
+	{
+		"number" : 1,
+		"pos" : 
+		[
+			0.0,
+			0.0,
+			0.0
+		],
+		"size" : 1.0,
+		"tilt" : 0.0
+	},
+	"rotIndicator" : 
+	{
+		"number" : true
+	},
+	"rudder" : 
+	{
+		"areaMobPart" : 112.5,
+		"aspectRatio" : 1.8270000219345093,
+		"expConstUr" : 0.20731137692928314,
+		"flowCoef" : 
+		[
+			0.44243374548225861,
+			0.44243374548225861
+		],
+		"forceIncreaseFactor" : 0.52852499485015869,
+		"longCoordinatePos" : -0.89999997615814209,
+		"longCoordinateRatio" : -0.5,
+		"longLateralForce" : -0.40000000596046448,
+		"maxAngle" : 0.61000001430511475,
+		"maxSpeed" : 0.040699999779462814,
+		"number" : 1,
+		"spacing" : 0.0,
+		"spanLength" : 15.800000190734863,
+		"steeringResistanceFactor" : 0.38999998569488525,
+		"wakeFractionRatio" : 1.0860999822616577
+	},
+	"sail" : 
+	{
+		"number" : 0,
+		"pos" : 
+		[
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			]
+		],
+		"size" : "18x3",
+		"type" : "Rotor"
+	}
 }

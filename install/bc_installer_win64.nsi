@@ -1,10 +1,10 @@
 ;setup names
 !define PROGRAMNAME "Bridge Command SOMOS"
 !ifndef OUTPUTFILE
-!define OUTPUTFILE "Setup-BridgeCommand-SOMOS-2.5.exe"
+!define OUTPUTFILE "Setup-BridgeCommand-SOMOS-2.6.exe"
 !endif
-!define INSTALLLOCATION "Bridge Command SOMOS 2.5"
-!define SMFOLDER "Bridge Command SOMOS 2.5"
+!define INSTALLLOCATION "Bridge Command SOMOS 2.6"
+!define SMFOLDER "Bridge Command SOMOS 2.6"
 !define REGKEY "BridgeCommandSOMOS2.5"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -23,7 +23,7 @@ Icon "..\resources\icon\Icon.ico"
 
 VIProductVersion "1.0.0.0"
 VIAddVersionKey "ProductName" "${PROGRAMNAME}"
-VIAddVersionKey "ProductVersion" "2.5"
+VIAddVersionKey "ProductVersion" "2.6"
 VIAddVersionKey "CompanyName" "ENSM-Nantes"
 VIAddVersionKey "FileDescription" "Install BC"
 VIAddVersionKey "LegalCopyright" "2026 ENSM Nantes"

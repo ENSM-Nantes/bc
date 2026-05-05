@@ -107,7 +107,11 @@ void Rudder::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoP
   else
     tmpur = 0;
 
-  ur = mEpsilon * up * pow((eta * pow(tmpur, 2) + (1-eta)), 0.5);/*Equation (25 - 2)*/
+  if(0 != tmpur)
+    ur = mEpsilon * up * pow((eta * pow(tmpur, 2) + (1-eta)), 0.5);/*Equation (25 - 2)*/
+  else
+    ur = 0;
+  
   betar = beta - (mLpR * rp);/*Equation (24)*/
 
   if(betar < 0) gammar = mGammaR[0];
@@ -137,7 +141,7 @@ void Rudder::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoP
   Nr = -(xr + mAh * xh) * mFn * cos(mDelta);
 
   mT << Xr, Yr, Nr;
-  //std::cout << "****Rudder mT :" << mT << std::endl; 
+  //std::cout << "****Rudder mT :" << mT << std::endl;
   //*************
 }
 

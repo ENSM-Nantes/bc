@@ -27,15 +27,15 @@
 	},
 	"geoParams" : 
 	{
-		"GM" : 0.0,
-		"KM" : 0.0,
-		"altGravityCenter" : 2.0,
+		"GM" : 1.0,
+		"KM" : 1.5,
+		"altGravityCenter" : 1.5,
 		"blockCoef" : 0.30000001192092896,
 		"breadth" : 8.0,
 		"draugth" : 2.0,
 		"length" : 50.0,
 		"longGravityCenter" : 1.1000000238418579,
-		"rho" : 0.0,
+		"rho" : 1025.0,
 		"subwaterVolume" : 3126.0
 	},
 	"gps" : 
@@ -44,6 +44,7 @@
 	},
 	"hull" : 
 	{
+		"invertRoll" : false,
 		"kpB" : -0.25859999656677246,
 		"kpBBB" : -0.72930002212524414,
 		"kpBBG" : 0.22290000319480896,
@@ -192,7 +193,7 @@
 				0.0
 			]
 		],
-		"size" : "",
-		"type" : ""
+		"size" : "18x3",
+		"type" : "Rotor"
 	}
 }

@@ -27,15 +27,15 @@
 	},
 	"geoParams" : 
 	{
-		"GM" : 0.0,
-		"KM" : 0.0,
-		"altGravityCenter" : 10.0,
+		"GM" : 1.5,
+		"KM" : 16.0,
+		"altGravityCenter" : -4.5,
 		"blockCoef" : 0.81000000238418579,
 		"breadth" : 58.0,
 		"draugth" : 10.0,
 		"length" : 320.0,
 		"longGravityCenter" : 11.100000381469727,
-		"rho" : 0.0,
+		"rho" : 1025.0,
 		"subwaterVolume" : 312622.0
 	},
 	"gps" : 
@@ -161,7 +161,7 @@
 		"longLateralForce" : -0.40000000596046448,
 		"maxAngle" : 0.61000001430511475,
 		"maxSpeed" : 0.040699999779462814,
-		"number" : 0,
+		"number" : 1,
 		"spacing" : 0.0,
 		"spanLength" : 15.800000190734863,
 		"steeringResistanceFactor" : 0.38999998569488525,

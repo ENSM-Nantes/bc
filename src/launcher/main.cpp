@@ -184,7 +184,8 @@ public:
 		ShellExecute(NULL, NULL, "C:\\Program Files\\ShipEditor\\build\\ShipEditor.exe", NULL, NULL, SW_SHOW);
 		SetCurrentDirectory(oldDir);
 #else
-	  execl("../../../ShipEditor/res/launch.sh", "ShipEditor", NULL);
+		execl("./ShipEditor", "ShipEditor", NULL);
+		execl("../../../ShipEditor/res/launch.sh", "ShipEditor", NULL);
 #endif
 	}
       }

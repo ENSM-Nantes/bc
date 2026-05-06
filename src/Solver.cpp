@@ -137,14 +137,13 @@ void Solver::Run(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu)
   
 void Solver::SolveRk4(Eigen::Vector3d aEta, Eigen::Vector3d aMu)
 {
-   
-  Eigen::VectorXd y(VECTOR_SIZE_DIFF_EQ);
-  Eigen::VectorXd tmp(VECTOR_SIZE_DIFF_EQ);
-  Eigen::VectorXd dy1(VECTOR_SIZE_DIFF_EQ);
-  Eigen::VectorXd dy2(VECTOR_SIZE_DIFF_EQ);
-  Eigen::VectorXd dy3(VECTOR_SIZE_DIFF_EQ);
-  Eigen::VectorXd dy4(VECTOR_SIZE_DIFF_EQ);
-  Eigen::VectorXd ySol(VECTOR_SIZE_DIFF_EQ);
+  Eigen::VectorXd y = Eigen::VectorXd::Zero(VECTOR_SIZE_DIFF_EQ);
+  Eigen::VectorXd tmp = Eigen::VectorXd::Zero(VECTOR_SIZE_DIFF_EQ);
+  Eigen::VectorXd dy1 = Eigen::VectorXd::Zero(VECTOR_SIZE_DIFF_EQ);
+  Eigen::VectorXd dy2 = Eigen::VectorXd::Zero(VECTOR_SIZE_DIFF_EQ);
+  Eigen::VectorXd dy3 = Eigen::VectorXd::Zero(VECTOR_SIZE_DIFF_EQ);
+  Eigen::VectorXd dy4 = Eigen::VectorXd::Zero(VECTOR_SIZE_DIFF_EQ);
+  Eigen::VectorXd ySol = Eigen::VectorXd::Zero(VECTOR_SIZE_DIFF_EQ);
   
   y << aEta, aMu;
 

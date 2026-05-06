@@ -16,7 +16,7 @@
 		"fuelCons" : 177.0,
 		"number" : 1,
 		"power" : 4500.0,
-		"rpmMax" : 500.0,
+		"rpmMax" : 1000.0,
 		"type" : "xxx"
 	},
 	"general" : 
@@ -118,7 +118,7 @@
 	"propeller" : 
 	{
 		"backwardEff" : 0.67000001668930054,
-		"diameter" : 2.0,
+		"diameter" : 0.89999997615814209,
 		"forwardRotDir" : "right",
 		"k0" : 0.29300001263618469,
 		"k1" : -0.27500000596046448,
@@ -147,7 +147,7 @@
 	},
 	"rudder" : 
 	{
-		"areaMobPart" : 12.5,
+		"areaMobPart" : 1.0,
 		"aspectRatio" : 1.8270000219345093,
 		"expConstUr" : 0.15731275081634521,
 		"flowCoef" : 
@@ -160,10 +160,10 @@
 		"longCoordinateRatio" : -0.5,
 		"longLateralForce" : -0.40000000596046448,
 		"maxAngle" : 0.61000001430511475,
-		"maxSpeed" : 0.040699999779462814,
+		"maxSpeed" : 0.10700000077486038,
 		"number" : 1,
 		"spacing" : 0.0,
-		"spanLength" : 15.800000190734863,
+		"spanLength" : 1.0,
 		"steeringResistanceFactor" : 0.38999998569488525,
 		"wakeFractionRatio" : 0.71299999952316284
 	},

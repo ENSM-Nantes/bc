@@ -44,7 +44,7 @@
 	},
 	"hull" : 
 	{
-		"invertRoll" : false,
+		"invertRoll" : true,
 		"kpB" : -0.25859999656677246,
 		"kpBBB" : -0.72930002212524414,
 		"kpBBG" : 0.22290000319480896,

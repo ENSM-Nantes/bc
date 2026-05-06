@@ -27,15 +27,15 @@
 	},
 	"geoParams" : 
 	{
-		"GM" : 0.0,
-		"KM" : 0.0,
-		"altGravityCenter" : 20.799999237060547,
+		"GM" : 1.5,
+		"KM" : 22.0,
+		"altGravityCenter" : 0.29999923706054688,
 		"blockCoef" : 0.81000000238418579,
 		"breadth" : 58.0,
 		"draugth" : 20.799999237060547,
 		"length" : 320.0,
 		"longGravityCenter" : 11.100000381469727,
-		"rho" : 0.0,
+		"rho" : 1025.0,
 		"subwaterVolume" : 312622.0
 	},
 	"gps" : 

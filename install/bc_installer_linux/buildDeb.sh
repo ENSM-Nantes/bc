@@ -16,6 +16,7 @@ mkdir bin
 mkdir share
 cd bin
 cp ../../../../../bin/linux/bridgecommand* .
+cp ../../../../../../ShipEditor/build/ShipEditor .
 cd ..
 cd share
 mkdir applications
@@ -32,6 +33,11 @@ cp -a ../../../../../readme.md ./bridgecommand/
 cp -a ../../../../../doc/* ./doc/bridgecommand/
 cp -a ../../../bridgecommand.desktop ./applications/
 cp -a ../../../bridgecommand.png ./icons/hicolor/48x48/apps/
+
+mkdir ShipEditor
+cp -a ../../../../../../ShipEditor/res/* ./ShipEditor/
+cp -a ../../../../../../ShipEditor/LICENSE ./ShipEditor/
+cp -a ../../../../../../ShipEditor/README.md ./ShipEditor/
 
 cd ../../DEBIAN
 echo "Package: BridgeCommand-SOMOS" > $file

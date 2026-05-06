@@ -1,6 +1,6 @@
 # Blender 4.3.2
 # www.blender.org
-mtllib shiptestflettner.mtl
+mtllib ContainerShipRotor.mtl
 o Ship
 v 9.009992 8.572995 -4.398087
 v 9.009992 8.828323 -4.398087

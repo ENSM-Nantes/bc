@@ -27,9 +27,9 @@
 	},
 	"geoParams" : 
 	{
-		"GM" : 0.0,
-		"KM" : 0.0,
-		"altGravityCenter" : 2.0,
+		"GM" : 1.0,
+		"KM" : 1.5,
+		"altGravityCenter" : 1.5,
 		"blockCoef" : 0.60000002384185791,
 		"breadth" : 24.799999237060547,
 		"draugth" : 2.0,
@@ -44,6 +44,7 @@
 	},
 	"hull" : 
 	{
+		"invertRoll" : false,
 		"kpB" : -0.25859999656677246,
 		"kpBBB" : -0.72930002212524414,
 		"kpBBG" : 0.22290000319480896,

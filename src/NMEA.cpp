@@ -438,7 +438,7 @@ void NMEA::updateNMEA(sTime& aTime)
   irr::f32 apparentWindSpd = mWind->getApparentSpd();
 
   int signRoll = 0;
-  if (mOwnShip->getHull.getInvertRoll())
+  if (mOwnShip->getHull().getInvertRoll())
       signRoll = -1;
   else
       signRoll = 1;

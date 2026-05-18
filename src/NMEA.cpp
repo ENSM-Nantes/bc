@@ -444,6 +444,9 @@ void NMEA::updateNMEA(sTime& aTime)
   geomag::Vector magField = geomag::GeoMag(2026.4, posMagnetic, geomag::WMM2025);
   geomag::Elements outMagn= geomag::magField2Elements(magField, lat, lon);
   irr::f32 hdgMagn = hdg + outMagn.declination;
+
+  if (hdgMagn > 360)
+      hdgMagn -= 360.0;
   
   lat = fabs(lat);
   lon = fabs(lon);

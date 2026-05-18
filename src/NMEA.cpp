@@ -436,6 +436,14 @@ void NMEA::updateNMEA(sTime& aTime)
   irr::f32 windSpeed = mWind->getTrueSpeed();
   irr::f32 apparentWindDir = mWind->getApparentDir() * irr::core::RADTODEG;
   irr::f32 apparentWindSpd = mWind->getApparentSpd();
+
+  int signRoll = 0;
+  if (mOwnShip->getHull.getInvertRoll())
+      signRoll = -1;
+  else
+      signRoll = 1;
+
+  roll = signRoll*roll;
     
   char eastWest = easting[lon < 0];
   char northSouth = northing[lat < 0];
@@ -446,7 +454,7 @@ void NMEA::updateNMEA(sTime& aTime)
   irr::f32 hdgMagn = hdg + outMagn.declination;
 
   if (hdgMagn > 360)
-      hdgMagn -= 360.0;
+    hdgMagn -= 360.0;
   
   lat = fabs(lat);
   lon = fabs(lon);

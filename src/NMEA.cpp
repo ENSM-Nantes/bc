@@ -23,6 +23,7 @@
 #include "Constants.hpp"
 #include "Utilities.hpp"
 #include "AIS.hpp"
+#include "MagneticNorth.hpp"
 
 NMEA::NMEA()
 {
@@ -439,6 +440,11 @@ void NMEA::updateNMEA(sTime& aTime)
   char eastWest = easting[lon < 0];
   char northSouth = northing[lat < 0];
 
+  geomag::Vector posMagnetic = geomag::geodetic2ecef(lat, lon, 0);
+  geomag::Vector magField = geomag::GeoMag(2026.4, posMagnetic, geomag::WMM2025);
+  geomag::Elements outMagn= geomag::magField2Elements(magField, lat, lon);
+  irr::f32 hdgMagn = hdg + outMagn.declination;
+  
   lat = fabs(lat);
   lon = fabs(lon);
   irr::f32 latMinutes = (lat - (int)lat)*60;
@@ -453,7 +459,6 @@ void NMEA::updateNMEA(sTime& aTime)
 
   latSpeedUp = latSpeedUp / 0.51444;
   latSpeedDown = latSpeedDown / 0.51444;
-  
 
   switch (currentMessageType) { // EN 61162-1:2011
   case RMC: // 8.3.69 Recommended minimum navigation information
@@ -611,7 +616,7 @@ void NMEA::updateNMEA(sTime& aTime)
     } 
   case VTG:
     {
-      snprintf(messageBuffer,maxSentenceChars,"$VDVTG,0,T,0,M,%.1f,N,%.1f,K",latSpeedUp, latSpeedDown);
+      snprintf(messageBuffer,maxSentenceChars,"$VDVTG,0,T,%.1f,M,%.1f,N,%.1f,K",hdgMagn, latSpeedUp, latSpeedDown);
       messageQueue.push_back(addChecksum(std::string(messageBuffer)));
       break;
     }

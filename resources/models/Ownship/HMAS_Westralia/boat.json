@@ -22,6 +22,7 @@
 	"general" : 
 	{
 		"boatName" : "HMAS_Westralia",
+		"desc" : "This ship is from the original BridgeCommand repository and has been retained for legacy\nHowever, it has not been tested with the new MMG Yasukawa model.\n\nTODO : Enter parameters for this ship",
 		"imgName" : "HMAS_Westralia.jpg",
 		"type" : "Cargo"
 	},
@@ -55,6 +56,7 @@
 		"kpR" : 0.008500000461935997,
 		"kpRRG" : -0.048700001090764999,
 		"kpRRR" : 0.036299999803304672,
+		"linearExtCoeff" : 0.079999998211860657,
 		"npR" : -0.053299997001886368,
 		"npRRR" : -0.019296875223517418,
 		"npV" : -0.12999999523162842,

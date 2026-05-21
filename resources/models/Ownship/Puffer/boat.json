@@ -22,6 +22,7 @@
 	"general" : 
 	{
 		"boatName" : "Puffer",
+		"desc" : "This ship is from the original BridgeCommand repository and has been retained for legacy\nHowever, it has not been tested with the new MMG Yasukawa model.\n\nTODO : Enter parameters for this ship",
 		"imgName" : "Puffer.jpg",
 		"type" : "TODO"
 	},
@@ -55,6 +56,7 @@
 		"kpR" : 0.053199999034404755,
 		"kpRRG" : -0.092799998819828033,
 		"kpRRR" : -0.013199999928474426,
+		"linearExtCoeff" : 0.20000000298023224,
 		"npR" : -0.036800000816583633,
 		"npRRR" : -0.043999999761581421,
 		"npV" : -0.079999998211860657,

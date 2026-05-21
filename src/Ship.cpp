@@ -130,7 +130,8 @@ int Ship::InitShipParams(const Json::Value& aJsonRoot)
 		 aJsonRoot["hull"]["kpBBR"].asFloat(),
 		 aJsonRoot["hull"]["kpBRR"].asFloat(),
 		 aJsonRoot["hull"]["kpRRR"].asFloat(),
-         aJsonRoot["hull"]["invertRoll"].asBool()
+		 aJsonRoot["hull"]["invertRoll"].asBool(),
+		 aJsonRoot["hull"]["linearExtCoeff"].asFloat()
 		 );
       mHull.PrintParams();
 
@@ -211,7 +212,7 @@ int Ship::InitShipParams(const std::string& aType)
   if("kvlcc2" == aType)
     {
       mGeoParams = {320, 58, 20.8, 312622, 11.1, 0.81};
-      mHull.Init(0.022,-0.04, 0.002, 0.011, 0.771, -0.315, 0.083, -1.607, 0.379, -0.391, 0.008, -0.137, -0.049, -0.03, -0.294, 0.055, -0.013, -0.0185, -0.2586, 0.0532, 0.2229, 0.5374, -0.0928, -0.7293, 1.1474, -0.3351, -0.0132, false);
+      mHull.Init(0.022,-0.04, 0.002, 0.011, 0.771, -0.315, 0.083, -1.607, 0.379, -0.391, 0.008, -0.137, -0.049, -0.03, -0.294, 0.055, -0.013, -0.0185, -0.2586, 0.0532, 0.2229, 0.5374, -0.0928, -0.7293, 1.1474, -0.3351, -0.0132, false, 0.08);
       mAddedMassParams = {0.022, 0.223, 0.011};
       mNumberProp=1;
       mNumberRud=1;

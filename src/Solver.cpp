@@ -193,7 +193,7 @@ void Solver::SolveRoll(void)
   
       //Equation (5)
       c44 = 9.81*mShip->getM()*mShip->getGeoParams().gM;
-      b44 = (2 * 0.031/PI) * pow((9.81*mShip->getM()*(mShip->getIxx()+mShip->getJxx())), 0.5); 
+      b44 = (2 * mShip->getHull().getLinearExtinctionCoeff()/PI) * pow((9.81*mShip->getM()*(mShip->getIxx()+mShip->getJxx())), 0.5); 
   
       //Equation (4)  
       accRoll = (

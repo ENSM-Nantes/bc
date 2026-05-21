@@ -22,6 +22,7 @@
 	"general" : 
 	{
 		"boatName" : "KVLCC2",
+		"desc" : "Use only to validate Yasukawa MMG model.\n\nReady to use.",
 		"imgName" : "KVLCC2.jpg",
 		"type" : "Container"
 	},
@@ -55,6 +56,7 @@
 		"kpR" : 0.008500000461935997,
 		"kpRRG" : -0.048700001090764999,
 		"kpRRR" : 0.036299999803304672,
+		"linearExtCoeff" : 0.079999998211860657,
 		"npR" : -0.053299997001886368,
 		"npRRR" : -0.019296875223517418,
 		"npV" : -0.12999999523162842,

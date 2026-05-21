@@ -22,6 +22,7 @@
 	"general" : 
 	{
 		"boatName" : "ContainerShipRotor",
+		"desc" : "This ship has been created to test the appearance of the rotor flettner. \nThe dimensions and physical characteristics of this boat are therefore completely incorrect. ",
 		"imgName" : "ContainerShipRotor.jpg",
 		"type" : "Container"
 	},
@@ -55,6 +56,7 @@
 		"kpR" : 0.008500000461935997,
 		"kpRRG" : -0.048700001090764999,
 		"kpRRR" : 0.036299999803304672,
+		"linearExtCoeff" : 0.079999998211860657,
 		"npR" : -0.029843749478459358,
 		"npRRR" : -0.019296875223517418,
 		"npV" : -0.0625,

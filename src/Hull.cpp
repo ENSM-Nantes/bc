@@ -3,7 +3,7 @@
 
 Hull::Hull(void)
 {
-  Init(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,false);
+  Init(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,false,0);
   mT << 0, 0, 0;
   mKh = 0;
 }
@@ -11,7 +11,7 @@ Hull::Hull(void)
 void Hull::Init(double aXp0, double aXpVV, double aXpVR, double aXpRR, double aXpVVVV, double aYpV, double aYpR, double aYpVVV,
 		double aYpVVR, double aYpVRR, double aYpRRR, double aNpV, double aNpR, double aNpVVV, double aNpVVR,
 		double aNpVRR, double aNpRRR, double aKpG, double aKpB, double aKpR, double aKpBBG, double aKpBRG,
-		double aKpRRG, double aKpBBB, double aKpBBR, double aKpBRR, double aKpRRR, bool aInvertRoll)
+		double aKpRRG, double aKpBBB, double aKpBBR, double aKpBRR, double aKpRRR, bool aInvertRoll, double aLinearExtCoeff)
 {
   mXp0 = aXp0;
   mXpVV = aXpVV;
@@ -41,6 +41,7 @@ void Hull::Init(double aXp0, double aXpVV, double aXpVR, double aXpRR, double aX
   mKpBRR = aKpBRR;
   mKpRRR = aKpRRR;
   mInvertRoll = aInvertRoll;
+  mLinearExtCoeff = aLinearExtCoeff;
 }
 
 void Hull::PrintParams(void)
@@ -73,6 +74,7 @@ void Hull::PrintParams(void)
   std::cout << "KpBBR : " << mKpBBR << std::endl;
   std::cout << "KpBRR : " << mKpBRR << std::endl;
   std::cout << "KpRRR : " << mKpRRR << std::endl;
+  std::cout << "Linear Extinction Coefficient : " << mLinearExtCoeff << std::endl;
   std::cout << "::::::::::::" << std::endl;
 }
 
@@ -129,3 +131,4 @@ void Hull::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoPar
 Eigen::Vector3d& Hull::getT(void){return mT;}
 double Hull::getKh(void){return mKh;}
 bool Hull::getInvertRoll(void) { return mInvertRoll; }
+double Hull::getLinearExtinctionCoeff(void){return mLinearExtCoeff;}

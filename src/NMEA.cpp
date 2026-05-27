@@ -149,10 +149,10 @@ void NMEA::ReceiveThread(std::string udpListenPortName)
             
 	  // set socket timeout as in AISOverUDP
 #ifdef WIN32
-	  DWORD timeout = 1000;
+	  DWORD timeout = 200;
 	  setsockopt(rcvSocket.native_handle(), SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(DWORD))!=0;
 #else
-	  struct timeval tv = { 1, 0 };
+	  struct timeval tv = { 0, 200000 };
 	  setsockopt(rcvSocket.native_handle(), SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
 #endif
             

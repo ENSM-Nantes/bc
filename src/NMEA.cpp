@@ -56,12 +56,10 @@ void NMEA::Init(std::string serialPortName, irr::u32 serialBaudrate, std::string
       std::cout << "NMEA::Error : " << e.what() << std::endl;
     }
 
-    // create send socket
-  socket = new asio::ip::udp::socket(io_service);
-
+  asio::ip::tcp::socket sock(io_service);
   asio::error_code ec;
-  size_t n = socket->send_to(asio::buffer("ping"), receiver_endpoint, 0, ec);
-
+  sock.connect(asio::ip::tcp::endpoint(receiver_endpoint.address(), 80),ec);
+  
   if (ec) {
     mIsHostAlive=false;
     std::cout << "NMEA::HostALive : " << mIsHostAlive << std::endl;
@@ -72,7 +70,10 @@ void NMEA::Init(std::string serialPortName, irr::u32 serialBaudrate, std::string
       mIsHostAlive=true;
       std::cout << "NMEA::HostALive : " << mIsHostAlive << std::endl;
     }
-  
+
+  // create send socket
+  socket = new asio::ip::udp::socket(io_service);
+
   // set up listening thread
   terminateNmeaReceive = 0;
   receivedNmeaMessages = std::vector<std::string>();

@@ -62,13 +62,13 @@ void NMEA::Init(std::string serialPortName, irr::u32 serialBaudrate, std::string
   
   if (ec) {
     mIsHostAlive=false;
-    std::cout << "NMEA::HostALive : " << receiver_endpoint.address() " : " << mIsHostAlive << std::endl;
+    std::cout << "NMEA::HostALive : " << receiver_endpoint.address() << " : " << mIsHostAlive << std::endl;
     return;
   }
   else
     {
       mIsHostAlive=true;
-      std::cout << "NMEA::HostALive : " << receiver_endpoint.address() " : "  << mIsHostAlive << std::endl;
+      std::cout << "NMEA::HostALive : " << receiver_endpoint.address() << " : "  << mIsHostAlive << std::endl;
     }
 
   // create send socket

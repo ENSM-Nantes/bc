@@ -64,10 +64,14 @@ void NMEA::Init(std::string serialPortName, irr::u32 serialBaudrate, std::string
 
   if (ec) {
     mIsHostAlive=false;
+    std::cout << "NMEA::HostALive : " << mIsHostAlive << std::endl;
     return;
   }
   else
-    mIsHostAlive=true;
+    {
+      mIsHostAlive=true;
+      std::cout << "NMEA::HostALive : " << mIsHostAlive << std::endl;
+    }
   
   // set up listening thread
   terminateNmeaReceive = 0;

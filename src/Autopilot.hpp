@@ -26,6 +26,7 @@ public:
   Autopilot();
   Autopilot(void *aOwnShip);
   ~Autopilot();
+  void Init(void *aOwnShip);
   bool receiveAPB(APB);
   bool receiveRMB(RMB);
 private:

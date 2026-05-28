@@ -43,6 +43,7 @@ public:
   void ReceiveThread(std::string udpListenPortName);
   void receive();
   bool getHostStatus(void);
+  void SetModelData(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *aWind, RadarCalculation *aRadarCalc);
   // not implemented: RSD, OSD, POS, VTG, HRM, VDO, HBT
   enum NMEAMessage { RMC=0, GPROT, GLL, RSA, RPM, VHW, VTG, GPHDT, HEROT, TTM, GGA, ZDA, DTM, HEHDT, WIMWV, WIMWR, TIROT, DPT, XDR};
 

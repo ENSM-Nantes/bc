@@ -39,13 +39,32 @@ NMEA::NMEA(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *
   mRadarCalc = aRadarCalc;
 }
 
+void NMEA::SetModelData(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *aWind, RadarCalculation *aRadarCalc)
+{
+  mAutopilot.Init(aOwnShip);
+  mOwnShip = aOwnShip;
+  mOtherShips = aOtherShips;
+  mTerrain = aTerrain;
+  mWind = aWind;
+  mRadarCalc = aRadarCalc;
+}
+
 void NMEA::Init(std::string serialPortName, irr::u32 serialBaudrate, std::string udpHostname, std::string udpPortName, std::string udpListenPortName)
 {
   messageQueue = {};
   lastSendEvent = 0;
   currentMessageType = 0;
 
-  receiver_endpoint = asio::ip::udp::endpoint(asio::ip::make_address(udpHostname), std::stoi(udpPortName));
+  try
+    {
+      asio::ip::udp::resolver resolver(io_service);
+      asio::ip::udp::resolver::query query(asio::ip::udp::v4(), udpHostname, udpPortName);
+      receiver_endpoint = *resolver.resolve(query);
+    }
+  catch (std::exception& e)
+    {
+      std::cout << "NMEA::Error : " << e.what() << std::endl;
+    }
 
   asio::ip::tcp::socket sock(io_service);
   asio::error_code ec;

@@ -641,9 +641,6 @@ int main(int argc, char ** argv)
   //create GUI
   GUIMain guiMain;
 
-  Network network;
-  network.Connect(enetSrvAddr, enetSrvPort, mode);
-
   bool secondaryControlWheel = false;
   bool secondaryControlPortEngine = false;
   bool secondaryControlStbdEngine = false;
@@ -701,7 +698,19 @@ int main(int argc, char ** argv)
   modelParameters.secondaryControlSternThruster = secondaryControlSternThruster;
   modelParameters.debugMode = debugMode;
 
-    
+
+  //create NMEA serial port and UDP, linked to model
+  NMEA nmeaConning;
+  NMEA nmeaOpCpn;
+  NMEA nmeaVDR;
+
+  nmeaConning.Init(nmeaComPortConning, nmeaBaudrateConning, nmeaUDPAddrConning, nmeaUDPPortConning, nmeaUDPListenPortConning);
+  nmeaOpCpn.Init(nmeaComPortOpCpn, nmeaBaudrateOpCpn, nmeaUDPAddrOpCpn, nmeaUDPPortOpCpn, nmeaUDPListenPortOpCpn);
+  nmeaVDR.Init(nmeaComPortVDR, nmeaBaudrateVDR, nmeaUDPAddrVDR, nmeaUDPPortVDR, nmeaUDPListenPortVDR);
+  
+  Network network;
+  network.Connect(enetSrvAddr, enetSrvPort, mode);
+  
   ScenarioData scenarioData;
      
   if(mode == OperatingMode::Normal)
@@ -742,6 +751,11 @@ int main(int argc, char ** argv)
 
   SimulationModel model(device, &guiMain, &sound, scenarioData, modelParameters);
 
+ nmeaConning.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
+ nmeaOpCpn.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
+ nmeaVDR.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
+
+  
   bEnd = true;
   taskWaitingNet.join();
 
@@ -819,17 +833,6 @@ int main(int argc, char ** argv)
   JoyStick hJoySticks(jsMapping, jsConf);
 
   hJoySticks.Init(&model, &guiMain);
-
-  //create NMEA serial port and UDP, linked to model
-  NMEA nmeaConning(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
-  NMEA nmeaOpCpn(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
-  NMEA nmeaVDR(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
-
-
-  nmeaConning.Init(nmeaComPortConning, nmeaBaudrateConning, nmeaUDPAddrConning, nmeaUDPPortConning, nmeaUDPListenPortConning);
-  nmeaOpCpn.Init(nmeaComPortOpCpn, nmeaBaudrateOpCpn, nmeaUDPAddrOpCpn, nmeaUDPPortOpCpn, nmeaUDPListenPortOpCpn);
-  nmeaVDR.Init(nmeaComPortVDR, nmeaBaudrateVDR, nmeaUDPAddrVDR, nmeaUDPPortVDR, nmeaUDPListenPortVDR);
-
     
   //Load sound files
   sound.load(model.getOwnShip()->getBasePath());

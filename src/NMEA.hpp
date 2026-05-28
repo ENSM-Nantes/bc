@@ -42,6 +42,7 @@ public:
   void clearQueue();
   void ReceiveThread(std::string udpListenPortName);
   void receive();
+  bool getHostStatus(void);
   // not implemented: RSD, OSD, POS, VTG, HRM, VDO, HBT
   enum NMEAMessage { RMC=0, GPROT, GLL, RSA, RPM, VHW, VTG, GPHDT, HEROT, TTM, GGA, ZDA, DTM, HEHDT, WIMWV, WIMWR, TIROT, DPT, XDR};
 
@@ -69,7 +70,7 @@ private:
   asio::io_service io_service;
   asio::ip::udp::endpoint receiver_endpoint;
   asio::ip::udp::socket* socket;
-
+  bool mIsHostAlive;
   irr::u32 terminateNmeaReceive;
   std::mutex terminateNmeaReceiveMutex;
   std::vector<std::string> receivedNmeaMessages;

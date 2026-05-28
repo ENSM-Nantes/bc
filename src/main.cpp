@@ -898,25 +898,32 @@ int main(int argc, char ** argv)
 
        { IPROF("NMEA");
 
-	if (!nmeaUDPListenPortConning.empty()) nmeaConning.receive();
-	if (!nmeaComPortConning.empty() || (!nmeaUDPAddrConning.empty() && !nmeaUDPPortConning.empty())) nmeaConning.updateNMEA(model.getTime());
-	if (!nmeaComPortConning.empty())  nmeaConning.sendNMEASerial();
-	if (!nmeaUDPAddrConning.empty() && !nmeaUDPPortConning.empty()) nmeaConning.sendNMEAUDP();
-	nmeaConning.clearQueue();   
+	 if(nmeaConning.getHostStatus())
+	   {
+	     if (!nmeaUDPListenPortConning.empty()) nmeaConning.receive();
+	     if (!nmeaComPortConning.empty() || (!nmeaUDPAddrConning.empty() && !nmeaUDPPortConning.empty())) nmeaConning.updateNMEA(model.getTime());
+	     if (!nmeaComPortConning.empty())  nmeaConning.sendNMEASerial();
+	     if (!nmeaUDPAddrConning.empty() && !nmeaUDPPortConning.empty()) nmeaConning.sendNMEAUDP();
+	     nmeaConning.clearQueue();   
+	   }
 
-	if (!nmeaUDPListenPortOpCpn.empty()) nmeaOpCpn.receive();
-	if (!nmeaComPortOpCpn.empty() || (!nmeaUDPAddrOpCpn.empty() && !nmeaUDPPortOpCpn.empty())) nmeaOpCpn.updateNMEA(model.getTime());
-	if (!nmeaComPortOpCpn.empty())  nmeaOpCpn.sendNMEASerial();
-	if (!nmeaUDPAddrOpCpn.empty() && !nmeaUDPPortOpCpn.empty()) nmeaOpCpn.sendNMEAUDP();
-	nmeaOpCpn.clearQueue();
+	 if(nmeaOpCpn.getHostStatus())
+	   { 
+	     if (!nmeaUDPListenPortOpCpn.empty()) nmeaOpCpn.receive();
+	     if (!nmeaComPortOpCpn.empty() || (!nmeaUDPAddrOpCpn.empty() && !nmeaUDPPortOpCpn.empty())) nmeaOpCpn.updateNMEA(model.getTime());
+	     if (!nmeaComPortOpCpn.empty())  nmeaOpCpn.sendNMEASerial();
+	     if (!nmeaUDPAddrOpCpn.empty() && !nmeaUDPPortOpCpn.empty()) nmeaOpCpn.sendNMEAUDP();
+	     nmeaOpCpn.clearQueue();
+	   }
 
-	
-	if (!nmeaUDPListenPortVDR.empty()) nmeaVDR.receive();
-	if (!nmeaComPortVDR.empty() || (!nmeaUDPAddrVDR.empty() && !nmeaUDPPortVDR.empty())) nmeaVDR.updateNMEA(model.getTime());
-	if (!nmeaComPortVDR.empty())  nmeaVDR.sendNMEASerial();
-	if (!nmeaUDPAddrVDR.empty() && !nmeaUDPPortVDR.empty()) nmeaVDR.sendNMEAUDP();
-	nmeaVDR.clearQueue();
-
+	 if(nmeaVDR.getHostStatus())
+	   {	 
+	     if (!nmeaUDPListenPortVDR.empty()) nmeaVDR.receive();
+	     if (!nmeaComPortVDR.empty() || (!nmeaUDPAddrVDR.empty() && !nmeaUDPPortVDR.empty())) nmeaVDR.updateNMEA(model.getTime());
+	     if (!nmeaComPortVDR.empty())  nmeaVDR.sendNMEASerial();
+	     if (!nmeaUDPAddrVDR.empty() && !nmeaUDPPortVDR.empty()) nmeaVDR.sendNMEAUDP();
+	     nmeaVDR.clearQueue();
+	   }
       }
       { IPROF("Render setup");
         driver->setViewPort(irr::core::rect<irr::s32>(0,0,graphicsWidth,graphicsHeight)); //Full screen before beginScene

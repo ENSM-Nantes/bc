@@ -56,6 +56,16 @@ void NMEA::Init(std::string serialPortName, irr::u32 serialBaudrate, std::string
       std::cout << "NMEA::Error : " << e.what() << std::endl;
     }
 
+  asio::error_code ec;
+
+  size_t n = socket->send_to(asio::buffer("ping"), receiver_endpoint, 0, ec);
+
+  if (ec) {
+    mIsHostAlive=false;
+  }
+  else
+    mIsHostAlive=true;
+  
   // set up listening thread
   terminateNmeaReceive = 0;
   receivedNmeaMessages = std::vector<std::string>();
@@ -719,4 +729,10 @@ std::string NMEA::addChecksum(std::string messageIn)
     }
   snprintf(checksumBuffer,sizeof(checksumBuffer),"%02X",checksum);
   return messageIn + "*" + std::string(checksumBuffer) + "\r\n";
+}
+
+
+bool NMEA::getHostStatus(void)
+{
+  return mIsHostAlive;
 }

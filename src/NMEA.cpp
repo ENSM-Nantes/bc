@@ -58,7 +58,7 @@ void NMEA::Init(std::string serialPortName, irr::u32 serialBaudrate, std::string
 
   asio::ip::tcp::socket sock(io_service);
   asio::error_code ec;
-  sock.connect(asio::ip::tcp::endpoint(receiver_endpoint.address(), 80),ec);
+  sock.connect(asio::ip::tcp::endpoint(receiver_endpoint.address(), 22),ec);
   
   if (ec) {
     mIsHostAlive=false;

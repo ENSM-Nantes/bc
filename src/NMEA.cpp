@@ -60,7 +60,7 @@ void NMEA::Init(std::string serialPortName, irr::u32 serialBaudrate, std::string
   asio::error_code ec;
   sock.connect(asio::ip::tcp::endpoint(receiver_endpoint.address(), 22),ec);
   
-  if (ec) {
+  if (ec || receiver_endpoint.address().to_v4().to_string() == "0.0.0.0") {
     mIsHostAlive=false;
     std::cout << "NMEA::HostALive : " << receiver_endpoint.address() << " : " << mIsHostAlive << std::endl;
     return;

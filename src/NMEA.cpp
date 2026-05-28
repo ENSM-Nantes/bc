@@ -45,16 +45,7 @@ void NMEA::Init(std::string serialPortName, irr::u32 serialBaudrate, std::string
   lastSendEvent = 0;
   currentMessageType = 0;
 
-  try
-    {
-      asio::ip::udp::resolver resolver(io_service);
-      asio::ip::udp::resolver::query query(asio::ip::udp::v4(), udpHostname, udpPortName);
-      receiver_endpoint = *resolver.resolve(query);
-    }
-  catch (std::exception& e)
-    {
-      std::cout << "NMEA::Error : " << e.what() << std::endl;
-    }
+  receiver_endpoint = asio::ip::udp::endpoint(asio::ip::make_address(udpHostname), std::stoi(udpPortName));
 
   asio::ip::tcp::socket sock(io_service);
   asio::error_code ec;

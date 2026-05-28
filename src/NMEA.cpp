@@ -138,7 +138,20 @@ void NMEA::ReceiveThread(std::string udpListenPortName)
       irr::u16 port = std::stoi(udpListenPortName);
       rcvSocket.open(asio::ip::udp::v4());
       rcvSocket.bind(asio::ip::udp::endpoint(asio::ip::udp::v4(), port));
-      std::cout << "Listening for NMEA messages on " << rcvSocket.local_endpoint().address().to_string() << ":" << port << std::endl;
+
+      std::cout << "Listening on port " << port << std::endl;
+
+      char data[1024];
+      asio::ip::udp::endpoint sender;
+
+      while (true) {
+        size_t len = rcvSocket.receive_from(asio::buffer(data), sender);
+
+        std::cout << "Received " << len
+                  << " bytes from "
+                  << sender.address().to_string()
+                  << std::endl;
+      }
     } catch (std::exception e) 
     {
       std::cerr << e.what() << ". In NMEA::ReceiveThread()" << std::endl;

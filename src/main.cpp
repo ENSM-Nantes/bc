@@ -951,7 +951,6 @@ int main(int argc, char ** argv)
 	}
 
 	//       renderRadarProfile.toc();
-
 	//       renderProfile.tic();
       }{ IPROF("Render");
 

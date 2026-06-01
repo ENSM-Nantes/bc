@@ -28,6 +28,8 @@
 #include "Wind.hpp"
 #include "RadarCalculation.hpp"
 
+#define SENSOR_REPORT_INTERVAL (1000) //ms
+
 class NMEA {
 
 public:
@@ -35,7 +37,7 @@ public:
   NMEA();
   NMEA(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *aWind, RadarCalculation *aRadarCalc);
   ~NMEA();
-  void Init(std::string serialPortName, irr::u32 serialBaudrate, std::string udpHostname, std::string udpPortName, std::string udpListenPortName);
+  void Init(unsigned int aStartTime, std::string serialPortName, irr::u32 serialBaudrate, std::string udpHostname, std::string udpPortName, std::string udpListenPortName);
   void updateNMEA(sTime& aTime);
   void sendNMEASerial();
   void sendNMEAUDP();
@@ -58,8 +60,7 @@ private:
   RadarCalculation *mRadarCalc;
   
   serial::Serial mySerialPort;
-  irr::u32 lastSendEvent; // when was the last time an NMEA message was sent
-  static const irr::u32 sensorReportInterval = 100; // milliseconds between sensor reports
+  unsigned int mLastSendEvent; 
   std::vector<std::string> messageQueue;
   std::string messageToSend;
   std::string addChecksum(std::string messageIn);

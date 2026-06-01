@@ -704,9 +704,9 @@ int main(int argc, char ** argv)
   NMEA nmeaOpCpn;
   NMEA nmeaVDR;
 
-  nmeaConning.Init(nmeaComPortConning, nmeaBaudrateConning, nmeaUDPAddrConning, nmeaUDPPortConning, nmeaUDPListenPortConning);
-  nmeaOpCpn.Init(nmeaComPortOpCpn, nmeaBaudrateOpCpn, nmeaUDPAddrOpCpn, nmeaUDPPortOpCpn, nmeaUDPListenPortOpCpn);
-  nmeaVDR.Init(nmeaComPortVDR, nmeaBaudrateVDR, nmeaUDPAddrVDR, nmeaUDPPortVDR, nmeaUDPListenPortVDR);
+  nmeaConning.Init(device->getTimer()->getRealTime(), nmeaComPortConning, nmeaBaudrateConning, nmeaUDPAddrConning, nmeaUDPPortConning, nmeaUDPListenPortConning);
+  nmeaOpCpn.Init(device->getTimer()->getRealTime(), nmeaComPortOpCpn, nmeaBaudrateOpCpn, nmeaUDPAddrOpCpn, nmeaUDPPortOpCpn, nmeaUDPListenPortOpCpn);
+  nmeaVDR.Init(device->getTimer()->getRealTime(), nmeaComPortVDR, nmeaBaudrateVDR, nmeaUDPAddrVDR, nmeaUDPPortVDR, nmeaUDPListenPortVDR);
   
   Network network;
   network.Connect(enetSrvAddr, enetSrvPort, mode);

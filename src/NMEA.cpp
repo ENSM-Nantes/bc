@@ -49,12 +49,12 @@ void NMEA::SetModelData(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTe
   mRadarCalc = aRadarCalc;
 }
 
-void NMEA::Init(std::string serialPortName, irr::u32 serialBaudrate, std::string udpHostname, std::string udpPortName, std::string udpListenPortName)
+void NMEA::Init(unsigned int aStartTime, std::string serialPortName, irr::u32 serialBaudrate, std::string udpHostname, std::string udpPortName, std::string udpListenPortName)
 {
   messageQueue = {};
-  lastSendEvent = 0;
   currentMessageType = 0;
-
+  mLastSendEvent = aStartTime;
+  
   try
     {
       asio::ip::udp::resolver resolver(io_service);
@@ -361,10 +361,7 @@ void NMEA::receive()
 
 void NMEA::updateNMEA(sTime& aTime)
 {
-  char messageBuffer[maxSentenceChars];
-  for (int i = 0; i<maxSentenceChars; i++) { //Avoid error about variable size object initialization
-    messageBuffer[i]=0;
-  }
+  char messageBuffer[maxSentenceChars] = {0};
   
   irr::u32 now = aTime.currentTime;
 
@@ -406,7 +403,7 @@ void NMEA::updateNMEA(sTime& aTime)
 
   // if sufficient time elapsed since the last sensor report was sent,
   // construct and send sentence(s) for the next sensor
-  if (now - lastSendEvent < sensorReportInterval) {
+  if (now - mLastSendEvent < SENSOR_REPORT_INTERVAL) {
     return;
   }
 
@@ -692,7 +689,7 @@ void NMEA::updateNMEA(sTime& aTime)
     break;
   }
 
-  lastSendEvent = now;
+  mLastSendEvent = now;
 
   currentMessageType += 1;
   currentMessageType %= maxMessages;

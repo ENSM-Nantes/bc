@@ -20,18 +20,14 @@
 #include <string>
 #include <vector>
 
-class AIS {
-    public: 
-  static std::tuple<std::string, int> generateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int);
-        static std::vector<unsigned int> getReadyShips(void *aOtherShips, unsigned int);
+class AIS
+{
+public: 
+  static std::string GenerateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int);
+  static std::vector<unsigned int> GetReadyShips(void *aOtherShips, unsigned int);
 
-    private:
-        static const int mmsis[];
-        static std::vector<unsigned int> lastUpdates; 
-        static int currentShip;
-        static bool initialized;
-        static std::vector<bool> classAReport;
-        static std::string bitsToArmoredASCII(std::vector<bool>);
+private:
+  static std::string BitsToArmoredASCII(std::vector<bool>);
 };
 
 #endif

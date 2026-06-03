@@ -22,16 +22,11 @@
 #include "Terrain.hpp"
 #include <iostream>
 
-int AIS::currentShip = 0;
-bool AIS::initialized = false;
-std::vector<unsigned int> AIS::lastUpdates;
-std::vector<bool> AIS::classAReport(168, 0);
-// arbitrary MMSIs from European countries to assign to otherShips
-constexpr const int AIS::mmsis[] = {211032189, 226155323, 232984311, 224513921, 245193002, 247829914};
-
-std::vector<unsigned int> AIS::getReadyShips(void *aOtherShips, unsigned int now)
+std::vector<unsigned int> AIS::GetReadyShips(void *aOtherShips, unsigned int now)
 {
-
+  static bool initialized = false;
+  static std::vector<unsigned int> lastUpdates;
+  
   OtherShips *pOtherShips = (OtherShips*)aOtherShips;
   
   if (!initialized) {
@@ -65,38 +60,15 @@ std::vector<unsigned int> AIS::getReadyShips(void *aOtherShips, unsigned int now
   return readyShips;
 }
 
-std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int ship)
-{  
+std::string AIS::GenerateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int ship)
+{
+  std::vector<bool> classAReport(168, 0);
   OtherShips *pOtherShips = (OtherShips*)aOtherShips;
   Terrain *pTerrain = (Terrain*)aTerrain;
   bool done = false;
   unsigned int heading = (unsigned int) (pOtherShips->getHeading(ship) * 180/PI);
   unsigned int mmsi = pOtherShips->getMMSI(ship);
-  
-  if (mmsi == 0) {
-    // mmsi is not set, give the ship a vanity mmsi
-    mmsi = mmsis[ship % (sizeof(mmsis) / sizeof(mmsis[0]))] + (ship % 10000);
-    // keep incrementing mmsi until it reaches a value that has not been allocated
-    // e.g. via scenario config
-    bool collision = true;
-    unsigned int ships = pOtherShips->getNumber();
-    while (collision) {
-      collision = false;
-      for (int i=0; i < ships; i++) {
-	if (pOtherShips->getMMSI(i) == mmsi) {
-	  collision = true;
-	  break;
-	}
-      }
-      if (collision) mmsi++;
-    }
-    pOtherShips->setMMSI(ship, mmsi);
-  }
-
-  // AIS speed over ground is in 0.1-knot increments, capped to 102.2 knots
-  // getOtherShipSpeed returns speed in m/s, multiply by 1.9438445 to get knots
   unsigned int speed = std::min<int>((int) 10.0f * MPS_TO_KTS * pOtherShips->getSpeed(ship), 1022);
-
   float posX=0, posZ=0;
 
   posX = pOtherShips->getPosition(ship).X + aOffsetPosX;
@@ -203,16 +175,16 @@ std::tuple<std::string, int> AIS::generateClassAReport(void *aOtherShips, float 
   // 149-167 radio status, 19 bit field, unsigned integer for radio diagnostic, leave as 0 for now
     
   // convert bit sequence to armored ASCII
-  std::string payload = bitsToArmoredASCII(classAReport);
+  std::string payload = BitsToArmoredASCII(classAReport);
 
   // number of bits we need to append to get the payload length to a multiple of 6
   // always 0 since we always generate a class A Report of length 168
   // int fillBits = (6 - (168 % 6)) % 6;
 
-  return std::make_tuple(payload, 0);
+  return payload;
 }
 
-std::string AIS::bitsToArmoredASCII(std::vector<bool> bits) {
+std::string AIS::BitsToArmoredASCII(std::vector<bool> bits) {
   // must be called with padded payload!
   assert(bits.size() % 6 == 0);
 

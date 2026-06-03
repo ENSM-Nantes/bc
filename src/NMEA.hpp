@@ -28,7 +28,29 @@
 #include "Wind.hpp"
 #include "RadarCalculation.hpp"
 
-#define SENSOR_REPORT_INTERVAL (1000) //ms
+#define SENSOR_REPORT_INTERVAL (300) //ms
+#define MAX_NMEA_SENTENCE_CHARS (81) 
+
+enum eNMEAMessage{
+  RMC=0,
+  GLL,
+  RSA,
+  RPM,
+  VHW,
+  VTG,
+  TTM,
+  GGA,
+  ZDA,
+  DTM,
+  HEHDT,
+  WIMWV,
+  WIMWR,
+  TIROT,
+  DPT,
+  XDR,
+  MSG_MAX
+};
+
 
 class NMEA {
 
@@ -38,42 +60,38 @@ public:
   NMEA(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *aWind, RadarCalculation *aRadarCalc);
   ~NMEA();
   void Init(unsigned int aStartTime, std::string serialPortName, irr::u32 serialBaudrate, std::string udpHostname, std::string udpPortName, std::string udpListenPortName);
-  void updateNMEA(sTime& aTime);
-  void sendNMEASerial();
-  void sendNMEAUDP();
-  void clearQueue();
+  void Update(sTime& aTime);
+  void SendSerial(void);
+  void SendUdp(void);
+  void ClearQueue(void);
   void ReceiveThread(std::string udpListenPortName);
-  void receive();
-  bool getHostStatus(void);
+  void Receive(void);
+  bool GetHostStatus(void);
   void SetModelData(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *aWind, RadarCalculation *aRadarCalc);
-  // not implemented: RSD, OSD, POS, VTG, HRM, VDO, HBT
-  enum NMEAMessage { RMC=0, GPROT, GLL, RSA, RPM, VHW, VTG, GPHDT, HEROT, TTM, GGA, ZDA, DTM, HEHDT, WIMWV, WIMWR, TIROT, DPT, XDR};
 
 
 private:
-  Autopilot mAutopilot;
 
+  std::string AddChecksum(std::string messageIn);
+  
+  Autopilot mAutopilot;
   OwnShip *mOwnShip;
   OtherShips *mOtherShips;
   Terrain *mTerrain;
   Wind *mWind;
   RadarCalculation *mRadarCalc;
   
-  serial::Serial mySerialPort;
+  serial::Serial mMySerialPort;
   unsigned int mLastSendEvent; 
-  std::vector<std::string> messageQueue;
-  std::string messageToSend;
-  std::string addChecksum(std::string messageIn);
-  const int maxMessages = (XDR - RMC) + 1; // how many messages are defined
-  static const int maxSentenceChars = 79+1+1; // iaw EN 61162-1:2011 + start char + null termination
-  const char northing[2] = {'N', 'S'};
-  const char easting[2] = {'E', 'W'};
-  int currentMessageType; // sequentially send different sentences
-  asio::io_service io_service;
-  asio::ip::udp::endpoint receiver_endpoint;
-  asio::ip::udp::socket* socket;
+  std::vector<std::string> mMessageQueue;
+  int mCurrentMessageType; 
+
   bool mIsHostAlive;
-  irr::u32 terminateNmeaReceive;
+  asio::io_service mIoService;
+  asio::ip::udp::endpoint mReceiverEndpoint;
+  asio::ip::udp::socket* mSocket;
+  
+  unsigned int terminateNmeaReceive;
   std::mutex terminateNmeaReceiveMutex;
   std::vector<std::string> receivedNmeaMessages;
   std::mutex receivedNmeaMessagesMutex;

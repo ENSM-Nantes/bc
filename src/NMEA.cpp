@@ -51,38 +51,38 @@ void NMEA::SetModelData(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTe
 
 void NMEA::Init(unsigned int aStartTime, std::string serialPortName, irr::u32 serialBaudrate, std::string udpHostname, std::string udpPortName, std::string udpListenPortName)
 {
-  messageQueue = {};
-  currentMessageType = 0;
+  mMessageQueue = {};
+  mCurrentMessageType = 0;
   mLastSendEvent = aStartTime;
   
   try
     {
-      asio::ip::udp::resolver resolver(io_service);
+      asio::ip::udp::resolver resolver(mIoService);
       asio::ip::udp::resolver::query query(asio::ip::udp::v4(), udpHostname, udpPortName);
-      receiver_endpoint = *resolver.resolve(query);
+      mReceiverEndpoint = *resolver.resolve(query);
     }
   catch (std::exception& e)
     {
       std::cout << "NMEA::Error : " << e.what() << std::endl;
     }
 
-  asio::ip::tcp::socket sock(io_service);
+  asio::ip::tcp::socket sock(mIoService);
   asio::error_code ec;
-  sock.connect(asio::ip::tcp::endpoint(receiver_endpoint.address(), 22),ec);
+  sock.connect(asio::ip::tcp::endpoint(mReceiverEndpoint.address(), 22),ec);
   
-  if (ec || receiver_endpoint.address().to_v4().to_string() == "0.0.0.0") {
+  if (ec || mReceiverEndpoint.address().to_v4().to_string() == "0.0.0.0") {
     mIsHostAlive=false;
-    std::cout << "NMEA::HostALive : " << receiver_endpoint.address() << " : " << mIsHostAlive << std::endl;
+    std::cout << "NMEA::HostALive : " << mReceiverEndpoint.address() << " : " << mIsHostAlive << std::endl;
     return;
   }
   else
     {
       mIsHostAlive=true;
-      std::cout << "NMEA::HostALive : " << receiver_endpoint.address() << " : "  << mIsHostAlive << std::endl;
+      std::cout << "NMEA::HostALive : " << mReceiverEndpoint.address() << " : "  << mIsHostAlive << std::endl;
     }
 
   // create send socket
-  socket = new asio::ip::udp::socket(io_service);
+  mSocket = new asio::ip::udp::socket(mIoService);
 
   // set up listening thread
   terminateNmeaReceive = 0;
@@ -98,11 +98,11 @@ void NMEA::Init(unsigned int aStartTime, std::string serialPortName, irr::u32 se
         {
 	  serial::Timeout timeout = serial::Timeout::simpleTimeout(50);
 
-	  mySerialPort.setPort(serialPortName);
-	  mySerialPort.setBaudrate(serialBaudrate);
-	  mySerialPort.setTimeout(timeout);
+	  mMySerialPort.setPort(serialPortName);
+	  mMySerialPort.setBaudrate(serialBaudrate);
+	  mMySerialPort.setTimeout(timeout);
 
-	  mySerialPort.open();
+	  mMySerialPort.open();
 	  std::cout << "Serial port opened." << std::endl;
 
         }
@@ -118,11 +118,11 @@ NMEA::~NMEA()
 {
 
   //Shut down serial port here
-  if (mySerialPort.isOpen())
+  if (mMySerialPort.isOpen())
     {
       try
         {
-	  mySerialPort.close();
+	  mMySerialPort.close();
         }
       catch (std::exception const& e)
         {
@@ -209,7 +209,7 @@ void NMEA::ReceiveThread(std::string udpListenPortName)
     }
 }
 
-void NMEA::receive()
+void NMEA::Receive(void)
 {
   // check the receivedNmeaMessages shared vector for new messages
   // if it is non-empty, parse the messages
@@ -359,53 +359,34 @@ void NMEA::receive()
 }
 
 
-void NMEA::updateNMEA(sTime& aTime)
+void NMEA::Update(sTime& aTime)
 {
-  char messageBuffer[maxSentenceChars] = {0};
+  char messageBuffer[MAX_NMEA_SENTENCE_CHARS] = {0};
+  bool done = false;
+  std::string data = "", messageToSend = "";
+  unsigned int now = aTime.currentTime;
+
+  if(mOtherShips->getNumber() >= 0)
+    { 
+      std::vector<unsigned int> readyShips = AIS::GetReadyShips(mOtherShips, now);
+      for(auto ship : readyShips)
+	{
+	  //Generate Class A : Message 1
+	  data = AIS::GenerateClassAReport(mOtherShips, mOwnShip->getOffsetPos().Z, mOwnShip->getOffsetPos().X, mTerrain, aTime.absoluteTime, ship);
+	  snprintf(messageBuffer, MAX_NMEA_SENTENCE_CHARS,"!AIVDM,%d,%d,,%c,%s,%d", 1, 1, 'B', data.c_str(), 0);
   
-  irr::u32 now = aTime.currentTime;
-
-  // AIS messages are scheduled based on amount of otherShips and their speed
-  // check each frame if a new report should be sent
-  if (mOtherShips->getNumber() >= 0) { // only consider AIS if there are other ships
-    std::string messageToSend = "";
-    // which ships are ready to send?
-    std::vector<irr::u32> readyShips = AIS::getReadyShips(mOtherShips, now);
-    for (auto ship : readyShips) {
-      // 8.3.90 AIS VHF data-link message (6-bit, iaw ITU-R M.1371)
-      // Position Report Class A
-      int fragments = 1;
-      int fragmentNumber = 1;
-      char radioChannel = 'B';
-      std::string data;
-      int fillBits;
-      bool done;
-      std::tie(data, fillBits) = AIS::generateClassAReport(mOtherShips, mOwnShip->getOffsetPos().Z, mOwnShip->getOffsetPos().X, mTerrain, aTime.absoluteTime, ship);
-
-      snprintf(messageBuffer,maxSentenceChars,"!AIVDM,%d,%d,,%c,%s,%d",
-	       fragments,
-	       fragmentNumber,
-	       radioChannel,
-	       data.c_str(),
-	       fillBits
-	       );
-      messageToSend.append(addChecksum(std::string(messageBuffer)));
-      if (messageToSend.length() > 800) { // ensure we don't build too big of a UDP packet
-	messageQueue.push_back(messageToSend);
-	messageToSend = "";
-      }
+	  messageToSend.append(AddChecksum(std::string(messageBuffer)));
+	  mMessageQueue.push_back(messageToSend);
+	  messageToSend.clear();
+	}
+      
+      readyShips.clear();
     }
-    readyShips.clear();
-    if (messageToSend != "") {
-      messageQueue.push_back(messageToSend);
-    }
-  }
 
-  // if sufficient time elapsed since the last sensor report was sent,
-  // construct and send sentence(s) for the next sensor
-  if (now - mLastSendEvent < SENSOR_REPORT_INTERVAL) {
-    return;
-  }
+  if(now - mLastSendEvent < SENSOR_REPORT_INTERVAL)
+    {
+      return;
+    }
 
   std::string dateTimeString = Utilities::ttos(aTime.absoluteTime);
 
@@ -462,15 +443,20 @@ void NMEA::updateNMEA(sTime& aTime)
 
   int signRoll = 0;
   if (mOwnShip->getHull().getInvertRoll())
-      signRoll = -1;
+    signRoll = -1;
   else
-      signRoll = 1;
+    signRoll = 1;
 
   roll = signRoll*roll;
     
-  char eastWest = easting[lon < 0];
-  char northSouth = northing[lat < 0];
+  char eastWest = 0, northSouth = 0;
 
+  if(lat < 0) northSouth = 'S';
+  else northSouth = 'N';
+
+  if(lon < 0) eastWest = 'W';
+  else eastWest = 'E';
+  
   geomag::Vector posMagnetic = geomag::geodetic2ecef(lat, lon, 0);
   geomag::Vector magField = geomag::GeoMag(2026.4, posMagnetic, geomag::WMM2025);
   geomag::Elements outMagn= geomag::magField2Elements(magField, lat, lon);
@@ -494,48 +480,48 @@ void NMEA::updateNMEA(sTime& aTime)
   latSpeedUp = latSpeedUp / 0.51444;
   latSpeedDown = latSpeedDown / 0.51444;
 
-  switch (currentMessageType) { // EN 61162-1:2011
+  switch (mCurrentMessageType) { // EN 61162-1:2011
   case RMC: // 8.3.69 Recommended minimum navigation information
     {
-      snprintf(messageBuffer,maxSentenceChars,"$GPRMC,%s%s%s.00,A,%02u%06.3f,%c,%03u%06.3f,%c,%.1f,%.1f,%s%s%s,,,A,S",hour,min,sec,latDegrees,latMinutes,northSouth,lonDegrees,lonMinutes,eastWest,sog,cog,year,mon,mday); //FIXME: SOG -> knots, COG->degrees
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$GPRMC,%s%s%s.00,A,%02u%06.3f,%c,%03u%06.3f,%c,%.1f,%.1f,%s%s%s,,,A,S",hour,min,sec,latDegrees,latMinutes,northSouth,lonDegrees,lonMinutes,eastWest,sog,cog,year,mon,mday); //FIXME: SOG -> knots, COG->degrees
+      mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }
   case GLL: // 8.3.36 Geographic position – Latitude/longitude
     {
-      snprintf(messageBuffer,maxSentenceChars,"$GPGLL,%02u%06.3f,%c,%03u%06.3f,%c,%s%s%s.00,A,A",latDegrees,latMinutes,northSouth,lonDegrees,lonMinutes,eastWest,hour,min,sec);
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$GPGLL,%02u%06.3f,%c,%03u%06.3f,%c,%s%s%s.00,A,A",latDegrees,latMinutes,northSouth,lonDegrees,lonMinutes,eastWest,hour,min,sec);
+      mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }
   case GGA: // 8.3.35 Global positioning system (GPS) fix data
     {
-      snprintf(messageBuffer,maxSentenceChars,"$GPGGA,%s%s%s.00,%02u%06.3f,%c,%03u%06.3f,%c,1,12,0.0,0.0,M,0.0,M,,",hour,min,sec,latDegrees,latMinutes,northSouth,lonDegrees,lonMinutes,eastWest); //Hardcoded NMEA Quality 8, Satellites 8, HDOP 0.9
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$GPGGA,%s%s%s.00,%02u%06.3f,%c,%03u%06.3f,%c,1,12,0.0,0.0,M,0.0,M,,",hour,min,sec,latDegrees,latMinutes,northSouth,lonDegrees,lonMinutes,eastWest); //Hardcoded NMEA Quality 8, Satellites 8, HDOP 0.9
+      mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }
   case RSA: // 8.3.73 Rudder sensor angle
     {    
-      snprintf(messageBuffer,maxSentenceChars,"$IIRSA,%.1f,A,%.1f,A,V",rudderAngleS, rudderAngleP);
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$IIRSA,%.1f,A,%.1f,A,V",rudderAngleS, rudderAngleP);
+      mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }
   case RPM: // 8.3.72 Revolutions
     {
       std::string messageToSend = "";
       
-      snprintf(messageBuffer, maxSentenceChars, "$IIRPM,S,%d,%.1f,%.1f,A", 1, engineRPM[0], mOwnShip->getEngine("port").getRpmMax()/60); // 'S' is for shaft, 
-      messageToSend.append(addChecksum(std::string(messageBuffer)));
+      snprintf(messageBuffer, MAX_NMEA_SENTENCE_CHARS, "$IIRPM,S,%d,%.1f,%.1f,A", 1, engineRPM[0], mOwnShip->getEngine("port").getRpmMax()/60); // 'S' is for shaft, 
+      messageToSend.append(AddChecksum(std::string(messageBuffer)));
       
-      messageQueue.push_back(messageToSend);
+      mMessageQueue.push_back(messageToSend);
       
       messageToSend.clear();
 
       if(mOwnShip->getNumberProp() > 1)
 	{
-	  snprintf(messageBuffer, maxSentenceChars, "$IIRPM,S,%d,%.1f,%.1f,A", 2, engineRPM[1], mOwnShip->getEngine("starboard").getRpmMax()/60); // 'S' is for shaft, 
-	  messageToSend.append(addChecksum(std::string(messageBuffer)));
+	  snprintf(messageBuffer, MAX_NMEA_SENTENCE_CHARS, "$IIRPM,S,%d,%.1f,%.1f,A", 2, engineRPM[1], mOwnShip->getEngine("starboard").getRpmMax()/60); // 'S' is for shaft, 
+	  messageToSend.append(AddChecksum(std::string(messageBuffer)));
 
-	  messageQueue.push_back(messageToSend);
+	  mMessageQueue.push_back(messageToSend);
 	}
       break;
     }
@@ -547,7 +533,7 @@ void NMEA::updateNMEA(sTime& aTime)
 	for (int i=0; i<mRadarCalc->getARPATracksSize(); i++) {
 	  ARPAContact contact = mRadarCalc->getARPAContactFromTrackIndex(i);
 	  ARPAEstimatedState state = contact.estimate;
-	  snprintf(messageBuffer,maxSentenceChars,"$RATTM,%02d,%.1f,%.1f,T,%.1f,%.1f,T,%.1f,%.1f,N,TGT%02d,T,,%s.00,A",
+	  snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$RATTM,%02d,%.1f,%.1f,T,%.1f,%.1f,T,%.1f,%.1f,N,TGT%02d,T,,%s.00,A",
 		   state.displayID - 1,
 		   state.range,
 		   state.bearing,
@@ -558,179 +544,118 @@ void NMEA::updateNMEA(sTime& aTime)
 		   state.displayID - 1,
 		   timeString.c_str()
 		   );
-	  messageToSend.append(addChecksum(std::string(messageBuffer)));
+	  messageToSend.append(AddChecksum(std::string(messageBuffer)));
 	}
-	if (messageToSend != "") messageQueue.push_back(messageToSend);
+	if (messageToSend != "") mMessageQueue.push_back(messageToSend);
       }
       break;
     }
-    /*
-      case RSD: // 8.3.74 Radar system data
-      snprintf(messageBuffer,maxSentenceChars,"$RARSD,");
-      messageToSend.append(addChecksum(std::string(messageBuffer)));
-      break;
-    */
   case ZDA: // 8.3.106 Time and date
     {
-      snprintf(messageBuffer,maxSentenceChars,"$RAZDA,%s%s%s.00,%s,%s,%s,00,00",hour,min,sec,mday,mon,year);
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$RAZDA,%s%s%s.00,%s,%s,%s,00,00",hour,min,sec,mday,mon,year);
+      mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }
-    /*
-      case OSD: // 8.3.64 Own ship data
-      snprintf(messageBuffer,maxSentenceChars,"$RAOSD,");
-      messageToSend.append(addChecksum(std::string(messageBuffer)));
-      break;
-      /*
-      /*
-      case POS: // 8.3.65 Device position and ship dimensions report or configuration command
-      snprintf(messageBuffer,maxSentenceChars,"$INPOS,");
-      messageToSend.append(addChecksum(std::string(messageBuffer)));
-      break;
-    */
   case DTM: // 8.3.27 Datum reference
     {
-      snprintf(messageBuffer,maxSentenceChars,"$RADTM,W84,,,,,,,");
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$RADTM,W84,,,,,,,");
+      mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }
   case HEHDT: // 8.3.44 Heading true
     {
-      snprintf(messageBuffer,maxSentenceChars,"$HEHDT,%.1f,T",hdg); // T = true north
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
-      break;
-    }
-  case GPHDT: // 8.3.44 Heading true
-    {
-      snprintf(messageBuffer,maxSentenceChars,"$GPHDT,%.1f,T",hdg); // T = true north
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$HEHDT,%.1f,T",hdg); // T = true north
+      mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }
   case DPT: //Depth
     {
-      snprintf(messageBuffer,maxSentenceChars,"$SDDPT,%.1f,,",depth); //Depth, Offset from transducer: Positive - distance from transducer to water line, or Negative - distance from transducer to keel, max depth measurable
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$SDDPT,%.1f,,",depth); //Depth, Offset from transducer: Positive - distance from transducer to water line, or Negative - distance from transducer to keel, max depth measurable
+      mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }
   case TIROT: // 8.3.71 Rate of turn
     {
-      snprintf(messageBuffer,maxSentenceChars,"$TIROT,%.1f,A",rot);  // A = data valid
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
-      break;
-    }
-  case GPROT: // 8.3.71 Rate of turn
-    {
-      snprintf(messageBuffer,maxSentenceChars,"$GPROT,%.1f,A",rot);  // A = data valid
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
-      break;
-    }
-  case HEROT: // 8.3.71 Rate of turn
-    {
-      snprintf(messageBuffer,maxSentenceChars,"$HEROT,%.1f,A",rot);  // A = data valid
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$TIROT,%.1f,A",rot);  // A = data valid
+      mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }
   case WIMWV:
     {
-      snprintf(messageBuffer,maxSentenceChars,"$IIMWV,%.1f,T,%.1f,N,A", windDirection, windSpeed);
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$IIMWV,%.1f,T,%.1f,N,A", windDirection, windSpeed);
+      mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }
   case WIMWR:
     {
-      snprintf(messageBuffer, maxSentenceChars, "$IIMWV,%.1f,R,%.1f,N,A", apparentWindDir, apparentWindSpd);
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
+      snprintf(messageBuffer, MAX_NMEA_SENTENCE_CHARS, "$IIMWV,%.1f,R,%.1f,N,A", apparentWindDir, apparentWindSpd);
+      mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }
   case VHW:
     {
-      snprintf(messageBuffer,maxSentenceChars,"$VDVHW,0,T,0,M,%.1f,N,0,K",spdWater);
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$VDVHW,0,T,0,M,%.1f,N,0,K",spdWater);
+      mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     } 
   case VTG:
     {
-      snprintf(messageBuffer,maxSentenceChars,"$VDVTG,0,T,%.1f,M,%.1f,N,%.1f,K",hdgMagn, latSpeedUp, latSpeedDown);
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$VDVTG,0,T,%.1f,M,%.1f,N,%.1f,K",hdgMagn, latSpeedUp, latSpeedDown);
+      mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }
   case XDR:
     {
-      snprintf(messageBuffer,maxSentenceChars,"$IIXDR,A,%.1f,D,ROLL,A,%.1f,D,PITCH", roll, pitch);
-      messageQueue.push_back(addChecksum(std::string(messageBuffer)));
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$IIXDR,A,%.1f,D,ROLL,A,%.1f,D,PITCH", roll, pitch);
+      mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }
 
-    /*
-      case VTG: // 8.3.98 Course over ground and ground speed
-      snprintf(messageBuffer,maxSentenceChars,"$VDVTG,");
-      messageToSend.append(addChecksum(std::string(messageBuffer)));
-      break;
-    */
-    /*
-      case HRM: // _, Heel angle, roll period, and roll amplitude
-      snprintf(messageBuffer,maxSentenceChars,"$IIHRM,");
-      messageToSend.append(addChecksum(std::string(messageBuffer)));
-      break;
-    */
-    /*
-      case HBT: // 8.3.42 Heartbeat supervision sentence (for engine room)
-      snprintf(messageBuffer,maxSentenceChars,"$ERHBT,");
-      messageToSend.append(addChecksum(std::string(messageBuffer)));
-      break;
-    */
-    /*
-      case VDO: // 8.3.91 AIS VHF data-link own-vessel report (6-bit, iaw ITU-R M.1371)
-      snprintf(messageBuffer,maxSentenceChars,"!AIVDO,");
-      messageToSend.append(addChecksum(std::string(messageBuffer)));
-      break;
-    */
   default:
     break;
   }
 
   mLastSendEvent = now;
-
-  currentMessageType += 1;
-  currentMessageType %= maxMessages;
+  mCurrentMessageType++;
+  mCurrentMessageType %= MSG_MAX;
 }
 
-void NMEA::clearQueue()
+void NMEA::ClearQueue()
 {
-  messageQueue.clear();
+  mMessageQueue.clear();
 }
 
-void NMEA::sendNMEASerial()
+void NMEA::SendSerial()
 {
-  if (mySerialPort.isOpen())
+  if (mMySerialPort.isOpen())
     {
-      for (auto message : messageQueue)
+      for (auto message : mMessageQueue)
         {
-	  mySerialPort.write(message);
+	  mMySerialPort.write(message);
         }
     }
 }
 
-void NMEA::sendNMEAUDP()
+void NMEA::SendUdp(void)
 {    
-  if (!messageQueue.empty()) {
+  if (!mMessageQueue.empty()) {
     try {
-      if (!socket->is_open()) {
-	socket->open(asio::ip::udp::v4());
-	socket->set_option(asio::socket_base::broadcast(true));
+      if (!mSocket->is_open()) {
+	mSocket->open(asio::ip::udp::v4());
+	mSocket->set_option(asio::socket_base::broadcast(true));
       }
-      for (auto message : messageQueue)
+      for (auto message : mMessageQueue)
 	{
-	  socket->send_to(asio::buffer(message), receiver_endpoint);
+	  mSocket->send_to(asio::buffer(message), mReceiverEndpoint);
 	}
     } catch (std::exception& e)
       {
-      std::cout << "NMEA::Error : " << e.what() << std::endl;
-    }
+	std::cout << "NMEA::Error : " << e.what() << std::endl;
+      }
   }
 }
 
-std::string NMEA::addChecksum(std::string messageIn)
+std::string NMEA::AddChecksum(std::string messageIn)
 {
   char checksumBuffer[3];
   //Get checksum
@@ -745,7 +670,7 @@ std::string NMEA::addChecksum(std::string messageIn)
 }
 
 
-bool NMEA::getHostStatus(void)
+bool NMEA::GetHostStatus(void)
 {
   return mIsHostAlive;
 }

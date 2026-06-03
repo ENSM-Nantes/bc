@@ -75,6 +75,7 @@ Eigen::VectorXd Solver::DiffEq(const Eigen::VectorXd& aVectEtaMu)
 	{
 	  mShip->getSail().ComputeT();
 	  mT += mShip->getSail().getT();
+	  std::cout << "Force sail : " << mT << std::endl;
 	}
     }
 

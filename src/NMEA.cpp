@@ -41,12 +41,15 @@ NMEA::NMEA(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *
 
 void NMEA::SetModelData(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *aWind, RadarCalculation *aRadarCalc)
 {
+  OtherShips *pOtherShips = (OtherShips*)aOtherShips;
+  
   mAutopilot.Init(aOwnShip);
   mOwnShip = aOwnShip;
   mOtherShips = aOtherShips;
   mTerrain = aTerrain;
   mWind = aWind;
   mRadarCalc = aRadarCalc;
+  mAIS.Init(pOtherShips->getNumber());
 }
 
 void NMEA::Init(unsigned int aStartTime, std::string serialPortName, irr::u32 serialBaudrate, std::string udpHostname, std::string udpPortName, std::string udpListenPortName)
@@ -90,7 +93,6 @@ void NMEA::Init(unsigned int aStartTime, std::string serialPortName, irr::u32 se
   std::thread* receiveThreadObject = 0;
   receiveThreadObject = new std::thread(&NMEA::ReceiveThread, this, udpListenPortName);
     
-
   //Set up serial
   if (!serialPortName.empty() && (serialBaudrate > 0))
     {
@@ -111,7 +113,6 @@ void NMEA::Init(unsigned int aStartTime, std::string serialPortName, irr::u32 se
 	  std::cout << "NMEA::Error : " << e.what() << std::endl;
         }
     }
-
 }
 
 NMEA::~NMEA()
@@ -368,11 +369,11 @@ void NMEA::Update(sTime& aTime)
 
   if(mOtherShips->getNumber() >= 0)
     { 
-      std::vector<unsigned int> readyShips = AIS::GetReadyShips(mOtherShips, now);
+      std::vector<unsigned int> readyShips = mAIS.GetReadyShips(mOtherShips, now);
       for(auto ship : readyShips)
 	{
 	  //Generate Class A : Message 1
-	  data = AIS::GenerateClassAReport(mOtherShips, mOwnShip->getOffsetPos().Z, mOwnShip->getOffsetPos().X, mTerrain, aTime.absoluteTime, ship);
+	  data = mAIS.GenerateClassAReport(mOtherShips, mOwnShip->getOffsetPos().Z, mOwnShip->getOffsetPos().X, mTerrain, aTime.absoluteTime, ship);
 	  snprintf(messageBuffer, MAX_NMEA_SENTENCE_CHARS,"!AIVDM,%d,%d,,%c,%s,%d", 1, 1, 'B', data.c_str(), 0);
   
 	  messageToSend.append(AddChecksum(std::string(messageBuffer)));

@@ -22,12 +22,18 @@
 
 class AIS
 {
-public: 
-  static std::string GenerateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int);
-  static std::vector<unsigned int> GetReadyShips(void *aOtherShips, unsigned int);
+public:
+  AIS();
+  ~AIS();
+  void Init(unsigned int aNumberShip);
+  std::string GenerateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int);
+  std::vector<unsigned int> GetReadyShips(void *aOtherShips, unsigned int);
 
 private:
-  static std::string BitsToArmoredASCII(std::vector<bool>);
+  std::string BitsToArmoredASCII(std::vector<bool>);
+  std::vector<unsigned int> mLastUpdates;
+  std::vector<unsigned int> mReadyShips;
+  
 };
 
 #endif

@@ -21,6 +21,7 @@
 #include <string>
 #include <asio.hpp> //For UDP
 #include "../lib/serial/serial.h"
+#include "AIS.hpp"
 #include "Autopilot.hpp"
 #include "OtherShips.hpp"
 #include "OwnShip.hpp"
@@ -73,7 +74,7 @@ public:
 private:
 
   std::string AddChecksum(std::string messageIn);
-  
+  AIS mAIS;
   Autopilot mAutopilot;
   OwnShip *mOwnShip;
   OtherShips *mOtherShips;

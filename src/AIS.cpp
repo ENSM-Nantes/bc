@@ -22,42 +22,49 @@
 #include "Terrain.hpp"
 #include <iostream>
 
-std::vector<unsigned int> AIS::GetReadyShips(void *aOtherShips, unsigned int now)
+
+AIS::AIS()
 {
-  static bool initialized = false;
-  static std::vector<unsigned int> lastUpdates;
-  
+
+}
+
+AIS::~AIS()
+{
+
+
+}
+
+void AIS::Init(unsigned int aNumberShip)
+{
+  for(unsigned int i = 0; i<aNumberShip; i++)
+    {
+      mLastUpdates.push_back(i*1000);
+    }
+}
+
+std::vector<unsigned int> AIS::GetReadyShips(void *aOtherShips, unsigned int aNow)
+{
   OtherShips *pOtherShips = (OtherShips*)aOtherShips;
-  
-  if (!initialized) {
-    for (unsigned int i=0; i < pOtherShips->getNumber(); i++) {
-      lastUpdates.push_back(i * 600); // offset ship reports in 600 ms increments
-    }
-    initialized = true;
+  unsigned int elapsedTime = 0, reportingInterval = 0;
+  float shipSpeed = 0;
+  mReadyShips.clear();
+
+  for(unsigned int ship=0; ship < mLastUpdates.size(); ship++)
+    {
+      if(aNow > mLastUpdates[ship]) elapsedTime = aNow - mLastUpdates[ship];
+      else elapsedTime = 0;
+    
+      shipSpeed = pOtherShips->getSpeed(ship);
+
+      reportingInterval = 2000;
+
+      if(elapsedTime >= reportingInterval)
+	{
+	  mLastUpdates[ship] = aNow;
+	  mReadyShips.push_back(ship);
+	}
   }
-
-  std::vector<unsigned int> readyShips;
-  readyShips.clear();
-
-  for (unsigned int ship=0; ship < lastUpdates.size(); ship++) {
-    unsigned int elapsed_time;
-    if (now > lastUpdates[ship]) {
-      elapsed_time = now - lastUpdates[ship];
-    } else {
-      elapsed_time = 0;
-    }
-    unsigned int reportingInterval;
-    float shipSpeed = pOtherShips->getSpeed(ship);
-
-    reportingInterval = 2000;
-
-    // random delay to reporting to avoid coalescence of reports after a while
-    if (elapsed_time >= reportingInterval + (rand() % 500)) {
-      lastUpdates[ship] = now;
-      readyShips.push_back(ship);
-    }
-  }
-  return readyShips;
+  return mReadyShips;
 }
 
 std::string AIS::GenerateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int ship)
@@ -175,13 +182,10 @@ std::string AIS::GenerateClassAReport(void *aOtherShips, float aOffsetPosZ, floa
   // 149-167 radio status, 19 bit field, unsigned integer for radio diagnostic, leave as 0 for now
     
   // convert bit sequence to armored ASCII
-  std::string payload = BitsToArmoredASCII(classAReport);
-
   // number of bits we need to append to get the payload length to a multiple of 6
   // always 0 since we always generate a class A Report of length 168
   // int fillBits = (6 - (168 % 6)) % 6;
-
-  return payload;
+  return BitsToArmoredASCII(classAReport);
 }
 
 std::string AIS::BitsToArmoredASCII(std::vector<bool> bits) {

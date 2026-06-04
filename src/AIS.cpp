@@ -57,7 +57,7 @@ std::vector<unsigned int> AIS::GetReadyShips(void *aOtherShips, unsigned int aNo
       shipSpeed = pOtherShips->getSpeed(ship);
 
       if(shipSpeed >=0 && shipSpeed < SPEED_MAX_INTERVAL_1) reportingInterval = TIME_INTERVAL_1;
-      else if(shipSpeed >=SPEED_MAX_INTERVAL_2 && shipSpeed < SPEED_MAX_INTERVAL_2) reportingInterval = TIME_INTERVAL_2;
+      else if(shipSpeed >=SPEED_MAX_INTERVAL_1 && shipSpeed < SPEED_MAX_INTERVAL_2) reportingInterval = TIME_INTERVAL_2;
       else reportingInterval = TIME_INTERVAL_3;
       
       if(elapsedTime >= reportingInterval)

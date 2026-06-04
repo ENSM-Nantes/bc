@@ -56,8 +56,10 @@ std::vector<unsigned int> AIS::GetReadyShips(void *aOtherShips, unsigned int aNo
     
       shipSpeed = pOtherShips->getSpeed(ship);
 
-      reportingInterval = 2000;
-
+      if(shipSpeed >=0 && shipSpeed < SPEED_MAX_INTERVAL_1) reportingInterval = TIME_INTERVAL_1;
+      else if(shipSpeed >=SPEED_MAX_INTERVAL_2 && shipSpeed < SPEED_MAX_INTERVAL_2) reportingInterval = TIME_INTERVAL_2;
+      else reportingInterval = TIME_INTERVAL_3;
+      
       if(elapsedTime >= reportingInterval)
 	{
 	  mLastUpdates[ship] = aNow;
@@ -67,19 +69,19 @@ std::vector<unsigned int> AIS::GetReadyShips(void *aOtherShips, unsigned int aNo
   return mReadyShips;
 }
 
-std::string AIS::GenerateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int ship)
+std::string AIS::GenerateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int aShip)
 {
   std::vector<bool> classAReport(168, 0);
   OtherShips *pOtherShips = (OtherShips*)aOtherShips;
   Terrain *pTerrain = (Terrain*)aTerrain;
   bool done = false;
-  unsigned int heading = (unsigned int) (pOtherShips->getHeading(ship) * 180/PI);
-  unsigned int mmsi = pOtherShips->getMMSI(ship);
-  unsigned int speed = std::min<int>((int) 10.0f * MPS_TO_KTS * pOtherShips->getSpeed(ship), 1022);
+  unsigned int heading = (unsigned int) (pOtherShips->getHeading(aShip) * 180/PI);
+  unsigned int mmsi = pOtherShips->getMMSI(aShip);
+  unsigned int speed = std::min<int>((int) 10.0f * MPS_TO_KTS * pOtherShips->getSpeed(aShip), 1022);
   float posX=0, posZ=0;
 
-  posX = pOtherShips->getPosition(ship).X + aOffsetPosX;
-  posZ = pOtherShips->getPosition(ship).Z + aOffsetPosZ;
+  posX = pOtherShips->getPosition(aShip).X + aOffsetPosX;
+  posZ = pOtherShips->getPosition(aShip).Z + aOffsetPosZ;
   
   float shipLong = pTerrain->xToLong(posX);
   float shipLat  = pTerrain->zToLat(posZ);
@@ -188,18 +190,18 @@ std::string AIS::GenerateClassAReport(void *aOtherShips, float aOffsetPosZ, floa
   return BitsToArmoredASCII(classAReport);
 }
 
-std::string AIS::BitsToArmoredASCII(std::vector<bool> bits) {
+std::string AIS::BitsToArmoredASCII(std::vector<bool> aBits) {
   // must be called with padded payload!
-  assert(bits.size() % 6 == 0);
+  assert(aBits.size() % 6 == 0);
 
   int counter = 0;
 
-  std::string payload(bits.size() / 6, 0);
+  std::string payload(aBits.size() / 6, 0);
   int index = 0;
 
-  for (int i=0; i < bits.size(); i++) {
+  for (int i=0; i < aBits.size(); i++) {
     payload[index] <<= 1;
-    payload[index] |= bits[i];
+    payload[index] |= aBits[i];
     counter += 1;
         
     if (counter % 6 == 0) {

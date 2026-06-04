@@ -20,17 +20,25 @@
 #include <string>
 #include <vector>
 
+#define TIME_INTERVAL_1 (10000)
+#define TIME_INTERVAL_2 (6000)
+#define TIME_INTERVAL_3 (2000)
+
+#define SPEED_MAX_INTERVAL_1 (14)
+#define SPEED_MAX_INTERVAL_2 (23)
+
 class AIS
 {
 public:
   AIS();
   ~AIS();
   void Init(unsigned int aNumberShip);
-  std::string GenerateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int);
-  std::vector<unsigned int> GetReadyShips(void *aOtherShips, unsigned int);
+  std::string GenerateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int aShip);
+  std::vector<unsigned int> GetReadyShips(void *aOtherShips, unsigned int aNow);
 
 private:
-  std::string BitsToArmoredASCII(std::vector<bool>);
+  std::string BitsToArmoredASCII(std::vector<bool> aBits);
+  
   std::vector<unsigned int> mLastUpdates;
   std::vector<unsigned int> mReadyShips;
   

@@ -52,6 +52,7 @@ public:
 
   float getLength() const;
   float getBreadth() const;
+  float getDraught() const;
   float getHeightCorrection() const;
   float getEstimatedDisplacement() const;
   void setHeading(float hdg);

@@ -188,6 +188,16 @@ irr::f32 OtherShips::getBreadth(int number) const
     }
 }
 
+irr::f32 OtherShips::getDraught(int number) const
+{
+    if (number < (int)otherShips.size() && number >= 0) {
+        return otherShips.at(number)->getDraught();
+    } else {
+        return 0.0;
+    }
+}
+
+
 irr::f32 OtherShips::getHeading(int number) const
 {
     if (number < (int)otherShips.size() && number >= 0) {
@@ -219,6 +229,51 @@ void OtherShips::setSpeed(int number, irr::f32 speed)
 {
     if (number < (int)otherShips.size() && number >= 0) {
         otherShips.at(number)->setSpeed(speed);
+    }
+}
+
+unsigned char OtherShips::getType(int number) const
+{
+    if (number < (int)otherShips.size() && number >= 0) {
+      return 0x60; //TODO : Set a real type into ShipEditor
+    } else {
+        return 0;
+    }
+}
+
+std::string OtherShips::getShipDest(int number) const
+{
+    if (number < (int)otherShips.size() && number >= 0) {
+      return "ST NAZAIRE"; //TODO : Set a real destination into ShipEditor
+    } else {
+        return 0;
+    }
+}
+
+std::string OtherShips::getShipName(int number) const
+{
+    if (number < (int)otherShips.size() && number >= 0) {
+      return "Boat test"; //TODO : Set a real name into ShipEditor
+    } else {
+        return 0;
+    }
+}
+
+std::string OtherShips::getCallSign(int number) const
+{
+    if (number < (int)otherShips.size() && number >= 0) {
+      return "DGTH2"; //TODO : Set a real IMO into ShipEditor
+    } else {
+        return 0;
+    }
+}
+
+irr::u32 OtherShips::getIMO(int number) const
+{
+    if (number < (int)otherShips.size() && number >= 0) {
+      return 4444444; //TODO : Set a real IMO into ShipEditor
+    } else {
+        return 0;
     }
 }
 

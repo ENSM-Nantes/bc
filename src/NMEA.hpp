@@ -30,7 +30,7 @@
 #include "RadarCalculation.hpp"
 
 #define SENSOR_REPORT_INTERVAL (300) //ms
-#define MAX_NMEA_SENTENCE_CHARS (81) 
+#define MAX_NMEA_SENTENCE_CHARS (79) 
 
 enum eNMEAMessage{
   RMC=0,

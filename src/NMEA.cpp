@@ -373,12 +373,29 @@ void NMEA::Update(sTime& aTime)
       for(auto ship : readyShips)
 	{
 	  //Generate Class A : Message 1
-	  data = mAIS.GenerateClassAReport(mOtherShips, mOwnShip->getOffsetPos().Z, mOwnShip->getOffsetPos().X, mTerrain, aTime.absoluteTime, ship);
+	  data = mAIS.GenerateMessage1(mOtherShips, mOwnShip->getOffsetPos().Z, mOwnShip->getOffsetPos().X, mTerrain, aTime.absoluteTime, ship);
 	  snprintf(messageBuffer, MAX_NMEA_SENTENCE_CHARS,"!AIVDM,%d,%d,,%c,%s,%d", 1, 1, 'B', data.c_str(), 0);
-  
+ 
 	  messageToSend.append(AddChecksum(std::string(messageBuffer)));
 	  mMessageQueue.push_back(messageToSend);
 	  messageToSend.clear();
+	  data.clear();
+
+	  //Generate Class A : Message 5
+	  data = mAIS.GenerateMessage5(mOtherShips, ship);
+	  std::string frag1 = data.substr(0, 60);
+	  std::string frag2 = data.substr(60);
+	  
+	  snprintf(messageBuffer, MAX_NMEA_SENTENCE_CHARS,"!AIVDM,%d,%d,,%c,%s,%d", 2, 1, 'B', frag1.c_str(), 0);
+	  messageToSend.append(AddChecksum(std::string(messageBuffer)));
+	  mMessageQueue.push_back(messageToSend);
+	  messageToSend.clear();
+
+	  snprintf(messageBuffer, MAX_NMEA_SENTENCE_CHARS,"!AIVDM,%d,%d,,%c,%s,%d", 2, 2, 'B', frag2.c_str(), 2);
+	  messageToSend.append(AddChecksum(std::string(messageBuffer)));
+	  mMessageQueue.push_back(messageToSend);
+	  messageToSend.clear();
+	  
 	}
       
       readyShips.clear();

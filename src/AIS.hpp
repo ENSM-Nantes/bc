@@ -33,11 +33,14 @@ public:
   AIS();
   ~AIS();
   void Init(unsigned int aNumberShip);
-  std::string GenerateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int aShip);
+  std::string GenerateMessage1(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int aShip);
+  std::string GenerateMessage5(void *aOtherShips, unsigned int aShip);
   std::vector<unsigned int> GetReadyShips(void *aOtherShips, unsigned int aNow);
 
 private:
   std::string BitsToArmoredASCII(std::vector<bool> aBits);
+  unsigned char AsciiToAis6(char aChar);
+  std::vector<unsigned char> StringToAis6(const std::string& aStrIn);
   
   std::vector<unsigned int> mLastUpdates;
   std::vector<unsigned int> mReadyShips;

@@ -21,7 +21,7 @@
 #include "OtherShips.hpp"
 #include "Terrain.hpp"
 #include <iostream>
-
+#include <algorithm>
 
 AIS::AIS()
 {
@@ -32,6 +32,35 @@ AIS::~AIS()
 {
 
 
+}
+
+
+unsigned char AIS::AsciiToAis6(char aChar)
+{
+    if(aChar >= '@' && aChar <= '_')
+      {
+        return aChar - 64;
+      }
+    else if(aChar >= ' ' && aChar <= '?')
+      {
+        return aChar - 32;
+      }
+    else
+      {
+        return 0; //@ in AIS ASCII 6 bits
+      }
+}
+
+std::vector<unsigned char> AIS::StringToAis6(const std::string& aStrIn)
+{
+    std::vector<unsigned char> strOut;
+
+    for(char c : aStrIn)
+      {
+        strOut.push_back(AsciiToAis6(c));
+      }
+
+    return strOut;
 }
 
 void AIS::Init(unsigned int aNumberShip)
@@ -69,7 +98,155 @@ std::vector<unsigned int> AIS::GetReadyShips(void *aOtherShips, unsigned int aNo
   return mReadyShips;
 }
 
-std::string AIS::GenerateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int aShip)
+std::string AIS::GenerateMessage5(void *aOtherShips, unsigned int aShip)
+{
+  std::vector<bool> classAReport(426, 0);
+  OtherShips *pOtherShips = (OtherShips*)aOtherShips;
+  unsigned int mmsi = pOtherShips->getMMSI(aShip);
+  unsigned int imo = pOtherShips->getIMO(aShip);
+  unsigned char type = pOtherShips->getType(aShip);
+  std::string callSignStr = pOtherShips->getCallSign(aShip);
+  std::string shipNameStr = pOtherShips->getShipName(aShip);
+  std::string shipDestStr = pOtherShips->getShipDest(aShip);
+  std::vector<unsigned char> callSignAIS = {0};
+  std::vector<unsigned char> shipNameAIS = {0};
+  std::vector<unsigned char> shipDestAIS = {0};
+  unsigned int idx = 0;
+  float lpp = pOtherShips->getLength(aShip);
+  float breadth = pOtherShips->getBreadth(aShip);
+  float draught = pOtherShips->getDraught(aShip);
+  unsigned char draughtAIS = 0;
+  
+  // fill class A report fields    
+  // 0-5: message type, set to 0b000101 for normal class A position report
+  classAReport[3] = 1;
+  classAReport[5] = 1;
+    
+  // 6-7 repeat indicator, set to 0b11 to signify do not repeat
+  classAReport[6] = 1;
+  classAReport[7] = 1;
+
+  // 8-37 MMSI, 9-decimal digit in 30 bit field
+  for(int i=0; i<30; i++)
+    {
+      classAReport[8 + 29 - i] = mmsi % 2;
+      mmsi >>= 1;
+    }
+
+  // 38-39 AIS version indicator
+  classAReport[38] = 1;
+  classAReport[39] = 1;
+
+  //40-69 IMO number 10-decimal digit in 30 bit field
+  idx=40;
+  for(int i=idx; i<70; i++)
+    {
+      classAReport[i] = imo % 2;
+      imo >>= 1;
+    }
+
+  //70-111 Call Sign  
+  callSignAIS = AIS::StringToAis6(callSignStr);  
+  idx = 70;
+  for(int k=callSignAIS.size()-1; k>=0; k--)
+    {
+      for(int j=5;j>=0;j--)
+	{
+	  classAReport[idx] = callSignAIS[k] & (1 << j);
+	  idx++;
+	}
+    }
+
+  //112-231 Name  
+  shipNameAIS = AIS::StringToAis6(shipNameStr);  
+  idx = 112;
+  for(int k=shipNameAIS.size()-1; k>=0; k--)
+    {
+      for(int j=5;j>=0;j--)
+	{
+	  classAReport[idx] = shipNameAIS[k] & (1 << j);
+	  idx++;
+	}
+    }
+
+  //232-239 Type of ship
+  for(int i=0; i<8; i++)
+    {
+      classAReport[232 + 7 - i] = type % 2;
+      type >>= 1;
+    }
+
+  //240-269 Overall dimension
+  unsigned short A = lpp/2;
+  unsigned short B = A;
+  unsigned short C = breadth/2;
+  unsigned short D = C;
+  
+  for(int i=0; i<9; i++)
+    {
+      classAReport[240 + 8 - i] =  A % 2;
+      A >>= 1;
+    }
+  for(int i=0; i<9; i++)
+    {
+      classAReport[249 + 8 - i] =  B % 2;
+      B >>= 1;
+    }
+  for(int i=0; i<6; i++)
+    {
+      classAReport[258 + 5 - i] =  C % 2;
+      C >>= 1;
+    }
+  for(int i=0; i<6; i++)
+    {
+      classAReport[264 + 5 - i] =  D % 2;
+      D >>= 1;
+    }
+
+  //270-273 Type of electronic
+  classAReport[273] = 1; //GPS forced
+
+  //274-293 ETA
+  //MM 0 - default - 4bits
+  //DD 0 - default - 5 bits
+  classAReport[283] = 1; //HH 24 - default
+  classAReport[284] = 1;
+
+  classAReport[288] = 1; //MM 60 - default
+  classAReport[289] = 1;
+  classAReport[290] = 1;
+  classAReport[291] = 1;
+
+  //294-303 Draught - 8bits
+  draught = std::clamp(draught, 0.0f, 25.5f);
+  draughtAIS = static_cast<unsigned char>(std::round(draught * 10.0f));
+  
+  for(int i=0; i<8; i++)
+    {
+      classAReport[294 + i] = draughtAIS & (1 << i);
+    }
+
+  //304-423 Destination 
+  shipDestAIS = AIS::StringToAis6(shipDestStr);  
+  idx = 304;
+  
+  for(int k=shipDestAIS.size()-1; k>=0; k--)
+    {
+      for(int j=5;j>=0;j--)
+	{
+	  classAReport[idx] = shipDestAIS[k] & (1 << j);
+	  idx++;
+	}
+    }
+  
+  //424 DTE
+  classAReport[424] = 1;
+
+  return BitsToArmoredASCII(classAReport);
+}
+
+
+std::string AIS::GenerateMessage1(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int aShip)
 {
   std::vector<bool> classAReport(168, 0);
   OtherShips *pOtherShips = (OtherShips*)aOtherShips;

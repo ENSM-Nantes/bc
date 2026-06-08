@@ -260,6 +260,11 @@ irr::f32 Ship::getBreadth() const
   return mGeoParams.b;
 }
 
+irr::f32 Ship::getDraught() const
+{
+  return mGeoParams.d;
+}
+
 irr::f32 Ship::getHeightCorrection() const
 {
   return mHeightCorrection;

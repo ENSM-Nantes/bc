@@ -43,7 +43,7 @@ unsigned char AIS::AsciiToAis6(char aChar)
       }
     else if(aChar >= ' ' && aChar <= '?')
       {
-        return aChar - 32;
+        return aChar;
       }
     else
       {
@@ -138,17 +138,16 @@ std::string AIS::GenerateMessage5(void *aOtherShips, unsigned int aShip)
   classAReport[39] = 1;
 
   //40-69 IMO number 10-decimal digit in 30 bit field
-  idx=40;
-  for(int i=idx; i<70; i++)
+  for(int i=0; i<30; i++)
     {
-      classAReport[i] = imo % 2;
+      classAReport[40 + 29 - i] = imo % 2;
       imo >>= 1;
     }
 
   //70-111 Call Sign  
   callSignAIS = AIS::StringToAis6(callSignStr);  
   idx = 70;
-  for(int k=callSignAIS.size()-1; k>=0; k--)
+  for(int k=0; k<callSignAIS.size(); k++)
     {
       for(int j=5;j>=0;j--)
 	{
@@ -160,7 +159,7 @@ std::string AIS::GenerateMessage5(void *aOtherShips, unsigned int aShip)
   //112-231 Name  
   shipNameAIS = AIS::StringToAis6(shipNameStr);  
   idx = 112;
-  for(int k=shipNameAIS.size()-1; k>=0; k--)
+  for(int k=0; k<shipNameAIS.size(); k++)
     {
       for(int j=5;j>=0;j--)
 	{
@@ -223,14 +222,13 @@ std::string AIS::GenerateMessage5(void *aOtherShips, unsigned int aShip)
   
   for(int i=0; i<8; i++)
     {
-      classAReport[294 + i] = draughtAIS & (1 << i);
+      classAReport[294 + 7 - i] = draughtAIS & (1 << i);
     }
 
-  //304-423 Destination 
+  //302-421 Destination 
   shipDestAIS = AIS::StringToAis6(shipDestStr);  
-  idx = 304;
-  
-  for(int k=shipDestAIS.size()-1; k>=0; k--)
+  idx = 302;
+  for(int k=0; k<shipDestAIS.size(); k++)
     {
       for(int j=5;j>=0;j--)
 	{
@@ -239,33 +237,21 @@ std::string AIS::GenerateMessage5(void *aOtherShips, unsigned int aShip)
 	}
     }
   
-  //424 DTE
-  classAReport[424] = 1;
+  //422 DTE
+  classAReport[422] = 1;
+
+  //423 Spare
+  classAReport[423] = 0;
 
   return BitsToArmoredASCII(classAReport);
 }
 
 
-std::string AIS::GenerateMessage1(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int aShip)
+std::string AIS::GenerateMessage1(unsigned long long aTimeStamp, unsigned int aHdg, unsigned int aMmsi, unsigned int aSpeed, float aPosX, float aPosZ, float aLong, float aLat)
 {
   std::vector<bool> classAReport(168, 0);
-  OtherShips *pOtherShips = (OtherShips*)aOtherShips;
-  Terrain *pTerrain = (Terrain*)aTerrain;
-  bool done = false;
-  unsigned int heading = (unsigned int) (pOtherShips->getHeading(aShip) * 180/PI);
-  unsigned int mmsi = pOtherShips->getMMSI(aShip);
-  unsigned int speed = std::min<int>((int) 10.0f * MPS_TO_KTS * pOtherShips->getSpeed(aShip), 1022);
-  float posX=0, posZ=0;
-
-  posX = pOtherShips->getPosition(aShip).X + aOffsetPosX;
-  posZ = pOtherShips->getPosition(aShip).Z + aOffsetPosZ;
-  
-  float shipLong = pTerrain->xToLong(posX);
-  float shipLat  = pTerrain->zToLat(posZ);
-
   unsigned int timestamp = aTimeStamp % 60;
-
-
+  
   // fill class A report fields
     
   // 0-5: message type, set to 0b000001 for normal class A position report
@@ -277,8 +263,8 @@ std::string AIS::GenerateMessage1(void *aOtherShips, float aOffsetPosZ, float aO
 
   // 8-37 MMSI, 9-decimal digit in 30 bit field
   for (int i=0; i < 30; i++) {
-    classAReport[8 + 29 - i] = mmsi % 2;
-    mmsi >>= 1;
+    classAReport[8 + 29 - i] = aMmsi % 2;
+    aMmsi >>= 1;
   }
 
   // 38-41 navigation status
@@ -287,7 +273,7 @@ std::string AIS::GenerateMessage1(void *aOtherShips, float aOffsetPosZ, float aO
   classAReport[39] = 0;
   classAReport[40] = 0;
   classAReport[41] = 0;
-  if (speed == 0) {
+  if (aSpeed == 0) {
     // if not moving, set to 0b0001 for anchored
     classAReport[41] = 1;
   }
@@ -301,8 +287,8 @@ std::string AIS::GenerateMessage1(void *aOtherShips, float aOffsetPosZ, float aO
 
   // 50-59 speed over ground, 10 bit field
   for (int i=0; i < 10; i++) {
-    classAReport[50 + 9 - i] = speed % 2;
-    speed >>= 1;
+    classAReport[50 + 9 - i] = aSpeed % 2;
+    aSpeed >>= 1;
   }
 
   // 60 position accuracy, set to 0b1 to indicate DGPS-quality fix, since
@@ -311,7 +297,7 @@ std::string AIS::GenerateMessage1(void *aOtherShips, float aOffsetPosZ, float aO
 
   // 61-88 longitude in a 28-bit field encoding a signed integer representing a float with a
   // resolution of 0.0001 corresponding to the longitude in minutes
-  int longitude = (int) 600000.0f * shipLong;
+  int longitude = (int) 600000.0f * aLong;
   bool longIsNeg = longitude < 0;
   for (int i=0; i < 28; i++) {
     classAReport[61 + 27 - i] = longitude % 2;
@@ -321,7 +307,7 @@ std::string AIS::GenerateMessage1(void *aOtherShips, float aOffsetPosZ, float aO
     
   // 89-115 latitude in a 27-bit field encoding a signed integer representing a float with a
   // resolution of 0.0001 corresponding to the latitude in minutes
-  int latitude = (int) 600000.0f * shipLat;
+  int latitude = (int) 600000.0f * aLat;
   bool latIsNeg = latitude < 0;
   for (int i=0; i < 27; i++) {
     classAReport[89 + 26 - i] = latitude % 2;
@@ -331,7 +317,7 @@ std::string AIS::GenerateMessage1(void *aOtherShips, float aOffsetPosZ, float aO
 
   // 116-127 course over ground, 12 bit field, unsigned int representing a float with
   // a resolution of 0.1 corresponding to the course over ground in degrees relative to true north
-  unsigned int cog = 10 * heading;
+  unsigned int cog = 10 * aHdg;
   for (int i=0; i < 12; i++) {
     classAReport[116 + 11 - i] = cog % 2;
     cog >>= 1;
@@ -339,8 +325,8 @@ std::string AIS::GenerateMessage1(void *aOtherShips, float aOffsetPosZ, float aO
 
   // 128-136 true heading, 9 bit field, unsigned int
   for (int i=0; i < 9; i++) {
-    classAReport[128 + 8 - i] = heading % 2;
-    heading >>= 1;
+    classAReport[128 + 8 - i] = aHdg % 2;
+    aHdg >>= 1;
   }
 
   // 137-142 timestamp, 6 bit field, unsigned int corresponding to the seconds of current UTC time

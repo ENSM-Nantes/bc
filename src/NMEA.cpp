@@ -366,14 +366,24 @@ void NMEA::Update(sTime& aTime)
   bool done = false;
   std::string data = "", messageToSend = "";
   unsigned int now = aTime.currentTime;
-
+  unsigned int osHdg=0, osMmsi=0, osSpeed=0;
+  float osPosX=0, osPosZ=0, shipLong=0, shipLat=0;
+  
   if(mOtherShips->getNumber() >= 0)
     { 
       std::vector<unsigned int> readyShips = mAIS.GetReadyShips(mOtherShips, now);
       for(auto ship : readyShips)
 	{
+	  osHdg = (unsigned int) (mOtherShips->getHeading(ship) * 180/PI);
+	  osMmsi = mOtherShips->getMMSI(ship);
+	  osSpeed = 10.0f * MPS_TO_KTS * mOtherShips->getSpeed(ship);
+	  osPosX = mOtherShips->getPosition(ship).X + mOwnShip->getOffsetPos().X;
+	  osPosZ = mOtherShips->getPosition(ship).Z + mOwnShip->getOffsetPos().Z;
+	  shipLong = mTerrain->xToLong(osPosX);
+	  shipLat  = mTerrain->zToLat(osPosZ);
+	  
 	  //Generate Class A : Message 1
-	  data = mAIS.GenerateMessage1(mOtherShips, mOwnShip->getOffsetPos().Z, mOwnShip->getOffsetPos().X, mTerrain, aTime.absoluteTime, ship);
+	  data = mAIS.GenerateMessage1(aTime.absoluteTime, osHdg, osMmsi, osSpeed, osPosX, osPosZ, shipLong, shipLat);
 	  snprintf(messageBuffer, MAX_NMEA_SENTENCE_CHARS,"!AIVDM,%d,%d,,%c,%s,%d", 1, 1, 'B', data.c_str(), 0);
  
 	  messageToSend.append(AddChecksum(std::string(messageBuffer)));
@@ -628,7 +638,19 @@ void NMEA::Update(sTime& aTime)
       mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }
-
+  case AIVD0:
+    {
+      //Generate Class A : Message 1
+      data = mAIS.GenerateMessage1(aTime.absoluteTime, hdg, /*mOwnShip->getMMSI()*/123456789, sog, posX, posZ, lon, lat);
+      snprintf(messageBuffer, MAX_NMEA_SENTENCE_CHARS,"!AIVDO,%d,%d,,%c,%s,%d", 1, 1, 'B', data.c_str(), 0);
+  
+      messageToSend.append(AddChecksum(std::string(messageBuffer)));
+      mMessageQueue.push_back(messageToSend);
+      messageToSend.clear();
+      data.clear();
+      break;
+    }
+    
   default:
     break;
   }

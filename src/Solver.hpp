@@ -19,7 +19,7 @@ public:
   
   /*Process*/
   int Init(Ship* aShip);
-  void Run(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu);
+  void Run(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu, float aColX, float aColY, float aColN);
   
   /*Getter*/
   Eigen::Vector3d getEta(void) const;
@@ -33,12 +33,14 @@ private:
   Eigen::VectorXd DiffEq(const Eigen::VectorXd& aVectEtaMu);
   void SolveRk4(Eigen::Vector3d aEta, Eigen::Vector3d aMu);
   void SolveRoll(void);
+  void SetDataCollision(float aColX, float aColY, float aColN);
   
   
   Eigen::Vector3d mT; //Result Force X, Y, Z
   double mDt; //Time delta
   Eigen::Vector3d mEta; //Pos vector
   Eigen::Vector3d mMu; //Speed vector
+  Eigen::Vector3d mTCol; //Collision Force Vector
 
   Ship* mShip;  
 };

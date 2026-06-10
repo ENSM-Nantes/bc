@@ -33,7 +33,7 @@ public:
   AIS();
   ~AIS();
   void Init(unsigned int aNumberShip);
-  std::string GenerateMessage1(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int aShip);
+  std::string GenerateMessage1(unsigned long long aTimeStamp, unsigned int aHdg, unsigned int aMmsi, unsigned int aSpeed, float aPosX, float aPosZ, float aLong, float aLat);
   std::string GenerateMessage5(void *aOtherShips, unsigned int aShip);
   std::vector<unsigned int> GetReadyShips(void *aOtherShips, unsigned int aNow);
 
@@ -44,7 +44,6 @@ private:
   
   std::vector<unsigned int> mLastUpdates;
   std::vector<unsigned int> mReadyShips;
-  
 };
 
 #endif

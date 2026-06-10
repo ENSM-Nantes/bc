@@ -49,6 +49,7 @@ enum eNMEAMessage{
   TIROT,
   DPT,
   XDR,
+  AIVD0,
   MSG_MAX
 };
 

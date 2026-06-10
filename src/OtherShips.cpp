@@ -235,7 +235,7 @@ void OtherShips::setSpeed(int number, irr::f32 speed)
 unsigned char OtherShips::getType(int number) const
 {
     if (number < (int)otherShips.size() && number >= 0) {
-      return 0x60; //TODO : Set a real type into ShipEditor
+      return 0x3C; //TODO : Set a real type into ShipEditor
     } else {
         return 0;
     }
@@ -253,7 +253,7 @@ std::string OtherShips::getShipDest(int number) const
 std::string OtherShips::getShipName(int number) const
 {
     if (number < (int)otherShips.size() && number >= 0) {
-      return "Boat test"; //TODO : Set a real name into ShipEditor
+      return "SUPER-BOAT"; //TODO : Set a real name into ShipEditor
     } else {
         return 0;
     }

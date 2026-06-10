@@ -12,6 +12,7 @@ Solver::Solver()
   mEta << 0, 0, 0;
   mMu << 0, 0, 0;
   mDt = 0;
+  mTCol << 0, 0, 0;
   mShip = NULL;
 }
 
@@ -143,7 +144,7 @@ void Solver::Run(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu, float 
 
 void Solver::SetDataCollision(float aColX, float aColY, float aColN)
 {
-  mTCol << aColX, aColN, aColN; 
+  mTCol << aColX, aColY, aColN; 
 }
 
 void Solver::SolveRk4(Eigen::Vector3d aEta, Eigen::Vector3d aMu)

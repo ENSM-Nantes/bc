@@ -388,16 +388,16 @@ void Collision::DetectAndRespond(irr::f32 &reaction, irr::f32 &lateralReaction, 
 	    }
 
 	  // Apply this force
-	  turnReaction += combinedStiffnessDamping * contactPoints.at(i).torqueEffect;
-	  reaction += combinedStiffnessDamping * contactPoints.at(i).normal.Z;
-	  lateralReaction += combinedStiffnessDamping * contactPoints.at(i).normal.X;
+	  turnReaction -= combinedStiffnessDamping * contactPoints.at(i).torqueEffect;
+	  reaction -= combinedStiffnessDamping * contactPoints.at(i).normal.Z;
+	  lateralReaction -= combinedStiffnessDamping * contactPoints.at(i).normal.X;
 
 	  // Friction response. Use tanh function for better stability at low speed
 	  irr::f32 frictionTorqueFactor = (contactPoints.at(i).position.crossProduct(normalisedTangentialSpeedComponent)).Y; // Effect of unit friction force on ship's turning. TODO: Check this, I think it's correct
 	  irr::f32 frictionCoeff = mModelParameters.frictionCoefficient * tanh(mModelParameters.tanhFrictionFactor * tangentialSpeedAmplitude);
-	  turnReaction += combinedStiffnessDamping * frictionCoeff * frictionTorqueFactor;
-	  reaction += combinedStiffnessDamping * frictionCoeff * normalisedTangentialSpeedComponent.Z;
-	  lateralReaction += combinedStiffnessDamping * frictionCoeff * normalisedTangentialSpeedComponent.X;
+	  turnReaction -= combinedStiffnessDamping * frictionCoeff * frictionTorqueFactor;
+	  reaction -= combinedStiffnessDamping * frictionCoeff * normalisedTangentialSpeedComponent.Z;
+	  lateralReaction -= combinedStiffnessDamping * frictionCoeff * normalisedTangentialSpeedComponent.X;
 
 	  // std::cout << "remotePointAxialSpeed: " << remotePointAxialSpeed << std::endl;
 

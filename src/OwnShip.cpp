@@ -225,7 +225,7 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
       std::ifstream streamJson(boatJson);                
       streamJson >> rootJson;
       retShipPrms = InitShipParams(rootJson);
-      
+
       // get the model file
       mMeshFileName = rootJson["mesh"]["name"].asString();
       mMeshFullPath = basePath + mMeshFileName;

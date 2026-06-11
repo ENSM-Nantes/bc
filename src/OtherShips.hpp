@@ -71,7 +71,7 @@ public:
   irr::scene::ISceneNode* getSceneNode(int number);
 
 private:
-  std::vector<OtherShip*> otherShips;
+  std::vector<OtherShip*> mOtherShips;
   Water *mWater;
   Terrain *mTerrain;
 };

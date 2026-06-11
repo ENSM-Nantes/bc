@@ -34,10 +34,10 @@ OtherShips::OtherShips()
 
 OtherShips::~OtherShips()
 {
-    for(std::vector<OtherShip*>::iterator it = otherShips.begin(); it != otherShips.end(); ++it) {
+    for(std::vector<OtherShip*>::iterator it = mOtherShips.begin(); it != mOtherShips.end(); ++it) {
         delete (*it);
     }
-    otherShips.clear();
+    mOtherShips.clear();
 }
 
 void OtherShips::load(std::vector<OtherShipData> aOtherShipsData, irr::f32 aScenarioStartTime, Terrain *aTerrain, Water *aWater, OperatingMode::Mode aMode, irr::IrrlichtDevice* aDev)
@@ -54,9 +54,6 @@ void OtherShips::load(std::vector<OtherShipData> aOtherShipsData, irr::f32 aScen
         //Get initial position
         irr::f32 shipX = mTerrain->longToX(aOtherShipsData.at(i).initialLong);
         irr::f32 shipZ = mTerrain->latToZ(aOtherShipsData.at(i).initialLat);
-
-        //Set MMSI
-        irr::u32 mmsi = aOtherShipsData.at(i).mmsi;
 
         //Load leg information
         std::vector<Leg> legs;
@@ -90,7 +87,7 @@ void OtherShips::load(std::vector<OtherShipData> aOtherShipsData, irr::f32 aScen
         //Create otherShip and load into vector
         std::string internalName = "OtherShip_";
         internalName.append(std::to_string(i));
-        otherShips.push_back(new OtherShip (otherShipName,internalName,mmsi,irr::core::vector3df(shipX,0.0f,shipZ),legs,smgr, aDev));
+        mOtherShips.push_back(new OtherShip (otherShipName,internalName,irr::core::vector3df(shipX,0.0f,shipZ),legs, aDev));
     }
 
 }
@@ -100,7 +97,7 @@ void OtherShips::update(sTime& aTime, irr::f32 tideHeight, irr::u32 lightLevel, 
   float deltaTime = aTime.deltaTime;
   float scenarioTime = aTime.scenarioTime;
   
-    for(std::vector<OtherShip*>::iterator it = otherShips.begin(); it != otherShips.end(); ++it) {
+    for(std::vector<OtherShip*>::iterator it = mOtherShips.begin(); it != mOtherShips.end(); ++it) {
 
         //Find local wave height
         irr::core::vector3df prevPosition = (*it)->getPosition();
@@ -130,7 +127,7 @@ void OtherShips::update(sTime& aTime, irr::f32 tideHeight, irr::u32 lightLevel, 
 
 void OtherShips::enableAllTriangleSelectors()
 {
-    for(std::vector<OtherShip*>::iterator it = otherShips.begin(); it != otherShips.end(); ++it) {
+    for(std::vector<OtherShip*>::iterator it = mOtherShips.begin(); it != mOtherShips.end(); ++it) {
         // This will return to normal the next time OtherShips::update is called.
         (*it)->enableTriangleSelector(true);
     }
@@ -138,8 +135,8 @@ void OtherShips::enableAllTriangleSelectors()
 
 irr::scene::ISceneNode* OtherShips::getSceneNode(int number)
 {
-    if (number < (int)otherShips.size() && number >= 0) {
-        return otherShips.at(number)->getSceneNode();
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        return mOtherShips.at(number)->getSceneNode();
     } else {
         return 0;
     }
@@ -150,21 +147,21 @@ RadarData OtherShips::getRadarData(irr::u32 number, irr::core::vector3df scanner
 {
     RadarData radarData;
 
-    if (number<=otherShips.size()) {
-        radarData = otherShips[number-1]->getRadarData(scannerPosition);
+    if (number<=mOtherShips.size()) {
+        radarData = mOtherShips[number-1]->getRadarData(scannerPosition);
     }
     return radarData;
 }
 
 irr::u32 OtherShips::getNumber() const
 {
-    return otherShips.size();
+    return mOtherShips.size();
 }
 
 irr::core::vector3df OtherShips::getPosition(int number) const
 {
-    if (number < (int)otherShips.size() && number >= 0) {
-        return otherShips.at(number)->getPosition();
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        return mOtherShips.at(number)->getPosition();
     } else {
         return irr::core::vector3df(0,0,0);
     }
@@ -172,8 +169,8 @@ irr::core::vector3df OtherShips::getPosition(int number) const
 
 irr::f32 OtherShips::getLength(int number) const
 {
-    if (number < (int)otherShips.size() && number >= 0) {
-        return otherShips.at(number)->getLength();
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        return mOtherShips.at(number)->getLength();
     } else {
         return 0.0;
     }
@@ -181,8 +178,8 @@ irr::f32 OtherShips::getLength(int number) const
 
 irr::f32 OtherShips::getBreadth(int number) const
 {
-    if (number < (int)otherShips.size() && number >= 0) {
-        return otherShips.at(number)->getBreadth();
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        return mOtherShips.at(number)->getBreadth();
     } else {
         return 0.0;
     }
@@ -190,8 +187,8 @@ irr::f32 OtherShips::getBreadth(int number) const
 
 irr::f32 OtherShips::getDraught(int number) const
 {
-    if (number < (int)otherShips.size() && number >= 0) {
-        return otherShips.at(number)->getDraught();
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        return mOtherShips.at(number)->getDraught();
     } else {
         return 0.0;
     }
@@ -200,8 +197,8 @@ irr::f32 OtherShips::getDraught(int number) const
 
 irr::f32 OtherShips::getHeading(int number) const
 {
-    if (number < (int)otherShips.size() && number >= 0) {
-        return otherShips.at(number)->getHeading();
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        return mOtherShips.at(number)->getHeading();
     } else {
         return 0;
     }
@@ -209,8 +206,8 @@ irr::f32 OtherShips::getHeading(int number) const
 
 irr::f32 OtherShips::getSpeed(int number) const
 {
-    if (number < (int)otherShips.size() && number >= 0) {
-        return otherShips.at(number)->getSpeed();
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        return mOtherShips.at(number)->getSpeed();
     } else {
         return 0;
     }
@@ -218,8 +215,8 @@ irr::f32 OtherShips::getSpeed(int number) const
 
 irr::f32 OtherShips::getEstimatedDisplacement(int number) const
 {
-    if (number < (int)otherShips.size() && number >= 0) {
-        return otherShips.at(number)->getEstimatedDisplacement();
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        return mOtherShips.at(number)->getEstimatedDisplacement();
     } else {
         return 0;
     }
@@ -227,14 +224,14 @@ irr::f32 OtherShips::getEstimatedDisplacement(int number) const
 
 void OtherShips::setSpeed(int number, irr::f32 speed)
 {
-    if (number < (int)otherShips.size() && number >= 0) {
-        otherShips.at(number)->setSpeed(speed);
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        mOtherShips.at(number)->setSpeed(speed);
     }
 }
 
 unsigned char OtherShips::getType(int number) const
 {
-    if (number < (int)otherShips.size() && number >= 0) {
+    if (number < (int)mOtherShips.size() && number >= 0) {
       return 0x3C; //TODO : Set a real type into ShipEditor
     } else {
         return 0;
@@ -243,16 +240,17 @@ unsigned char OtherShips::getType(int number) const
 
 std::string OtherShips::getShipDest(int number) const
 {
-    if (number < (int)otherShips.size() && number >= 0) {
+    if (number < (int)mOtherShips.size() && number >= 0) {
       return "ST NAZAIRE"; //TODO : Set a real destination into ShipEditor
     } else {
         return 0;
+	
     }
 }
 
 std::string OtherShips::getShipName(int number) const
 {
-    if (number < (int)otherShips.size() && number >= 0) {
+    if (number < (int)mOtherShips.size() && number >= 0) {
       return "SUPER-BOAT"; //TODO : Set a real name into ShipEditor
     } else {
         return 0;
@@ -261,7 +259,7 @@ std::string OtherShips::getShipName(int number) const
 
 std::string OtherShips::getCallSign(int number) const
 {
-    if (number < (int)otherShips.size() && number >= 0) {
+    if (number < (int)mOtherShips.size() && number >= 0) {
       return "DGTH2"; //TODO : Set a real IMO into ShipEditor
     } else {
         return 0;
@@ -270,7 +268,7 @@ std::string OtherShips::getCallSign(int number) const
 
 irr::u32 OtherShips::getIMO(int number) const
 {
-    if (number < (int)otherShips.size() && number >= 0) {
+    if (number < (int)mOtherShips.size() && number >= 0) {
       return 4444444; //TODO : Set a real IMO into ShipEditor
     } else {
         return 0;
@@ -279,8 +277,8 @@ irr::u32 OtherShips::getIMO(int number) const
 
 irr::u32 OtherShips::getMMSI(int number) const
 {
-    if (number < (int)otherShips.size() && number >= 0) {
-        return otherShips.at(number)->getMMSI();
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        return mOtherShips.at(number)->getMMSI();
     } else {
         return 0;
     }
@@ -288,36 +286,36 @@ irr::u32 OtherShips::getMMSI(int number) const
 
 void OtherShips::setMMSI(int number, irr::u32 mmsi)
 {
-    if (number < (int)otherShips.size() && number >= 0) {
-        otherShips.at(number)->setMMSI(mmsi);
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        mOtherShips.at(number)->setMMSI(mmsi);
     }
 }
 
 void OtherShips::setPos(int number, irr::f32 positionX, irr::f32 positionZ)
 {
-    if (number < (int)otherShips.size() && number >= 0) {
-        otherShips.at(number)->setPosition(positionX,positionZ);
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        mOtherShips.at(number)->setPosition(positionX,positionZ);
     }
 }
 
 void OtherShips::setHeading(int number, irr::f32 hdg)
 {
-    if (number < (int)otherShips.size() && number >= 0) {
-        otherShips.at(number)->setHeading(hdg);
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        mOtherShips.at(number)->setHeading(hdg);
     }
 }
 
 void OtherShips::setRateOfTurn(int number, irr::f32 rateOfTurn)
 {
-    if (number < (int)otherShips.size() && number >= 0) {
-        otherShips.at(number)->setRateOfTurn(rateOfTurn);
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        mOtherShips.at(number)->setRateOfTurn(rateOfTurn);
     }
 }
 
 std::vector<Leg> OtherShips::getLegs(int number) const
 {
-    if (number < (int)otherShips.size() && number >= 0) {
-        return otherShips.at(number)->getLegs();
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        return mOtherShips.at(number)->getLegs();
     } else {
         //Return an empty vector
         std::vector<Leg> legs;
@@ -328,39 +326,39 @@ std::vector<Leg> OtherShips::getLegs(int number) const
 void OtherShips::changeLeg(int shipNumber, int legNumber, irr::f32 bearing, irr::f32 speed, irr::f32 distance, irr::f32 scenarioTime)
 {
     //Check if ship exists
-    if (shipNumber < (int)otherShips.size() && shipNumber >= 0) {
-        otherShips.at(shipNumber)->changeLeg(legNumber, bearing, speed, distance, scenarioTime);
+    if (shipNumber < (int)mOtherShips.size() && shipNumber >= 0) {
+        mOtherShips.at(shipNumber)->changeLeg(legNumber, bearing, speed, distance, scenarioTime);
     }
 }
 
 void OtherShips::addLeg(int shipNumber, int afterLegNumber, irr::f32 bearing, irr::f32 speed, irr::f32 distance, irr::f32 scenarioTime)
 {
     //Check if ship exists
-    if (shipNumber < (int)otherShips.size() && shipNumber >= 0) {
-        otherShips.at(shipNumber)->addLeg(afterLegNumber, bearing, speed, distance, scenarioTime);
+    if (shipNumber < (int)mOtherShips.size() && shipNumber >= 0) {
+        mOtherShips.at(shipNumber)->addLeg(afterLegNumber, bearing, speed, distance, scenarioTime);
     }
 }
 
 void OtherShips::deleteLeg(int shipNumber, int legNumber, irr::f32 scenarioTime)
 {
     //Check if ship exists
-    if (shipNumber < (int)otherShips.size() && shipNumber >= 0) {
-        otherShips.at(shipNumber)->deleteLeg(legNumber, scenarioTime);
+    if (shipNumber < (int)mOtherShips.size() && shipNumber >= 0) {
+        mOtherShips.at(shipNumber)->deleteLeg(legNumber, scenarioTime);
     }
 }
 
 void OtherShips::resetLegs(int shipNumber, irr::f32 course, irr::f32 speedKts, irr::f32 distanceNm, irr::f32 scenarioTime)
 {
     //Check if ship exists
-    if (shipNumber < (int)otherShips.size() && shipNumber >= 0) {
-        otherShips.at(shipNumber)->resetLegs(course, speedKts, distanceNm, scenarioTime);
+    if (shipNumber < (int)mOtherShips.size() && shipNumber >= 0) {
+        mOtherShips.at(shipNumber)->resetLegs(course, speedKts, distanceNm, scenarioTime);
     }
 }
 
 std::string OtherShips::getName(int number) const
 {
-    if(number < (int)otherShips.size() && number >= 0) {
-        return otherShips.at(number)->getName();
+    if(number < (int)mOtherShips.size() && number >= 0) {
+        return mOtherShips.at(number)->getName();
     } else {
         return "";
     }
@@ -368,7 +366,7 @@ std::string OtherShips::getName(int number) const
 
 void OtherShips::moveNode(irr::f32 deltaX, irr::f32 deltaY, irr::f32 deltaZ)
 {
-    for(std::vector<OtherShip*>::iterator it = otherShips.begin(); it != otherShips.end(); ++it) {
+    for(std::vector<OtherShip*>::iterator it = mOtherShips.begin(); it != mOtherShips.end(); ++it) {
         (*it)->moveNode(deltaX,deltaY,deltaZ);
     }
 }

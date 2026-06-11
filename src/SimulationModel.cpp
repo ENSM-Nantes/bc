@@ -150,7 +150,7 @@ SimulationModel::SimulationModel(irr::IrrlichtDevice* aDev, GUIMain* aGui, Sound
   }
 
   mSolver->Init(mOwnShip);
-  
+
   //Load rain
   mRain->load(mSmgr, mCamera->getSceneNode(), mDevice, mOwnShip->getPosition().X, mOwnShip->getPosition().Y, mOwnShip->getPosition().Z, mOwnShip->getLength(), mOwnShip->getBreadth());
 

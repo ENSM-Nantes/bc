@@ -16,6 +16,8 @@
 
 #include <iostream>
 #include <algorithm>
+#include <filesystem>
+#include <fstream>
 
 #include "IniFile.hpp"
 #include "Angles.hpp"
@@ -25,179 +27,176 @@
 #include "Utilities.hpp"
 
 
-OtherShip::OtherShip (const std::string& name, const std::string& internalName, const irr::u32& mmsi, const irr::core::vector3df& location, std::vector<Leg> legsLoaded, irr::scene::ISceneManager* smgr, irr::IrrlichtDevice* dev)
+OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName, const irr::core::vector3df& aLocation, std::vector<Leg> aLegsLoaded, irr::IrrlichtDevice* aDev)
 {
+  int retShipPrms = -1;
+  Json::Value rootJson;
+  irr::scene::IMesh *shipMesh;
+  
+  irr::scene::ISceneManager* smgr = aDev->getSceneManager();
+  mName = aName;
 
-    this->name = name;
-    mMsi = mmsi;
+  std::string basePath = "models/Othership/" + mName + "/";
+  std::string userFolder = Utilities::getUserDir();
+  //Read model from user dir if it exists there.
+  if (Utilities::pathExists(userFolder + basePath)) {
+    basePath = userFolder + basePath;
+  }
 
-    std::string basePath = "models/Othership/" + name + "/";
-    std::string userFolder = Utilities::getUserDir();
+  //Fall back to loading from own ship folder if it doesn't exist in Otherships (useful for multiplayer)
+  if (!Utilities::pathExists(basePath)) {
+    basePath = "models/Ownship/" + mName + "/";
     //Read model from user dir if it exists there.
     if (Utilities::pathExists(userFolder + basePath)) {
-        basePath = userFolder + basePath;
+      basePath = userFolder + basePath;
+    }
+  }
+
+  std::string shipJsonFilename = basePath + "boat.json";   
+  std::filesystem::path boatJson = shipJsonFilename;
+  
+  if(std::filesystem::exists(boatJson))
+    {
+      std::ifstream streamJson(boatJson);                
+      streamJson >> rootJson;
+      retShipPrms = InitShipParams(rootJson);
+      
+      // get the model file
+      mMeshFileName = rootJson["mesh"]["name"].asString();
+      mMeshFullPath = basePath + mMeshFileName;
+      streamJson.close();
+      // Load the model
+      shipMesh = smgr->getMesh(mMeshFullPath.c_str());
+      mShipScene = smgr->addMeshSceneNode(shipMesh, 0, IDFlag_IsPickable, irr::core::vector3df(0, 0, 0));
     }
 
-    //Fall back to loading from own ship folder if it doesn't exist in Otherships (useful for multiplayer)
-    if (!Utilities::pathExists(basePath)) {
-        basePath = "models/Ownship/" + name + "/";
-        //Read model from user dir if it exists there.
-        if (Utilities::pathExists(userFolder + basePath)) {
-            basePath = userFolder + basePath;
-        }
-    }
+  
+  mScaleFactor = rootJson["mesh"]["scaleFactor"].asFloat();
+  float yCorrection = rootJson["mesh"]["yCorrection"].asFloat();
+  mAngleCorrection = rootJson["mesh"]["angleCorrection"].asFloat();
 
-    //Load from individual boat.ini file
-    std::string iniFilename = basePath + "boat.ini";
+  //Set mesh vertical correction (world units)
+  mHeightCorrection = yCorrection*mScaleFactor;
 
-    //load information about this model from its ini file
-    std::string shipFileName = IniFile::iniFileToString(iniFilename,"FileName");
+  mShipScene = smgr->addMeshSceneNode( shipMesh, 0, -1);
+  mShipScene->setScale(irr::core::vector3df(mScaleFactor,mScaleFactor,mScaleFactor));
+  mShipScene->setPosition(irr::core::vector3df(0,mHeightCorrection,0));
 
-    //get scale factor from ini file (or zero if not set - assume 1)
-    irr::f32 scaleFactor = IniFile::iniFileTof32(iniFilename,"Scalefactor", 1.f);
+  mShipScene->setMaterialFlag(irr::video::EMF_FOG_ENABLE, true);
+  mShipScene->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true); //Normalise normals on scaled meshes, for correct lighting
 
-    irr::f32 yCorrection = IniFile::iniFileTof32(iniFilename,"YCorrection");
-    mAngleCorrection = IniFile::iniFileTof32(iniFilename,"AngleCorrection");
-    // DEE_DEC22 vvvv
-    mAngleCorrectionPitch = IniFile::iniFileTof32(iniFilename,"AngleCorrectionPitch");
-    mAngleCorrectionRoll = IniFile::iniFileTof32(iniFilename,"AngleCorrectionRoll");
-    // DEE_DEC22 ^^^^
-
-
-    std::string shipFullPath = basePath + shipFileName;
-
-    //load mesh
-    irr::scene::IAnimatedMesh* shipMesh = smgr->getMesh(shipFullPath.c_str());
-
-    //Set mesh vertical correction (world units)
-    mHeightCorrection = yCorrection*scaleFactor;
-
-    //add to scene node
-	if (shipMesh==0) {
-        //Failed to load mesh - load with dummy and continue
-        dev->getLogger()->log("Failed to load other ship model:");
-        dev->getLogger()->log(shipFullPath.c_str());
-        shipMesh = smgr->addSphereMesh("Dummy");
-    }
-    mShipScene = smgr->addMeshSceneNode( shipMesh, 0, -1);
-    mShipScene->setScale(irr::core::vector3df(scaleFactor,scaleFactor,scaleFactor));
-    mShipScene->setPosition(irr::core::vector3df(0,mHeightCorrection,0));
-
-    mShipScene->setMaterialFlag(irr::video::EMF_FOG_ENABLE, true);
-    mShipScene->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true); //Normalise normals on scaled meshes, for correct lighting
-
-    //store length and RCS information for radar etc
-    mShipScene->updateAbsolutePosition();
-    mGeoParams.lPP = mShipScene->getTransformedBoundingBox().getExtent().Z;
-    mGeoParams.b = mShipScene->getTransformedBoundingBox().getExtent().X;
-    height = mShipScene->getTransformedBoundingBox().getExtent().Y * 0.75; //Assume 3/4 of the mesh is above water
-    mGeoParams.d = -1 * mShipScene->getTransformedBoundingBox().MinEdge.Y;
+  //store length and RCS information for radar etc
+  mShipScene->updateAbsolutePosition();
+  mGeoParams.lPP = mShipScene->getTransformedBoundingBox().getExtent().Z;
+  mGeoParams.b = mShipScene->getTransformedBoundingBox().getExtent().X;
+  mHeight = mShipScene->getTransformedBoundingBox().getExtent().Y * 0.75; //Assume 3/4 of the mesh is above water
+  mGeoParams.d = -1 * mShipScene->getTransformedBoundingBox().MinEdge.Y;
     
-    rcs = 0.005*std::pow(mGeoParams.lPP ,3); //Default RCS, base radar cross section on length^3 (following RCS table Ship_RCS_table.pdf)
-    std::string logMessage = "Loading '";
-    logMessage.append(shipFullPath);
-    logMessage.append("' Length (m): ");
-    logMessage.append(std::to_string(mGeoParams.lPP));
-    dev->getLogger()->log(logMessage.c_str());
+  mRcs = 0.005*std::pow(mGeoParams.lPP ,3); //Default RCS, base radar cross section on length^3 (following RCS table Ship_RCS_table.pdf)
+  std::string logMessage = "Loading '";
+  logMessage.append(mMeshFullPath);
+  logMessage.append("' Length (m): ");
+  logMessage.append(std::to_string(mGeoParams.lPP));
+  aDev->getLogger()->log(logMessage.c_str());
 
-    //Add triangle selector and make pickable
-    mShipScene->setID(IDFlag_IsPickable);
-    selector=smgr->createTriangleSelector(shipMesh, mShipScene);
-    //This is applied depending on distance to own ship, for speed
-    triangleSelectorEnabled=false;
+  //Add triangle selector and make pickable
+  mShipScene->setID(IDFlag_IsPickable);
+  mSelector=smgr->createTriangleSelector(shipMesh, mShipScene);
+  //This is applied depending on distance to own ship, for speed
+  mTriangleSelectorEnabled=false;
     
-    mShipScene->setName(internalName.c_str());
+  mShipScene->setName(aInternalName.c_str());
 
-    // Todo: Note in documentation that to avoid blocking, use a value of 0.1, as 0 will go to default
-    //FIXME: Note in documentation that this is height above waterline in model units
-    solidHeight = scaleFactor * IniFile::iniFileTof32(iniFilename,"SolidHeight", .5f * height);
+  mSolidHeight = mScaleFactor * 5.f * mHeight;
 
-    //store initial x,y,z positions
-    mEta[1] = location.X;
-    double yPos = location.Y;
-    mEta[0] = location.Z;
-    //speed and heading will come from leg data
+  //store initial x,y,z positions
+  mEta[1] = aLocation.X;
+  double yPos = aLocation.Y;
+  mEta[0] = aLocation.Z;
+  //speed and heading will come from leg data
 
-    //Set lighting to use diffuse and ambient, so lighting of untextured models works
-	if(mShipScene->getMaterialCount()>0) {
-        for(irr::u32 mat=0;mat<mShipScene->getMaterialCount();mat++) {
-            if (mShipScene->getMaterial(mat).AmbientColor.getAlpha() != 255 || 
-                mShipScene->getMaterial(mat).DiffuseColor.getAlpha() != 255) {
-                // Only allow rendering with transparency if required to avoid Z order problems
-                mShipScene->getMaterial(mat).MaterialType = irr::video::EMT_TRANSPARENT_VERTEX_ALPHA;
-            }
-            mShipScene->getMaterial(mat).ColorMaterial = irr::video::ECM_DIFFUSE_AND_AMBIENT;
-        }
+  //Set lighting to use diffuse and ambient, so lighting of untextured models works
+  if(mShipScene->getMaterialCount()>0) {
+    for(unsigned int mat=0;mat<mShipScene->getMaterialCount();mat++) {
+      if (mShipScene->getMaterial(mat).AmbientColor.getAlpha() != 255 || 
+	  mShipScene->getMaterial(mat).DiffuseColor.getAlpha() != 255) {
+	// Only allow rendering with transparency if required to avoid Z order problems
+	mShipScene->getMaterial(mat).MaterialType = irr::video::EMT_TRANSPARENT_VERTEX_ALPHA;
+      }
+      mShipScene->getMaterial(mat).ColorMaterial = irr::video::ECM_DIFFUSE_AND_AMBIENT;
+    }
+  }
+
+  //get light locations:
+  unsigned int numberOfLights = rootJson["lights"]["numberOfLights"].asInt();
+  if (numberOfLights>0)
+    {
+      for(unsigned int currentLight=0; currentLight<=numberOfLights; currentLight++)
+	{
+	  irr::f32 lightX = rootJson["lights"]["list"][currentLight]["x"].asFloat();
+	  irr::f32 lightY = rootJson["lights"]["list"][currentLight]["y"].asFloat();
+	  irr::f32 lightZ = rootJson["lights"]["list"][currentLight]["z"].asFloat();
+
+	  unsigned int lightR = rootJson["lights"]["list"][currentLight]["red"].asInt();
+	  unsigned int lightG = rootJson["lights"]["list"][currentLight]["green"].asInt();
+	  unsigned int lightB = rootJson["lights"]["list"][currentLight]["blue"].asInt();
+
+	  irr::f32 lightStartAngle = rootJson["lights"]["list"][currentLight]["startAngle"].asFloat();
+	  irr::f32 lightEndAngle = rootJson["lights"]["list"][currentLight]["endAngle"].asFloat();
+	  irr::f32 lightRange = rootJson["lights"]["list"][currentLight]["range"].asFloat();
+	  lightRange = lightRange * M_IN_NM; //Convert to metres
+
+	  std::string lightSequence = 0;//IniFile::iniFileToString(iniFilename, IniFile::enumerate1("Sequence", currentLight));
+	  unsigned int phaseStart = 0;//IniFile::iniFileTou32(iniFilename, IniFile::enumerate1("PhaseStart", currentLight));
+
+	  //correct to local scaled coordinates
+	  /*
+	    lightX *= scaleFactor;
+	    lightY = (lightY+yCorrection)*scaleFactor;
+	    lightZ *= scaleFactor;
+	  */ //Whole entity scaled, so not needed
+
+	  //add this Nav light into array
+	  mNavLights.push_back(new NavLight (mShipScene,smgr,irr::core::vector3df(lightX,lightY,lightZ),irr::video::SColor(255,lightR,lightG,lightB),lightStartAngle,lightEndAngle,lightRange,lightSequence,phaseStart));
+	}
     }
 
-    //get light locations:
-    irr::u32 numberOfLights = IniFile::iniFileTou32(iniFilename,"NumberOfLights");
-    if (numberOfLights>0) {
-        for (irr::u32 currentLight=1; currentLight<=numberOfLights; currentLight++) {
-            irr::f32 lightX = IniFile::iniFileTof32(iniFilename,IniFile::enumerate1("LightX",currentLight));
-            irr::f32 lightY = IniFile::iniFileTof32(iniFilename,IniFile::enumerate1("LightY",currentLight));
-            irr::f32 lightZ = IniFile::iniFileTof32(iniFilename,IniFile::enumerate1("LightZ",currentLight));
-
-            irr::u32 lightR = IniFile::iniFileTof32(iniFilename,IniFile::enumerate1("LightRed",currentLight));
-            irr::u32 lightG = IniFile::iniFileTof32(iniFilename,IniFile::enumerate1("LightGreen",currentLight));
-            irr::u32 lightB = IniFile::iniFileTof32(iniFilename,IniFile::enumerate1("LightBlue",currentLight));
-
-            irr::f32 lightStartAngle = IniFile::iniFileTof32(iniFilename,IniFile::enumerate1("LightStartAngle",currentLight)); //Degrees 0-360
-            irr::f32 lightEndAngle = IniFile::iniFileTof32(iniFilename,IniFile::enumerate1("LightEndAngle",currentLight)); //Degrees 0-720, should be greater than LightStartAngle
-            irr::f32 lightRange = IniFile::iniFileTof32(iniFilename,IniFile::enumerate1("LightRange",currentLight)); //Range (Nm)
-            lightRange = lightRange * M_IN_NM; //Convert to metres
-
-            std::string lightSequence = IniFile::iniFileToString(iniFilename, IniFile::enumerate1("Sequence", currentLight));
-            irr::u32 phaseStart = IniFile::iniFileTou32(iniFilename, IniFile::enumerate1("PhaseStart", currentLight));
-
-            //correct to local scaled coordinates
-            /*
-            lightX *= scaleFactor;
-            lightY = (lightY+yCorrection)*scaleFactor;
-            lightZ *= scaleFactor;
-            */ //Whole entity scaled, so not needed
-
-            //add this Nav light into array
-            navLights.push_back(new NavLight (mShipScene,smgr,irr::core::vector3df(lightX,lightY,lightZ),irr::video::SColor(255,lightR,lightG,lightB),lightStartAngle,lightEndAngle,lightRange,lightSequence,phaseStart));
-        }
-    }
-
-    //store leg information
-    legs=legsLoaded;
+  //store leg information
+  mLegs=aLegsLoaded;
 }
 
 OtherShip::~OtherShip()
 {
-    //Drop navLights
-    for(std::vector<NavLight*>::iterator it = navLights.begin(); it != navLights.end(); ++it) {
-        delete (*it);
-    }
-    navLights.clear();
+  //Drop mNavLights
+  for(std::vector<NavLight*>::iterator it = mNavLights.begin(); it != mNavLights.end(); ++it) {
+    delete (*it);
+  }
+  mNavLights.clear();
 }
 
-void OtherShip::update(irr::f32 deltaTime, irr::f32 scenarioTime, irr::f32 tideHeight, irr::u32 lightLevel)
+void OtherShip::update(irr::f32 deltaTime, irr::f32 scenarioTime, irr::f32 tideHeight, unsigned int lightLevel)
 {
 
-    //move according to leg information
-    if (legs.empty()) {
-        //Don't change speed and hdg - may be in secondary mode, where these are set externally
-        //Except, use rateOfTurn to update hdg
-        mEta[2] += deltaTime * rateOfTurn; // rateOfTurn in deg/s
-    } else {
-        //Work out which leg we're on
-        std::vector<Leg>::size_type currentLeg = findCurrentLeg(scenarioTime);
+  //move according to leg information
+  if (mLegs.empty()) {
+    //Don't change speed and hdg - may be in secondary mode, where these are set externally
+    //Except, use rateOfTurn to update hdg
+    mEta[2] += deltaTime * mRateOfTurn; // rateOfTurn in deg/s
+  } else {
+    //Work out which leg we're on
+    std::vector<Leg>::size_type currentLeg = findCurrentLeg(scenarioTime);
 
-        mMu[0] = legs[currentLeg].speed*KTS_TO_MPS;
-        mEta[2] = legs[currentLeg].bearing*irr::core::DEGTORAD;
-    }
+    mMu[0] = mLegs[currentLeg].speed*KTS_TO_MPS;
+    mEta[2] = mLegs[currentLeg].bearing*irr::core::DEGTORAD;
+  }
 
     
-    mEta[1] = mEta[1] + sin(mEta[2])*mMu[0]*deltaTime;
-    mEta[0] = mEta[0] + cos(mEta[2])*mMu[0]*deltaTime;
-    double yPos = tideHeight+mHeightCorrection;
+  mEta[1] = mEta[1] + sin(mEta[2])*mMu[0]*deltaTime;
+  mEta[0] = mEta[0] + cos(mEta[2])*mMu[0]*deltaTime;
+  double yPos = tideHeight+mHeightCorrection;
 
 
-    /*std::cout << "::::::Pos & Rot::::::" << std::endl;
+  /*std::cout << "::::::Pos & Rot::::::" << std::endl;
     std::cout << "mMu[0] : Speed on Z : " << mMu[0] << std::endl;
     std::cout << "mMu[1] :  Speed on X (m/s) : " << mMu[1] << std::endl;
     std::cout << "mMu[2] :  Rate of turn (rad/s) : " << mMu[2] << std::endl;
@@ -205,260 +204,260 @@ void OtherShip::update(irr::f32 deltaTime, irr::f32 scenarioTime, irr::f32 tideH
     std::cout << "mEta[1] : X position : " << mEta[1] << std::endl;
     std::cout << "mEta[2] : Heading (rad) : " << mEta[2] << std::endl;*/
 
-    //Set position & speed by calling ship methods
-    //setPosition(irr::core::vector3df(xPos,yPos,zPos));
-    mShipScene->setPosition(irr::core::vector3df(mEta[1],yPos,mEta[0]));
-    // DEE_DEC22 vvvv allows modelling of trim , list and models derived from other coordinate systems
-    //ship->setRotation(irr::core::vector3df(angleCorrectionPitch, hdg+angleCorrection, angleCorrectionRoll)); //Global vectors
-    mShipScene->setRotation(Angles::irrAnglesFromYawPitchRoll((mEta[2]+mAngleCorrection)*180/PI, mAngleCorrectionPitch,  mAngleCorrectionRoll)); //Global vectors
-    // DEE_DEC22 ^^^^
+  //Set position & speed by calling ship methods
+  //setPosition(irr::core::vector3df(xPos,yPos,zPos));
+  mShipScene->setPosition(irr::core::vector3df(mEta[1],yPos,mEta[0]));
+  // DEE_DEC22 vvvv allows modelling of trim , list and models derived from other coordinate systems
+  //ship->setRotation(irr::core::vector3df(angleCorrectionPitch, hdg+angleCorrection, angleCorrectionRoll)); //Global vectors
+  mShipScene->setRotation(Angles::irrAnglesFromYawPitchRoll((mEta[2]+mAngleCorrection)*180/PI, mAngleCorrectionPitch,  mAngleCorrectionRoll)); //Global vectors
+  // DEE_DEC22 ^^^^
 
-    //for each light, find range and angle
-    for(std::vector<NavLight*>::size_type currentLight = 0; currentLight<navLights.size(); currentLight++) {
-        navLights[currentLight]->update(scenarioTime, lightLevel);
-    }
+  //for each light, find range and angle
+  for(std::vector<NavLight*>::size_type currentLight = 0; currentLight<mNavLights.size(); currentLight++) {
+    mNavLights[currentLight]->update(scenarioTime, lightLevel);
+  }
 
 }
 
 irr::f32 OtherShip::getHeight() const
 {
-    return height;
+  return mHeight;
 }
 
 irr::f32 OtherShip::getRCS() const
 {
-    return rcs;
+  return mRcs;
 }
 
 std::string OtherShip::getName() const
 {
-    return name;
+  return mName;
 }
 
 std::vector<Leg> OtherShip::getLegs() const
 {
-    return legs;
+  return mLegs;
 }
 
 void OtherShip::changeLeg(int legNumber, irr::f32 bearing, irr::f32 speed, irr::f32 distance, irr::f32 scenarioTime)
 {
 
-    //Check if leg exists, then if we are allowed to change this leg (current or future leg), and not the final 'stop' leg (hence legs.size()-1)
-    if (legNumber >=0 && legNumber < ((int)legs.size() - 1) && legNumber >= (int)findCurrentLeg(scenarioTime)) {
+  //Check if leg exists, then if we are allowed to change this leg (current or future leg), and not the final 'stop' leg (hence legs.size()-1)
+  if (legNumber >=0 && legNumber < ((int)mLegs.size() - 1) && legNumber >= (int)findCurrentLeg(scenarioTime)) {
 
-        //Store old information temporarily
-        irr::f32 oldSpeed = legs.at(legNumber).speed;
+    //Store old information temporarily
+    irr::f32 oldSpeed = mLegs.at(legNumber).speed;
 
-        //Recalculate subsequent start times, only changing from the current point.
-        //We can guarantee that there is a next leg, as we checked (legNumber < legs.size() - 1)
+    //Recalculate subsequent start times, only changing from the current point.
+    //We can guarantee that there is a next leg, as we checked (legNumber < legs.size() - 1)
 
-        irr::f32 newTimeRemaining;
-        if ( legNumber == (int)findCurrentLeg(scenarioTime) ) {
-            //On current leg - calculate from current point only
-            irr::f32 oldTimeRemaining = legs.at(legNumber+1).startTime - scenarioTime;
-            if (distance < 0) {distance = fabs(oldSpeed)*oldTimeRemaining/SECONDS_IN_HOUR;} //If leg length is negative, ensure overall leg length doesn't change
-            newTimeRemaining = SECONDS_IN_HOUR * distance / fabs(speed); //The adjusted leg distance starts from now
-            legs.at(legNumber).startTime = scenarioTime; // New leg effectively starts now
-        } else {
-            //On subsequent leg - calculate for whole leg
-            irr::f32 oldTimeRemaining = legs.at(legNumber+1).startTime - legs.at(legNumber).startTime;
-            if (distance < 0) {distance = fabs(oldSpeed)*oldTimeRemaining/SECONDS_IN_HOUR;} //If leg length is negative, ensure overall leg length doesn't change
-            newTimeRemaining = SECONDS_IN_HOUR * distance / fabs(speed);
-            //No need to change start time.
-        }
+    irr::f32 newTimeRemaining;
+    if ( legNumber == (int)findCurrentLeg(scenarioTime) ) {
+      //On current leg - calculate from current point only
+      irr::f32 oldTimeRemaining = mLegs.at(legNumber+1).startTime - scenarioTime;
+      if (distance < 0) {distance = fabs(oldSpeed)*oldTimeRemaining/SECONDS_IN_HOUR;} //If leg length is negative, ensure overall leg length doesn't change
+      newTimeRemaining = SECONDS_IN_HOUR * distance / fabs(speed); //The adjusted leg distance starts from now
+      mLegs.at(legNumber).startTime = scenarioTime; // New leg effectively starts now
+    } else {
+      //On subsequent leg - calculate for whole leg
+      irr::f32 oldTimeRemaining = mLegs.at(legNumber+1).startTime - mLegs.at(legNumber).startTime;
+      if (distance < 0) {distance = fabs(oldSpeed)*oldTimeRemaining/SECONDS_IN_HOUR;} //If leg length is negative, ensure overall leg length doesn't change
+      newTimeRemaining = SECONDS_IN_HOUR * distance / fabs(speed);
+      //No need to change start time.
+    }
 
-        //Change this leg
-        legs.at(legNumber).bearing = bearing;
-        legs.at(legNumber).speed = speed;
-        legs.at(legNumber).distance = distance; //Store for later reference
+    //Change this leg
+    mLegs.at(legNumber).bearing = bearing;
+    mLegs.at(legNumber).speed = speed;
+    mLegs.at(legNumber).distance = distance; //Store for later reference
 
-        //Set start time of the next leg (guaranteed to exist)
-        legs.at(legNumber + 1).startTime = legs.at(legNumber).startTime + newTimeRemaining;
-        //For the remaining legs (which may not exist)
-        for (int i = legNumber + 2; i < (int)legs.size(); i++) {
-            legs.at(i).startTime = legs.at(i-1).startTime + SECONDS_IN_HOUR*legs.at(i-1).distance/legs.at(i-1).speed;
-        }
+    //Set start time of the next leg (guaranteed to exist)
+    mLegs.at(legNumber + 1).startTime = mLegs.at(legNumber).startTime + newTimeRemaining;
+    //For the remaining legs (which may not exist)
+    for (int i = legNumber + 2; i < (int)mLegs.size(); i++) {
+      mLegs.at(i).startTime = mLegs.at(i-1).startTime + SECONDS_IN_HOUR*mLegs.at(i-1).distance/mLegs.at(i-1).speed;
+    }
 
-    } //Check leg exists & can be changed
+  } //Check leg exists & can be changed
 
 }
 
 void OtherShip::addLeg(int afterLegNumber, irr::f32 bearing, irr::f32 speed, irr::f32 distance, irr::f32 scenarioTime)
 {
+  
+  //Check if leg is reasonable, and is before the 'stop leg'
+  //A special case allows afterLegNumber to equal -1, for when only a single 'stop leg' exists
+  if (afterLegNumber >= -1 && afterLegNumber < ((int)mLegs.size() - 1)) {
 
-    //Check if leg is reasonable, and is before the 'stop leg'
-    //A special case allows afterLegNumber to equal -1, for when only a single 'stop leg' exists
-    if (afterLegNumber >= -1 && afterLegNumber < ((int)legs.size() - 1)) {
+    //if we're on the stop leg
+    if (findCurrentLeg(scenarioTime) == (mLegs.size()-1)) {
 
-        //if we're on the stop leg
-        if (findCurrentLeg(scenarioTime) == (legs.size()-1)) {
+      //If the 'after' leg is the penultimate, add a leg before the stop one, starting now
+      if (afterLegNumber == ((int)mLegs.size()-2))  { //This also catches the special case where there is only the 'stop' leg, so the 'afterLegNumber value is -1
 
-            //If the 'after' leg is the penultimate, add a leg before the stop one, starting now
-            if (afterLegNumber == ((int)legs.size()-2))  { //This also catches the special case where there is only the 'stop' leg, so the 'afterLegNumber value is -1
+	Leg newLeg;
+	newLeg.bearing = bearing;
+	newLeg.speed = speed;
+	newLeg.distance = distance;
+	newLeg.startTime = scenarioTime;
 
-                Leg newLeg;
-                newLeg.bearing = bearing;
-                newLeg.speed = speed;
-                newLeg.distance = distance;
-                newLeg.startTime = scenarioTime;
+	mLegs.insert(mLegs.end()-1, newLeg); //Insert before final leg
+      }
+      //else check that the 'after' leg is current or future
+    } else if (afterLegNumber >=0 && afterLegNumber >= (int)findCurrentLeg(scenarioTime)) { //First check only required in case findCurrentLeg does not return a valid result (>=0)
+      Leg newLeg;
+      newLeg.bearing = bearing;
+      newLeg.speed = speed;
+      newLeg.distance = distance;
+      newLeg.startTime = mLegs.at(afterLegNumber + 1).startTime; //This leg starts when the next leg would have started
 
-                legs.insert(legs.end()-1, newLeg); //Insert before final leg
-            }
-        //else check that the 'after' leg is current or future
-        } else if (afterLegNumber >=0 && afterLegNumber >= (int)findCurrentLeg(scenarioTime)) { //First check only required in case findCurrentLeg does not return a valid result (>=0)
-            Leg newLeg;
-            newLeg.bearing = bearing;
-            newLeg.speed = speed;
-            newLeg.distance = distance;
-            newLeg.startTime = legs.at(afterLegNumber + 1).startTime; //This leg starts when the next leg would have started
+      mLegs.insert(mLegs.begin()+afterLegNumber+1, newLeg); //Insert leg
+    }
 
-            legs.insert(legs.begin()+afterLegNumber+1, newLeg); //Insert leg
-        }
-
-        //set start time of subsequent legs
-        //For the remaining legs (which may not exist)
-        for (int i = afterLegNumber + 2; i < (int)legs.size(); i++) {
-            legs.at(i).startTime = legs.at(i-1).startTime + SECONDS_IN_HOUR*legs.at(i-1).distance/legs.at(i-1).speed;
-        }
+    //set start time of subsequent mLegs
+    //For the remaining mLegs (which may not exist)
+    for (int i = afterLegNumber + 2; i < (int)mLegs.size(); i++) {
+      mLegs.at(i).startTime = mLegs.at(i-1).startTime + SECONDS_IN_HOUR*mLegs.at(i-1).distance/mLegs.at(i-1).speed;
+    }
 
 
-    } //Check leg exists & can be changed
+  } //Check leg exists & can be changed
 
 }
 
 void OtherShip::deleteLeg(int legNumber, irr::f32 scenarioTime)
 {
 
-    //Check if leg exists, then if we are allowed to change this leg (current or future leg), and not the final 'stop' leg (hence legs.size()-1)
-    if (legNumber >=0 && legNumber < ((int)legs.size() - 1) && legNumber >= (int)findCurrentLeg(scenarioTime)) {
+  //Check if leg exists, then if we are allowed to change this leg (current or future leg), and not the final 'stop' leg (hence mLegs.size()-1)
+  if (legNumber >=0 && legNumber < ((int)mLegs.size() - 1) && legNumber >= (int)findCurrentLeg(scenarioTime)) {
 
-        //We can guarantee that there is a next leg, as we checked (legNumber < legs.size() - 1)
+    //We can guarantee that there is a next leg, as we checked (legNumber < mLegs.size() - 1)
 
-        //Current or future leg?
-        if (legNumber == (int)findCurrentLeg(scenarioTime)) {
-            //Current leg
-            //Set next leg start time to now: Set start time of the next leg (guaranteed to exist)
-            legs.at(legNumber + 1).startTime = scenarioTime;
+    //Current or future leg?
+    if (legNumber == (int)findCurrentLeg(scenarioTime)) {
+      //Current leg
+      //Set next leg start time to now: Set start time of the next leg (guaranteed to exist)
+      mLegs.at(legNumber + 1).startTime = scenarioTime;
 
-        } else {
-            //Future leg
-            //Set next leg start time to the start time of the leg we're removing
-            legs.at(legNumber + 1).startTime = legs.at(legNumber).startTime;
-        }
+    } else {
+      //Future leg
+      //Set next leg start time to the start time of the leg we're removing
+      mLegs.at(legNumber + 1).startTime = mLegs.at(legNumber).startTime;
+    }
 
-        //adjust start time of subsequent legs
-        //For the remaining legs (which may not exist)
-        for (int i = legNumber + 2; i < (int)legs.size(); i++) {
-            legs.at(i).startTime = legs.at(i-1).startTime + SECONDS_IN_HOUR*legs.at(i-1).distance/legs.at(i-1).speed;
-        }
+    //adjust start time of subsequent mLegs
+    //For the remaining mLegs (which may not exist)
+    for (int i = legNumber + 2; i < (int)mLegs.size(); i++) {
+      mLegs.at(i).startTime = mLegs.at(i-1).startTime + SECONDS_IN_HOUR*mLegs.at(i-1).distance/mLegs.at(i-1).speed;
+    }
 
-        //Remove this leg
-        legs.erase(legs.begin() + legNumber);
+    //Remove this leg
+    mLegs.erase(mLegs.begin() + legNumber);
 
-    } //Check leg exists & can be changed
+  } //Check leg exists & can be changed
 
 }
 
 void OtherShip::resetLegs(irr::f32 course, irr::f32 speedKts, irr::f32 distanceNm, irr::f32 scenarioTime)
 {
-    legs.clear();
+  mLegs.clear();
 
-    Leg currentLeg;
-    currentLeg.bearing = course;
-    currentLeg.speed = speedKts;
-    currentLeg.startTime = scenarioTime;
-    currentLeg.distance = distanceNm;
+  Leg currentLeg;
+  currentLeg.bearing = course;
+  currentLeg.speed = speedKts;
+  currentLeg.startTime = scenarioTime;
+  currentLeg.distance = distanceNm;
 
-    //Use distance to calculate startTime of next leg, and stored for later reference.
-    currentLeg.distance = distanceNm;
-    irr::f32 mainLegEndTime = scenarioTime + SECONDS_IN_HOUR*(distanceNm/fabs(speedKts)); // nm/kts -> hours, so convert to seconds
+  //Use distance to calculate startTime of next leg, and stored for later reference.
+  currentLeg.distance = distanceNm;
+  irr::f32 mainLegEndTime = scenarioTime + SECONDS_IN_HOUR*(distanceNm/fabs(speedKts)); // nm/kts -> hours, so convert to seconds
 
-    legs.push_back(currentLeg);
+  mLegs.push_back(currentLeg);
 
-    //Add a stop leg here
-    Leg stopLeg;
-    stopLeg.bearing=course;
-    stopLeg.speed=0;
-    stopLeg.distance=0;
-    stopLeg.startTime = mainLegEndTime;
-    legs.push_back(stopLeg);
+  //Add a stop leg here
+  Leg stopLeg;
+  stopLeg.bearing=course;
+  stopLeg.speed=0;
+  stopLeg.distance=0;
+  stopLeg.startTime = mainLegEndTime;
+  mLegs.push_back(stopLeg);
 }
 
-void OtherShip::setRateOfTurn(irr::f32 rateOfTurn) //Sets the rate of turn (only used in multiplayer mode)
+void OtherShip::setRateOfTurn(irr::f32 aRateOfTurn) //Sets the rate of turn (only used in multiplayer mode)
 {
-    this->rateOfTurn = rateOfTurn;
+  mRateOfTurn = aRateOfTurn;
 }
 
 RadarData OtherShip::getRadarData(irr::core::vector3df scannerPosition) const
 //Get data for OtherShip (number) relative to scannerPosition
 //Similar code in Buoy.cpp
 {
-    RadarData radarData;
+  RadarData radarData;
 
-    irr::core::vector3df contactPosition = getPosition();
-    irr::core::vector3df relativePosition = contactPosition-scannerPosition;
+  irr::core::vector3df contactPosition = getPosition();
+  irr::core::vector3df relativePosition = contactPosition-scannerPosition;
 
-    radarData.relX = relativePosition.X;
-    radarData.relZ = relativePosition.Z;
-    radarData.angle = relativePosition.getHorizontalAngle().Y;
-    radarData.range = relativePosition.getLength();
-    radarData.heading = getHeading();
+  radarData.relX = relativePosition.X;
+  radarData.relZ = relativePosition.Z;
+  radarData.angle = relativePosition.getHorizontalAngle().Y;
+  radarData.range = relativePosition.getLength();
+  radarData.heading = getHeading();
 
-    radarData.height=getHeight();
-    radarData.solidHeight=solidHeight;
-    //radarData.radarHorizon=99999; //ToDo: Implement when ARPA is implemented
-    radarData.length=getLength();
-    radarData.width=getBreadth();
-    radarData.rcs=getRCS();
+  radarData.height=getHeight();
+  radarData.solidHeight=mSolidHeight;
+  //radarData.radarHorizon=99999; //ToDo: Implement when ARPA is implemented
+  radarData.length=getLength();
+  radarData.width=getBreadth();
+  radarData.rcs=getRCS();
 
-    //Calculate angles and ranges to each end of the contact
-    irr::f32 relAngle1 = Angles::normaliseAngle(irr::core::RADTODEG*std::atan2( radarData.relX + 0.5*radarData.length*std::sin(irr::core::DEGTORAD*radarData.heading), radarData.relZ + 0.5*radarData.length*std::cos(irr::core::DEGTORAD*radarData.heading) ));
-    irr::f32 relAngle2 = Angles::normaliseAngle(irr::core::RADTODEG*std::atan2( radarData.relX - 0.5*radarData.length*std::sin(irr::core::DEGTORAD*radarData.heading), radarData.relZ - 0.5*radarData.length*std::cos(irr::core::DEGTORAD*radarData.heading) ));
-    irr::f32 range1 = std::sqrt(std::pow(radarData.relX + 0.5*radarData.length*std::sin(irr::core::DEGTORAD*radarData.heading),2) + std::pow(radarData.relZ + 0.5*radarData.length*std::cos(irr::core::DEGTORAD*radarData.heading),2));
-    irr::f32 range2 = std::sqrt(std::pow(radarData.relX - 0.5*radarData.length*std::sin(irr::core::DEGTORAD*radarData.heading),2) + std::pow(radarData.relZ - 0.5*radarData.length*std::cos(irr::core::DEGTORAD*radarData.heading),2));
-    radarData.minRange=std::min(range1,range2);
-    radarData.maxRange=std::max(range1,range2);
-    radarData.minAngle=std::min(relAngle1,relAngle2);
-    radarData.maxAngle=std::max(relAngle1,relAngle2);
+  //Calculate angles and ranges to each end of the contact
+  irr::f32 relAngle1 = Angles::normaliseAngle(irr::core::RADTODEG*std::atan2( radarData.relX + 0.5*radarData.length*std::sin(irr::core::DEGTORAD*radarData.heading), radarData.relZ + 0.5*radarData.length*std::cos(irr::core::DEGTORAD*radarData.heading) ));
+  irr::f32 relAngle2 = Angles::normaliseAngle(irr::core::RADTODEG*std::atan2( radarData.relX - 0.5*radarData.length*std::sin(irr::core::DEGTORAD*radarData.heading), radarData.relZ - 0.5*radarData.length*std::cos(irr::core::DEGTORAD*radarData.heading) ));
+  irr::f32 range1 = std::sqrt(std::pow(radarData.relX + 0.5*radarData.length*std::sin(irr::core::DEGTORAD*radarData.heading),2) + std::pow(radarData.relZ + 0.5*radarData.length*std::cos(irr::core::DEGTORAD*radarData.heading),2));
+  irr::f32 range2 = std::sqrt(std::pow(radarData.relX - 0.5*radarData.length*std::sin(irr::core::DEGTORAD*radarData.heading),2) + std::pow(radarData.relZ - 0.5*radarData.length*std::cos(irr::core::DEGTORAD*radarData.heading),2));
+  radarData.minRange=std::min(range1,range2);
+  radarData.maxRange=std::max(range1,range2);
+  radarData.minAngle=std::min(relAngle1,relAngle2);
+  radarData.maxAngle=std::max(relAngle1,relAngle2);
 
-    //Initial defaults: Fixme: Will need changing with full implementation
-    radarData.hidden=false;
-    radarData.racon=""; //Racon code if set
-    radarData.raconOffsetTime=0.0;
-    radarData.SART=false;
+  //Initial defaults: Fixme: Will need changing with full implementation
+  radarData.hidden=false;
+  radarData.racon=""; //Racon code if set
+  radarData.raconOffsetTime=0.0;
+  radarData.SART=false;
 
-    radarData.contact = (void*)this;
+  radarData.contact = (void*)this;
 
-    return radarData;
+  return radarData;
 }
 
 std::vector<Leg>::size_type OtherShip::findCurrentLeg(irr::f32 scenarioTime)
 {
-    std::vector<Leg>::size_type currentLeg;
+  std::vector<Leg>::size_type currentLeg;
 
-    for(currentLeg = 0; currentLeg<legs.size()-1; currentLeg++) {
-        if (legs[currentLeg].startTime <=scenarioTime && legs[currentLeg+1].startTime > scenarioTime ) {
-            break;
-        }
+  for(currentLeg = 0; currentLeg<mLegs.size()-1; currentLeg++) {
+    if (mLegs[currentLeg].startTime <=scenarioTime && mLegs[currentLeg+1].startTime > scenarioTime ) {
+      break;
     }
-    //currentLeg is now the correct leg, or the last leg, which is a 'stopped' leg. (true as we run currentLeg++ once after the check (currentLeg<legs.size()-1) if the 'break' isn't reached
+  }
+  //currentLeg is now the correct leg, or the last leg, which is a 'stopped' leg. (true as we run currentLeg++ once after the check (currentLeg<mLegs.size()-1) if the 'break' isn't reached
 
-    return currentLeg;
+  return currentLeg;
 }
 
-void OtherShip::enableTriangleSelector(bool selectorEnabled)
+void OtherShip::enableTriangleSelector(bool aSelectorEnabled)
 {
     
-    //Only re-set if we need to change the state
+  //Only re-set if we need to change the state
     
-    if (selectorEnabled && !triangleSelectorEnabled) {
-        mShipScene->setTriangleSelector(selector);
-        triangleSelectorEnabled = true;
-    } 
+  if (aSelectorEnabled && !mTriangleSelectorEnabled) {
+    mShipScene->setTriangleSelector(mSelector);
+    mTriangleSelectorEnabled = true;
+  } 
     
-    if (!selectorEnabled && triangleSelectorEnabled) {
-        mShipScene->setTriangleSelector(0);
-        triangleSelectorEnabled = false;
-    }
+  if (!aSelectorEnabled && mTriangleSelectorEnabled) {
+    mShipScene->setTriangleSelector(0);
+    mTriangleSelectorEnabled = false;
+  }
 
 }

@@ -129,7 +129,7 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
   unsigned int numberOfLights = rootJson["lights"]["numberOfLights"].asInt();
   if (numberOfLights>0)
     {
-      for(unsigned int currentLight=0; currentLight<=numberOfLights; currentLight++)
+      for(unsigned int currentLight=0; currentLight<numberOfLights; currentLight++)
 	{
 	  irr::f32 lightX = rootJson["lights"]["list"][currentLight]["x"].asFloat();
 	  irr::f32 lightY = rootJson["lights"]["list"][currentLight]["y"].asFloat();
@@ -144,15 +144,8 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
 	  irr::f32 lightRange = rootJson["lights"]["list"][currentLight]["range"].asFloat();
 	  lightRange = lightRange * M_IN_NM; //Convert to metres
 
-	  std::string lightSequence = 0;//IniFile::iniFileToString(iniFilename, IniFile::enumerate1("Sequence", currentLight));
+	  std::string lightSequence = "";//IniFile::iniFileToString(iniFilename, IniFile::enumerate1("Sequence", currentLight));
 	  unsigned int phaseStart = 0;//IniFile::iniFileTou32(iniFilename, IniFile::enumerate1("PhaseStart", currentLight));
-
-	  //correct to local scaled coordinates
-	  /*
-	    lightX *= scaleFactor;
-	    lightY = (lightY+yCorrection)*scaleFactor;
-	    lightZ *= scaleFactor;
-	  */ //Whole entity scaled, so not needed
 
 	  //add this Nav light into array
 	  mNavLights.push_back(new NavLight (mShipScene,smgr,irr::core::vector3df(lightX,lightY,lightZ),irr::video::SColor(255,lightR,lightG,lightB),lightStartAngle,lightEndAngle,lightRange,lightSequence,phaseStart));

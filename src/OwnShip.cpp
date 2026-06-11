@@ -155,7 +155,7 @@ void OwnShip::InitOwnShipParams(OwnShipData aOwnShipData, Json::Value aJsonRoot)
   mViews.resize(nbrOfViews);
   mIsHighView.resize(nbrOfViews);
 
-  for (unsigned char i=0; i<nbrOfViews; i++)
+  for(unsigned char i=0; i<nbrOfViews; i++)
     {
       mViews[i][0] = mScaleFactor * aJsonRoot["mesh"]["views"][i][0].asFloat();
       mViews[i][1] = mScaleFactor * aJsonRoot["mesh"]["views"][i][1].asFloat();

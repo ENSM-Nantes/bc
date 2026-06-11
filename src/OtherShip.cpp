@@ -69,7 +69,6 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
       shipMesh = smgr->getMesh(mMeshFullPath.c_str());
       mShipScene = smgr->addMeshSceneNode(shipMesh, 0, IDFlag_IsPickable, irr::core::vector3df(0, 0, 0));
     }
-
   
   mScaleFactor = rootJson["mesh"]["scaleFactor"].asFloat();
   float yCorrection = rootJson["mesh"]["yCorrection"].asFloat();
@@ -78,7 +77,6 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
   //Set mesh vertical correction (world units)
   mHeightCorrection = yCorrection*mScaleFactor;
 
-  mShipScene = smgr->addMeshSceneNode( shipMesh, 0, -1);
   mShipScene->setScale(irr::core::vector3df(mScaleFactor,mScaleFactor,mScaleFactor));
   mShipScene->setPosition(irr::core::vector3df(0,mHeightCorrection,0));
 

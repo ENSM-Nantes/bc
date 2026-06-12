@@ -278,7 +278,7 @@ irr::u32 OtherShips::getIMO(int number) const
 irr::u32 OtherShips::getMMSI(int number) const
 {
     if (number < (int)mOtherShips.size() && number >= 0) {
-        return mOtherShips.at(number)->getMMSI();
+        return 666600003;
     } else {
         return 0;
     }

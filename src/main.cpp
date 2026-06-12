@@ -414,6 +414,14 @@ int main(int argc, char ** argv)
   std::string nmeaUDPPortVDR = IniFile::iniFileToString(iniFilename, "NMEA_UDPPort_VDR");
   std::string nmeaUDPListenPortVDR = IniFile::iniFileToString(iniFilename, "NMEA_UDPListenPort_VDR");
 
+  //Gateway
+  std::string nmeaComPortGateway = IniFile::iniFileToString(iniFilename, "NMEA_ComPort_Gateway");
+  irr::u32 nmeaBaudrateGateway = IniFile::iniFileTou32(iniFilename, "NMEA_Baudrate_Gateway", 4800);
+  std::string nmeaUDPAddrGateway = IniFile::iniFileToString(iniFilename, "NMEA_UDPAddress_Gateway");
+  std::string nmeaUDPPortGateway = IniFile::iniFileToString(iniFilename, "NMEA_UDPPort_Gateway");
+  std::string nmeaUDPListenPortGateway = IniFile::iniFileToString(iniFilename, "NMEA_UDPListenPort_Gateway");
+
+  
   //Load UDP network settings
   irr::u32 enetSrvPort = IniFile::iniFileTou32(iniFilename, "udp_server_port");
   if (enetSrvPort == 0) {
@@ -703,10 +711,13 @@ int main(int argc, char ** argv)
   NMEA nmeaConning;
   NMEA nmeaOpCpn;
   NMEA nmeaVDR;
-
+  NMEA nmeaGateway;
+  
   nmeaConning.Init(device->getTimer()->getRealTime(), nmeaComPortConning, nmeaBaudrateConning, nmeaUDPAddrConning, nmeaUDPPortConning, nmeaUDPListenPortConning);
   nmeaOpCpn.Init(device->getTimer()->getRealTime(), nmeaComPortOpCpn, nmeaBaudrateOpCpn, nmeaUDPAddrOpCpn, nmeaUDPPortOpCpn, nmeaUDPListenPortOpCpn);
   nmeaVDR.Init(device->getTimer()->getRealTime(), nmeaComPortVDR, nmeaBaudrateVDR, nmeaUDPAddrVDR, nmeaUDPPortVDR, nmeaUDPListenPortVDR);
+  nmeaGateway.Init(device->getTimer()->getRealTime(), nmeaComPortGateway, nmeaBaudrateGateway, nmeaUDPAddrGateway, nmeaUDPPortGateway, nmeaUDPListenPortGateway);
+ 
   
   Network network;
   network.Connect(enetSrvAddr, enetSrvPort, mode);
@@ -754,6 +765,7 @@ int main(int argc, char ** argv)
  nmeaConning.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
  nmeaOpCpn.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
  nmeaVDR.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
+ nmeaGateway.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
 
   
   bEnd = true;
@@ -926,6 +938,15 @@ int main(int argc, char ** argv)
 	     if (!nmeaComPortVDR.empty())  nmeaVDR.SendSerial();
 	     if (!nmeaUDPAddrVDR.empty() && !nmeaUDPPortVDR.empty()) nmeaVDR.SendUdp();
 	     nmeaVDR.ClearQueue();
+	   }
+
+	 if(nmeaGateway.GetHostStatus())
+	   {	 
+	     if (!nmeaUDPListenPortGateway.empty()) nmeaGateway.Receive();
+	     if (!nmeaComPortGateway.empty() || (!nmeaUDPAddrGateway.empty() && !nmeaUDPPortGateway.empty())) nmeaGateway.Update(model.getTime());
+	     if (!nmeaComPortGateway.empty())  nmeaGateway.SendSerial();
+	     if (!nmeaUDPAddrGateway.empty() && !nmeaUDPPortGateway.empty()) nmeaGateway.SendUdp();
+	     nmeaGateway.ClearQueue();
 	   }
       }
       { IPROF("Render setup");

@@ -1,0 +1,261 @@
+{
+	"addedMass" : 
+	{
+		"pX" : 0.024513207376003265,
+		"pY" : 0.055419590324163437,
+		"pZ" : 0.011906502768397331
+	},
+	"depthSounder" : 
+	{
+		"maxDepth" : 200.0,
+		"number" : true
+	},
+	"engine" : 
+	{
+		"brand" : "xxxx",
+		"fuelCons" : 22.0,
+		"number" : 2,
+		"power" : 18000.0,
+		"rpmMax" : 170.0,
+		"type" : "xxxx"
+	},
+	"general" : 
+	{
+		"boatName" : "Waverley",
+		"desc" : "This ship is from the original BridgeCommand repository and has been retained for legacy\nHowever, it has not been tested with the new MMG Yasukawa model.\n\nTODO : Enter parameters for this ship",
+		"imgName" : "Waverley.jpg",
+		"type" : "TODO"
+	},
+	"geoParams" : 
+	{
+		"GM" : 1.0,
+		"KM" : 1.5,
+		"altGravityCenter" : 1.5,
+		"blockCoef" : 0.60000002384185791,
+		"breadth" : 24.799999237060547,
+		"draugth" : 2.0,
+		"length" : 156.44999694824219,
+		"longGravityCenter" : 10.430000305175781,
+		"rho" : 1025.0,
+		"subwaterVolume" : 6000.0
+	},
+	"gps" : 
+	{
+		"number" : true
+	},
+	"hull" : 
+	{
+		"invertRoll" : false,
+		"kpB" : -0.25859999656677246,
+		"kpBBB" : -0.72930002212524414,
+		"kpBBG" : 0.22290000319480896,
+		"kpBBR" : 1.1474000215530396,
+		"kpBRG" : 0.5374000072479248,
+		"kpBRR" : -0.33509999513626099,
+		"kpG" : -0.018500000238418579,
+		"kpR" : 0.053199999034404755,
+		"kpRRG" : -0.092799998819828033,
+		"kpRRR" : -0.013199999928474426,
+		"linearExtCoeff" : 0.20000000298023224,
+		"npR" : -0.013152643106877804,
+		"npRRR" : -0.032222434878349304,
+		"npV" : -0.025567274540662766,
+		"npVRR" : -0.28725403547286987,
+		"npVVR" : -0.6125791072845459,
+		"npVVV" : -0.24599997699260712,
+		"xp0" : 0.02199999988079071,
+		"xpRR" : -0.0037790117785334587,
+		"xpVR" : -0.046241007745265961,
+		"xpVV" : -0.070623196661472321,
+		"xpVVVV" : 0.46466344594955444,
+		"ypR" : 0.059811733663082123,
+		"ypRRR" : -0.050999999046325684,
+		"ypV" : -0.17331534624099731,
+		"ypVRR" : -0.76608061790466309,
+		"ypVVR" : -0.75,
+		"ypVVV" : -0.68706655502319336
+	},
+	"initialSpeed" : 
+	[
+		0,
+		0,
+		0
+	],
+	"mesh" : 
+	{
+		"angleCorrection" : 0,
+		"makeTransparent" : false,
+		"name" : "Waverley.obj",
+		"numberOfViews" : 4,
+		"scaleFactor" : 0.30379998683929443,
+		"views" : 
+		[
+			[
+				0.0,
+				39.0,
+				56.799999237060547,
+				false
+			],
+			[
+				-15.5,
+				39.700000762939453,
+				60.0,
+				false
+			],
+			[
+				15.5,
+				39.700000762939453,
+				60.0,
+				false
+			],
+			[
+				0.0,
+				400.0,
+				-30.0,
+				true
+			]
+		],
+		"yCorrection" : -15.0
+	},
+	"propeller" : 
+	{
+		"backwardEff" : 0.69999998807907104,
+		"diameter" : 2.2000000476837158,
+		"forwardRotDir" : "right",
+		"k0" : 0.29300001263618469,
+		"k1" : -0.27500000596046448,
+		"k2" : -0.13899999856948853,
+		"longPosition" : -0.47999998927116394,
+		"nominalWake" : 0.25,
+		"number" : 2,
+		"spacing" : 8.0,
+		"thrustFactor" : 0.27000001072883606
+	},
+	"radar" : 
+	{
+		"number" : 1,
+		"pos" : 
+		[
+			0.0,
+			-10.0,
+			0.0
+		],
+		"size" : 1.0,
+		"tilt" : 0.0
+	},
+	"rotIndicator" : 
+	{
+		"number" : true
+	},
+	"rudder" : 
+	{
+		"areaMobPart" : 20.0,
+		"aspectRatio" : 0.89999997615814209,
+		"expConstUr" : 0.17828778922557831,
+		"flowCoef" : 
+		[
+			0.33592713723305001,
+			0.33592713723305001
+		],
+		"forceIncreaseFactor" : 0.34239694476127625,
+		"longCoordinatePos" : -0.89999997615814209,
+		"longCoordinateRatio" : -0.5,
+		"longLateralForce" : -0.40000000596046448,
+		"maxAngle" : 0.61000001430511475,
+		"maxSpeed" : 0.05000000074505806,
+		"number" : 2,
+		"spacing" : 8.0,
+		"spanLength" : 4.1999998092651367,
+		"steeringResistanceFactor" : 0.38999998569488525,
+		"wakeFractionRatio" : 0.89500004053115845
+	},
+	"sail" : 
+	{
+		"number" : 0,
+		"pos" : 
+		[
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			]
+		],
+		"size" : "xxxx",
+		"type" : "xxx"
+	},
+    "lights": {
+        "numberOfLights": 5,
+        "list": [
+            {
+                "x": 18.3,
+                "y": 33.6,
+                "z": 58.8,
+                "range": 6,
+                "red": 0,
+                "green": 255,
+                "blue": 0,
+                "startAngle": -1.0,
+                "endAngle": 112.5
+            },
+            {
+                "x": -18.3,
+                "y": 33.8,
+                "z": 58.8,
+                "range": 6,
+                "red": 255,
+                "green": 0,
+                "blue": 0,
+                "startAngle": 247.5,
+                "endAngle": 361.0
+            },
+            {
+                "x": 0.0,
+                "y": 63.8,
+                "z": 89.6,
+                "range": 6,
+                "red": 255,
+                "green": 255,
+                "blue": 255,
+                "startAngle": 247.5,
+                "endAngle": 472.5
+            },
+            {
+                "x": 0.0,
+                "y": 29.7,
+                "z": -117.1,
+                "range": 6,
+                "red": 255,
+                "green": 255,
+                "blue": 255,
+                "startAngle": 112.5,
+                "endAngle": 247.5
+            },
+            {
+                "x": 0.0,
+                "y": 77.2,
+                "z": -54.0,
+                "range": 6,
+                "red": 255,
+                "green": 255,
+                "blue": 255,
+                "startAngle": 247.5,
+                "endAngle": 472.5
+            }
+        ]
+    }
+}

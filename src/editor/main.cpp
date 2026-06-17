@@ -459,13 +459,8 @@ int main (int argc, char ** argv)
     std::vector<std::string> ownShipTypes;
     std::vector<std::string> otherShipTypes;
 
-    std::string otherShipModelPath;
-    std::string ownShipModelPath = "models/Ownship/";
-    if (multiplayer) {
-        otherShipModelPath = "models/Ownship/"; //If in multiplayer mode, use own ship list for both own and others
-    } else {
-        otherShipModelPath = "models/Othership/";
-    }
+    std::string otherShipModelPath= "models/Ships/";
+    std::string ownShipModelPath = "models/Ships/";
 
     getDirectoryList(device,ownShipTypes,ownShipModelPath);
     if (Utilities::pathExists(userFolder + ownShipModelPath)) {

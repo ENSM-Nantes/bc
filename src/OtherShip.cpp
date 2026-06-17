@@ -36,7 +36,7 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
   irr::scene::ISceneManager* smgr = aDev->getSceneManager();
   mName = aName;
 
-  std::string basePath = "models/Othership/" + mName + "/";
+  std::string basePath = "models/Ships/" + mName + "/";
   std::string userFolder = Utilities::getUserDir();
   //Read model from user dir if it exists there.
   if (Utilities::pathExists(userFolder + basePath)) {
@@ -45,7 +45,7 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
 
   //Fall back to loading from own ship folder if it doesn't exist in Otherships (useful for multiplayer)
   if (!Utilities::pathExists(basePath)) {
-    basePath = "models/Ownship/" + mName + "/";
+    basePath = "models/Ships/" + mName + "/";
     //Read model from user dir if it exists there.
     if (Utilities::pathExists(userFolder + basePath)) {
       basePath = userFolder + basePath;

@@ -211,7 +211,7 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
   irr::scene::ISceneManager* smgr = mDevice->getSceneManager();
   std::string ownShipName = aOwnShipData.name;
 
-  basePath = "models/Ownship/" + ownShipName + "/";
+  basePath = "models/Ships/" + ownShipName + "/";
   std::string userFolder = Utilities::getUserDir();
 
   if(std::filesystem::exists(userFolder + basePath))

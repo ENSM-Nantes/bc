@@ -1,0 +1,205 @@
+{
+	"addedMass" : 
+	{
+		"pX" : 0.01604415662586689,
+		"pY" : 0.12216868251562119,
+		"pZ" : 0.016411006450653076
+	},
+	"depthSounder" : 
+	{
+		"maxDepth" : 200.0,
+		"number" : true
+	},
+	"engine" : 
+	{
+		"brand" : "xxxx",
+		"fuelCons" : 177.0,
+		"number" : 1,
+		"power" : 4500.0,
+		"rpmMax" : 1300.0,
+		"type" : "xxx"
+	},
+	"general" : 
+	{
+		"boatName" : "LifeRaft",
+		"desc" : "This ship is from the original BridgeCommand repository and has been retained for legacy\nHowever, it has not been tested with the new MMG Yasukawa model.\n\nTODO : Enter parameters for this ship",
+		"imgName" : "LifeRaft.jpg",
+		"type" : "Ferry"
+	},
+	"geoParams" : 
+	{
+		"GM" : 0.30000001192092896,
+		"KM" : 0.5,
+		"altGravityCenter" : 0.32999998331069946,
+		"blockCoef" : 0.15000000596046448,
+		"breadth" : 2.8499999046325684,
+		"draugth" : 0.52999997138977051,
+		"length" : 8.3999996185302734,
+		"longGravityCenter" : -1.0,
+		"rho" : 1025.0,
+		"subwaterVolume" : 3.0
+	},
+	"gps" : 
+	{
+		"number" : true
+	},
+	"hull" : 
+	{
+		"invertRoll" : true,
+		"kpB" : -0.25859999656677246,
+		"kpBBB" : -0.72930002212524414,
+		"kpBBG" : 0.22290000319480896,
+		"kpBBR" : 1.1474000215530396,
+		"kpBRG" : 0.5374000072479248,
+		"kpBRR" : -0.33509999513626099,
+		"kpG" : -0.018500000238418579,
+		"kpR" : 0.053199999034404755,
+		"kpRRG" : -0.092799998819828033,
+		"kpRRR" : -0.013199999928474426,
+		"linearExtCoeff" : 0.5,
+		"npR" : -0.052218817174434662,
+		"npRRR" : -0.043276786804199219,
+		"npV" : -0.12619046866893768,
+		"npVRR" : -0.2858947217464447,
+		"npVVR" : -0.68111604452133179,
+		"npVVV" : -0.55650001764297485,
+		"xp0" : 0.02199999988079071,
+		"xpRR" : 0.018217999488115311,
+		"xpVR" : 0.10496331751346588,
+		"xpVV" : -0.12147320806980133,
+		"xpVVVV" : 0.76003569364547729,
+		"ypR" : 0.03346850723028183,
+		"ypRRR" : -0.050999999046325684,
+		"ypV" : -0.26946952939033508,
+		"ypVRR" : -0.76136845350265503,
+		"ypVVR" : -0.75,
+		"ypVVV" : -0.065263152122497559
+	},
+	"initialSpeed" : 
+	[
+		0,
+		0,
+		0
+	],
+	"mesh" : 
+	{
+		"angleCorrection" : 0,
+		"makeTransparent" : false,
+		"name" : "LifeRaft.3ds",
+		"numberOfViews" : 2,
+		"scaleFactor" : 1.0,
+		"views" : 
+		[
+			[
+				0.0,
+				8.0,
+				-0.34999999403953552,
+				false
+			],
+			[
+				0.0,
+				100.0,
+				0.60000002384185791,
+				true
+			]
+		],
+		"yCorrection" : 0
+	},
+	"propeller" : 
+	{
+		"backwardEff" : 0.89999997615814209,
+		"diameter" : 0.60000002384185791,
+		"forwardRotDir" : "right",
+		"k0" : 0.29300001263618469,
+		"k1" : -0.27500000596046448,
+		"k2" : -0.13899999856948853,
+		"longPosition" : -0.47999998927116394,
+		"nominalWake" : 0.025000002235174179,
+		"number" : 1,
+		"spacing" : 0.0,
+		"thrustFactor" : 0.27000001072883606
+	},
+	"radar" : 
+	{
+		"number" : 1,
+		"pos" : 
+		[
+			0.0,
+			-5.0,
+			0.0
+		],
+		"size" : 1.0,
+		"tilt" : 0.0
+	},
+	"rotIndicator" : 
+	{
+		"number" : true
+	},
+	"rudder" : 
+	{
+		"areaMobPart" : 0.89999997615814209,
+		"aspectRatio" : 0.0,
+		"expConstUr" : 0.13714444637298584,
+		"flowCoef" : 
+		[
+			0.2448392912192765,
+			0.2448392912192765
+		],
+		"forceIncreaseFactor" : 0.18321429193019867,
+		"longCoordinatePos" : -0.89999997615814209,
+		"longCoordinateRatio" : -0.5,
+		"longLateralForce" : -0.40000000596046448,
+		"maxAngle" : 0.61000001430511475,
+		"maxSpeed" : 0.30000001192092896,
+		"number" : 1,
+		"spacing" : 0.0,
+		"spanLength" : 0.40000000596046448,
+		"steeringResistanceFactor" : 0.38999998569488525,
+		"wakeFractionRatio" : 0.48550000786781311
+	},
+	"sail" : 
+	{
+		"number" : 0,
+		"pos" : 
+		[
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			]
+		],
+		"size" : "30x5",
+		"type" : "Rotor"
+	},
+    "lights": {
+        "numberOfLights": 1,
+        "list": [
+            {
+                "x": 0.0,
+                "y": 1.45,
+                "z": 0.0,
+                "range": 10,
+                "red": 255,
+                "green": 255,
+                "blue": 255,
+                "startAngle": 0.0,
+                "endAngle": 360.0
+            }
+        ]
+    }
+}

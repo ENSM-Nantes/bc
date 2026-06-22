@@ -1,197 +1,184 @@
 {
-	"addedMass" : 
-	{
-		"pX" : 0.12503999471664429,
-		"pY" : 1.0371720790863037,
-		"pZ" : 0.13414062559604645
-	},
-	"depthSounder" : 
-	{
-		"maxDepth" : 200.0,
-		"number" : true
-	},
-	"engine" : 
-	{
-		"brand" : "xxxx",
-		"fuelCons" : 177.0,
-		"number" : 1,
-		"power" : 4500.0,
-		"rpmMax" : 500.0,
-		"type" : "xxx"
-	},
-	"general" : 
-	{
-		"boatName" : "VIC56",
-		"desc" : "This ship is from the original BridgeCommand repository and has been retained for legacy\nHowever, it has not been tested with the new MMG Yasukawa model.\n\nTODO : Enter parameters for this ship",
-		"imgName" : "VIC56.jpg",
-		"type" : "Cargo"
-	},
-	"geoParams" : 
-	{
-		"GM" : 1.0,
-		"KM" : 1.5,
-		"altGravityCenter" : 1.5,
-		"blockCoef" : 0.30000001192092896,
-		"breadth" : 8.0,
-		"draugth" : 2.0,
-		"length" : 50.0,
-		"longGravityCenter" : 1.1000000238418579,
-		"rho" : 1025.0,
-		"subwaterVolume" : 3126.0
-	},
-	"gps" : 
-	{
-		"number" : true
-	},
-	"hull" : 
-	{
-		"invertRoll" : false,
-		"kpB" : -0.13670000433921814,
-		"kpBBB" : -1.4351999759674072,
-		"kpBBG" : 0.28189998865127563,
-		"kpBBR" : 1.163599967956543,
-		"kpBRG" : 0.29969999194145203,
-		"kpBRR" : -0.42329999804496765,
-		"kpG" : -0.029899999499320984,
-		"kpR" : 0.008500000461935997,
-		"kpRRG" : -0.048700001090764999,
-		"kpRRR" : 0.036299999803304672,
-		"linearExtCoeff" : 0.5,
-		"npR" : -0.036800000816583633,
-		"npRRR" : -0.043999999761581421,
-		"npV" : -0.079999998211860657,
-		"npVRR" : -0.42612498998641968,
-		"npVVR" : -0.68559998273849487,
-		"npVVV" : -0.45299997925758362,
-		"xp0" : 0.02199999988079071,
-		"xpRR" : -0.018897784873843193,
-		"xpVR" : 1.0254920721054077,
-		"xpVV" : -0.12479999661445618,
-		"xpVVVV" : 0.77935999631881714,
-		"ypR" : 0.086520001292228699,
-		"ypRRR" : -0.050999999046325684,
-		"ypV" : -0.19286370277404785,
-		"ypVRR" : -1.247499942779541,
-		"ypVVR" : -0.75,
-		"ypVVV" : -0.67624998092651367
-	},
-	"initialSpeed" : 
-	[
-		0,
-		0,
-		0
-	],
-	"mesh" : 
-	{
-		"angleCorrection" : 0,
-		"makeTransparent" : false,
-		"name" : "VIC56.3ds",
-		"numberOfViews" : 3,
-		"scaleFactor" : 0.30000001192092896,
-		"views" : 
-		[
-			[
-				3.7000000476837158,
-				24.049999237060547,
-				-9.8000001907348633,
-				false
-			],
-			[
-				-3.7000000476837158,
-				24.049999237060547,
-				-9.8000001907348633,
-				false
-			],
-			[
-				0.0,
-				350.0,
-				-9.8000001907348633,
-				true
-			]
-		],
-		"yCorrection" : -8.0
-	},
-	"propeller" : 
-	{
-		"backwardEff" : 0.67000001668930054,
-		"diameter" : 2.0,
-		"forwardRotDir" : "right",
-		"k0" : 0.29300001263618469,
-		"k1" : -0.27500000596046448,
-		"k2" : -0.13899999856948853,
-		"longPosition" : -0.47999998927116394,
-		"nominalWake" : 0.10000000894069672,
-		"number" : 1,
-		"spacing" : 0.0,
-		"thrustFactor" : 0.27000001072883606
-	},
-	"radar" : 
-	{
-		"number" : 1,
-		"pos" : 
-		[
-			0.0,
-			-10.0,
-			0.0
-		],
-		"size" : 1.0,
-		"tilt" : 0.0
-	},
-	"rotIndicator" : 
-	{
-		"number" : true
-	},
-	"rudder" : 
-	{
-		"areaMobPart" : 12.5,
-		"aspectRatio" : 1.8270000219345093,
-		"expConstUr" : 0.14857316017150879,
-		"flowCoef" : 
-		[
-			0.23888000392913822,
-			0.23888000392913822
-		],
-		"forceIncreaseFactor" : 0.17280000448226929,
-		"longCoordinatePos" : -0.89999997615814209,
-		"longCoordinateRatio" : -0.5,
-		"longLateralForce" : -0.40000000596046448,
-		"maxAngle" : 0.61000001430511475,
-		"maxSpeed" : 0.040699999779462814,
-		"number" : 1,
-		"spacing" : 0.0,
-		"spanLength" : 15.800000190734863,
-		"steeringResistanceFactor" : 0.38999998569488525,
-		"wakeFractionRatio" : 0.62200003862380981
-	},
-	"sail" : 
-	{
-		"number" : 0,
-		"pos" : 
-		[
-			[
-				0.0,
-				0.0,
-				0.0
-			],
-			[
-				0.0,
-				0.0,
-				0.0
-			],
-			[
-				0.0,
-				0.0,
-				0.0
-			],
-			[
-				0.0,
-				0.0,
-				0.0
-			]
-		],
-		"size" : "XXX",
-		"type" : "XXX"
-	},
+    "addedMass": {
+        "pX": 0.1250399947166443,
+        "pY": 1.0371720790863037,
+        "pZ": 0.13414062559604645
+    },
+    "depthSounder": {
+        "maxDepth": 200.0,
+        "number": true
+    },
+    "engine": {
+        "brand": "xxxx",
+        "fuelCons": 177.0,
+        "number": 1,
+        "power": 4500.0,
+        "rpmMax": 500.0,
+        "type": "xxx"
+    },
+    "general": {
+        "boatName": "VIC56",
+        "imgName": "VIC56.jpg",
+        "desc": "This ship is from the original BridgeCommand repository and has been retained for legacy\nHowever, it has not been tested with the new MMG Yasukawa model.\n\nTODO : Enter parameters for this ship",
+        "typeStr": "Cargo",
+        "type": 70,
+        "mmsi": 123456789,
+        "imo": 0,
+        "callSign": "XXX",
+        "dest": "SOMEWHERE"
+    },
+    "geoParams": {
+        "GM": 1.0,
+        "KM": 1.5,
+        "altGravityCenter": 1.5,
+        "blockCoef": 0.30000001192092896,
+        "breadth": 8.0,
+        "draugth": 2.0,
+        "length": 50.0,
+        "longGravityCenter": 1.100000023841858,
+        "rho": 1025.0,
+        "subwaterVolume": 3126.0
+    },
+    "gps": {
+        "number": true
+    },
+    "hull": {
+        "invertRoll": false,
+        "kpB": -0.13670000433921814,
+        "kpBBB": -1.4351999759674072,
+        "kpBBG": 0.28189998865127563,
+        "kpBBR": 1.163599967956543,
+        "kpBRG": 0.299699991941452,
+        "kpBRR": -0.42329999804496765,
+        "kpG": -0.029899999499320984,
+        "kpR": 0.008500000461935997,
+        "kpRRG": -0.048700001090765,
+        "kpRRR": 0.03629999980330467,
+        "linearExtCoeff": 0.5,
+        "npR": -0.03680000081658363,
+        "npRRR": -0.04399999976158142,
+        "npV": -0.07999999821186066,
+        "npVRR": -0.4261249899864197,
+        "npVVR": -0.6855999827384949,
+        "npVVV": -0.4529999792575836,
+        "xp0": 0.02199999988079071,
+        "xpRR": -0.018897784873843193,
+        "xpVR": 1.0254920721054077,
+        "xpVV": -0.12479999661445618,
+        "xpVVVV": 0.7793599963188171,
+        "ypR": 0.0865200012922287,
+        "ypRRR": -0.050999999046325684,
+        "ypV": -0.19286370277404785,
+        "ypVRR": -1.247499942779541,
+        "ypVVR": -0.75,
+        "ypVVV": -0.6762499809265137
+    },
+    "initialSpeed": [
+        0,
+        0,
+        0
+    ],
+    "mesh": {
+        "angleCorrection": 0,
+        "makeTransparent": false,
+        "name": "VIC56.3ds",
+        "numberOfViews": 3,
+        "scaleFactor": 0.30000001192092896,
+        "views": [
+            [
+                3.700000047683716,
+                24.049999237060547,
+                -9.800000190734863,
+                false
+            ],
+            [
+                -3.700000047683716,
+                24.049999237060547,
+                -9.800000190734863,
+                false
+            ],
+            [
+                0.0,
+                350.0,
+                -9.800000190734863,
+                true
+            ]
+        ],
+        "yCorrection": -8.0
+    },
+    "propeller": {
+        "backwardEff": 0.6700000166893005,
+        "diameter": 2.0,
+        "forwardRotDir": "right",
+        "k0": 0.2930000126361847,
+        "k1": -0.2750000059604645,
+        "k2": -0.13899999856948853,
+        "longPosition": -0.47999998927116394,
+        "nominalWake": 0.10000000894069672,
+        "number": 1,
+        "spacing": 0.0,
+        "thrustFactor": 0.27000001072883606
+    },
+    "radar": {
+        "number": 1,
+        "pos": [
+            0.0,
+            -10.0,
+            0.0
+        ],
+        "size": 1.0,
+        "tilt": 0.0
+    },
+    "rotIndicator": {
+        "number": true
+    },
+    "rudder": {
+        "areaMobPart": 12.5,
+        "aspectRatio": 1.8270000219345093,
+        "expConstUr": 0.1485731601715088,
+        "flowCoef": [
+            0.23888000392913822,
+            0.23888000392913822
+        ],
+        "forceIncreaseFactor": 0.1728000044822693,
+        "longCoordinatePos": -0.8999999761581421,
+        "longCoordinateRatio": -0.5,
+        "longLateralForce": -0.4000000059604645,
+        "maxAngle": 0.6100000143051147,
+        "maxSpeed": 0.040699999779462814,
+        "number": 1,
+        "spacing": 0.0,
+        "spanLength": 15.800000190734863,
+        "steeringResistanceFactor": 0.38999998569488525,
+        "wakeFractionRatio": 0.6220000386238098
+    },
+    "sail": {
+        "number": 0,
+        "pos": [
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ]
+        ],
+        "size": "XXX",
+        "type": "XXX"
+    },
     "lights": {
         "numberOfLights": 0,
         "list": []

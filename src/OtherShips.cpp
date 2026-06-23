@@ -232,53 +232,88 @@ void OtherShips::setSpeed(int number, irr::f32 speed)
 unsigned char OtherShips::getType(int number) const
 {
     if (number < (int)mOtherShips.size() && number >= 0) {
-      return 0x3C; //TODO : Set a real type into ShipEditor
+      return mOtherShips.at(number)->getType();
     } else {
         return 0;
+    }
+}
+
+void OtherShips::setType(int number, irr::u32 aType)
+{
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        mOtherShips.at(number)->setType(aType);
     }
 }
 
 std::string OtherShips::getShipDest(int number) const
 {
     if (number < (int)mOtherShips.size() && number >= 0) {
-      return "ST NAZAIRE"; //TODO : Set a real destination into ShipEditor
+      return mOtherShips.at(number)->getDestination();
     } else {
         return 0;
 	
     }
 }
 
+void OtherShips::setShipDest(int number, std::string aDest)
+{
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        mOtherShips.at(number)->setDestination(aDest);
+    }
+}
+
 std::string OtherShips::getShipName(int number) const
 {
     if (number < (int)mOtherShips.size() && number >= 0) {
-      return "SUPER-BOAT"; //TODO : Set a real name into ShipEditor
+      return mOtherShips.at(number)->getName();
     } else {
         return 0;
+    }
+}
+
+void OtherShips::setShipName(int number, std::string aName)
+{
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        mOtherShips.at(number)->setName(aName);
     }
 }
 
 std::string OtherShips::getCallSign(int number) const
 {
     if (number < (int)mOtherShips.size() && number >= 0) {
-      return "DGTH2"; //TODO : Set a real IMO into ShipEditor
+      return mOtherShips.at(number)->getCallSign();
     } else {
         return 0;
+    }
+}
+
+void OtherShips::setCallSign(int number, std::string aCallSign)
+{
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        mOtherShips.at(number)->setCallSign(aCallSign);
     }
 }
 
 irr::u32 OtherShips::getIMO(int number) const
 {
     if (number < (int)mOtherShips.size() && number >= 0) {
-      return 4444444; //TODO : Set a real IMO into ShipEditor
+      return mOtherShips.at(number)->getIMO();
     } else {
         return 0;
+    }
+}
+
+void OtherShips::setIMO(int number, irr::u32 aImo)
+{
+    if (number < (int)mOtherShips.size() && number >= 0) {
+        mOtherShips.at(number)->setIMO(aImo);
     }
 }
 
 irr::u32 OtherShips::getMMSI(int number) const
 {
     if (number < (int)mOtherShips.size() && number >= 0) {
-        return 666600003;
+        return mOtherShips.at(number)->getMMSI();
     } else {
         return 0;
     }

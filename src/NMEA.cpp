@@ -641,7 +641,7 @@ void NMEA::Update(sTime& aTime)
   case AIVD0:
     {
       //Generate Class A : Message 1
-      data = mAIS.GenerateMessage1(aTime.absoluteTime, hdg, /*mOwnShip->getMMSI()*/123456789, sog, posX, posZ, lon, lat);
+      data = mAIS.GenerateMessage1(aTime.absoluteTime, hdg, mOwnShip->getMMSI(), sog, posX, posZ, lon, lat);
       snprintf(messageBuffer, MAX_NMEA_SENTENCE_CHARS,"!AIVDO,%d,%d,,%c,%s,%d", 1, 1, 'B', data.c_str(), 0);
   
       messageToSend.append(AddChecksum(std::string(messageBuffer)));

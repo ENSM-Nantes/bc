@@ -116,6 +116,8 @@ std::string AIS::GenerateMessage5(void *aOtherShips, unsigned int aShip)
   float breadth = pOtherShips->getBreadth(aShip);
   float draught = pOtherShips->getDraught(aShip);
   unsigned char draughtAIS = 0;
+
+  std::transform(shipNameStr.begin(), shipNameStr.end(), shipNameStr.begin(), ::toupper);
   
   // fill class A report fields    
   // 0-5: message type, set to 0b000101 for normal class A position report

@@ -25,8 +25,12 @@ Ship::Ship()
 {
   //Default to run on defined spd and hdg
   mControlMode = MODE_AUTO;
-  mMsi = 0;
-
+  mMmsi = 0;
+  mImo = 0;
+  mType = 0;
+  mCallSign.clear();
+  mDestination.clear();
+  
   mMu0 << 0, 0, 0;
   mM = 0; 
   mMX = 0; 
@@ -36,7 +40,12 @@ Ship::Ship()
   mMu << 0, 0, 0; 
   mEta << 0, 0, 0;
   mSpeedThroughWater = 0;
-
+  mIx = 0;
+  mJx = 0;
+  mRollAngle = 0;
+  mNumberProp = 0;
+  mNumberRud = 0;
+  
   mGeoParams = {0}; 
   mAddedMassParams = {0};
 
@@ -340,12 +349,62 @@ irr::f32 Ship::getSpeed() const
 
 irr::u32 Ship::getMMSI() const
 {
-  return mMsi;
+  return mMmsi;
 }
 
 void Ship::setMMSI(irr::u32 aMmsi)
 {
-  mMsi = aMmsi;
+  mMmsi = aMmsi;
+}
+
+unsigned int Ship::getIMO() const
+{
+  return mImo;
+}
+
+void Ship::setIMO(unsigned int aImo)
+{
+  mImo = aImo;
+}
+
+unsigned int Ship::getType() const
+{
+  return mType;
+}
+
+void Ship::setType(unsigned int aType)
+{
+  mType = aType;
+}
+
+std::string Ship::getDestination() const
+{
+  return mDestination;
+}
+
+void Ship::setDestination(std::string aDest)
+{
+  mDestination = aDest;
+}
+
+std::string Ship::getCallSign() const
+{
+  return mCallSign;
+}
+
+void Ship::setCallSign(std::string aCallSign)
+{
+  mCallSign = aCallSign;
+}
+
+std::string Ship::getName() const
+{
+  return mName;
+}
+
+void Ship::setName(std::string aName)
+{
+  mName = aName;
 }
 
 void Ship::moveNode(irr::f32 deltaX, irr::f32 deltaY, irr::f32 deltaZ)

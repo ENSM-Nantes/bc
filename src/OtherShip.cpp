@@ -73,7 +73,13 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
   mScaleFactor = rootJson["mesh"]["scaleFactor"].asFloat();
   float yCorrection = rootJson["mesh"]["yCorrection"].asFloat();
   mAngleCorrection = rootJson["mesh"]["angleCorrection"].asFloat();
-
+  mName = rootJson["general"]["boatName"].asString();
+  mCallSign = rootJson["general"]["callSign"].asString();
+  mDestination = rootJson["general"]["dest"].asString();
+  mImo = rootJson["general"]["imo"].asInt();
+  mMmsi = rootJson["general"]["mmsi"].asInt();
+  mType = rootJson["general"]["type"].asInt();
+  
   //Set mesh vertical correction (world units)
   mHeightCorrection = yCorrection*mScaleFactor;
 

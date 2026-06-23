@@ -189,10 +189,13 @@ void OwnShip::InitOwnShipParams(OwnShipData aOwnShipData, Json::Value aJsonRoot)
   mRadarTilt = aJsonRoot["radar"]["tilt"].asFloat();
   mRadarPos = mScaleFactor * mRadarPos;
   mRadarSize = mScaleFactor * mRadarSize;
-
+  
   if(0 == mRadarSize)
     mRadarSize = 1;
 
+  //MMSI
+  mMmsi = aJsonRoot["general"]["mmsi"].asInt();
+  
   PrintDevices();
   PrintMeshInfos();
 }

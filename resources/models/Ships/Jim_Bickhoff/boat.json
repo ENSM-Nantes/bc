@@ -1,0 +1,248 @@
+{
+    "addedMass": {
+        "pX": 0.015944194048643112,
+        "pY": 0.11310294270515442,
+        "pZ": 0.009539011865854263
+    },
+    "depthSounder": {
+        "maxDepth": 200.0,
+        "number": true
+    },
+    "engine": {
+        "brand": "Caterpillar",
+        "fuelCons": 22.0,
+        "number": 2,
+        "power": 18000.0,
+        "rpmMax": 170.0,
+        "type": "9M32C"
+    },
+    "general": {
+        "boatName": "Jim_Bickhoff",
+        "imgName": "Jim_Bickhoff.jpg",
+        "desc": "This ship is from the original BridgeCommand repository and has been retained for legacy\nHowever, it has not been tested with the new MMG Yasukawa model.\n\nTODO : Enter parameters for this ship",
+        "typeStr": "CruiseLiner",
+        "type": 65,
+        "mmsi": 123456789,
+        "imo": 123456789,
+        "callSign": "XXX",
+        "dest": "SOMEWHERE"
+    },
+    "geoParams": {
+        "GM": 1.0,
+        "KM": 11.0,
+        "altGravityCenter": -4.0,
+        "blockCoef": 0.5,
+        "breadth": 24.799999237060547,
+        "draugth": 6.0,
+        "length": 156.4499969482422,
+        "longGravityCenter": 10.430000305175781,
+        "rho": 1025.0,
+        "subwaterVolume": 11707.7900390625
+    },
+    "gps": {
+        "number": true
+    },
+    "hull": {
+        "invertRoll": false,
+        "kpB": -0.25859999656677246,
+        "kpBBB": -0.7293000221252441,
+        "kpBBG": 0.22290000319480896,
+        "kpBBR": 1.1474000215530396,
+        "kpBRG": 0.5374000072479248,
+        "kpBRR": -0.335099995136261,
+        "kpG": -0.01850000023841858,
+        "kpR": 0.053199999034404755,
+        "kpRRG": -0.09279999881982803,
+        "kpRRR": -0.013199999928474426,
+        "linearExtCoeff": 0.20000000298023224,
+        "npR": -0.03553581237792969,
+        "npRRR": -0.036185361444950104,
+        "npV": -0.076701819896698,
+        "npVRR": -0.3345675468444824,
+        "npVVR": -0.6371492743492126,
+        "npVVV": -0.3149999976158142,
+        "xp0": 0.02199999988079071,
+        "xpRR": -0.006277173291891813,
+        "xpVR": 0.041719116270542145,
+        "xpVV": -0.08885267376899719,
+        "xpVVVV": 0.5705528855323792,
+        "ypR": 0.0476013720035553,
+        "ypRRR": -0.050999999046325684,
+        "ypV": -0.23144491016864777,
+        "ypVRR": -0.9301007986068726,
+        "ypVVR": -0.75,
+        "ypVVV": -0.6870665550231934
+    },
+    "initialSpeed": [
+        0,
+        0,
+        0
+    ],
+    "mesh": {
+        "angleCorrection": 0,
+        "makeTransparent": true,
+        "name": "Jim_Bickhoff.x",
+        "numberOfViews": 4,
+        "scaleFactor": 0.30480000376701355,
+        "views": [
+            [
+                0.0,
+                100.5,
+                185.5,
+                false
+            ],
+            [
+                50.0,
+                99.30000305175781,
+                182.8000030517578,
+                false
+            ],
+            [
+                -50.0,
+                99.30000305175781,
+                182.8000030517578,
+                false
+            ],
+            [
+                0.0,
+                900.0,
+                0.0,
+                true
+            ]
+        ],
+        "yCorrection": -12.0
+    },
+    "propeller": {
+        "backwardEff": 0.699999988079071,
+        "diameter": 4.199999809265137,
+        "forwardRotDir": "right",
+        "k0": 0.2930000126361847,
+        "k1": -0.2750000059604645,
+        "k2": -0.13899999856948853,
+        "longPosition": -0.47999998927116394,
+        "nominalWake": 0.20000000298023224,
+        "number": 1,
+        "spacing": 8.0,
+        "thrustFactor": 0.27000001072883606
+    },
+    "radar": {
+        "number": 1,
+        "pos": [
+            0.0,
+            -10.0,
+            0.0
+        ],
+        "size": 1.0,
+        "tilt": 0.0
+    },
+    "rotIndicator": {
+        "number": true
+    },
+    "rudder": {
+        "areaMobPart": 20.0,
+        "aspectRatio": 0.8999999761581421,
+        "expConstUr": 0.1671448051929474,
+        "flowCoef": [
+            0.3032726078730045,
+            0.3032726078730045
+        ],
+        "forceIncreaseFactor": 0.28533077239990234,
+        "longCoordinatePos": -0.8999999761581421,
+        "longCoordinateRatio": -0.5,
+        "longLateralForce": -0.4000000059604645,
+        "maxAngle": 0.6100000143051147,
+        "maxSpeed": 0.05000000074505806,
+        "number": 1,
+        "spacing": 8.0,
+        "spanLength": 4.199999809265137,
+        "steeringResistanceFactor": 0.38999998569488525,
+        "wakeFractionRatio": 0.8040000200271606
+    },
+    "sail": {
+        "number": 0,
+        "pos": [
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ]
+        ],
+        "size": "XXX",
+        "type": "XXX"
+    },
+    "lights": {
+        "numberOfLights": 5,
+        "list": [
+            {
+                "x": 21.8,
+                "y": 70.9,
+                "z": 80.0,
+                "range": 6,
+                "red": 0,
+                "green": 255,
+                "blue": 0,
+                "startAngle": -1.0,
+                "endAngle": 112.5
+            },
+            {
+                "x": -21.1,
+                "y": 70.9,
+                "z": 80.0,
+                "range": 6,
+                "red": 255,
+                "green": 0,
+                "blue": 0,
+                "startAngle": 247.5,
+                "endAngle": 361.0
+            },
+            {
+                "x": 0.0,
+                "y": 115.1,
+                "z": -68.0,
+                "range": 6,
+                "red": 255,
+                "green": 255,
+                "blue": 255,
+                "startAngle": 247.5,
+                "endAngle": 472.5
+            },
+            {
+                "x": 0.0,
+                "y": 57.9,
+                "z": -110.5,
+                "range": 6,
+                "red": 255,
+                "green": 255,
+                "blue": 255,
+                "startAngle": 112.5,
+                "endAngle": 247.5
+            },
+            {
+                "x": 0.0,
+                "y": 81.3,
+                "z": 70.2,
+                "range": 6,
+                "red": 255,
+                "green": 255,
+                "blue": 255,
+                "startAngle": 247.5,
+                "endAngle": 472.5
+            }
+        ]
+    }
+}

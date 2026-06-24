@@ -20,18 +20,30 @@
 #include <string>
 #include <vector>
 
-class AIS {
-    public: 
-  static std::tuple<std::string, int> generateClassAReport(void *aOtherShips, float aOffsetPosZ, float aOffsetPosX, void *aTerrain, unsigned long long aTimeStamp, unsigned int);
-        static std::vector<unsigned int> getReadyShips(void *aOtherShips, unsigned int);
+#define TIME_INTERVAL_1 (10000)
+#define TIME_INTERVAL_2 (6000)
+#define TIME_INTERVAL_3 (2000)
 
-    private:
-        static const int mmsis[];
-        static std::vector<unsigned int> lastUpdates; 
-        static int currentShip;
-        static bool initialized;
-        static std::vector<bool> classAReport;
-        static std::string bitsToArmoredASCII(std::vector<bool>);
+#define SPEED_MAX_INTERVAL_1 (14)
+#define SPEED_MAX_INTERVAL_2 (23)
+
+class AIS
+{
+public:
+  AIS();
+  ~AIS();
+  void Init(unsigned int aNumberShip);
+  std::string GenerateMessage1(unsigned long long aTimeStamp, unsigned int aHdg, unsigned int aMmsi, unsigned int aSpeed, float aPosX, float aPosZ, float aLong, float aLat);
+  std::string GenerateMessage5(void *aOtherShips, unsigned int aShip);
+  std::vector<unsigned int> GetReadyShips(void *aOtherShips, unsigned int aNow);
+
+private:
+  std::string BitsToArmoredASCII(std::vector<bool> aBits);
+  unsigned char AsciiToAis6(char aChar);
+  std::vector<unsigned char> StringToAis6(const std::string& aStrIn);
+  
+  std::vector<unsigned int> mLastUpdates;
+  std::vector<unsigned int> mReadyShips;
 };
 
 #endif

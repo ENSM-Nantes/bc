@@ -28,6 +28,12 @@ Autopilot::Autopilot()
 
 Autopilot::Autopilot(void *aOwnShip)
 {
+  Init(aOwnShip);
+}
+
+
+void Autopilot::Init(void *aOwnShip)
+{
   mOwnShip = aOwnShip;
   currentWaypointPos = {INVALID_LAT, INVALID_LONG};
   currentWaypointId = "";

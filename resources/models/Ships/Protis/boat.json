@@ -1,0 +1,237 @@
+{
+    "addedMass": {
+        "pX": 0.1250399947166443,
+        "pY": 0.9749055504798889,
+        "pZ": 0.09757892787456512
+    },
+    "depthSounder": {
+        "maxDepth": 200.0,
+        "number": true
+    },
+    "engine": {
+        "brand": "xxxx",
+        "fuelCons": 177.0,
+        "number": 1,
+        "power": 4500.0,
+        "rpmMax": 1000.0,
+        "type": "xxx"
+    },
+    "general": {
+        "boatName": "Protis",
+        "imgName": "Protis.jpg",
+        "desc": "This ship is from the original BridgeCommand repository and has been retained for legacy\nHowever, it has not been tested with the new MMG Yasukawa model.\n\nTODO : Enter parameters for this ship",
+        "typeStr": "PleasureCraft",
+        "type": 37,
+        "mmsi": 228109080,
+        "imo": 0,
+        "callSign": "XXX",
+        "dest": "SOMEWHERE"
+    },
+    "geoParams": {
+        "GM": 1.0,
+        "KM": 1.5,
+        "altGravityCenter": 1.5,
+        "blockCoef": 0.4000000059604645,
+        "breadth": 8.0,
+        "draugth": 2.0,
+        "length": 50.0,
+        "longGravityCenter": 1.100000023841858,
+        "rho": 1025.0,
+        "subwaterVolume": 3126.0
+    },
+    "gps": {
+        "number": true
+    },
+    "hull": {
+        "invertRoll": false,
+        "kpB": -0.25859999656677246,
+        "kpBBB": -0.7293000221252441,
+        "kpBBG": 0.22290000319480896,
+        "kpBBR": 1.1474000215530396,
+        "kpBRG": 0.5374000072479248,
+        "kpBRR": -0.335099995136261,
+        "kpG": -0.01850000023841858,
+        "kpR": 0.053199999034404755,
+        "kpRRG": -0.09279999881982803,
+        "kpRRR": -0.013199999928474426,
+        "linearExtCoeff": 0.5,
+        "npR": -0.03680000081658363,
+        "npRRR": -0.03999999910593033,
+        "npV": -0.07999999821186066,
+        "npVRR": -0.3792499899864197,
+        "npVVR": -0.6607999801635742,
+        "npVVV": -0.3840000033378601,
+        "xp0": 0.02199999988079071,
+        "xpRR": -0.018887922167778015,
+        "xpVR": 0.9326655268669128,
+        "xpVV": -0.10639999806880951,
+        "xpVVVV": 0.6724799871444702,
+        "ypR": 0.09451999515295029,
+        "ypRRR": -0.050999999046325684,
+        "ypV": -0.2152637094259262,
+        "ypVRR": -1.0850000381469727,
+        "ypVVR": -0.75,
+        "ypVVV": -0.6762499809265137
+    },
+    "initialSpeed": [
+        0,
+        0,
+        0
+    ],
+    "mesh": {
+        "angleCorrection": 0,
+        "makeTransparent": true,
+        "name": "Protis.x",
+        "numberOfViews": 4,
+        "scaleFactor": 0.30000001192092896,
+        "views": [
+            [
+                -0.30000001192092896,
+                15.739999771118164,
+                -6.0,
+                false
+            ],
+            [
+                9.399999618530273,
+                16.0,
+                -9.800000190734863,
+                false
+            ],
+            [
+                -9.399999618530273,
+                16.0,
+                -9.800000190734863,
+                false
+            ],
+            [
+                0.30000001192092896,
+                300.0,
+                -6.0,
+                true
+            ]
+        ],
+        "yCorrection": -3.0
+    },
+    "propeller": {
+        "backwardEff": 0.6700000166893005,
+        "diameter": 0.8999999761581421,
+        "forwardRotDir": "right",
+        "k0": 0.2930000126361847,
+        "k1": -0.2750000059604645,
+        "k2": -0.13899999856948853,
+        "longPosition": -0.47999998927116394,
+        "nominalWake": 0.15000000596046448,
+        "number": 1,
+        "spacing": 0.0,
+        "thrustFactor": 0.27000001072883606
+    },
+    "radar": {
+        "number": 1,
+        "pos": [
+            0.0,
+            -10.0,
+            0.0
+        ],
+        "size": 1.0,
+        "tilt": 0.0
+    },
+    "rotIndicator": {
+        "number": true
+    },
+    "rudder": {
+        "areaMobPart": 1.0,
+        "aspectRatio": 1.8270000219345093,
+        "expConstUr": 0.15731275081634521,
+        "flowCoef": [
+            0.2718400019645691,
+            0.2718400019645691
+        ],
+        "forceIncreaseFactor": 0.2303999960422516,
+        "longCoordinatePos": -0.8999999761581421,
+        "longCoordinateRatio": -0.5,
+        "longLateralForce": -0.4000000059604645,
+        "maxAngle": 0.6100000143051147,
+        "maxSpeed": 0.10700000077486038,
+        "number": 1,
+        "spacing": 0.0,
+        "spanLength": 1.0,
+        "steeringResistanceFactor": 0.38999998569488525,
+        "wakeFractionRatio": 0.7129999995231628
+    },
+    "sail": {
+        "number": 0,
+        "pos": [
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ]
+        ],
+        "size": "30x5",
+        "type": "Rotor"
+    },
+    "lights": {
+        "numberOfLights": 4,
+        "list": [
+            {
+                "x": 5.4,
+                "y": 19.2,
+                "z": -4.5,
+                "range": 4,
+                "red": 0,
+                "green": 255,
+                "blue": 0,
+                "startAngle": -1.0,
+                "endAngle": 112.5
+            },
+            {
+                "x": -5.4,
+                "y": 19.2,
+                "z": -4.5,
+                "range": 4,
+                "red": 255,
+                "green": 0,
+                "blue": 0,
+                "startAngle": 247.5,
+                "endAngle": 361.0
+            },
+            {
+                "x": 0.0,
+                "y": 29.3,
+                "z": -19.5,
+                "range": 4,
+                "red": 255,
+                "green": 255,
+                "blue": 255,
+                "startAngle": 247.5,
+                "endAngle": 472.5
+            },
+            {
+                "x": 0.0,
+                "y": 11.2,
+                "z": -34.0,
+                "range": 4,
+                "red": 255,
+                "green": 255,
+                "blue": 255,
+                "startAngle": 112.5,
+                "endAngle": 247.5
+            }
+        ]
+    }
+}

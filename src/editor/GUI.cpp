@@ -88,17 +88,14 @@ GUIMain::GUIMain(irr::IrrlichtDevice* device, Lang* language, std::vector<std::s
     guienv->addStaticText(language->translate("setSpeed").c_str(),irr::core::rect<irr::s32>(0.18*su,0.20*sh,0.30*su,0.23*sh),false,false,shipTab);
     guienv->addStaticText(language->translate("setDistance").c_str(),irr::core::rect<irr::s32>(0.35*su,0.20*sh,0.45*su,0.23*sh),false,false,shipTab);
 
-    //Add MMSI editing
-    mmsiEdit = guienv->addEditBox(L"",irr::core::rect<irr::s32>(0.18*su,0.09*sh,0.31*su,0.12*sh),false,shipTab,GUI_ID_MMSI_EDITBOX);
-    setMMSI = guienv->addButton(irr::core::rect<irr::s32>(0.18*su,0.13*sh,0.31*su,0.16*sh),shipTab,GUI_ID_SETMMSI_BUTTON,language->translate("setMMSI").c_str());
-
+    
     //Add buttons
     changeLeg       = guienv->addButton(irr::core::rect<irr::s32>(0.03*su, 0.28*sh, 0.23*su, 0.31*sh),shipTab,GUI_ID_CHANGE_BUTTON,language->translate("changeLeg").c_str());
     addShip         = guienv->addButton(irr::core::rect<irr::s32>(0.25*su, 0.28*sh, 0.45*su, 0.31*sh),shipTab, GUI_ID_ADDSHIP_BUTTON,language->translate("addShip").c_str());
     addLeg          = guienv->addButton(irr::core::rect<irr::s32>(0.03*su, 0.31*sh, 0.23*su, 0.34*sh),shipTab,GUI_ID_ADDLEG_BUTTON,language->translate("addLeg").c_str());
     deleteLeg       = guienv->addButton(irr::core::rect<irr::s32>(0.25*su, 0.31*sh, 0.45*su, 0.34*sh),shipTab, GUI_ID_DELETELEG_BUTTON,language->translate("deleteLeg").c_str());
     moveShip        = guienv->addButton(irr::core::rect<irr::s32>(0.14*su, 0.34*sh, 0.34*su, 0.37*sh),shipTab, GUI_ID_MOVESHIP_BUTTON,language->translate("move").c_str());
-	deleteShip		= guienv->addButton(irr::core::rect<irr::s32>(0.14*su, 0.09*sh, 0.17*su, 0.12*sh), shipTab, GUI_ID_DELETESHIP_BUTTON, language->translate("deleteShip").c_str());
+	deleteShip		= guienv->addButton(irr::core::rect<irr::s32>(0.14*su, 0.09*sh, 0.30*su, 0.12*sh), shipTab, GUI_ID_DELETESHIP_BUTTON, language->translate("deleteShip").c_str());
     //This is used to track when the edit boxes need updating, when ship or legs have changed. Set to true for initial load
     editBoxesNeedUpdating = true;
 
@@ -405,11 +402,6 @@ void GUIMain::updateGuiData(ScenarioData scenarioData, irr::s32 mapOffsetX, irr:
     //Update edit boxes if required, and then mark as updated
     //This must be done before we update the drop down boxes, as otherwise we'll miss the results of the manually triggered GUI change events
     if (editBoxesNeedUpdating) {
-        if (selectedShip >= 0 && selectedShip < scenarioData.otherShipsData.size()) {
-            mmsiEdit->setText(irr::core::stringw(scenarioData.otherShipsData.at(selectedShip).mmsi).c_str());
-        } else if (selectedShip == -1) {
-            mmsiEdit->setText(L"-");
-        }
         if (selectedShip >= 0 && selectedShip < scenarioData.otherShipsData.size() && selectedLeg >= 0 && selectedLeg < scenarioData.otherShipsData.at(selectedShip).legs.size()) {
             legCourseEdit  ->setText(irr::core::stringw(scenarioData.otherShipsData.at(selectedShip).legs.at(selectedLeg).bearing).c_str());
             legSpeedEdit   ->setText(irr::core::stringw(scenarioData.otherShipsData.at(selectedShip).legs.at(selectedLeg).speed).c_str());
@@ -728,12 +720,6 @@ irr::f32 GUIMain::getEditBoxDistance() const {
     wchar_t* endPtr;
     irr::f32 distance = wcstof(legDistanceEdit->getText(), &endPtr); //TODO: Check portability
     return distance;
-}
-
-irr::u32 GUIMain::getEditBoxMMSI() const {
-    wchar_t* endPtr;
-    irr::u32 mmsi = wcstol(mmsiEdit->getText(),&endPtr,10); //TODO: Check portability
-    return mmsi;
 }
 
 int GUIMain::getSelectedShip() const {

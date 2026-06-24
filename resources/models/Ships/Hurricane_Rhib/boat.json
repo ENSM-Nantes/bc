@@ -1,0 +1,214 @@
+{
+    "addedMass": {
+        "pX": 0.01604415662586689,
+        "pY": 0.12216868251562119,
+        "pZ": 0.016411006450653076
+    },
+    "depthSounder": {
+        "maxDepth": 200.0,
+        "number": true
+    },
+    "engine": {
+        "brand": "xxxx",
+        "fuelCons": 177.0,
+        "number": 1,
+        "power": 4500.0,
+        "rpmMax": 1300.0,
+        "type": "xxx"
+    },
+    "general": {
+        "boatName": "Hurricane_Rhib",
+        "imgName": "Hurricane_Rhib.jpg",
+        "desc": "This ship is from the original BridgeCommand repository and has been retained for legacy\nHowever, it has not been tested with the new MMG Yasukawa model.\n\nTODO : Enter parameters for this ship",
+        "typeStr": "SAR",
+        "type": 51,
+        "mmsi": 123456789,
+        "imo": 123456789,
+        "callSign": "XXX",
+        "dest": "SOMEWHERE"
+    },
+    "geoParams": {
+        "GM": 0.30000001192092896,
+        "KM": 0.5,
+        "altGravityCenter": 0.32999998331069946,
+        "blockCoef": 0.15000000596046448,
+        "breadth": 2.8499999046325684,
+        "draugth": 0.5299999713897705,
+        "length": 8.399999618530273,
+        "longGravityCenter": -1.0,
+        "rho": 1025.0,
+        "subwaterVolume": 3.0
+    },
+    "gps": {
+        "number": true
+    },
+    "hull": {
+        "invertRoll": true,
+        "kpB": -0.25859999656677246,
+        "kpBBB": -0.7293000221252441,
+        "kpBBG": 0.22290000319480896,
+        "kpBBR": 1.1474000215530396,
+        "kpBRG": 0.5374000072479248,
+        "kpBRR": -0.335099995136261,
+        "kpG": -0.01850000023841858,
+        "kpR": 0.053199999034404755,
+        "kpRRG": -0.09279999881982803,
+        "kpRRR": -0.013199999928474426,
+        "linearExtCoeff": 0.5,
+        "npR": -0.05221881717443466,
+        "npRRR": -0.04327678680419922,
+        "npV": -0.12619046866893768,
+        "npVRR": -0.2858947217464447,
+        "npVVR": -0.6811160445213318,
+        "npVVV": -0.5565000176429749,
+        "xp0": 0.02199999988079071,
+        "xpRR": 0.01821799948811531,
+        "xpVR": 0.10496331751346588,
+        "xpVV": -0.12147320806980133,
+        "xpVVVV": 0.7600356936454773,
+        "ypR": 0.03346850723028183,
+        "ypRRR": -0.050999999046325684,
+        "ypV": -0.2694695293903351,
+        "ypVRR": -0.761368453502655,
+        "ypVVR": -0.75,
+        "ypVVV": -0.06526315212249756
+    },
+    "initialSpeed": [
+        0,
+        0,
+        0
+    ],
+    "mesh": {
+        "angleCorrection": 0,
+        "makeTransparent": false,
+        "name": "Hurricane_Rhib.x",
+        "numberOfViews": 2,
+        "scaleFactor": 1.0,
+        "views": [
+            [
+                0.0,
+                8.0,
+                -0.3499999940395355,
+                false
+            ],
+            [
+                0.0,
+                100.0,
+                0.6000000238418579,
+                true
+            ]
+        ],
+        "yCorrection": -1.5
+    },
+    "propeller": {
+        "backwardEff": 0.8999999761581421,
+        "diameter": 0.6000000238418579,
+        "forwardRotDir": "right",
+        "k0": 0.2930000126361847,
+        "k1": -0.2750000059604645,
+        "k2": -0.13899999856948853,
+        "longPosition": -0.47999998927116394,
+        "nominalWake": 0.02500000223517418,
+        "number": 1,
+        "spacing": 0.0,
+        "thrustFactor": 0.27000001072883606
+    },
+    "radar": {
+        "number": 1,
+        "pos": [
+            0.0,
+            -5.0,
+            0.0
+        ],
+        "size": 1.0,
+        "tilt": 0.0
+    },
+    "rotIndicator": {
+        "number": true
+    },
+    "rudder": {
+        "areaMobPart": 0.8999999761581421,
+        "aspectRatio": 0.0,
+        "expConstUr": 0.13714444637298584,
+        "flowCoef": [
+            0.2448392912192765,
+            0.2448392912192765
+        ],
+        "forceIncreaseFactor": 0.18321429193019867,
+        "longCoordinatePos": -0.8999999761581421,
+        "longCoordinateRatio": -0.5,
+        "longLateralForce": -0.4000000059604645,
+        "maxAngle": 0.6100000143051147,
+        "maxSpeed": 0.30000001192092896,
+        "number": 1,
+        "spacing": 0.0,
+        "spanLength": 0.4000000059604645,
+        "steeringResistanceFactor": 0.38999998569488525,
+        "wakeFractionRatio": 0.4855000078678131
+    },
+    "sail": {
+        "number": 0,
+        "pos": [
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ]
+        ],
+        "size": "30x5",
+        "type": "Rotor"
+    },
+    "lights": {
+        "numberOfLights": 3,
+        "list": [
+            {
+                "x": 2.1,
+                "y": 5.2,
+                "z": -5.4,
+                "range": 6,
+                "red": 0,
+                "green": 255,
+                "blue": 0,
+                "startAngle": -1.0,
+                "endAngle": 112.5
+            },
+            {
+                "x": -2.1,
+                "y": 5.2,
+                "z": -5.4,
+                "range": 6,
+                "red": 255,
+                "green": 0,
+                "blue": 0,
+                "startAngle": 247.5,
+                "endAngle": 361.0
+            },
+            {
+                "x": 0.0,
+                "y": 7.9,
+                "z": -16.7,
+                "range": 6,
+                "red": 255,
+                "green": 255,
+                "blue": 255,
+                "startAngle": 0.0,
+                "endAngle": 360.0
+            }
+        ]
+    }
+}

@@ -1,0 +1,237 @@
+{
+    "addedMass": {
+        "pX": 0.029355281963944435,
+        "pY": 0.22422604262828827,
+        "pZ": 0.011218443512916565
+    },
+    "depthSounder": {
+        "maxDepth": 200.0,
+        "number": true
+    },
+    "engine": {
+        "brand": "Caterpillar",
+        "fuelCons": 177.0,
+        "number": 1,
+        "power": 4500.0,
+        "rpmMax": 170.0,
+        "type": "9M32C"
+    },
+    "general": {
+        "boatName": "CSL_Wattle",
+        "imgName": "CSL_Wattle.jpg",
+        "desc": "This ship is from the original BridgeCommand repository and has been retained for legacy\nHowever, it has not been tested with the new MMG Yasukawa model.\n\nTODO : Enter parameters for this ship",
+        "typeStr": "BulkCarrier",
+        "type": 75,
+        "mmsi": 123456789,
+        "imo": 123456789,
+        "callSign": "XXX",
+        "dest": "SOMEWHERE"
+    },
+    "geoParams": {
+        "GM": 1.5,
+        "KM": 22.0,
+        "altGravityCenter": 0.2999992370605469,
+        "blockCoef": 0.8100000023841858,
+        "breadth": 58.0,
+        "draugth": 20.799999237060547,
+        "length": 320.0,
+        "longGravityCenter": 11.100000381469727,
+        "rho": 1025.0,
+        "subwaterVolume": 312622.0
+    },
+    "gps": {
+        "number": true
+    },
+    "hull": {
+        "invertRoll": false,
+        "kpB": -0.13670000433921814,
+        "kpBBB": -1.4351999759674072,
+        "kpBBG": 0.28189998865127563,
+        "kpBBR": 1.163599967956543,
+        "kpBRG": 0.299699991941452,
+        "kpBRR": -0.42329999804496765,
+        "kpG": -0.029899999499320984,
+        "kpR": 0.008500000461935997,
+        "kpRRG": -0.048700001090765,
+        "kpRRR": 0.03629999980330467,
+        "linearExtCoeff": 0.05000000074505806,
+        "npR": -0.05329999700188637,
+        "npRRR": -0.019296875223517418,
+        "npV": -0.12999999523162842,
+        "npVRR": -0.1766206920146942,
+        "npVVR": -0.5324406027793884,
+        "npVVV": -0.10109999775886536,
+        "xp0": 0.02199999988079071,
+        "xpRR": -0.012256903573870659,
+        "xpVR": 0.02381417155265808,
+        "xpVV": -0.011165627278387547,
+        "xpVVVV": 0.11929251253604889,
+        "ypR": 0.0880838930606842,
+        "ypRRR": -0.050999999046325684,
+        "ypV": -0.40974101424217224,
+        "ypVRR": -0.38255172967910767,
+        "ypVVR": -0.75,
+        "ypVVV": -0.5406896471977234
+    },
+    "initialSpeed": [
+        0,
+        0,
+        0
+    ],
+    "mesh": {
+        "angleCorrection": 0,
+        "makeTransparent": true,
+        "name": "CSL_Wattle.obj",
+        "numberOfViews": 4,
+        "scaleFactor": 0.30000001192092896,
+        "views": [
+            [
+                0.0,
+                37.16999816894531,
+                -29.0,
+                false
+            ],
+            [
+                13.0,
+                37.16999816894531,
+                -29.0,
+                false
+            ],
+            [
+                -13.0,
+                37.16999816894531,
+                -29.0,
+                false
+            ],
+            [
+                0.0,
+                350.0,
+                -29.0,
+                true
+            ]
+        ],
+        "yCorrection": -12.0
+    },
+    "propeller": {
+        "backwardEff": 0.6700000166893005,
+        "diameter": 9.859999656677246,
+        "forwardRotDir": "right",
+        "k0": 0.2930000126361847,
+        "k1": -0.2750000059604645,
+        "k2": -0.13899999856948853,
+        "longPosition": -0.47999998927116394,
+        "nominalWake": 0.35499998927116394,
+        "number": 1,
+        "spacing": 0.0,
+        "thrustFactor": 0.27000001072883606
+    },
+    "radar": {
+        "number": 1,
+        "pos": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "size": 1.0,
+        "tilt": 0.0
+    },
+    "rotIndicator": {
+        "number": true
+    },
+    "rudder": {
+        "areaMobPart": 112.5,
+        "aspectRatio": 1.8270000219345093,
+        "expConstUr": 0.20731137692928314,
+        "flowCoef": [
+            0.4424337454822586,
+            0.4424337454822586
+        ],
+        "forceIncreaseFactor": 0.5285249948501587,
+        "longCoordinatePos": -0.8999999761581421,
+        "longCoordinateRatio": -0.5,
+        "longLateralForce": -0.4000000059604645,
+        "maxAngle": 0.6100000143051147,
+        "maxSpeed": 0.040699999779462814,
+        "number": 1,
+        "spacing": 0.0,
+        "spanLength": 15.800000190734863,
+        "steeringResistanceFactor": 0.38999998569488525,
+        "wakeFractionRatio": 1.0860999822616577
+    },
+    "sail": {
+        "number": 0,
+        "pos": [
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ]
+        ],
+        "size": "18x3",
+        "type": "Rotor"
+    },
+    "lights": {
+        "numberOfLights": 4,
+        "list": [
+            {
+                "x": 17.4,
+                "y": 32.1,
+                "z": -25.5,
+                "range": 6,
+                "red": 0,
+                "green": 255,
+                "blue": 0,
+                "startAngle": -1.0,
+                "endAngle": 112.5
+            },
+            {
+                "x": -17.4,
+                "y": 32.1,
+                "z": -25.5,
+                "range": 6,
+                "red": 255,
+                "green": 0,
+                "blue": 0,
+                "startAngle": 247.5,
+                "endAngle": 361.0
+            },
+            {
+                "x": 0.0,
+                "y": 61.9,
+                "z": -34.6,
+                "range": 6,
+                "red": 255,
+                "green": 255,
+                "blue": 255,
+                "startAngle": 247.5,
+                "endAngle": 472.5
+            },
+            {
+                "x": 0.0,
+                "y": 22.9,
+                "z": -49.9,
+                "range": 6,
+                "red": 255,
+                "green": 255,
+                "blue": 255,
+                "startAngle": 112.5,
+                "endAngle": 247.5
+            }
+        ]
+    }
+}

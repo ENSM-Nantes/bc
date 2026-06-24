@@ -12,6 +12,7 @@ Solver::Solver()
   mEta << 0, 0, 0;
   mMu << 0, 0, 0;
   mDt = 0;
+  mTCol << 0, 0, 0;
   mShip = NULL;
 }
 
@@ -75,6 +76,7 @@ Eigen::VectorXd Solver::DiffEq(const Eigen::VectorXd& aVectEtaMu)
 	{
 	  mShip->getSail().ComputeT();
 	  mT += mShip->getSail().getT();
+	  //std::cout << "Force sail : " << mShip->getSail().getT() << std::endl;
 	}
     }
 
@@ -111,6 +113,10 @@ Eigen::VectorXd Solver::DiffEq(const Eigen::VectorXd& aVectEtaMu)
 		  (mShip->getRudder("starboard").getNormalForce() * sin(mShip->getRudder("starboard").getDelta()))));
       mT += tYaw;
     }
+
+
+  //Add Collision
+  mT += mTCol;
   
   vMuP = mShip->getInvMatM() * (mT - (matC * vMu));/*Sukas 2019 : Equation 15*/
   
@@ -125,16 +131,22 @@ void Solver::SetDeltaT(double aDt)
   mDt = aDt;
 }
 
-void Solver::Run(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu)
+void Solver::Run(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu, float aColX, float aColY, float aColN)
 {
   float aDt = aTime.deltaTime;
   SetDeltaT(aDt);
+  SetDataCollision(aColX, aColY, aColN);
 
   SolveRk4(aEta, aMu);
   SolveRoll();
   
 }
-  
+
+void Solver::SetDataCollision(float aColX, float aColY, float aColN)
+{
+  mTCol << aColX, aColY, aColN; 
+}
+
 void Solver::SolveRk4(Eigen::Vector3d aEta, Eigen::Vector3d aMu)
 {
   Eigen::VectorXd y = Eigen::VectorXd::Zero(VECTOR_SIZE_DIFF_EQ);

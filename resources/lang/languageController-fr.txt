@@ -48,7 +48,7 @@ changeLegCourseSpeed = "Changer le cap de l'itinéraire + vitesse"
 addLeg = "Ajouter itinéraire (après sélectionné)"
 addShip = "Ajouter navire"
 deleteLeg = "Supprimer itinéraire"
-deleteShip = "X"
+deleteShip = "Supprimer navire"
 move = "Déplacer navire"
 
 pump1Working = "Pompe gouvernail 1 Allumée"

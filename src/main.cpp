@@ -414,6 +414,14 @@ int main(int argc, char ** argv)
   std::string nmeaUDPPortVDR = IniFile::iniFileToString(iniFilename, "NMEA_UDPPort_VDR");
   std::string nmeaUDPListenPortVDR = IniFile::iniFileToString(iniFilename, "NMEA_UDPListenPort_VDR");
 
+  //Gateway
+  std::string nmeaComPortGateway = IniFile::iniFileToString(iniFilename, "NMEA_ComPort_Gateway");
+  irr::u32 nmeaBaudrateGateway = IniFile::iniFileTou32(iniFilename, "NMEA_Baudrate_Gateway", 4800);
+  std::string nmeaUDPAddrGateway = IniFile::iniFileToString(iniFilename, "NMEA_UDPAddress_Gateway");
+  std::string nmeaUDPPortGateway = IniFile::iniFileToString(iniFilename, "NMEA_UDPPort_Gateway");
+  std::string nmeaUDPListenPortGateway = IniFile::iniFileToString(iniFilename, "NMEA_UDPListenPort_Gateway");
+
+  
   //Load UDP network settings
   irr::u32 enetSrvPort = IniFile::iniFileTou32(iniFilename, "udp_server_port");
   if (enetSrvPort == 0) {
@@ -641,9 +649,6 @@ int main(int argc, char ** argv)
   //create GUI
   GUIMain guiMain;
 
-  Network network;
-  network.Connect(enetSrvAddr, enetSrvPort, mode);
-
   bool secondaryControlWheel = false;
   bool secondaryControlPortEngine = false;
   bool secondaryControlStbdEngine = false;
@@ -701,7 +706,22 @@ int main(int argc, char ** argv)
   modelParameters.secondaryControlSternThruster = secondaryControlSternThruster;
   modelParameters.debugMode = debugMode;
 
-    
+
+  //create NMEA serial port and UDP, linked to model
+  NMEA nmeaConning;
+  NMEA nmeaOpCpn;
+  NMEA nmeaVDR;
+  NMEA nmeaGateway;
+  
+  nmeaConning.Init(device->getTimer()->getRealTime(), nmeaComPortConning, nmeaBaudrateConning, nmeaUDPAddrConning, nmeaUDPPortConning, nmeaUDPListenPortConning);
+  nmeaOpCpn.Init(device->getTimer()->getRealTime(), nmeaComPortOpCpn, nmeaBaudrateOpCpn, nmeaUDPAddrOpCpn, nmeaUDPPortOpCpn, nmeaUDPListenPortOpCpn);
+  nmeaVDR.Init(device->getTimer()->getRealTime(), nmeaComPortVDR, nmeaBaudrateVDR, nmeaUDPAddrVDR, nmeaUDPPortVDR, nmeaUDPListenPortVDR);
+  nmeaGateway.Init(device->getTimer()->getRealTime(), nmeaComPortGateway, nmeaBaudrateGateway, nmeaUDPAddrGateway, nmeaUDPPortGateway, nmeaUDPListenPortGateway);
+ 
+  
+  Network network;
+  network.Connect(enetSrvAddr, enetSrvPort, mode);
+  
   ScenarioData scenarioData;
      
   if(mode == OperatingMode::Normal)
@@ -742,6 +762,12 @@ int main(int argc, char ** argv)
 
   SimulationModel model(device, &guiMain, &sound, scenarioData, modelParameters);
 
+ nmeaConning.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
+ nmeaOpCpn.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
+ nmeaVDR.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
+ nmeaGateway.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
+
+  
   bEnd = true;
   taskWaitingNet.join();
 
@@ -819,17 +845,6 @@ int main(int argc, char ** argv)
   JoyStick hJoySticks(jsMapping, jsConf);
 
   hJoySticks.Init(&model, &guiMain);
-
-  //create NMEA serial port and UDP, linked to model
-  NMEA nmeaConning(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
-  NMEA nmeaOpCpn(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
-  NMEA nmeaVDR(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
-
-
-  nmeaConning.Init(nmeaComPortConning, nmeaBaudrateConning, nmeaUDPAddrConning, nmeaUDPPortConning, nmeaUDPListenPortConning);
-  nmeaOpCpn.Init(nmeaComPortOpCpn, nmeaBaudrateOpCpn, nmeaUDPAddrOpCpn, nmeaUDPPortOpCpn, nmeaUDPListenPortOpCpn);
-  nmeaVDR.Init(nmeaComPortVDR, nmeaBaudrateVDR, nmeaUDPAddrVDR, nmeaUDPPortVDR, nmeaUDPListenPortVDR);
-
     
   //Load sound files
   sound.load(model.getOwnShip()->getBasePath());
@@ -898,25 +913,41 @@ int main(int argc, char ** argv)
 
        { IPROF("NMEA");
 
-	if (!nmeaUDPListenPortConning.empty()) nmeaConning.receive();
-	if (!nmeaComPortConning.empty() || (!nmeaUDPAddrConning.empty() && !nmeaUDPPortConning.empty())) nmeaConning.updateNMEA(model.getTime());
-	if (!nmeaComPortConning.empty())  nmeaConning.sendNMEASerial();
-	if (!nmeaUDPAddrConning.empty() && !nmeaUDPPortConning.empty()) nmeaConning.sendNMEAUDP();
-	nmeaConning.clearQueue();   
+	 if(nmeaConning.GetHostStatus())
+	   {
+	     if (!nmeaUDPListenPortConning.empty()) nmeaConning.Receive();
+	     if (!nmeaComPortConning.empty() || (!nmeaUDPAddrConning.empty() && !nmeaUDPPortConning.empty())) nmeaConning.Update(model.getTime());
+	     if (!nmeaComPortConning.empty())  nmeaConning.SendSerial();
+	     if (!nmeaUDPAddrConning.empty() && !nmeaUDPPortConning.empty()) nmeaConning.SendUdp();
+	     nmeaConning.ClearQueue();   
+	   }
 
-	if (!nmeaUDPListenPortOpCpn.empty()) nmeaOpCpn.receive();
-	if (!nmeaComPortOpCpn.empty() || (!nmeaUDPAddrOpCpn.empty() && !nmeaUDPPortOpCpn.empty())) nmeaOpCpn.updateNMEA(model.getTime());
-	if (!nmeaComPortOpCpn.empty())  nmeaOpCpn.sendNMEASerial();
-	if (!nmeaUDPAddrOpCpn.empty() && !nmeaUDPPortOpCpn.empty()) nmeaOpCpn.sendNMEAUDP();
-	nmeaOpCpn.clearQueue();
+	 if(nmeaOpCpn.GetHostStatus())
+	   { 
+	     if (!nmeaUDPListenPortOpCpn.empty()) nmeaOpCpn.Receive();
+	     if (!nmeaComPortOpCpn.empty() || (!nmeaUDPAddrOpCpn.empty() && !nmeaUDPPortOpCpn.empty())) nmeaOpCpn.Update(model.getTime());
+	     if (!nmeaComPortOpCpn.empty())  nmeaOpCpn.SendSerial();
+	     if (!nmeaUDPAddrOpCpn.empty() && !nmeaUDPPortOpCpn.empty()) nmeaOpCpn.SendUdp();
+	     nmeaOpCpn.ClearQueue();
+	   }
 
-	
-	if (!nmeaUDPListenPortVDR.empty()) nmeaVDR.receive();
-	if (!nmeaComPortVDR.empty() || (!nmeaUDPAddrVDR.empty() && !nmeaUDPPortVDR.empty())) nmeaVDR.updateNMEA(model.getTime());
-	if (!nmeaComPortVDR.empty())  nmeaVDR.sendNMEASerial();
-	if (!nmeaUDPAddrVDR.empty() && !nmeaUDPPortVDR.empty()) nmeaVDR.sendNMEAUDP();
-	nmeaVDR.clearQueue();
+	 if(nmeaVDR.GetHostStatus())
+	   {	 
+	     if (!nmeaUDPListenPortVDR.empty()) nmeaVDR.Receive();
+	     if (!nmeaComPortVDR.empty() || (!nmeaUDPAddrVDR.empty() && !nmeaUDPPortVDR.empty())) nmeaVDR.Update(model.getTime());
+	     if (!nmeaComPortVDR.empty())  nmeaVDR.SendSerial();
+	     if (!nmeaUDPAddrVDR.empty() && !nmeaUDPPortVDR.empty()) nmeaVDR.SendUdp();
+	     nmeaVDR.ClearQueue();
+	   }
 
+	 if(nmeaGateway.GetHostStatus())
+	   {	 
+	     if (!nmeaUDPListenPortGateway.empty()) nmeaGateway.Receive();
+	     if (!nmeaComPortGateway.empty() || (!nmeaUDPAddrGateway.empty() && !nmeaUDPPortGateway.empty())) nmeaGateway.Update(model.getTime());
+	     if (!nmeaComPortGateway.empty())  nmeaGateway.SendSerial();
+	     if (!nmeaUDPAddrGateway.empty() && !nmeaUDPPortGateway.empty()) nmeaGateway.SendUdp();
+	     nmeaGateway.ClearQueue();
+	   }
       }
       { IPROF("Render setup");
         driver->setViewPort(irr::core::rect<irr::s32>(0,0,graphicsWidth,graphicsHeight)); //Full screen before beginScene
@@ -944,7 +975,6 @@ int main(int argc, char ** argv)
 	}
 
 	//       renderRadarProfile.toc();
-
 	//       renderProfile.tic();
       }{ IPROF("Render");
 

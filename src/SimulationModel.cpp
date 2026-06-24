@@ -150,7 +150,7 @@ SimulationModel::SimulationModel(irr::IrrlichtDevice* aDev, GUIMain* aGui, Sound
   }
 
   mSolver->Init(mOwnShip);
-  
+
   //Load rain
   mRain->load(mSmgr, mCamera->getSceneNode(), mDevice, mOwnShip->getPosition().X, mOwnShip->getPosition().Y, mOwnShip->getPosition().Z, mOwnShip->getLength(), mOwnShip->getBreadth());
 
@@ -457,8 +457,12 @@ void SimulationModel::update()
   //update all lines, ready to be used for own ship force
   mLines->update(mTime);
 
+  //Detect collision
+  float colX = 0, colY= 0, colN = 0;
+  mCollision->DetectAndRespond(colX, colY, colN); 
+  
   //Solver Man 3Ddl
-  mSolver->Run(mTime, mOwnShip->getEta(), mOwnShip->getMu());
+  mSolver->Run(mTime, mOwnShip->getEta(), mOwnShip->getMu(), colX, colY, colN);
 
   //update own ship
   mOwnShip->Update(mTime, mTideHeight, mWeather, mWind, mSolver, mOffsetPosition);
@@ -516,19 +520,6 @@ void SimulationModel::update()
   
   //update the camera position
   mCamera->update(mTime);
-
-
-  // Check depth and update collision response forces and torque
-  irr::f32 groundingAxialDrag = 0;
-  irr::f32 groundingLateralDrag = 0;
-  irr::f32 groundingTurnDrag = 0;
-  mCollision->DetectAndRespond(groundingAxialDrag, groundingLateralDrag, groundingTurnDrag); // The drag values will get modified by this call
-
-  // Add in response from mooring lines here
-  //groundingAxialDrag -= linesForce.Z;
-  //groundingLateralDrag -= linesForce.X;
-  //groundingTurnDrag -= linesTorque.Y;
-
   
   //update radar
   if (mRadarCalculation->isRadarOn())

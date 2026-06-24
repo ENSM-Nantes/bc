@@ -155,7 +155,7 @@ void OwnShip::InitOwnShipParams(OwnShipData aOwnShipData, Json::Value aJsonRoot)
   mViews.resize(nbrOfViews);
   mIsHighView.resize(nbrOfViews);
 
-  for (unsigned char i=0; i<nbrOfViews; i++)
+  for(unsigned char i=0; i<nbrOfViews; i++)
     {
       mViews[i][0] = mScaleFactor * aJsonRoot["mesh"]["views"][i][0].asFloat();
       mViews[i][1] = mScaleFactor * aJsonRoot["mesh"]["views"][i][1].asFloat();
@@ -189,10 +189,13 @@ void OwnShip::InitOwnShipParams(OwnShipData aOwnShipData, Json::Value aJsonRoot)
   mRadarTilt = aJsonRoot["radar"]["tilt"].asFloat();
   mRadarPos = mScaleFactor * mRadarPos;
   mRadarSize = mScaleFactor * mRadarSize;
-
+  
   if(0 == mRadarSize)
     mRadarSize = 1;
 
+  //MMSI
+  mMmsi = aJsonRoot["general"]["mmsi"].asInt();
+  
   PrintDevices();
   PrintMeshInfos();
 }
@@ -211,7 +214,7 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
   irr::scene::ISceneManager* smgr = mDevice->getSceneManager();
   std::string ownShipName = aOwnShipData.name;
 
-  basePath = "models/Ownship/" + ownShipName + "/";
+  basePath = "models/Ships/" + ownShipName + "/";
   std::string userFolder = Utilities::getUserDir();
 
   if(std::filesystem::exists(userFolder + basePath))
@@ -225,7 +228,7 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
       std::ifstream streamJson(boatJson);                
       streamJson >> rootJson;
       retShipPrms = InitShipParams(rootJson);
-      
+
       // get the model file
       mMeshFileName = rootJson["mesh"]["name"].asString();
       mMeshFullPath = basePath + mMeshFileName;

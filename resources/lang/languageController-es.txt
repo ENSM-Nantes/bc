@@ -48,7 +48,7 @@ changeLegCourseSpeed = "Cambiar el rumbo y velocidad de la etapa"
 addLeg = "Añadir etapa (después de la seleccionada)"
 addShip = "Añadir buque"
 deleteLeg = "Borrar etapa"
-deleteShip = "X"
+deleteShip = "Borrar buque"
 move = "Desplazar buque"
 
 pump1Working = "Bomba del timón 1 Activa"

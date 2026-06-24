@@ -52,6 +52,7 @@ public:
 
   float getLength() const;
   float getBreadth() const;
+  float getDraught() const;
   float getHeightCorrection() const;
   float getEstimatedDisplacement() const;
   void setHeading(float hdg);
@@ -64,7 +65,17 @@ public:
   void moveNode(float deltaX, float deltaY, float deltaZ);
   void setPosition(float xPos, float yPos);
   irr::u32 getMMSI() const;
-  void setMMSI(irr::u32 mmsi);
+  void setMMSI(irr::u32 aMmsi);
+  unsigned int getIMO() const;
+  void setIMO(unsigned int aImo);
+  unsigned int getType() const;
+  void setType(unsigned int aType);
+  std::string getDestination() const;
+  void setDestination(std::string aDest);
+  std::string getCallSign() const;
+  void setCallSign(std::string aCallSign);
+  std::string getName() const;
+  void setName(std::string aName);
   float getDepth(Terrain *aTerrain) const;
   int InitShipParams(const std::string& aType);
   int InitShipParams(const Json::Value& aJsonRoot);
@@ -143,9 +154,15 @@ protected:
   Sail mSails;
   Engine mEngine[2];
 
-  //Devices
-  unsigned int mMsi;
+  //Global informations
+  unsigned int mMmsi;
+  unsigned int mImo;
+  unsigned int mType;
+  std::string mCallSign;
+  std::string mDestination;
+  std::string mName;
 
+  
   //Control
   eControlMode mControlMode;
 };

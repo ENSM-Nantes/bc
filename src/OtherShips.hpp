@@ -18,7 +18,6 @@
 #define __OTHERSHIPS_HPP_INCLUDED__
 
 #include "irrlicht.h"
-
 #include <vector>
 #include <string>
 
@@ -38,34 +37,45 @@ class OtherShips
 public:
   OtherShips();
   ~OtherShips();
-  void load(std::vector<OtherShipData> aOtherShipsData, irr::f32 aScenarioStartTime, Terrain *aTerrain, Water *aWater, OperatingMode::Mode aMode, irr::IrrlichtDevice* aDev);
-  void update(sTime& aTime, irr::f32 tideHeight, irr::u32 lightLevel, irr::core::vector3df ownShipPosition, irr::f32 ownShipLength);
-  RadarData getRadarData(irr::u32 number, irr::core::vector3df scannerPosition) const;
-  irr::u32 getNumber() const;
+  void load(std::vector<OtherShipData> aOtherShipsData, float aScenarioStartTime, Terrain *aTerrain, Water *aWater, OperatingMode::Mode aMode, irr::IrrlichtDevice* aDev);
+  void update(sTime& aTime, float tideHeight, unsigned int lightLevel, irr::core::vector3df ownShipPosition, float ownShipLength);
+  RadarData getRadarData(unsigned int number, irr::core::vector3df scannerPosition) const;
+  unsigned int getNumber() const;
   irr::core::vector3df getPosition(int number) const;
-  irr::f32 getLength(int number) const;
-  irr::f32 getBreadth(int number) const;
-  irr::f32 getHeading(int number) const;
-  irr::f32 getSpeed(int number) const; //Speed in m/s
-  irr::u32 getMMSI(int number) const;
-  irr::f32 getEstimatedDisplacement(int number) const;
-  void setSpeed(int number, irr::f32 speed); //Speed in m/s
-  void setMMSI(int number, irr::u32 mmsi);
-  void setPos(int number, irr::f32 positionX, irr::f32 positionZ);
-  void setHeading(int number, irr::f32 hdg);
-  void setRateOfTurn(int number, irr::f32 rateOfTurn);
+  float getLength(int number) const;
+  float getDraught(int number) const;
+  float getBreadth(int number) const;
+  float getHeading(int number) const;
+  float getSpeed(int number) const; //Speed in m/s
+  unsigned int getMMSI(int number) const;
+  unsigned int getIMO(int number) const;
+  std::string getShipName(int number) const;
+  std::string getShipDest(int number) const;
+  std::string getCallSign(int number) const;
+  unsigned char getType(int number) const;
+  float getEstimatedDisplacement(int number) const;
+  void setSpeed(int number, float speed); //Speed in m/s
+  void setMMSI(int number, unsigned int aMmsi);
+  void setIMO(int number, unsigned int aImo);
+  void setShipName(int number, std::string aName);
+  void setShipDest(int number, std::string aDest);
+  void setCallSign(int number, std::string aCallSign);
+  void setType(int number,  unsigned int aType);
+  void setPos(int number, float positionX, float positionZ);
+  void setHeading(int number, float hdg);
+  void setRateOfTurn(int number, float rateOfTurn);
   std::vector<Leg> getLegs(int number) const;
-  void changeLeg(int shipNumber, int legNumber, irr::f32 bearing, irr::f32 speed, irr::f32 distance, irr::f32 scenarioTime);
-  void addLeg(int shipNumber, int afterLegNumber, irr::f32 bearing, irr::f32 speed, irr::f32 distance, irr::f32 scenarioTime);
-  void deleteLeg(int shipNumber, int legNumber, irr::f32 scenarioTime);
-  void resetLegs(int shipNumber, irr::f32 course, irr::f32 speedKts, irr::f32 distanceNm, irr::f32 scenarioTime);
+  void changeLeg(int shipNumber, int legNumber, float bearing, float speed, float distance, float scenarioTime);
+  void addLeg(int shipNumber, int afterLegNumber, float bearing, float speed, float distance, float scenarioTime);
+  void deleteLeg(int shipNumber, int legNumber, float scenarioTime);
+  void resetLegs(int shipNumber, float course, float speedKts, float distanceNm, float scenarioTime);
   std::string getName(int number) const;
-  void moveNode(irr::f32 deltaX, irr::f32 deltaY, irr::f32 deltaZ);
+  void moveNode(float deltaX, float deltaY, float deltaZ);
   void enableAllTriangleSelectors();
   irr::scene::ISceneNode* getSceneNode(int number);
 
 private:
-  std::vector<OtherShip*> otherShips;
+  std::vector<OtherShip*> mOtherShips;
   Water *mWater;
   Terrain *mTerrain;
 };

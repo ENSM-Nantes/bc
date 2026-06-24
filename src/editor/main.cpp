@@ -459,13 +459,8 @@ int main (int argc, char ** argv)
     std::vector<std::string> ownShipTypes;
     std::vector<std::string> otherShipTypes;
 
-    std::string otherShipModelPath;
-    std::string ownShipModelPath = "models/Ownship/";
-    if (multiplayer) {
-        otherShipModelPath = "models/Ownship/"; //If in multiplayer mode, use own ship list for both own and others
-    } else {
-        otherShipModelPath = "models/Othership/";
-    }
+    std::string otherShipModelPath= "models/Ships/";
+    std::string ownShipModelPath = "models/Ships/";
 
     getDirectoryList(device,ownShipTypes,ownShipModelPath);
     if (Utilities::pathExists(userFolder + ownShipModelPath)) {
@@ -578,7 +573,6 @@ int main (int argc, char ** argv)
                 thisShip.initialX = controller.longToX(IniFile::iniFileTof32(otherShipIniFilename,IniFile::enumerate1("InitLong",i)));
                 thisShip.initialZ = controller.latToZ(IniFile::iniFileTof32(otherShipIniFilename,IniFile::enumerate1("InitLat",i)));
                 thisShip.shipName = IniFile::iniFileToString(otherShipIniFilename,IniFile::enumerate1("Type",i));
-                thisShip.mmsi = IniFile::iniFileTou32(otherShipIniFilename,IniFile::enumerate1("mmsi",i));
                 int numberOfLegs = IniFile::iniFileTof32(otherShipIniFilename,IniFile::enumerate1("Legs",i));
 
                 irr::f32 legStartTime = scenarioData.startTime; //Legs start at the start of the scenario

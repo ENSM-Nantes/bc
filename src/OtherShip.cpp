@@ -31,7 +31,7 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
 {
   int retShipPrms = -1;
   Json::Value rootJson;
-  irr::scene::IMesh *shipMesh;
+  irr::scene::IMesh *shipMesh = NULL;
   
   irr::scene::ISceneManager* smgr = aDev->getSceneManager();
   mName = aName;

@@ -36,8 +36,8 @@ void Wind::update(void)
   frontalArea = mOwnShip->getGeoParams().b * mOwnShip->getGeoParams().h * mOwnShip->getGeoParams().coefH; 
   sideArea = mOwnShip->getGeoParams().lPP * mOwnShip->getGeoParams().h * mOwnShip->getGeoParams().coefL; 
 
-  mAxialWindDrag = -1 * pow(relWindAxialMps, 2) * (relWindAxialMps/abs(relWindAxialMps)) * 0.5 * RHO_AIR * frontalArea;
-  mLateralWindDrag = -1 * pow(relWindLateralMps, 2) * relWindAxialMps/abs(relWindAxialMps) * 0.5 * RHO_AIR * sideArea;
+  mAxialWindDrag = pow(relWindAxialMps, 2) * (relWindAxialMps/abs(relWindAxialMps)) * 0.5 * RHO_AIR * frontalArea;
+  mLateralWindDrag = pow(relWindLateralMps, 2) * relWindAxialMps/abs(relWindAxialMps) * 0.5 * RHO_AIR * sideArea;
 
   alpha = (mWindDirection - (mOwnShip->getHeading() * 180/PI)) * PI/180;
   mApparentWindSpd = sqrt(pow(mOwnShip->getSpeedThroughWater(), 2) + pow((mWindSpeed), 2) + (2 * mOwnShip->getSpeedThroughWater() * (mWindSpeed) * cos(alpha)));

@@ -462,7 +462,7 @@ void SimulationModel::update()
   mCollision->DetectAndRespond(colX, colY, colN); 
   
   //Solver Man 3Ddl
-  mSolver->Run(mTime, mOwnShip->getEta(), mOwnShip->getMu(), colX, colY, colN);
+  mSolver->Run(mTime, mOwnShip->getEta(), mOwnShip->getMu(), colX, colY, colN, mWind);
 
   //update own ship
   mOwnShip->Update(mTime, mTideHeight, mWeather, mWind, mSolver, mOffsetPosition);

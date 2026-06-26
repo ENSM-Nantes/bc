@@ -118,6 +118,9 @@ Eigen::VectorXd Solver::DiffEq(const Eigen::VectorXd& aVectEtaMu)
   //Add Collision
   mT += mTCol;
   
+  //Add Wind drag
+  mT += mTWindDrag;
+  
   vMuP = mShip->getInvMatM() * (mT - (matC * vMu));/*Sukas 2019 : Equation 15*/
   
   catVect.resize(vEtaP.size() + vMuP.size());
@@ -131,11 +134,12 @@ void Solver::SetDeltaT(double aDt)
   mDt = aDt;
 }
 
-void Solver::Run(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu, float aColX, float aColY, float aColN)
+void Solver::Run(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu, float aColX, float aColY, float aColN, Wind* aWind)
 {
   float aDt = aTime.deltaTime;
   SetDeltaT(aDt);
   SetDataCollision(aColX, aColY, aColN);
+  SetWindDrag(aWind->getAxialDrag() * MPS_TO_KTS, aWind->getLateralDrag() * MPS_TO_KTS);
 
   SolveRk4(aEta, aMu);
   SolveRoll();
@@ -145,6 +149,11 @@ void Solver::Run(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu, float 
 void Solver::SetDataCollision(float aColX, float aColY, float aColN)
 {
   mTCol << aColX, aColY, aColN; 
+}
+
+void Solver::SetWindDrag(float aAxialDrag, float aLateralDrag)
+{
+  mTWindDrag << aAxialDrag, aLateralDrag, 0; 
 }
 
 void Solver::SolveRk4(Eigen::Vector3d aEta, Eigen::Vector3d aMu)

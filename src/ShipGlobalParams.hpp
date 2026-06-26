@@ -15,7 +15,10 @@ struct sGeoParams{
   double kM; //Distance between kheel to metacentric 
   double gM; //Distance between gravity center to metacentric
   double propSpacing; //length between 2 propeller
-  double rudSpacing; //length between 2 rudder  
+  double rudSpacing; //length between 2 rudder
+  double h;
+  double coefH;
+  double coefL;
 };
 
 struct sAddedMassParams{

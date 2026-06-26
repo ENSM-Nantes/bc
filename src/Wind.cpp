@@ -33,8 +33,8 @@ void Wind::update(void)
   relWindAxialMps = (axialWind - mOwnShip->getSpeed()) * KTS_TO_MPS;
   relWindLateralMps = (lateralWind - mOwnShip->getLateralSpeed()) * KTS_TO_MPS;
 
-  frontalArea = mOwnShip->getGeoParams().b * mOwnShip->getGeoParams().d; //TODO : Add an air draught param
-  sideArea = mOwnShip->getGeoParams().lPP * mOwnShip->getGeoParams().d; //TODO : Add an air draught param
+  frontalArea = mOwnShip->getGeoParams().b * mOwnShip->getGeoParams().h * mOwnShip->getGeoParams().coefH; 
+  sideArea = mOwnShip->getGeoParams().lPP * mOwnShip->getGeoParams().h * mOwnShip->getGeoParams().coefL; 
 
   mAxialWindDrag = -1 * pow(relWindAxialMps, 2) * (relWindAxialMps/abs(relWindAxialMps)) * 0.5 * RHO_AIR * frontalArea;
   mLateralWindDrag = -1 * pow(relWindLateralMps, 2) * relWindAxialMps/abs(relWindAxialMps) * 0.5 * RHO_AIR * sideArea;

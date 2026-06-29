@@ -191,9 +191,9 @@ void Sail::SetRotDirection(std::string aRotDirection)
   if(!mWaitForStop && !mWaitForStart)
     {
       if(aRotDirection == "left")
-	mRotDirection = 1;
-      else
 	mRotDirection = -1;
+      else
+	mRotDirection = 1;
     }
 }
 

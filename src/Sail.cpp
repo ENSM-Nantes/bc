@@ -384,6 +384,26 @@ void Sail::ComputeT(void)
   sailsForceX = GetForce('X', mSpeedThroughWater, mTrueWindSpeed * MPS_TO_KTS, (mApparentWindDir * 180/PI));
   sailsForceY = GetForce('Y', mSpeedThroughWater, mTrueWindSpeed * MPS_TO_KTS, (mApparentWindDir * 180/PI));
 
+  //Starboard wind
+  if((mApparentWindDir * 180/PI) >= 0 && (mApparentWindDir * 180/PI) <= 180)
+    {
+      if(mRotDirection == -1)
+	{
+	  sailsForceX *= -1;
+	  sailsForceY *= -1;
+	}
+    }
+  //Port wind
+  else
+    {
+      if(mRotDirection == 1)
+	{
+	  sailsForceX *= -1;
+	  sailsForceY *= -1;
+	}
+    }
+
+  
   mT << sailsForceX*1000, sailsForceY*1000, 0;
 }
 

@@ -30,16 +30,17 @@ NMEA::NMEA()
 
 }
 
-NMEA::NMEA(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *aWind, RadarCalculation *aRadarCalc):mAutopilot(aOwnShip) 
+NMEA::NMEA(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *aWind, RadarCalculation *aRadarCalc, unsigned int aIntervalReport):mAutopilot(aOwnShip) 
 {
   mOwnShip = aOwnShip;
   mOtherShips = aOtherShips;
   mTerrain = aTerrain;
   mWind = aWind;
   mRadarCalc = aRadarCalc;
+  mIntervalReport = aIntervalReport;
 }
 
-void NMEA::SetModelData(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *aWind, RadarCalculation *aRadarCalc)
+void NMEA::SetModelData(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *aWind, RadarCalculation *aRadarCalc, unsigned int aIntervalReport)
 {
   OtherShips *pOtherShips = (OtherShips*)aOtherShips;
   
@@ -49,6 +50,7 @@ void NMEA::SetModelData(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTe
   mTerrain = aTerrain;
   mWind = aWind;
   mRadarCalc = aRadarCalc;
+  mIntervalReport = aIntervalReport;
   mAIS.Init(pOtherShips->getNumber());
 }
 
@@ -411,7 +413,7 @@ void NMEA::Update(sTime& aTime)
       readyShips.clear();
     }
 
-  if(now - mLastSendEvent < SENSOR_REPORT_INTERVAL)
+  if(now - mLastSendEvent < mIntervalReport)
     {
       return;
     }

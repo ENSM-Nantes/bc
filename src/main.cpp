@@ -762,7 +762,7 @@ int main(int argc, char ** argv)
 
   SimulationModel model(device, &guiMain, &sound, scenarioData, modelParameters);
 
- nmeaConning.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
+  nmeaConning.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation(), 100);
  nmeaOpCpn.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
  nmeaVDR.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
  nmeaGateway.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());

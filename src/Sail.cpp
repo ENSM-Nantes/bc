@@ -9,7 +9,7 @@ Sail::Sail(void)
   mOnOff = false;
   mWaitForStop = false;
   mWaitForStart = false;
-  mRotDirection = 1;
+  mRotDirection = -1;
   mDimCountX = 0;
   mDimCountY = 0;
   mSailsCount = 0;
@@ -191,9 +191,9 @@ void Sail::SetRotDirection(std::string aRotDirection)
   if(!mWaitForStop && !mWaitForStart)
     {
       if(aRotDirection == "left")
-	mRotDirection = -1;
-      else
 	mRotDirection = 1;
+      else
+	mRotDirection = -1;
     }
 }
 
@@ -387,7 +387,7 @@ void Sail::ComputeT(void)
   //Starboard wind
   if((mApparentWindDir * 180/PI) >= 0 && (mApparentWindDir * 180/PI) <= 180)
     {
-      if(mRotDirection == -1)
+      if(mRotDirection == 1)
 	{
 	  sailsForceX *= -1;
 	  sailsForceY *= -1;
@@ -396,7 +396,7 @@ void Sail::ComputeT(void)
   //Port wind
   else
     {
-      if(mRotDirection == 1)
+      if(mRotDirection == -1)
 	{
 	  sailsForceX *= -1;
 	  sailsForceY *= -1;

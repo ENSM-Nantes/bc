@@ -464,7 +464,7 @@ eCmdMsg Message::ParseShutDown(std::string& aMsg, void** aCmdData)
 
 eCmdMsg Message::ParseSailManagement(std::string& aMsg, void** aCmdData)
 {
-  static sRotorCtrl rotorCtrl = {false, "right"}; 
+  static sRotorCtrl rotorCtrl = {false, "left"}; 
   if(aMsg == "RT1")
     {
       rotorCtrl.onOff = true;

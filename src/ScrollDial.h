@@ -18,7 +18,7 @@ namespace gui
 
 		//! constructor
 		ScrollDial(core::position2d< s32 > centre, u32 radius, IGUIEnvironment* environment,
-				IGUIElement* parent, s32 id, s32 maxAngle=315, bool showValue=false, bool noclip=false);
+				IGUIElement* parent, s32 id, s32 maxAngle=360, bool showValue=false, bool noclip=false);
 
 		//! destructor
 		virtual ~ScrollDial();
@@ -101,6 +101,7 @@ namespace gui
 
 		s32 maxAngle;
 		s32 thresholdAngle;
+		s32 startAngleDeg;
 
 		bool showValue;
 

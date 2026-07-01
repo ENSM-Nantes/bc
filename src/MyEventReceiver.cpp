@@ -553,6 +553,7 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
                 gui->setExtraControlsWindowVisible(true);
             }
 
+
             if (id == GUIMain::GUI_ID_HIDE_LINES_CONTROLS_BUTTON)
             {
                 gui->setLinesControlsWindowVisible(false);
@@ -601,11 +602,6 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
             if (id == GUIMain::GUI_ID_FOLLOWUP_FAILED_BUTTON)
             {
 	      //model->setFollowUpRudderWorking(false);
-            }
-
-            if (id == GUIMain::GUI_ID_ACK_ALARMS_BUTTON)
-            {
-	      //model->setAlarm(false);
             }
 
             if (id == GUIMain::GUI_ID_ADD_LINE_BUTTON)

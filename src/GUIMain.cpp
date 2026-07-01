@@ -238,7 +238,7 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
 	    
 
   //add data display:
-  stdDataDisplayPos = irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL,0.71*sh,0.45*su+azimuthGUIOffsetR,0.95*sh); //In normal view
+  stdDataDisplayPos = irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL,0.76*sh,0.45*su+azimuthGUIOffsetR,0.95*sh); //In normal view
   radDataDisplayPos = irr::core::rect<irr::s32>(0.83*su,0.96*sh,0.99*su,0.99*sh); //In maximised 3d view
   altDataDisplayPos = irr::core::rect<irr::s32>(0.83*su,0.96*sh,0.99*su,0.99*sh); //In maximised 3d view
   dataDisplay = guienv->addStaticText(L"", stdDataDisplayPos, true, false, 0, -1, true); //Actual text set later
@@ -253,30 +253,52 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
   stdHdgIndicatorPos = irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL,0.630*sh,0.45*su+azimuthGUIOffsetR,0.680*sh); //In normal view
   radHdgIndicatorPos = irr::core::rect<irr::s32>(0.46*su, 0.96*sh, 0.82*su, 0.99*sh); //In maximised radar view
   maxHdgIndicatorPos = irr::core::rect<irr::s32>(0.46*su, 0.96*sh, 0.82*su, 0.99*sh); //In maximised 3d view
+
+  // Blue background behind the gauge only (added before headingIndicator so it renders behind)
+  {
+    irr::gui::IGUIStaticText* bg = guienv->addStaticText(L"",
+      irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, 0.630*sh, 0.45*su+azimuthGUIOffsetR, 0.680*sh));
+    bg->setBackgroundColor(irr::video::SColor(220, 20, 50, 120));
+    bg->setDrawBackground(true);
+  }
+
   headingIndicator = new irr::gui::HeadingIndicator(guienv,guienv->getRootGUIElement(),stdHdgIndicatorPos);
+
+  guienv->addStaticText(language->translate("compass").c_str(),
+    irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, 0.600*sh, 0.45*su+azimuthGUIOffsetR, 0.630*sh))
+    ->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
 
   // DEE vvvvv add very basic rate of turn indicator
   // rewrite this with its own class so that it is more realistic i.e. either a dial or a conning display
 
-  rateofturnScrollbar = new irr::gui::OutlineScrollBar(true,guienv,guienv->getRootGUIElement(),GUI_ID_RATE_OF_TURN_SCROLL_BAR,irr::core::rect<irr::s32>(0.10*su+azimuthGUIOffsetL, 0.87*sh, 0.20*su+azimuthGUIOffsetL, 0.91*sh),rudderTics,centreTic);
+  rateofturnScrollbar = new irr::gui::OutlineScrollBar(true,guienv,guienv->getRootGUIElement(),GUI_ID_RATE_OF_TURN_SCROLL_BAR,irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, 0.715*sh, 0.45*su+azimuthGUIOffsetR, 0.750*sh),rudderTics,centreTic);
 
   rateofturnScrollbar->setMax(50);
   rateofturnScrollbar->setMin(-50);
   rateofturnScrollbar->setSmallStep(1);
   rateofturnScrollbar->setPos(0);
   rateofturnScrollbar->setToolTipText(language->translate("rotText").c_str());
+
+  // Color zones: left = port turn (red), centre = no turn, right = starboard turn (green)
+  {
+    irr::core::array<irr::s32> rotThresholds;
+    irr::core::array<irr::video::SColor> rotColors;
+    rotThresholds.push_back(-50); rotColors.push_back(irr::video::SColor(160, 200,  30,  30)); // port
+    rotThresholds.push_back(  0); rotColors.push_back(irr::video::SColor(160,  30, 180,  30)); // starboard
+    static_cast<irr::gui::OutlineScrollBar*>(rateofturnScrollbar)->setColorZones(rotThresholds, rotColors);
+  }
+
+  rateofturnText = guienv->addStaticText(L"RoT: 0.0 °/min",
+    irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, 0.685*sh, 0.45*su+azimuthGUIOffsetR, 0.715*sh));
+  rateofturnText->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
+
   if (!hasRateOfTurnIndicator) {
     rateofturnScrollbar->setVisible(false);
+    rateofturnText->setVisible(false);
   }
 
   // DEE ^^^^^
 
-  // add indicators for whether the rudder pumps are working
-  pump1On = guienv->addStaticText(language->translate("pump1").c_str(),irr::core::rect<irr::s32>(0.35*su+azimuthGUIOffsetR,0.72*sh,0.44*su+azimuthGUIOffsetR,0.745*sh),true,false,0,-1,true);
-  //pump2On = guienv->addStaticText(language->translate("pump2").c_str(),irr::core::rect<irr::s32>(0.35*su+azimuthGUIOffsetR,0.75*sh,0.44*su+azimuthGUIOffsetR,0.775*sh),true,false,0,-1,true);
-  ackAlarms = guienv->addButton(irr::core::rect<irr::s32>(0.35*su+azimuthGUIOffsetR, 0.78*sh, 0.44*su+azimuthGUIOffsetR, 0.805*sh),0,GUI_ID_ACK_ALARMS_BUTTON,language->translate("ackAlarms").c_str());
-  pump1On->setTextAlignment(irr::gui::EGUIA_CENTER,irr::gui::EGUIA_CENTER);
-  //pump2On->setTextAlignment(irr::gui::EGUIA_CENTER,irr::gui::EGUIA_CENTER);
 
   //Add an additional window for controls (will normally be hidden)
   extraControlsWindow=guienv->addWindow(stdDataDisplayPos);
@@ -867,9 +889,6 @@ void GUIMain::updateVisibility(bool bHideFull)
   if (portText) {portText->setVisible(showInterface);}
   if (stbdText) {stbdText->setVisible(showInterface && !singleEngine);}
 
-  pump1On->setVisible(showInterface);
-  //pump2On->setVisible(showInterface);
-  ackAlarms->setVisible(showInterface);
 
   //Items not to show if we're on full screen radar
   //dataDisplay->setVisible(!radarLarge);
@@ -877,6 +896,7 @@ void GUIMain::updateVisibility(bool bHideFull)
   bearingButton->setVisible(!radarLarge);
   changeViewButton->setVisible(!radarLarge);
   rateofturnScrollbar->setVisible(!radarLarge && hasRateOfTurnIndicator);
+  if (rateofturnText) { rateofturnText->setVisible(!radarLarge && hasRateOfTurnIndicator); }
   hideInterfaceButton->setVisible(showInterface && !radarLarge);
   showInterfaceButton->setVisible(!showInterface && !radarLarge);
         
@@ -916,6 +936,7 @@ void GUIMain::updateVisibility(bool bHideFull)
     {
       if(headingIndicator) headingIndicator->setVisible(false);
       if(rateofturnScrollbar) rateofturnScrollbar->setVisible(false);
+      if(rateofturnText) rateofturnText->setVisible(false);
       if(dataDisplay) dataDisplay->setVisible(false);
     }
 
@@ -1032,7 +1053,14 @@ void GUIMain::updateGuiData(GUIData* guiData)
 
   // DEE vvvvv  this should display the rate of turn data on the screen
   // DEE        since internalrate of turn is in rads per second then for deg per min x 3438
-  rateofturnScrollbar->setPos(Utilities::round(3438*guiData->RateOfTurn));
+  {
+    irr::f32 rotDegMin = 3438 * guiData->RateOfTurn;
+    rateofturnScrollbar->setPos(Utilities::round(rotDegMin));
+    if (rateofturnText) {
+      std::wstring rotLabel = L"RoT: " + f32To1dp(rotDegMin) + L" °/min";
+      rateofturnText->setText(rotLabel.c_str());
+    }
+  }
   // DEE ^^^^
 
   //Update text display data
@@ -1075,17 +1103,6 @@ void GUIMain::updateGuiData(GUIData* guiData)
   arpaContactStates = guiData->arpaContactStates;
   setARPAList(guiData->arpaListSelection);
 
-  //Update rudder pump indicators
-  //if (guiData->pump1On == true) {
-    pump1On->setBackgroundColor(irr::video::SColor(255,0,128,0));
-    /*} else {
-    pump1On->setBackgroundColor(irr::video::SColor(255,128,0,0));
-    }*/
-    /*if (guiData->pump2On == true) {
-    pump2On->setBackgroundColor(irr::video::SColor(255,0,128,0));
-  } else {
-    pump2On->setBackgroundColor(irr::video::SColor(255,128,0,0));
-    }*/
 }
 
 void GUIMain::showLogWindow()

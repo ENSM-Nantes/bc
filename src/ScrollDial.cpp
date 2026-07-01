@@ -41,6 +41,7 @@ ScrollDial::ScrollDial(core::position2d< s32 > centre, u32 radius, IGUIEnvironme
 
 	//Threshold angle is half way between the max angle and 360 degrees. Input between maxAngle and theshold goes to max, above theshold goes to 0
 	thresholdAngle = (maxAngle + 360) / 2;
+	startAngleDeg = 0;
 }
 
 
@@ -209,46 +210,94 @@ void ScrollDial::OnPostRender(u32 timeMs)
 //! draws the element and its children
 void ScrollDial::draw()
 {
-
 	if (!IsVisible)
 		return;
 
+	IGUISkin* skin = Environment->getSkin();
+	u32 skinAlpha = 255;
+	if (skin)
+		skinAlpha = skin->getColor(gui::EGDC_3D_FACE).getAlpha();
 
-    IGUISkin* skin = Environment->getSkin();
-    u32 skinAlpha = 255;
-    if (skin) {
-        skinAlpha = skin->getColor(gui::EGDC_3D_FACE).getAlpha();
-    }
+	s32 offsetX = AbsoluteRect.LowerRightCorner.X - RelativeRect.LowerRightCorner.X;
+	s32 offsetY = AbsoluteRect.LowerRightCorner.Y - RelativeRect.LowerRightCorner.Y;
+	core::vector2d<s32> C(centre.X + offsetX, centre.Y + offsetY);
 
-    s32 offsetX = AbsoluteRect.LowerRightCorner.X - RelativeRect.LowerRightCorner.X;
-    s32 offsetY = AbsoluteRect.LowerRightCorner.Y - RelativeRect.LowerRightCorner.Y;
-
-    core::vector2d<s32> absoluteCentre(centre.X + offsetX, centre.Y + offsetY);
-
-	Environment->getVideoDriver()->draw2DPolygon(absoluteCentre,radius,video::SColor(skinAlpha,0,0,0),30);
-
+	irr::video::IVideoDriver* driver = Environment->getVideoDriver();
 	SliderRect = AbsoluteRect;
 
-	if ( core::isnotzero ( range() ) )
-	{
-		//Draw from centre
-		core::vector2d<s32> endPoint;
-		endPoint.X = absoluteCentre.X + radius*sin(DrawAngle);
-		endPoint.Y = absoluteCentre.Y - radius*cos(DrawAngle);
+	const s32 borderW = 3;
+	const s32 iR      = (s32)radius - borderW;
+	const s32 R       = (s32)radius;
 
-		Environment->getVideoDriver()->draw2DLine(absoluteCentre,endPoint,video::SColor(skinAlpha,0,0,0));
-	}
+	video::SColor bgColor(skinAlpha, 220, 220, 220);
+	video::SColor borderColor(skinAlpha, 0, 0, 0);
 
-	// Display value on scroll dial
-	if (showValue) {
-		if (Environment->getHovered() == this) {
-			if (skin) {
-				irr::gui::IGUIFont* font = skin->getFont();
-				if (font) {
-					font->draw(irr::core::stringw(Pos),AbsoluteRect,video::SColor(skinAlpha,0,0,0),true,true,&AbsoluteRect);
+	// Arc colour based on current proportion
+	f32 prop = core::isnotzero(range())
+	           ? core::clamp((f32)(Pos - Min) / range(), 0.0f, 1.0f) : 0.0f;
+	u32 rv = (prop < 0.5f) ? (u32)(prop * 2.0f * 220) : 220u;
+	u32 gv = (prop < 0.5f) ? 200u : (u32)((1.0f - (prop - 0.5f) * 2.0f) * 200);
+	video::SColor arcColor(skinAlpha, rv, gv, 0);
+
+	f32 startRad = startAngleDeg * core::DEGTORAD;
+	bool hasArc  = core::isnotzero(range()) && DrawAngle > 0.001f;
+	bool fullArc = DrawAngle >= 2.0f * core::PI - 0.01f;
+
+	// 1. Interior fill (scanlines) — guaranteed gap-free
+	for (s32 dy = -iR; dy <= iR; dy++) {
+		s32 mx = (s32)sqrtf((f32)(iR*iR - dy*dy));
+		if (mx <= 0) continue;
+
+		if (!hasArc || fullArc) {
+			driver->draw2DRectangle(fullArc ? arcColor : bgColor,
+				core::rect<s32>(C.X - mx, C.Y + dy, C.X + mx + 1, C.Y + dy + 1));
+		} else {
+			// Grey baseline for the whole row, then overwrite arc spans
+			driver->draw2DRectangle(bgColor,
+				core::rect<s32>(C.X - mx, C.Y + dy, C.X + mx + 1, C.Y + dy + 1));
+
+			s32 spanStart = INT_MAX;
+			for (s32 dx = -mx; dx <= mx + 1; dx++) {
+				bool inArc = false;
+				if (dx <= mx && (dx != 0 || dy != 0)) {
+					f32 a = atan2f((f32)dx, -(f32)dy);
+					if (a < 0) a += 2.0f * core::PI;
+					f32 rel = a - startRad;
+					if (rel < 0) rel += 2.0f * core::PI;
+					inArc = (rel <= DrawAngle);
+				}
+				if (inArc && spanStart == INT_MAX) {
+					spanStart = dx;
+				} else if (!inArc && spanStart != INT_MAX) {
+					driver->draw2DRectangle(arcColor,
+						core::rect<s32>(C.X + spanStart, C.Y + dy,
+						                C.X + dx,        C.Y + dy + 1));
+					spanStart = INT_MAX;
 				}
 			}
 		}
+	}
+
+	// 2. Border ring (annular scanlines) — guaranteed gap-free
+	for (s32 dy = -R; dy <= R; dy++) {
+		s32 outerX = (dy*dy <= R*R) ? (s32)sqrtf((f32)(R*R - dy*dy)) : 0;
+		if (outerX <= 0) continue;
+		s32 innerX = (dy*dy <= iR*iR) ? (s32)sqrtf((f32)(iR*iR - dy*dy)) : 0;
+		// Left arc segment
+		driver->draw2DRectangle(borderColor,
+			core::rect<s32>(C.X - outerX, C.Y + dy, C.X - innerX, C.Y + dy + 1));
+		// Right arc segment
+		driver->draw2DRectangle(borderColor,
+			core::rect<s32>(C.X + innerX, C.Y + dy, C.X + outerX + 1, C.Y + dy + 1));
+	}
+
+	// 3. Needle
+	if (hasArc) {
+		f32 na = startRad + DrawAngle;
+		core::vector2d<s32> tip(C.X + (s32)(iR * sinf(na)), C.Y - (s32)(iR * cosf(na)));
+		video::SColor needleColor(skinAlpha, 0, 0, 0);
+		for (s32 d = -1; d <= 1; d++)
+			driver->draw2DLine({C.X + d, C.Y}, {tip.X + d, tip.Y}, needleColor);
 	}
 
 }
@@ -274,13 +323,16 @@ s32 ScrollDial::getPosFromMousePos(const core::position2di &pos) const
 
     f32 angle = atan2(relX,-1.0*relY)*core::RADTODEG;
     while (angle<0) {angle+=360;} //As atan2 gives -pi to +pi
+    // Remove start offset so angle is relative to the dial's zero position
+    angle -= (f32)startAngleDeg;
+    while (angle < 0) {angle += 360;}
     if (angle > thresholdAngle) {
 		//Closer to 0 than to max
 		angle=0;
 	} else if (angle > maxAngle) {
 		//Above max
 		angle=maxAngle;
-	} 
+	}
     f32 proportion = angle/maxAngle;
     return (s32) (proportion * range()) + Min;
 }

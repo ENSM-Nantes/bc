@@ -485,8 +485,8 @@ void SimulationModel::update()
   if(mOwnShip->getPosition().getLength() > 1000)
     {
       irr::core::vector3df ownShipPos = mOwnShip->getPosition();
-      irr::s32 deltaX = -1*(irr::s32)ownShipPos.X;
-      irr::s32 deltaZ = -1*(irr::s32)ownShipPos.Z;
+      float deltaX = -1*ownShipPos.X;
+      float deltaZ = -1*ownShipPos.Z;
       //std::cout << "deltaX : " << deltaX << std::endl;
       //std::cout << "deltaZ : " << deltaZ << std::endl;
 

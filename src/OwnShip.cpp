@@ -61,6 +61,7 @@ OwnShip::OwnShip()
   mOffsetPos = {0, 0, 0};
   mDeltaX = 0;
   mDeltaZ = 0;
+  mWaveHeightFiltered = 0;
 }
 
 OwnShip::~OwnShip()
@@ -87,7 +88,7 @@ void OwnShip::PrintMeshInfos(void)
   std::cout << "Angle correction : " << mAngleCorrection << std::endl;
   std::cout << "Height correction : " << mHeightCorrection << std::endl; 
 
-  for (unsigned char i=0; i<MESH_VIEWS_MAX; i++)
+  for (unsigned char i=0; i<mViews.size(); i++)
     {
       std::cout << "View " << i << " :" << std::endl;
       std::cout << "  -> X : " << mViews[i][0] << std::endl;

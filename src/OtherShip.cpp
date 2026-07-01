@@ -32,6 +32,7 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
   int retShipPrms = -1;
   Json::Value rootJson;
   irr::scene::IMesh *shipMesh = NULL;
+  mShipScene = NULL;
   
   irr::scene::ISceneManager* smgr = aDev->getSceneManager();
   mName = aName;
@@ -248,18 +249,22 @@ void OtherShip::changeLeg(int legNumber, irr::f32 bearing, irr::f32 speed, irr::
     //Recalculate subsequent start times, only changing from the current point.
     //We can guarantee that there is a next leg, as we checked (legNumber < legs.size() - 1)
 
-    irr::f32 newTimeRemaining;
+    irr::f32 newTimeRemaining = 0;
     if ( legNumber == (int)findCurrentLeg(scenarioTime) ) {
       //On current leg - calculate from current point only
       irr::f32 oldTimeRemaining = mLegs.at(legNumber+1).startTime - scenarioTime;
       if (distance < 0) {distance = fabs(oldSpeed)*oldTimeRemaining/SECONDS_IN_HOUR;} //If leg length is negative, ensure overall leg length doesn't change
-      newTimeRemaining = SECONDS_IN_HOUR * distance / fabs(speed); //The adjusted leg distance starts from now
+
+      if(speed != 0)
+	newTimeRemaining = SECONDS_IN_HOUR * distance / fabs(speed); //The adjusted leg distance starts from now
+
       mLegs.at(legNumber).startTime = scenarioTime; // New leg effectively starts now
     } else {
       //On subsequent leg - calculate for whole leg
       irr::f32 oldTimeRemaining = mLegs.at(legNumber+1).startTime - mLegs.at(legNumber).startTime;
       if (distance < 0) {distance = fabs(oldSpeed)*oldTimeRemaining/SECONDS_IN_HOUR;} //If leg length is negative, ensure overall leg length doesn't change
-      newTimeRemaining = SECONDS_IN_HOUR * distance / fabs(speed);
+      if(speed != 0)
+	newTimeRemaining = SECONDS_IN_HOUR * distance / fabs(speed);
       //No need to change start time.
     }
 
@@ -272,7 +277,8 @@ void OtherShip::changeLeg(int legNumber, irr::f32 bearing, irr::f32 speed, irr::
     mLegs.at(legNumber + 1).startTime = mLegs.at(legNumber).startTime + newTimeRemaining;
     //For the remaining legs (which may not exist)
     for (int i = legNumber + 2; i < (int)mLegs.size(); i++) {
-      mLegs.at(i).startTime = mLegs.at(i-1).startTime + SECONDS_IN_HOUR*mLegs.at(i-1).distance/mLegs.at(i-1).speed;
+      if(mLegs.at(i-1).speed != 0)
+        mLegs.at(i).startTime = mLegs.at(i-1).startTime + SECONDS_IN_HOUR*mLegs.at(i-1).distance/mLegs.at(i-1).speed;
     }
 
   } //Check leg exists & can be changed
@@ -314,7 +320,8 @@ void OtherShip::addLeg(int afterLegNumber, irr::f32 bearing, irr::f32 speed, irr
     //set start time of subsequent mLegs
     //For the remaining mLegs (which may not exist)
     for (int i = afterLegNumber + 2; i < (int)mLegs.size(); i++) {
-      mLegs.at(i).startTime = mLegs.at(i-1).startTime + SECONDS_IN_HOUR*mLegs.at(i-1).distance/mLegs.at(i-1).speed;
+      if(mLegs.at(i-1).speed != 0)
+        mLegs.at(i).startTime = mLegs.at(i-1).startTime + SECONDS_IN_HOUR*mLegs.at(i-1).distance/mLegs.at(i-1).speed;
     }
 
 
@@ -345,7 +352,8 @@ void OtherShip::deleteLeg(int legNumber, irr::f32 scenarioTime)
     //adjust start time of subsequent mLegs
     //For the remaining mLegs (which may not exist)
     for (int i = legNumber + 2; i < (int)mLegs.size(); i++) {
-      mLegs.at(i).startTime = mLegs.at(i-1).startTime + SECONDS_IN_HOUR*mLegs.at(i-1).distance/mLegs.at(i-1).speed;
+      if(mLegs.at(i-1).speed != 0)
+        mLegs.at(i).startTime = mLegs.at(i-1).startTime + SECONDS_IN_HOUR*mLegs.at(i-1).distance/mLegs.at(i-1).speed;
     }
 
     //Remove this leg
@@ -367,7 +375,10 @@ void OtherShip::resetLegs(irr::f32 course, irr::f32 speedKts, irr::f32 distanceN
 
   //Use distance to calculate startTime of next leg, and stored for later reference.
   currentLeg.distance = distanceNm;
-  irr::f32 mainLegEndTime = scenarioTime + SECONDS_IN_HOUR*(distanceNm/fabs(speedKts)); // nm/kts -> hours, so convert to seconds
+  irr::f32 mainLegEndTime = 0;
+
+  if(speedKts != 0)
+    mainLegEndTime = scenarioTime + SECONDS_IN_HOUR*(distanceNm/fabs(speedKts)); // nm/kts -> hours, so convert to seconds
 
   mLegs.push_back(currentLeg);
 

@@ -4,7 +4,13 @@
 
 Wind::Wind()
 {
-
+  mWindDirection = 0;
+  mWindSpeed = 0; 
+  mApparentWindDir = 0;
+  mApparentWindSpd = 0;
+  mWindFlowDirection = 0;
+  mAxialWindDrag = 0;
+  mLateralWindDrag = 0;        
 }
 
 Wind::~Wind()

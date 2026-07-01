@@ -176,11 +176,31 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
   stbdScrollbar->setMin(-100);
   stbdScrollbar->setPos(0);
 
+  // Color zones: scroll pos -100→-10 = top = ahead (green), -10→+10 = stop (yellow), +10→100 = bottom = astern (red)
+  {
+    irr::core::array<irr::s32> ezThresholds;
+    irr::core::array<irr::video::SColor> ezColors;
+    ezThresholds.push_back(-100);
+    ezColors.push_back(irr::video::SColor(160,  30, 180,  30)); // ahead
+    ezThresholds.push_back( 0);
+    ezColors.push_back(irr::video::SColor(160, 200,  30,  30)); // astern
+    static_cast<irr::gui::OutlineScrollBar*>(portScrollbar)->setColorZones(ezThresholds, ezColors);
+    static_cast<irr::gui::OutlineScrollBar*>(stbdScrollbar)->setColorZones(ezThresholds, ezColors);
+  }
+
   wheelScrollbar = new irr::gui::OutlineScrollBar(true,guienv,guienv->getRootGUIElement(),GUI_ID_WHEEL_SCROLL_BAR,irr::core::rect<irr::s32>(0.13*su, 0.96*sh, 0.45*su, 0.99*sh),rudderTics,centreTic,true,rudderIndicatorTics);
   wheelScrollbar->setMax(30);
   wheelScrollbar->setMin(-30);
   wheelScrollbar->setPos(0);
 
+  // Color zones: left = port (red), centre neutral, right = starboard (green)
+  {
+    irr::core::array<irr::s32> wzThresholds;
+    irr::core::array<irr::video::SColor> wzColors;
+    wzThresholds.push_back(-30); wzColors.push_back(irr::video::SColor(160, 200,  30,  30)); // port = red
+    wzThresholds.push_back(  0); wzColors.push_back(irr::video::SColor(160,  30, 180,  30)); // starboard = green
+    wheelScrollbar->setColorZones(wzThresholds, wzColors);
+  }
 
   nonFollowUpPortButton = guienv->addButton(irr::core::rect<irr::s32>(0.09*su, 0.96*sh, 0.11*su, 0.99*sh),0,GUI_ID_NFU_PORT_BUTTON,language->translate("NFUPort").c_str());
   nonFollowUpStbdButton = guienv->addButton(irr::core::rect<irr::s32>(0.11*su, 0.96*sh, 0.13*su, 0.99*sh),0,GUI_ID_NFU_STBD_BUTTON,language->translate("NFUStbd").c_str());

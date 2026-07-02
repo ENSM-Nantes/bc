@@ -254,19 +254,17 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
   radHdgIndicatorPos = irr::core::rect<irr::s32>(0.46*su, 0.96*sh, 0.82*su, 0.99*sh); //In maximised radar view
   maxHdgIndicatorPos = irr::core::rect<irr::s32>(0.46*su, 0.96*sh, 0.82*su, 0.99*sh); //In maximised 3d view
 
-  // Blue background behind the gauge only (added before headingIndicator so it renders behind)
-  {
-    irr::gui::IGUIStaticText* bg = guienv->addStaticText(L"",
-      irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, 0.630*sh, 0.45*su+azimuthGUIOffsetR, 0.680*sh));
-    bg->setBackgroundColor(irr::video::SColor(220, 20, 50, 120));
-    bg->setDrawBackground(true);
-  }
+  // Cadet blue background behind the gauge (hidden in large radar mode)
+  compassBG = guienv->addStaticText(L"",
+    irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, 0.630*sh, 0.45*su+azimuthGUIOffsetR, 0.680*sh));
+  compassBG->setBackgroundColor(irr::video::SColor(255, 95, 158, 160));
+  compassBG->setDrawBackground(true);
 
   headingIndicator = new irr::gui::HeadingIndicator(guienv,guienv->getRootGUIElement(),stdHdgIndicatorPos);
 
-  guienv->addStaticText(language->translate("compass").c_str(),
-    irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, 0.600*sh, 0.45*su+azimuthGUIOffsetR, 0.630*sh))
-    ->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
+  compassLabel = guienv->addStaticText(language->translate("compass").c_str(),
+    irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, 0.600*sh, 0.45*su+azimuthGUIOffsetR, 0.630*sh));
+  compassLabel->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
 
   // DEE vvvvv add very basic rate of turn indicator
   // rewrite this with its own class so that it is more realistic i.e. either a dial or a conning display
@@ -301,7 +299,10 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
 
 
   //Add an additional window for controls (will normally be hidden)
-  extraControlsWindow=guienv->addWindow(stdDataDisplayPos);
+  irr::core::rect<irr::s32> extraControlsWindowPos(
+    0.09*su + azimuthGUIOffsetL, (irr::s32)(0.55*sh),
+    0.45*su + azimuthGUIOffsetR, (irr::s32)(0.95*sh));
+  extraControlsWindow=guienv->addWindow(extraControlsWindowPos);
   extraControlsWindow->getCloseButton()->setVisible(false);
   extraControlsWindow->setText(language->translate("extraControls").c_str());
   guienv->addButton(extraControlsWindow->getCloseButton()->getRelativePosition(),extraControlsWindow,GUI_ID_HIDE_EXTRA_CONTROLS_BUTTON,L"X");
@@ -311,8 +312,8 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
   irr::core::rect<irr::s32> extraControlsTabPosition = irr::core::rect<irr::s32>(
 										 0.01 * su,
 										 0.05 * sh,
-										 stdDataDisplayPos.getWidth() - 0.02 * su,
-										 stdDataDisplayPos.getHeight() - 0.01 * sh
+										 extraControlsWindowPos.getWidth() - 0.02 * su,
+										 extraControlsWindowPos.getHeight() - 0.01 * sh
 										 );
   irr::gui::IGUITabControl* extraControlsTabControl = guienv->addTabControl(extraControlsTabPosition, extraControlsWindow);
   extraControlsTabControl->setTabHeight(0.03*sh);
@@ -895,8 +896,10 @@ void GUIMain::updateVisibility(bool bHideFull)
   binosButton->setVisible(!radarLarge);
   bearingButton->setVisible(!radarLarge);
   changeViewButton->setVisible(!radarLarge);
-  rateofturnScrollbar->setVisible(!radarLarge && hasRateOfTurnIndicator);
-  if (rateofturnText) { rateofturnText->setVisible(!radarLarge && hasRateOfTurnIndicator); }
+  if (compassBG) { compassBG->setVisible(showInterface && !radarLarge); }
+  if (compassLabel) { compassLabel->setVisible(showInterface && !radarLarge); }
+  rateofturnScrollbar->setVisible(showInterface && !radarLarge && hasRateOfTurnIndicator);
+  if (rateofturnText) { rateofturnText->setVisible(showInterface && !radarLarge && hasRateOfTurnIndicator); }
   hideInterfaceButton->setVisible(showInterface && !radarLarge);
   showInterfaceButton->setVisible(!showInterface && !radarLarge);
         

@@ -307,6 +307,9 @@ private:
     irr::gui::IGUIListBox* linesList;
     irr::gui::IGUIStaticText* linesText;
 
+    irr::gui::IGUIStaticText* compassBG = nullptr;
+    irr::gui::IGUIStaticText* compassLabel = nullptr;
+
     irr::gui::IGUIStaticText* clickForRudderText;
     irr::gui::IGUIStaticText* clickForEngineText;
 

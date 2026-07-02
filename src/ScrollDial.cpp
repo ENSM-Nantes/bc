@@ -291,8 +291,8 @@ void ScrollDial::draw()
 			core::rect<s32>(C.X + innerX, C.Y + dy, C.X + outerX + 1, C.Y + dy + 1));
 	}
 
-	// 3. Needle
-	if (hasArc) {
+	// 3. Needle — always drawn so the zero position is visible
+	{
 		f32 na = startRad + DrawAngle;
 		core::vector2d<s32> tip(C.X + (s32)(iR * sinf(na)), C.Y - (s32)(iR * cosf(na)));
 		video::SColor needleColor(skinAlpha, 0, 0, 0);

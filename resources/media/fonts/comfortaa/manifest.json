@@ -1,0 +1,26 @@
+{
+  "name": "Comfortaa",
+  "family": "Comfortaa",
+  "description": "Comfortaa is a rounded geometric sans-serif type design intended for large sizes. It is absolutely free, both for personal and commercial use. If you like it please visit my DeviantArt page and fav it (but obviously only if you like it.) You are also more than welcome to comment about anything you want (I'm open to critique). I obviously would love to see how my font is being used, so feel free to comment with a link to your work, or send me a message. I hope you will enjoy using my font!",
+  "author": "Johan Aakerlund",
+  "website": "https://github.com/alexeiva/comfortaa",
+  "category": "Display",
+  "tags": [
+    "display",
+    "google"
+  ],
+  "languages": [
+    "el",
+    "en",
+    "es",
+    "ru",
+    "vi"
+  ],
+  "styles": [
+    "Regular"
+  ],
+  "formats": [
+    "ttf"
+  ],
+  "license": "SIL Open Font License 1.1"
+}

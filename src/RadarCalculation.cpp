@@ -145,9 +145,9 @@ void RadarCalculation::load(std::string radarConfigFile, irr::IrrlichtDevice* de
     radarForegroundColour.setBlue(0);
 
     radarSurroundColour.setAlpha(255);
-    radarSurroundColour.setRed(128);
-    radarSurroundColour.setGreen(128);
-    radarSurroundColour.setBlue(128);
+    radarSurroundColour.setRed(45);
+    radarSurroundColour.setGreen(55);
+    radarSurroundColour.setBlue(70);
 
         
     radarBackgroundColours.push_back(radarBackgroundColour);
@@ -209,9 +209,9 @@ void RadarCalculation::load(std::string radarConfigFile, irr::IrrlichtDevice* de
       radarForegroundColour.setBlue(IniFile::iniFileTou32(radarConfigFile,"radar1_blue"));
 
       radarSurroundColour.setAlpha(255);
-      radarSurroundColour.setRed(IniFile::iniFileTou32(radarConfigFile, "radar_surround_red", 128));
-      radarSurroundColour.setGreen(IniFile::iniFileTou32(radarConfigFile, "radar1_green", 128));
-      radarSurroundColour.setBlue(IniFile::iniFileTou32(radarConfigFile, "radar1_blue", 128));
+      radarSurroundColour.setRed(IniFile::iniFileTou32(radarConfigFile, "radar_surround_red", 45));
+      radarSurroundColour.setGreen(IniFile::iniFileTou32(radarConfigFile, "radar1_green", 55));
+      radarSurroundColour.setBlue(IniFile::iniFileTou32(radarConfigFile, "radar1_blue", 70));
 
       radarBackgroundColours.push_back(radarBackgroundColour);
       radarForegroundColours.push_back(radarForegroundColour);
@@ -233,9 +233,9 @@ void RadarCalculation::load(std::string radarConfigFile, irr::IrrlichtDevice* de
 	radarForegroundColour.setBlue(IniFile::iniFileTou32(radarConfigFile,IniFile::enumerate1("radar1_blue",i)));
 
 	radarSurroundColour.setAlpha(255);
-	radarSurroundColour.setRed(IniFile::iniFileTou32(radarConfigFile, IniFile::enumerate1("radar_surround_red", i), 128));
-	radarSurroundColour.setGreen(IniFile::iniFileTou32(radarConfigFile, IniFile::enumerate1("radar_surround_green", i), 128));
-	radarSurroundColour.setBlue(IniFile::iniFileTou32(radarConfigFile, IniFile::enumerate1("radar_surround_blue", i), 128));
+	radarSurroundColour.setRed(IniFile::iniFileTou32(radarConfigFile, IniFile::enumerate1("radar_surround_red", i), 45));
+	radarSurroundColour.setGreen(IniFile::iniFileTou32(radarConfigFile, IniFile::enumerate1("radar_surround_green", i), 55));
+	radarSurroundColour.setBlue(IniFile::iniFileTou32(radarConfigFile, IniFile::enumerate1("radar_surround_blue", i), 70));
 
 	radarBackgroundColours.push_back(radarBackgroundColour);
 	radarForegroundColours.push_back(radarForegroundColour);    
@@ -1904,6 +1904,6 @@ irr::video::SColor RadarCalculation::getRadarSurroundColour() const
     return radarSurroundColours.at(currentRadarColourChoice);
   }
   else {
-    return irr::video::SColor(255, 128, 128, 128);
+    return irr::video::SColor(255, 20, 35, 60);
   }
 }

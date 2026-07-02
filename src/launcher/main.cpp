@@ -364,7 +364,7 @@ int main (int argc, char ** argv)
   irr::core::stringw wVer(version.c_str());
 
   y1 = y2 + bR; y2 = y1 + bH;
-  device->getGUIEnvironment()->addStaticText(wVer.c_str(), irr::core::rect<irr::s32>(170+wVer.size(), y1, x2, y2), true);
+  device->getGUIEnvironment()->addStaticText(wVer.c_str(), irr::core::rect<irr::s32>(165+wVer.size(), y1, x2, y2), true);
   device->getGUIEnvironment()->setFocus(launchBC);
 
   Receiver receiver;

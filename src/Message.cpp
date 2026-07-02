@@ -464,7 +464,7 @@ eCmdMsg Message::ParseShutDown(std::string& aMsg, void** aCmdData)
 
 eCmdMsg Message::ParseSailManagement(std::string& aMsg, void** aCmdData)
 {
-  static sRotorCtrl rotorCtrl = {false, "right"}; 
+  static sRotorCtrl rotorCtrl = {false, "left"}; 
   if(aMsg == "RT1")
     {
       rotorCtrl.onOff = true;
@@ -990,7 +990,7 @@ std::string& Message::KeepAliveShort(void)
   msg.append(",");
   msg.append(std::to_string(pModel->getWind()->getTrueSpeed()));
   msg.append(",");
-  msg.append(std::to_string(fabs(pModel->getWind()->getApparentDir()) * irr::core::RADTODEG));
+  msg.append(std::to_string(pModel->getWind()->getApparentDir() * irr::core::RADTODEG));
   msg.append(",");
   msg.append(std::to_string(pModel->getWind()->getApparentSpd()));
   msg.append(",");

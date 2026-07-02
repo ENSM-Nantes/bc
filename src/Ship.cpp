@@ -69,6 +69,9 @@ void Ship::PrintGeoParams(void)
   std::cout << "Coefficient Block : " << mGeoParams.cB << std::endl;
   std::cout << "Spacing beetween 2 propeller : " << mGeoParams.propSpacing << std::endl;
   std::cout << "Spacing beetween 2 rudder : " << mGeoParams.rudSpacing << std::endl;
+  std::cout << "Air height : " << mGeoParams.h << std::endl;
+  std::cout << "Air draft frontal coef : " << mGeoParams.coefH << std::endl;
+  std::cout << "Air draft lateral coef : " << mGeoParams.coefL << std::endl;
   std::cout << "::::::::::::" << std::endl;
 }
 
@@ -103,6 +106,9 @@ int Ship::InitShipParams(const Json::Value& aJsonRoot)
       mGeoParams.cB = aJsonRoot["geoParams"]["blockCoef"].asFloat();
       mGeoParams.propSpacing = aJsonRoot["propeller"]["spacing"].asFloat();
       mGeoParams.rudSpacing = aJsonRoot["rudder"]["spacing"].asFloat();
+      mGeoParams.h = aJsonRoot["geoParams"]["airHeight"].asFloat();
+      mGeoParams.coefH = aJsonRoot["geoParams"]["airDraftCoefH"].asFloat();
+      mGeoParams.coefL = aJsonRoot["geoParams"]["airDraftCoefL"].asFloat();
       PrintGeoParams();
 
       //Added-Mass Params

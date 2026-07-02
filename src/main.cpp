@@ -762,7 +762,7 @@ int main(int argc, char ** argv)
 
   SimulationModel model(device, &guiMain, &sound, scenarioData, modelParameters);
 
- nmeaConning.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
+  nmeaConning.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation(), 100);
  nmeaOpCpn.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
  nmeaVDR.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
  nmeaGateway.SetModelData(model.getOwnShip(), model.getOtherShips(), model.getTerrain(), model.getWind(), model.getRadarCalculation());
@@ -1027,6 +1027,48 @@ int main(int argc, char ** argv)
         //gui
         driver->setViewPort(irr::core::rect<irr::s32>(0, 0, 10, 10));//Set to a dummy value first to force the next call to make the change
         driver->setViewPort(irr::core::rect<irr::s32>(0,0,graphicsWidth,graphicsHeight)); //Full screen for gui
+
+        // Gradient over left panel + radar square corners, but NOT the radar circle
+        if (guiMain.getShowInterface() && !guiMain.getLargeRadar()) {
+          irr::video::SColor gradTop   (255,  70, 100, 155);
+          irr::video::SColor gradBottom(255,  20,  35,  60);
+          irr::core::rect<irr::s32> radarRect = guiMain.getSmallRadarRect();
+          irr::s32 cx = (radarRect.UpperLeftCorner.X + radarRect.LowerRightCorner.X) / 2;
+          irr::s32 cy = (radarRect.UpperLeftCorner.Y + radarRect.LowerRightCorner.Y) / 2;
+          irr::s32 r  = (radarRect.LowerRightCorner.Y - radarRect.UpperLeftCorner.Y) / 2;
+
+          // Left panel (full height)
+          driver->draw2DRectangle(
+            irr::core::rect<irr::s32>(0, graphicsHeight3d, radarRect.UpperLeftCorner.X, graphicsHeight),
+            gradTop, gradTop, gradBottom, gradBottom);
+
+          // Radar square corners — per scanline, skipping the circle
+          irr::s32 panelH = (irr::s32)graphicsHeight - (irr::s32)graphicsHeight3d;
+          for (irr::s32 y = (irr::s32)graphicsHeight3d; y < (irr::s32)graphicsHeight; y++) {
+            irr::f32 t = (irr::f32)(y - (irr::s32)graphicsHeight3d) / (irr::f32)panelH;
+            irr::u32 rv = (irr::u32)(70  * (1.0f-t) + 20 * t);
+            irr::u32 gv = (irr::u32)(100 * (1.0f-t) + 35 * t);
+            irr::u32 bv = (irr::u32)(155 * (1.0f-t) + 60 * t);
+            irr::video::SColor rowColor(255, rv, gv, bv);
+
+            irr::f32 relY = (irr::f32)(y - cy);
+            if (relY * relY < (irr::f32)(r * r)) {
+              // Inside circle row: fill only the left and right corners
+              irr::s32 hw = (irr::s32)sqrtf((irr::f32)(r*r) - relY*relY);
+              if (cx - hw > radarRect.UpperLeftCorner.X)
+                driver->draw2DRectangle(rowColor,
+                  irr::core::rect<irr::s32>(radarRect.UpperLeftCorner.X, y, cx - hw, y + 1));
+              if (cx + hw < radarRect.LowerRightCorner.X)
+                driver->draw2DRectangle(rowColor,
+                  irr::core::rect<irr::s32>(cx + hw, y, radarRect.LowerRightCorner.X, y + 1));
+            } else {
+              // Outside circle row: fill full square width
+              driver->draw2DRectangle(rowColor,
+                irr::core::rect<irr::s32>(radarRect.UpperLeftCorner.X, y, radarRect.LowerRightCorner.X, y + 1));
+            }
+          }
+        }
+
         guiMain.drawGUI();
 
 	//       guiProfile.toc();

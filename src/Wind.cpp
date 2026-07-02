@@ -4,7 +4,13 @@
 
 Wind::Wind()
 {
-
+  mWindDirection = 0;
+  mWindSpeed = 0; 
+  mApparentWindDir = 0;
+  mApparentWindSpd = 0;
+  mWindFlowDirection = 0;
+  mAxialWindDrag = 0;
+  mLateralWindDrag = 0;        
 }
 
 Wind::~Wind()
@@ -33,11 +39,14 @@ void Wind::update(void)
   relWindAxialMps = (axialWind - mOwnShip->getSpeed()) * KTS_TO_MPS;
   relWindLateralMps = (lateralWind - mOwnShip->getLateralSpeed()) * KTS_TO_MPS;
 
-  frontalArea = mOwnShip->getGeoParams().b * mOwnShip->getGeoParams().d; //TODO : Add an air draught param
-  sideArea = mOwnShip->getGeoParams().lPP * mOwnShip->getGeoParams().d; //TODO : Add an air draught param
+  frontalArea = mOwnShip->getGeoParams().b * mOwnShip->getGeoParams().h * mOwnShip->getGeoParams().coefH; 
+  sideArea = mOwnShip->getGeoParams().lPP * mOwnShip->getGeoParams().h * mOwnShip->getGeoParams().coefL; 
 
-  mAxialWindDrag = -1 * pow(relWindAxialMps, 2) * (relWindAxialMps/abs(relWindAxialMps)) * 0.5 * RHO_AIR * frontalArea;
-  mLateralWindDrag = -1 * pow(relWindLateralMps, 2) * relWindAxialMps/abs(relWindAxialMps) * 0.5 * RHO_AIR * sideArea;
+  if(relWindAxialMps != 0)
+    mAxialWindDrag = pow(relWindAxialMps, 2) * (relWindAxialMps/abs(relWindAxialMps)) * 0.5 * RHO_AIR * frontalArea;
+
+  if(relWindLateralMps != 0)
+    mLateralWindDrag = pow(relWindLateralMps, 2) * relWindLateralMps/abs(relWindLateralMps) * 0.5 * RHO_AIR * sideArea;
 
   alpha = (mWindDirection - (mOwnShip->getHeading() * 180/PI)) * PI/180;
   mApparentWindSpd = sqrt(pow(mOwnShip->getSpeedThroughWater(), 2) + pow((mWindSpeed), 2) + (2 * mOwnShip->getSpeedThroughWater() * (mWindSpeed) * cos(alpha)));

@@ -36,6 +36,7 @@ ebl="EBL: "
 cursor="Cursor: "
 minSymbol="'"
 bearing="Brg"
+compass="Compass"
 NFUPort="<"
 NFUStbd=">"
 

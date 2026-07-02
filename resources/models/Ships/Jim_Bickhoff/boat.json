@@ -37,7 +37,10 @@
         "length": 156.4499969482422,
         "longGravityCenter": 10.430000305175781,
         "rho": 1025.0,
-        "subwaterVolume": 11707.7900390625
+        "subwaterVolume": 11707.7900390625,
+        "airHeight": 25.0,
+        "airDraftCoefH": 0.8,
+        "airDraftCoefL": 0.8
     },
     "gps": {
         "number": true

@@ -73,7 +73,8 @@ void OtherShips::load(std::vector<OtherShipData> aOtherShipsData, irr::f32 aScen
                 legs.push_back(currentLeg);
 
                 //find the start time for the next leg
-                legStartTime = legStartTime + SECONDS_IN_HOUR*(distance/fabs(currentLeg.speed)); // nm/kts -> hours, so convert to seconds
+		if(currentLeg.speed != 0)
+		  legStartTime = legStartTime + SECONDS_IN_HOUR*(distance/fabs(currentLeg.speed)); // nm/kts -> hours, so convert to seconds
             }
             //add a final 'stop' leg, which the ship will remain on after it has passed the other legs.
             Leg stopLeg;

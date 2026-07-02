@@ -60,5 +60,5 @@ chmod +x bridgecommand-somos/usr/share/bridgecommand/scripts/linux/*
 
 strip --strip-unneeded --remove-section=.comment --remove-section=.note bridgecommand-somos/usr/bin/*
 
-fakeroot dpkg-deb --build bridgecommand-somos bridgecommand-somos-$versionNo.deb
+fakeroot dpkg-deb --build bridgecommand-somos Setup-BC-SOMOS-"$versionNo"_x86-64.deb
  

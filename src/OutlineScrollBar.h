@@ -69,6 +69,9 @@ namespace gui
 		//! gets the position of the secondary indicator
 		virtual s32 getSecondary() const;
 
+		//! sets colored background zones; thresholds[i] is the start of zone i, color[i] is its color
+		void setColorZones(core::array<s32> thresholds, core::array<video::SColor> colors);
+
 		//! updates the rectangle
 	        virtual void updateAbsolutePosition();
 
@@ -109,6 +112,9 @@ namespace gui
 		core::array<s32> shortTicMarks;
 		core::array<s32> longTicMarks;
 		core::array<s32> ticIndicators;
+
+		core::array<s32> colorZoneThresholds;
+		core::array<video::SColor> colorZoneColors;
 
 		f32 range () const { return (f32) ( Max - Min ); }
 	};

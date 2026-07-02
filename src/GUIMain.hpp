@@ -229,6 +229,7 @@ private:
     irr::gui::IGUIStaticText* dataDisplay;
     irr::gui::IGUIStaticText* radarText;
     irr::gui::IGUIScrollBar* rateofturnScrollbar;
+    irr::gui::IGUIStaticText* rateofturnText = nullptr;
 
     irr::gui::IGUICheckBox* azimuth1Master;
     irr::gui::IGUICheckBox* azimuth2Master;
@@ -306,9 +307,8 @@ private:
     irr::gui::IGUIListBox* linesList;
     irr::gui::IGUIStaticText* linesText;
 
-    irr::gui::IGUIStaticText* pump1On;
-    irr::gui::IGUIStaticText* pump2On;
-    irr::gui::IGUIButton* ackAlarms;
+    irr::gui::IGUIStaticText* compassBG = nullptr;
+    irr::gui::IGUIStaticText* compassLabel = nullptr;
 
     irr::gui::IGUIStaticText* clickForRudderText;
     irr::gui::IGUIStaticText* clickForEngineText;
@@ -350,7 +350,7 @@ private:
     irr::s32 smallRadarScreenRadius;
     std::vector<ARPAEstimatedState> arpaContactStates;
     std::string guiTime;
-    bool singleEngine;
+    bool singleEngine = false;
     bool hasBowThruster;
     bool hasSternThruster;
     bool hasRateOfTurnIndicator;

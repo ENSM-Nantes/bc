@@ -9,7 +9,7 @@ Sail::Sail(void)
   mOnOff = false;
   mWaitForStop = false;
   mWaitForStart = false;
-  mRotDirection = 1;
+  mRotDirection = -1;
   mDimCountX = 0;
   mDimCountY = 0;
   mSailsCount = 0;
@@ -21,6 +21,7 @@ Sail::Sail(void)
   mStw = {0};
   mTws = {0};
   mTwa = {0};
+  mRotSpeed = 0;
   mSpeedThroughWater = 0;
   mTrueWindSpeed = 0;
   mApparentWindDir = 0;
@@ -28,8 +29,8 @@ Sail::Sail(void)
 }
 
 Sail::Sail(const std::string aPolarFile, std::string aVarNameX, std::string aVarNameY)
+  : Sail()
 {
-  Sail();
   OpenPolar(aPolarFile, aVarNameX, aVarNameY);
 }
 
@@ -222,7 +223,11 @@ void Sail::UpdateMesh(irr::IrrlichtDevice *aDev)
       static bool initStart = true, initStop = false, initSimu = false;
       
       time = aDev->getTimer()->getTime() / 1000.0f;
-      angleRotSec = 360.0f / aDev->getVideoDriver()->getFPS();
+
+      float fps = aDev->getVideoDriver()->getFPS();
+
+      if(fps > 0)
+	angleRotSec = 360.0f / fps;
 
       //std::cout << "time : " << time << std::endl;
       //std::cout << "angleRotSec : " << angleRotSec << std::endl;
@@ -327,7 +332,10 @@ void Sail::PrintParams(void)
 size_t FindClosestIndex(const std::vector<float>& aValue, float aTarget)
 {
   size_t best = 0;
-  float minDiff = std::abs(aValue[0] - aTarget);
+  float minDiff = 0;
+
+  if(!aValue.empty())
+    minDiff = std::abs(aValue[0] - aTarget);
 
   for(size_t i = 1; i < aValue.size(); ++i)
     {
@@ -384,6 +392,28 @@ void Sail::ComputeT(void)
   sailsForceX = GetForce('X', mSpeedThroughWater, mTrueWindSpeed * MPS_TO_KTS, (mApparentWindDir * 180/PI));
   sailsForceY = GetForce('Y', mSpeedThroughWater, mTrueWindSpeed * MPS_TO_KTS, (mApparentWindDir * 180/PI));
 
+  //Starboard wind
+  if((mApparentWindDir * 180/PI) >= 0 && (mApparentWindDir * 180/PI) <= 180)
+    {
+      //rot right
+      if(mRotDirection == 1)
+	{
+	  sailsForceX *= -1;
+	  sailsForceY *= -1;
+	}
+    }
+  //Port wind
+  else
+    {
+      //rot left
+      if(mRotDirection == -1)
+	{
+	  sailsForceX *= -1;
+	  sailsForceY *= -1;
+	}
+    }
+
+  
   mT << sailsForceX*1000, sailsForceY*1000, 0;
 }
 

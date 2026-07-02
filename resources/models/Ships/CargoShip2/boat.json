@@ -1,268 +1,251 @@
 {
-	"addedMass" : 
-	{
-		"pX" : 0.061058986932039261,
-		"pY" : 0.26423758268356323,
-		"pZ" : 0.023334361612796783
-	},
-	"depthSounder" : 
-	{
-		"maxDepth" : 200.0,
-		"number" : true
-	},
-	"engine" : 
-	{
-		"brand" : "Caterpillar",
-		"fuelCons" : 177.0,
-		"number" : 1,
-		"power" : 4500.0,
-		"rpmMax" : 170.0,
-		"type" : "9M32C"
-	},
-	"general" : 
-	{
-		"boatName" : "CargoShip2",
-		"callSign" : "XIUXX",
-		"desc" : "This ship is from the original BridgeCommand repository and has been retained for legacy\nHowever, it has not been tested with the new MMG Yasukawa model.\n\nTODO : Enter parameters for this ship",
-		"dest" : "SOMEWHERE",
-		"imgName" : "CargoShip2.jpg",
-		"imo" : 321890543,
-		"mmsi" : 122444678,
-		"type" : 70,
-		"typeStr" : "Cargo"
-	},
-	"geoParams" : 
-	{
-		"GM" : 1.5,
-		"KM" : 16.0,
-		"altGravityCenter" : -4.5,
-		"blockCoef" : 0.81000000238418579,
-		"breadth" : 58.0,
-		"draugth" : 10.0,
-		"length" : 320.0,
-		"longGravityCenter" : 11.100000381469727,
-		"rho" : 1025.0,
-		"subwaterVolume" : 312622.0
-	},
-	"gps" : 
-	{
-		"number" : true
-	},
-	"hull" : 
-	{
-		"invertRoll" : false,
-		"kpB" : -0.13670000433921814,
-		"kpBBB" : -1.4351999759674072,
-		"kpBBG" : 0.28189998865127563,
-		"kpBBR" : 1.163599967956543,
-		"kpBRG" : 0.29969999194145203,
-		"kpBRR" : -0.42329999804496765,
-		"kpG" : -0.029899999499320984,
-		"kpR" : 0.008500000461935997,
-		"kpRRG" : -0.048700001090764999,
-		"kpRRR" : 0.036299999803304672,
-		"linearExtCoeff" : 0.079999998211860657,
-		"npR" : -0.029843749478459358,
-		"npRRR" : -0.019296875223517418,
-		"npV" : -0.0625,
-		"npVRR" : -0.17662069201469421,
-		"npVVR" : -0.53244060277938843,
-		"npVVV" : -0.10109999775886536,
-		"xp0" : 0.02199999988079071,
-		"xpRR" : -0.013644804246723652,
-		"xpVR" : 0.063825711607933044,
-		"xpVV" : -0.011165627278387547,
-		"xpVVVV" : 0.11929251253604889,
-		"ypR" : 0.10393574088811874,
-		"ypRRR" : -0.050999999046325684,
-		"ypV" : -0.30371227860450745,
-		"ypVRR" : -0.38255172967910767,
-		"ypVVR" : -0.75,
-		"ypVVV" : -0.54068964719772339
-	},
-	"initialSpeed" : 
-	[
-		0,
-		0,
-		0
-	],
-	"lights" : 
-	{
-		"list" : 
-		[
-			{
-				"blue" : 0.0,
-				"endAngle" : 112.5,
-				"green" : 255.0,
-				"range" : 6.0,
-				"red" : 0.0,
-				"startAngle" : -1.0,
-				"x" : 70.800003051757812,
-				"y" : 135.60000610351562,
-				"z" : -130.19999694824219
-			},
-			{
-				"blue" : 0.0,
-				"endAngle" : 361.0,
-				"green" : 0.0,
-				"range" : 6.0,
-				"red" : 255.0,
-				"startAngle" : 247.5,
-				"x" : -70.800003051757812,
-				"y" : 135.60000610351562,
-				"z" : -130.19999694824219
-			},
-			{
-				"blue" : 255.0,
-				"endAngle" : 472.5,
-				"green" : 255.0,
-				"range" : 6.0,
-				"red" : 255.0,
-				"startAngle" : 247.5,
-				"x" : 0.0,
-				"y" : 102.19999694824219,
-				"z" : 365.5
-			},
-			{
-				"blue" : 255.0,
-				"endAngle" : 247.5,
-				"green" : 255.0,
-				"range" : 6.0,
-				"red" : 255.0,
-				"startAngle" : 112.5,
-				"x" : 0.0,
-				"y" : 80.0,
-				"z" : -417.0
-			},
-			{
-				"blue" : 255.0,
-				"endAngle" : 472.5,
-				"green" : 255.0,
-				"range" : 6.0,
-				"red" : 255.0,
-				"startAngle" : 247.5,
-				"x" : 0.0,
-				"y" : 168.60000610351562,
-				"z" : -127.0
-			}
-		],
-		"numberOfLights" : 5
-	},
-	"mesh" : 
-	{
-		"angleCorrection" : 0,
-		"makeTransparent" : false,
-		"name" : "CargoShip2.x",
-		"numberOfViews" : 4,
-		"scaleFactor" : 0.30379998683929443,
-		"views" : 
-		[
-			[
-				0.0,
-				100.0,
-				-100.0,
-				false
-			],
-			[
-				-100.0,
-				100.0,
-				-100.0,
-				false
-			],
-			[
-				100.0,
-				100.0,
-				100.0,
-				false
-			],
-			[
-				0.0,
-				400.0,
-				0.0,
-				true
-			]
-		],
-		"yCorrection" : -20.0
-	},
-	"propeller" : 
-	{
-		"backwardEff" : 0.67000001668930054,
-		"diameter" : 9.8599996566772461,
-		"forwardRotDir" : "right",
-		"k0" : 0.29300001263618469,
-		"k1" : -0.27500000596046448,
-		"k2" : -0.13899999856948853,
-		"longPosition" : -0.47999998927116394,
-		"nominalWake" : 0.35499998927116394,
-		"number" : 1,
-		"spacing" : 0.0,
-		"thrustFactor" : 0.27000001072883606
-	},
-	"radar" : 
-	{
-		"number" : 1,
-		"pos" : 
-		[
-			0.0,
-			0.0,
-			0.0
-		],
-		"size" : 1.0,
-		"tilt" : 0.0
-	},
-	"rotIndicator" : 
-	{
-		"number" : true
-	},
-	"rudder" : 
-	{
-		"areaMobPart" : 112.5,
-		"aspectRatio" : 1.8270000219345093,
-		"expConstUr" : 0.20731137692928314,
-		"flowCoef" : 
-		[
-			0.44243374548225861,
-			0.44243374548225861
-		],
-		"forceIncreaseFactor" : 0.52852499485015869,
-		"longCoordinatePos" : -0.89999997615814209,
-		"longCoordinateRatio" : -0.5,
-		"longLateralForce" : -0.40000000596046448,
-		"maxAngle" : 0.61000001430511475,
-		"maxSpeed" : 0.040699999779462814,
-		"number" : 1,
-		"spacing" : 0.0,
-		"spanLength" : 15.800000190734863,
-		"steeringResistanceFactor" : 0.38999998569488525,
-		"wakeFractionRatio" : 1.0860999822616577
-	},
-	"sail" : 
-	{
-		"number" : 0,
-		"pos" : 
-		[
-			[
-				0.0,
-				0.0,
-				0.0
-			],
-			[
-				0.0,
-				0.0,
-				0.0
-			],
-			[
-				0.0,
-				0.0,
-				0.0
-			],
-			[
-				0.0,
-				0.0,
-				0.0
-			]
-		],
-		"size" : "xxx",
-		"type" : "xxx"
-	}
+    "addedMass": {
+        "pX": 0.06105898693203926,
+        "pY": 0.26423758268356323,
+        "pZ": 0.023334361612796783
+    },
+    "depthSounder": {
+        "maxDepth": 200.0,
+        "number": true
+    },
+    "engine": {
+        "brand": "Caterpillar",
+        "fuelCons": 177.0,
+        "number": 1,
+        "power": 4500.0,
+        "rpmMax": 170.0,
+        "type": "9M32C"
+    },
+    "general": {
+        "boatName": "CargoShip2",
+        "callSign": "XIUXX",
+        "desc": "This ship is from the original BridgeCommand repository and has been retained for legacy\nHowever, it has not been tested with the new MMG Yasukawa model.\n\nTODO : Enter parameters for this ship",
+        "dest": "SOMEWHERE",
+        "imgName": "CargoShip2.jpg",
+        "imo": 321890543,
+        "mmsi": 122444678,
+        "type": 70,
+        "typeStr": "Cargo"
+    },
+    "geoParams": {
+        "GM": 1.5,
+        "KM": 16.0,
+        "altGravityCenter": -4.5,
+        "blockCoef": 0.8100000023841858,
+        "breadth": 58.0,
+        "draugth": 10.0,
+        "length": 320.0,
+        "longGravityCenter": 11.100000381469727,
+        "rho": 1025.0,
+        "subwaterVolume": 312622.0,
+        "airHeight": 35.0,
+        "airDraftCoefH": 0.65,
+        "airDraftCoefL": 0.5
+    },
+    "gps": {
+        "number": true
+    },
+    "hull": {
+        "invertRoll": false,
+        "kpB": -0.13670000433921814,
+        "kpBBB": -1.4351999759674072,
+        "kpBBG": 0.28189998865127563,
+        "kpBBR": 1.163599967956543,
+        "kpBRG": 0.299699991941452,
+        "kpBRR": -0.42329999804496765,
+        "kpG": -0.029899999499320984,
+        "kpR": 0.008500000461935997,
+        "kpRRG": -0.048700001090765,
+        "kpRRR": 0.03629999980330467,
+        "linearExtCoeff": 0.07999999821186066,
+        "npR": -0.029843749478459358,
+        "npRRR": -0.019296875223517418,
+        "npV": -0.0625,
+        "npVRR": -0.1766206920146942,
+        "npVVR": -0.5324406027793884,
+        "npVVV": -0.10109999775886536,
+        "xp0": 0.02199999988079071,
+        "xpRR": -0.013644804246723652,
+        "xpVR": 0.06382571160793304,
+        "xpVV": -0.011165627278387547,
+        "xpVVVV": 0.11929251253604889,
+        "ypR": 0.10393574088811874,
+        "ypRRR": -0.050999999046325684,
+        "ypV": -0.30371227860450745,
+        "ypVRR": -0.38255172967910767,
+        "ypVVR": -0.75,
+        "ypVVV": -0.5406896471977234
+    },
+    "initialSpeed": [
+        0,
+        0,
+        0
+    ],
+    "lights": {
+        "list": [
+            {
+                "blue": 0.0,
+                "endAngle": 112.5,
+                "green": 255.0,
+                "range": 6.0,
+                "red": 0.0,
+                "startAngle": -1.0,
+                "x": 70.80000305175781,
+                "y": 135.60000610351562,
+                "z": -130.1999969482422
+            },
+            {
+                "blue": 0.0,
+                "endAngle": 361.0,
+                "green": 0.0,
+                "range": 6.0,
+                "red": 255.0,
+                "startAngle": 247.5,
+                "x": -70.80000305175781,
+                "y": 135.60000610351562,
+                "z": -130.1999969482422
+            },
+            {
+                "blue": 255.0,
+                "endAngle": 472.5,
+                "green": 255.0,
+                "range": 6.0,
+                "red": 255.0,
+                "startAngle": 247.5,
+                "x": 0.0,
+                "y": 102.19999694824219,
+                "z": 365.5
+            },
+            {
+                "blue": 255.0,
+                "endAngle": 247.5,
+                "green": 255.0,
+                "range": 6.0,
+                "red": 255.0,
+                "startAngle": 112.5,
+                "x": 0.0,
+                "y": 80.0,
+                "z": -417.0
+            },
+            {
+                "blue": 255.0,
+                "endAngle": 472.5,
+                "green": 255.0,
+                "range": 6.0,
+                "red": 255.0,
+                "startAngle": 247.5,
+                "x": 0.0,
+                "y": 168.60000610351562,
+                "z": -127.0
+            }
+        ],
+        "numberOfLights": 5
+    },
+    "mesh": {
+        "angleCorrection": 0,
+        "makeTransparent": false,
+        "name": "CargoShip2.x",
+        "numberOfViews": 4,
+        "scaleFactor": 0.30379998683929443,
+        "views": [
+            [
+                0.0,
+                100.0,
+                -100.0,
+                false
+            ],
+            [
+                -100.0,
+                100.0,
+                -100.0,
+                false
+            ],
+            [
+                100.0,
+                100.0,
+                100.0,
+                false
+            ],
+            [
+                0.0,
+                400.0,
+                0.0,
+                true
+            ]
+        ],
+        "yCorrection": -20.0
+    },
+    "propeller": {
+        "backwardEff": 0.6700000166893005,
+        "diameter": 9.859999656677246,
+        "forwardRotDir": "right",
+        "k0": 0.2930000126361847,
+        "k1": -0.2750000059604645,
+        "k2": -0.13899999856948853,
+        "longPosition": -0.47999998927116394,
+        "nominalWake": 0.35499998927116394,
+        "number": 1,
+        "spacing": 0.0,
+        "thrustFactor": 0.27000001072883606
+    },
+    "radar": {
+        "number": 1,
+        "pos": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "size": 1.0,
+        "tilt": 0.0
+    },
+    "rotIndicator": {
+        "number": true
+    },
+    "rudder": {
+        "areaMobPart": 112.5,
+        "aspectRatio": 1.8270000219345093,
+        "expConstUr": 0.20731137692928314,
+        "flowCoef": [
+            0.4424337454822586,
+            0.4424337454822586
+        ],
+        "forceIncreaseFactor": 0.5285249948501587,
+        "longCoordinatePos": -0.8999999761581421,
+        "longCoordinateRatio": -0.5,
+        "longLateralForce": -0.4000000059604645,
+        "maxAngle": 0.6100000143051147,
+        "maxSpeed": 0.040699999779462814,
+        "number": 1,
+        "spacing": 0.0,
+        "spanLength": 15.800000190734863,
+        "steeringResistanceFactor": 0.38999998569488525,
+        "wakeFractionRatio": 1.0860999822616577
+    },
+    "sail": {
+        "number": 0,
+        "pos": [
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                0.0
+            ]
+        ],
+        "size": "xxx",
+        "type": "xxx"
+    }
 }

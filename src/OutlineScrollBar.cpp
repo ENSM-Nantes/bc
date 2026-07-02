@@ -224,12 +224,35 @@ void OutlineScrollBar::draw()
 	SliderRect = AbsoluteRect;
 
 	// draws the background
-	//skin->draw2DRectangle(this, skin->getColor(EGDC_SCROLLBAR), SliderRect, &AbsoluteClippingRect);
-	//Environment->getVideoDriver()->draw2DRectangle(video::SColor(255,128,128,128),SliderRect,&AbsoluteClippingRect);
-	
-	Environment->getVideoDriver()->draw2DRectangle(video::SColor(skinAlpha/4,255,255,255),SliderRect); //Todo: Think about clipping (find smaller of AbsoluteClippingRect and SliderRect?)
-	
-	Environment->getVideoDriver()->draw2DRectangleOutline(SliderRect,video::SColor(skinAlpha,0,0,0)); //Todo: Think about clipping (find smaller of AbsoluteClippingRect and SliderRect?)
+	Environment->getVideoDriver()->draw2DRectangle(video::SColor(skinAlpha/4,255,255,255),SliderRect);
+
+	// draw color zones
+	if(colorZoneColors.size() > 0 && colorZoneThresholds.size() == colorZoneColors.size())
+	  {
+		float f = Horizontal ? RelativeRect.getWidth() / range() : RelativeRect.getHeight() / range();
+
+		for(unsigned int i = 0; i < colorZoneColors.size(); i++)
+		  {
+			int pixStart = (int)((colorZoneThresholds[i] - Min) * f);
+
+			int pixEnd   = (i + 1 < colorZoneThresholds.size()) ? (int)((colorZoneThresholds[i + 1] - Min) * f) : (Horizontal ? RelativeRect.getWidth() : RelativeRect.getHeight());
+			
+			core::rect<int> zoneRect;
+
+			if(Horizontal)
+			  {
+			    zoneRect = core::rect<int>(AbsoluteRect.UpperLeftCorner.X + pixStart, AbsoluteRect.UpperLeftCorner.Y, AbsoluteRect.UpperLeftCorner.X + pixEnd, AbsoluteRect.LowerRightCorner.Y);
+			  }
+			else
+			  {
+			    zoneRect = core::rect<int>(AbsoluteRect.UpperLeftCorner.X, AbsoluteRect.UpperLeftCorner.Y + pixStart, AbsoluteRect.LowerRightCorner.X, AbsoluteRect.UpperLeftCorner.Y + pixEnd);
+			  }
+			
+			Environment->getVideoDriver()->draw2DRectangle(colorZoneColors[i], zoneRect);
+		  }
+	  }
+
+	Environment->getVideoDriver()->draw2DRectangleOutline(SliderRect,video::SColor(skinAlpha,0,0,0));
 
 	if ( core::isnotzero ( range() ) )
 	{
@@ -348,6 +371,12 @@ void OutlineScrollBar::draw()
 	//IGUIElement::draw();
 }
 
+
+void OutlineScrollBar::setColorZones(core::array<s32> thresholds, core::array<video::SColor> colors)
+{
+	colorZoneThresholds = thresholds;
+	colorZoneColors = colors;
+}
 
 void OutlineScrollBar::updateAbsolutePosition()
 {

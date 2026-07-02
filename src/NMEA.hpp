@@ -59,7 +59,7 @@ class NMEA {
 public:
 
   NMEA();
-  NMEA(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *aWind, RadarCalculation *aRadarCalc);
+  NMEA(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *aWind, RadarCalculation *aRadarCalc, unsigned int aIntervalReport);
   ~NMEA();
   void Init(unsigned int aStartTime, std::string serialPortName, irr::u32 serialBaudrate, std::string udpHostname, std::string udpPortName, std::string udpListenPortName);
   void Update(sTime& aTime);
@@ -69,7 +69,7 @@ public:
   void ReceiveThread(std::string udpListenPortName);
   void Receive(void);
   bool GetHostStatus(void);
-  void SetModelData(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *aWind, RadarCalculation *aRadarCalc);
+  void SetModelData(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *aWind, RadarCalculation *aRadarCalc, unsigned int aIntervalReport = SENSOR_REPORT_INTERVAL);
 
 
 private:
@@ -82,6 +82,7 @@ private:
   Terrain *mTerrain;
   Wind *mWind;
   RadarCalculation *mRadarCalc;
+  unsigned int mIntervalReport;
   
   serial::Serial mMySerialPort;
   unsigned int mLastSendEvent; 

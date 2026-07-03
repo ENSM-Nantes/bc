@@ -256,11 +256,13 @@ irr::scene::IMeshSceneNode* Ship::getSceneNode() const
 
 irr::core::vector3df Ship::getRotation() const
 {
+  if (mShipScene == nullptr) return irr::core::vector3df(0, 0, 0);
   return mShipScene->getRotation();
 }
 
 irr::core::vector3df Ship::getPosition() const
 {
+  if (mShipScene == nullptr) return irr::core::vector3df((irr::f32)mEta[1], 0, (irr::f32)mEta[0]);
   mShipScene->updateAbsolutePosition();//ToDo: This may be needed, but seems odd that it's required
   return mShipScene->getAbsolutePosition();
 }

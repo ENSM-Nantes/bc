@@ -33,7 +33,11 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
   Json::Value rootJson;
   irr::scene::IMesh *shipMesh = NULL;
   mShipScene = NULL;
-  
+  mHeight = 0;
+  mSolidHeight = 0;
+  mSelector = nullptr;
+  mTriangleSelectorEnabled = false;
+
   irr::scene::ISceneManager* smgr = aDev->getSceneManager();
   mName = aName;
 
@@ -70,7 +74,7 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
       shipMesh = smgr->getMesh(mMeshFullPath.c_str());
       mShipScene = smgr->addMeshSceneNode(shipMesh, 0, IDFlag_IsPickable, irr::core::vector3df(0, 0, 0));
     }
-  
+
   mScaleFactor = rootJson["mesh"]["scaleFactor"].asFloat();
   float yCorrection = rootJson["mesh"]["yCorrection"].asFloat();
   mAngleCorrection = rootJson["mesh"]["angleCorrection"].asFloat();
@@ -80,9 +84,19 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
   mImo = rootJson["general"]["imo"].asInt();
   mMmsi = rootJson["general"]["mmsi"].asInt();
   mType = rootJson["general"]["type"].asInt();
-  
+
   //Set mesh vertical correction (world units)
   mHeightCorrection = yCorrection*mScaleFactor;
+
+  //store initial x,y,z positions
+  mEta[1] = aLocation.X;
+  mEta[0] = aLocation.Z;
+  mLegs = aLegsLoaded;
+
+  if (mShipScene == nullptr) {
+    aDev->getLogger()->log(("OtherShip: failed to load model for '" + aName + "'").c_str(), irr::ELL_ERROR);
+    return;
+  }
 
   mShipScene->setScale(irr::core::vector3df(mScaleFactor,mScaleFactor,mScaleFactor));
   mShipScene->setPosition(irr::core::vector3df(0,mHeightCorrection,0));
@@ -113,12 +127,6 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
   mShipScene->setName(aInternalName.c_str());
 
   mSolidHeight = mScaleFactor * 5.f * mHeight;
-
-  //store initial x,y,z positions
-  mEta[1] = aLocation.X;
-  double yPos = aLocation.Y;
-  mEta[0] = aLocation.Z;
-  //speed and heading will come from leg data
 
   //Set lighting to use diffuse and ambient, so lighting of untextured models works
   if(mShipScene->getMaterialCount()>0) {
@@ -158,9 +166,6 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
 	  mNavLights.push_back(new NavLight (mShipScene,smgr,irr::core::vector3df(lightX,lightY,lightZ),irr::video::SColor(255,lightR,lightG,lightB),lightStartAngle,lightEndAngle,lightRange,lightSequence,phaseStart));
 	}
     }
-
-  //store leg information
-  mLegs=aLegsLoaded;
 }
 
 OtherShip::~OtherShip()
@@ -174,6 +179,7 @@ OtherShip::~OtherShip()
 
 void OtherShip::update(irr::f32 deltaTime, irr::f32 scenarioTime, irr::f32 tideHeight, unsigned int lightLevel)
 {
+  if (mShipScene == nullptr) return;
 
   //move according to leg information
   if (mLegs.empty()) {
@@ -455,14 +461,15 @@ std::vector<Leg>::size_type OtherShip::findCurrentLeg(irr::f32 scenarioTime)
 
 void OtherShip::enableTriangleSelector(bool aSelectorEnabled)
 {
-    
+  if (mShipScene == nullptr) return;
+
   //Only re-set if we need to change the state
-    
+
   if (aSelectorEnabled && !mTriangleSelectorEnabled) {
     mShipScene->setTriangleSelector(mSelector);
     mTriangleSelectorEnabled = true;
-  } 
-    
+  }
+
   if (!aSelectorEnabled && mTriangleSelectorEnabled) {
     mShipScene->setTriangleSelector(0);
     mTriangleSelectorEnabled = false;

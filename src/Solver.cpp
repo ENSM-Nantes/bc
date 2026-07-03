@@ -13,6 +13,7 @@ Solver::Solver()
   mMu << 0, 0, 0;
   mDt = 0;
   mTCol << 0, 0, 0;
+  mTWindDrag << 0, 0, 0;
   mShip = NULL;
 }
 
@@ -22,6 +23,8 @@ Solver::Solver(Ship* aShip)
   mEta << 0, 0, 0;
   mMu << 0, 0, 0;
   mDt = 0;
+  mTCol << 0, 0, 0;
+  mTWindDrag << 0, 0, 0;
   Init(aShip);
 }
 

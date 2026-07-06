@@ -865,27 +865,27 @@ bool GUIMain::isNFUActive() const
 void GUIMain::updateVisibility(bool bHideFull)
 {
   //Items to show if we're showing interface
-  radarTabControl->setVisible(showInterface);
-  radarText->setVisible(showInterface);
+  if (radarTabControl) { radarTabControl->setVisible(showInterface); }
+  if (radarText) { radarText->setVisible(showInterface); }
 
-  radarCursorLeftButton->setVisible(showInterface && !radarLarge);
-  radarCursorRightButton->setVisible(showInterface && !radarLarge);
-  radarCursorUpButton->setVisible(showInterface && !radarLarge);
-  radarCursorDownButton->setVisible(showInterface && !radarLarge);
+  if (radarCursorLeftButton) { radarCursorLeftButton->setVisible(showInterface && !radarLarge); }
+  if (radarCursorRightButton) { radarCursorRightButton->setVisible(showInterface && !radarLarge); }
+  if (radarCursorUpButton) { radarCursorUpButton->setVisible(showInterface && !radarLarge); }
+  if (radarCursorDownButton) { radarCursorDownButton->setVisible(showInterface && !radarLarge); }
 
-  radarCursorLeftButton2->setVisible(radarLarge);
-  radarCursorRightButton2->setVisible(radarLarge);
-  radarCursorUpButton2->setVisible(radarLarge);
-  radarCursorDownButton2->setVisible(radarLarge);
+  if (radarCursorLeftButton2) { radarCursorLeftButton2->setVisible(radarLarge); }
+  if (radarCursorRightButton2) { radarCursorRightButton2->setVisible(radarLarge); }
+  if (radarCursorUpButton2) { radarCursorUpButton2->setVisible(radarLarge); }
+  if (radarCursorDownButton2) { radarCursorDownButton2->setVisible(radarLarge); }
 
   //weatherScrollbar->setVisible(showInterface);
   //rainScrollbar->setVisible(showInterface);
   //visibilityScrollbar->setVisible(showInterface);
-  pcLogButton->setVisible(showInterface);
-  showExtraControlsButton->setVisible(showInterface);
-  showLinesControlsButton->setVisible(showInterface);
+  if (pcLogButton) { pcLogButton->setVisible(showInterface); }
+  if (showExtraControlsButton) { showExtraControlsButton->setVisible(showInterface); }
+  if (showLinesControlsButton) { showLinesControlsButton->setVisible(showInterface); }
 
-  exitButton->setVisible(showInterface);
+  if (exitButton) { exitButton->setVisible(showInterface); }
 
   if (portText) {portText->setVisible(showInterface);}
   if (stbdText) {stbdText->setVisible(showInterface && !singleEngine);}
@@ -893,42 +893,56 @@ void GUIMain::updateVisibility(bool bHideFull)
 
   //Items not to show if we're on full screen radar
   //dataDisplay->setVisible(!radarLarge);
-  binosButton->setVisible(!radarLarge);
-  bearingButton->setVisible(!radarLarge);
-  changeViewButton->setVisible(!radarLarge);
+  if (binosButton) { binosButton->setVisible(!radarLarge); }
+  if (bearingButton) { bearingButton->setVisible(!radarLarge); }
+  if (changeViewButton) { changeViewButton->setVisible(!radarLarge); }
   if (compassBG) { compassBG->setVisible(showInterface && !radarLarge); }
   if (compassLabel) { compassLabel->setVisible(showInterface && !radarLarge); }
-  rateofturnScrollbar->setVisible(showInterface && !radarLarge && hasRateOfTurnIndicator);
+  if (rateofturnScrollbar) { rateofturnScrollbar->setVisible(showInterface && !radarLarge && hasRateOfTurnIndicator); }
   if (rateofturnText) { rateofturnText->setVisible(showInterface && !radarLarge && hasRateOfTurnIndicator); }
-  hideInterfaceButton->setVisible(showInterface && !radarLarge);
-  showInterfaceButton->setVisible(!showInterface && !radarLarge);
+  if (hideInterfaceButton) { hideInterfaceButton->setVisible(showInterface && !radarLarge); }
+  if (showInterfaceButton) { showInterfaceButton->setVisible(!showInterface && !radarLarge); }
         
-  bigRadarButton->setVisible(showInterface && !radarLarge);
+  if (bigRadarButton) { bigRadarButton->setVisible(showInterface && !radarLarge); }
 
-  smallRadarButton->setVisible(radarLarge);
-  largeRadarControls->setVisible(radarLarge);
-  largeRadarPIControls->setVisible(radarLarge);
+  if (smallRadarButton) { smallRadarButton->setVisible(radarLarge); }
+  if (largeRadarControls) { largeRadarControls->setVisible(radarLarge); }
+  if (largeRadarPIControls) { largeRadarPIControls->setVisible(radarLarge); }
 
   //Move gui elements if on largescreen radar
   //Heading
-  if (radarLarge) {
-    headingIndicator->setRelativePosition(radHdgIndicatorPos);
-  } else if (!showInterface) {
-    headingIndicator->setRelativePosition(maxHdgIndicatorPos);
-  } else {
-    headingIndicator->setRelativePosition(stdHdgIndicatorPos);
+  if (headingIndicator) {
+    if (radarLarge) {
+      headingIndicator->setRelativePosition(radHdgIndicatorPos);
+    } else if (!showInterface) {
+      headingIndicator->setRelativePosition(maxHdgIndicatorPos);
+    } else {
+      headingIndicator->setRelativePosition(stdHdgIndicatorPos);
+    }
   }
   //Set position of data display
-  if (radarLarge) {
-    dataDisplay->setRelativePosition(radDataDisplayPos);
-    dataDisplay->setBackgroundColor(radDataDisplayBG);
-  } else if (!showInterface) {
-    dataDisplay->setRelativePosition(altDataDisplayPos);
-    dataDisplay->setBackgroundColor(altDataDisplayBG);
-  } else {
-    dataDisplay->setRelativePosition(stdDataDisplayPos);
-    dataDisplay->setBackgroundColor(stdDataDisplayBG);
+  if (dataDisplay) {
+    if (radarLarge) {
+      dataDisplay->setRelativePosition(radDataDisplayPos);
+      dataDisplay->setBackgroundColor(radDataDisplayBG);
+    } else if (!showInterface) {
+      dataDisplay->setRelativePosition(altDataDisplayPos);
+      dataDisplay->setBackgroundColor(altDataDisplayBG);
+    } else {
+      dataDisplay->setRelativePosition(stdDataDisplayPos);
+      dataDisplay->setBackgroundColor(stdDataDisplayBG);
+    }
   }
+
+  // Restore visibility of elements that hideInSecondary/bHideFull may have hidden,
+  // so toggling showInterface works correctly after a hide2dInterfaceFull() call.
+  if (headingIndicator) { headingIndicator->setVisible(showInterface); }
+  if (dataDisplay) { dataDisplay->setVisible(true); }
+  if (portScrollbar) { portScrollbar->setVisible(showInterface); }
+  if (stbdScrollbar) { stbdScrollbar->setVisible(showInterface && !singleEngine); }
+  if (wheelScrollbar) { wheelScrollbar->setVisible(showInterface); }
+  if (nonFollowUpPortButton) { nonFollowUpPortButton->setVisible(showInterface); }
+  if (nonFollowUpStbdButton) { nonFollowUpStbdButton->setVisible(showInterface); }
 
   //If we're in secondary mode, make sure things are hidden if they shouldn't be shown on the secondary screen
   if (controlsHidden || bHideFull) {
@@ -1058,7 +1072,7 @@ void GUIMain::updateGuiData(GUIData* guiData)
   // DEE        since internalrate of turn is in rads per second then for deg per min x 3438
   {
     irr::f32 rotDegMin = 3438 * guiData->RateOfTurn;
-    rateofturnScrollbar->setPos(Utilities::round(rotDegMin));
+    if (rateofturnScrollbar) { rateofturnScrollbar->setPos(Utilities::round(rotDegMin)); }
     if (rateofturnText) {
       std::wstring rotLabel = L"RoT: " + f32To1dp(rotDegMin) + L" °/min";
       rateofturnText->setText(rotLabel.c_str());

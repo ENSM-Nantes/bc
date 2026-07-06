@@ -231,8 +231,8 @@ private:
     irr::gui::IGUIScrollBar* rateofturnScrollbar;
     irr::gui::IGUIStaticText* rateofturnText = nullptr;
 
-    irr::gui::IGUICheckBox* azimuth1Master;
-    irr::gui::IGUICheckBox* azimuth2Master;
+    irr::gui::IGUICheckBox* azimuth1Master = nullptr;
+    irr::gui::IGUICheckBox* azimuth2Master = nullptr;
 
     // DEE_NOV22 ^^^^
 

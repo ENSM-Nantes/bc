@@ -451,9 +451,9 @@ void OwnShip::setWheel(float aWheel)
     }
 }
 
-//Step size/rate used by increase/decreaseWheel: comparable sweep speed to increase/decreaseBowThruster & co
+
 static const float WHEEL_STEP = 1;
-static const float WHEEL_STEP_INTERVAL = 0.05; //seconds
+static const float WHEEL_STEP_INTERVAL = 0.05; //sec
 
 void OwnShip::increaseWheel()
 {
@@ -539,20 +539,22 @@ void OwnShip::increaseBowThruster()
 {
   clock_t clockNow = clock();
   float elapsed = (float)(clockNow - mBowThrusterLastStepped)/CLOCKS_PER_SEC;
-  if (elapsed > THRUSTER_STEP_INTERVAL) {
-    mBowThrusterLastStepped = clockNow;
-    setBowThruster(mBowThruster + THRUSTER_STEP);
-  }
+  if(elapsed > THRUSTER_STEP_INTERVAL)
+    {
+      mBowThrusterLastStepped = clockNow;
+      setBowThruster(mBowThruster + THRUSTER_STEP);
+    }
 }
 
 void OwnShip::decreaseBowThruster()
 {
   clock_t clockNow = clock();
   float elapsed = (float)(clockNow - mBowThrusterLastStepped)/CLOCKS_PER_SEC;
-  if (elapsed > THRUSTER_STEP_INTERVAL) {
-    mBowThrusterLastStepped = clockNow;
-    setBowThruster(mBowThruster - THRUSTER_STEP);
-  }
+  if(elapsed > THRUSTER_STEP_INTERVAL)
+    {
+      mBowThrusterLastStepped = clockNow;
+      setBowThruster(mBowThruster - THRUSTER_STEP);
+    }
 }
 
 void OwnShip::increaseSternThruster()

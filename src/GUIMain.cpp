@@ -36,7 +36,7 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
 {
   mOwnShip = aOwnShip;
   mLines = aLines;
-	
+
   this->device = device;
   this->hasDepthSounder = mOwnShip->HasDepthSounder();
   this->maxSounderDepth = mOwnShip->GetMaxSounderDepth();

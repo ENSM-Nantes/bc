@@ -28,7 +28,8 @@ Message::Message()
 }
 
 Message::~Message()
-{    
+{
+  
 }
 
 sUpLeg* Message::UpdateLeg(std::string aCmd)
@@ -955,10 +956,10 @@ std::string& Message::KeepAlive(void)
   //msg.append(Utilities::lexical_cast<std::string>(pModel->getPortAzimuthThrustLever()));
   msg.append(",0");
   //msg.append(Utilities::lexical_cast<std::string>(pModel->getStbdAzimuthThrustLever()));
-  msg.append(",0");
-  //msg.append(Utilities::lexical_cast<std::string>(pModel->getBowThruster()));
-  msg.append(",0");
-  //msg.append(Utilities::lexical_cast<std::string>(pModel->getSternThruster()));
+  msg.append(",");
+  msg.append(Utilities::lexical_cast<std::string>(pModel->getOwnShip()->getBowThruster()));
+  msg.append(",");
+  msg.append(Utilities::lexical_cast<std::string>(pModel->getOwnShip()->getSternThruster()));
 
   return msg;
 }

@@ -913,8 +913,8 @@ void SimulationModel::updateFromNetwork(eCmdMsg aMsgType, void* aDataCmd)
         //mOwnShip->setRudder(dataMasterCmds->controls.rudder);
         mOwnShip->setPortEngine(dataMasterCmds->controls.portEng);
 	mOwnShip->setStbdEngine(dataMasterCmds->controls.stbdEng);
-	//setBowThruster(dataMasterCmds->controls.bowThrust);
-	//setSternThruster(dataMasterCmds->controls.sternThrust);
+	mOwnShip->setBowThruster(dataMasterCmds->controls.bowThrust);
+	mOwnShip->setSternThruster(dataMasterCmds->controls.sternThrust);
 	
 	break;
       }

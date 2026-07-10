@@ -969,16 +969,24 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
                     break;
 
 
-                case irr::KEY_KEY_J:
-		    break;
-
-                case irr::KEY_KEY_L:
+                // Keyboard control of thrusters
+                case irr::KEY_KEY_U:
+		  model->getOwnShip()->decreaseBowThruster();
                     break;
 
                 case irr::KEY_KEY_I:
+		  model->getOwnShip()->increaseBowThruster();
                     break;
 
-                case irr::KEY_KEY_K:
+                case irr::KEY_KEY_J:
+		  model->getOwnShip()->decreaseSternThruster();
+		    break;
+
+		case irr::KEY_KEY_K:
+		  model->getOwnShip()->increaseSternThruster();
+		    break;
+
+                case irr::KEY_KEY_L:
 		  
 		  acc++;
 		  model->setAccelerator(acc);
@@ -1063,7 +1071,7 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
                 case irr::KEY_KEY_B:
 		   model->getOwnShip()->setWheel(model->getOwnShip()->getWheel() + 1);
 		  break;
-                
+
 
                 default:
                     // don't do anything

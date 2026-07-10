@@ -11,7 +11,7 @@ Thruster::~Thruster(void)
 
 }
 
-void Thruster::Init(bool aHasBowThruster, bool aHasSternThruster, std::string aBrand, std::string aType, unsigned int aPower, float aRpmMax, float aFuelCons, float aPropDiameter, float aThrustFactor, float aNominalWake, float aK0, float aK1, float aK2, std::string aForwardRotDir, float aBackEff, float aXBow, float aXStern)
+void Thruster::Init(bool aHasBowThruster, bool aHasSternThruster, std::string aBrand, std::string aType, unsigned int aPower, float aRpmMax, float aFuelCons, float aPropDiameter, float aThrustFactor, float aNominalWake, float aK0, float aK1, float aK2, std::string aForwardRotDir, float aXBow, float aXStern)
 {
   mHasBowThruster = aHasBowThruster;
   mHasSternThruster = aHasSternThruster;
@@ -27,19 +27,18 @@ void Thruster::Init(bool aHasBowThruster, bool aHasSternThruster, std::string aB
   mK1 = aK1;
   mK2 = aK2;
   mForwardRotDir = aForwardRotDir;
-  mBackEff = aBackEff;
   mXBow = aXBow;
   mXStern = aXStern;
 
   
   if(mHasBowThruster)
     {
-      mBowProp.Init(mPropDiam, mThrustFactor, mXBow, mNominalWake, mK0, mK1, mK2, mForwardRotDir, mBackEff, true);
+      mBowProp.Init(mPropDiam, mThrustFactor, mXBow, mNominalWake, mK0, mK1, mK2, mForwardRotDir, 1, true);
     }
 
   if(mHasSternThruster)
     {
-      mSternProp.Init(mPropDiam, mThrustFactor, mXStern, mNominalWake, mK0, mK1, mK2, mForwardRotDir, mBackEff, true);
+      mSternProp.Init(mPropDiam, mThrustFactor, mXStern, mNominalWake, mK0, mK1, mK2, mForwardRotDir, 1, true);
     }
   
 }
@@ -56,7 +55,6 @@ void Thruster::PrintParams(void)
   std::cout << "Fuel Consumption (g/kWh 100%) : " << mFuelConsumption << std::endl;
   std::cout << "Propeller thruster diameter (m) : " << mPropDiam << std::endl;
   std::cout << "Forward rotation direction : " << mForwardRotDir << std::endl;
-  std::cout << "Backward efficiency : " << mBackEff << std::endl;
   std::cout << "Non dimensional longitudinal position from midship (Bow) : " << mXBow << std::endl;
   std::cout << "Non dimensional longitudinal position from midship (Stern : " << mXStern << std::endl;
 

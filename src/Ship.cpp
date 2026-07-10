@@ -201,7 +201,6 @@ int Ship::InitShipParams(const Json::Value& aJsonRoot)
 		     aJsonRoot["thruster"]["k1"].asFloat(),
 		     aJsonRoot["thruster"]["k2"].asFloat(),
 		     aJsonRoot["thruster"]["forwardRotDir"].asString(),
-		     aJsonRoot["thruster"]["backwardEff"].asFloat(),
 		     aJsonRoot["thruster"]["pos"]["bow"]["x"].asFloat(),
 		     aJsonRoot["thruster"]["pos"]["stern"]["x"].asFloat()
 		     );

@@ -13,7 +13,7 @@ public:
   Thruster();
   ~Thruster();
 
-  void Init(bool aHasBowThruster, bool aHasSternThruster, std::string aBrand, std::string aType, unsigned int aPower, float aRpmMax, float aFuelCons, float aPropDiameter, float aThrustFactor, float aNominalWake, float aK0, float aK1, float aK2, std::string aForwardRotDir, float aBackEff, float aXBow, float aXStern);
+  void Init(bool aHasBowThruster, bool aHasSternThruster, std::string aBrand, std::string aType, unsigned int aPower, float aRpmMax, float aFuelCons, float aPropDiameter, float aThrustFactor, float aNominalWake, float aK0, float aK1, float aK2, std::string aForwardRotDir, float aXBow, float aXStern);
   void PrintParams(void);
   void ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoParams& aGeo);
 
@@ -49,7 +49,6 @@ private:
   float mK2;
   
   std::string mForwardRotDir;
-  float mBackEff;  
   std::string mBrand;
   std::string mType;
   unsigned int mPower; //kW

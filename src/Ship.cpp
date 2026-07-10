@@ -154,6 +154,22 @@ int Ship::InitShipParams(const Json::Value& aJsonRoot)
       mNumberProp = aJsonRoot["propeller"]["number"].asInt();
       for(unsigned char i=0;i<mNumberProp;i++)
 	{
+	  //Engine
+	  mEngine[i].Init(aJsonRoot["engine"]["brand"].asString(),
+			  aJsonRoot["engine"]["type"].asString(),
+			  aJsonRoot["engine"]["power"].asFloat(),
+			  aJsonRoot["engine"]["rpmMax"].asFloat(),
+			  aJsonRoot["engine"]["fuelCons"].asFloat()
+			  );
+	  mEngine[i].PrintParams();
+
+	  //Max rate the propeller shaft can spool up/down (rpm/s), mirrors the rudder's maxSpeed rate
+	  //limit. If not specified in boat.json, default to a full 0-max spool in ~8s, scaled to the
+	  //engine's shaft rpmMax (Engine::getRpmMax() - the "shaft outlet" rpm).
+	  float rpmChangeMax = aJsonRoot["engine"]["rpmChangeMax"].asFloat();
+	  if(0 == rpmChangeMax)
+	    rpmChangeMax = mEngine[i].getRpmMax() / 8;
+
 	  mProp[i].Init(aJsonRoot["propeller"]["diameter"].asFloat(),
 			aJsonRoot["propeller"]["thrustFactor"].asFloat(),
 			aJsonRoot["propeller"]["longPosition"].asFloat(),
@@ -162,20 +178,36 @@ int Ship::InitShipParams(const Json::Value& aJsonRoot)
 			aJsonRoot["propeller"]["k1"].asFloat(),
 			aJsonRoot["propeller"]["k2"].asFloat(),
 			aJsonRoot["propeller"]["forwardRotDir"].asString(),
-			aJsonRoot["propeller"]["backwardEff"].asFloat()
+			aJsonRoot["propeller"]["backwardEff"].asFloat(),
+			false, //Not a thruster
+			rpmChangeMax/60 //Convert rpm/s to revs/sec²
 			);
 	  mProp[i].PrintParams();
-
-	  //Engine 
-	  mEngine[i].Init(aJsonRoot["engine"]["brand"].asString(),
-			  aJsonRoot["engine"]["type"].asString(),
-			  aJsonRoot["engine"]["power"].asFloat(),
-			  aJsonRoot["engine"]["rpmMax"].asFloat(),
-			  aJsonRoot["engine"]["fuelCons"].asFloat()		  
-			  );
-	  mEngine[i].PrintParams();
 	}
 
+
+      //Thruster 
+      mThruster.Init(aJsonRoot["thruster"]["bow"].asBool(),
+		     aJsonRoot["thruster"]["stern"].asBool(),
+		     aJsonRoot["thruster"]["brand"].asString(),
+		     aJsonRoot["thruster"]["type"].asString(),
+		     aJsonRoot["thruster"]["power"].asFloat(),
+		     aJsonRoot["thruster"]["rpmMax"].asFloat(),
+		     aJsonRoot["thruster"]["fuelCons"].asFloat(),
+		     aJsonRoot["thruster"]["propDiam"].asFloat(),
+		     aJsonRoot["thruster"]["thrustFactor"].asFloat(),
+		     aJsonRoot["thruster"]["nominalWake"].asFloat(),
+		     aJsonRoot["thruster"]["k0"].asFloat(),
+		     aJsonRoot["thruster"]["k1"].asFloat(),
+		     aJsonRoot["thruster"]["k2"].asFloat(),
+		     aJsonRoot["thruster"]["forwardRotDir"].asString(),
+		     aJsonRoot["thruster"]["backwardEff"].asFloat(),
+		     aJsonRoot["thruster"]["pos"]["bow"]["x"].asFloat(),
+		     aJsonRoot["thruster"]["pos"]["stern"]["x"].asFloat()
+		     );
+      mThruster.PrintParams();
+
+      
       //Rudder
       mNumberRud = aJsonRoot["rudder"]["number"].asInt();
       for(unsigned char i=0;i<mNumberRud;i++)
@@ -214,31 +246,6 @@ int Ship::InitShipParams(const Json::Value& aJsonRoot)
 		  );
       
       mSails.PrintParams();
-    }
-
-  return ret;
-}
-
-int Ship::InitShipParams(const std::string& aType)
-{
-  int ret = 0;
-
-  /*TODO : Get datas from parameters file*/
-  if("kvlcc2" == aType)
-    {
-      mGeoParams = {320, 58, 20.8, 312622, 11.1, 0.81};
-      mHull.Init(0.022,-0.04, 0.002, 0.011, 0.771, -0.315, 0.083, -1.607, 0.379, -0.391, 0.008, -0.137, -0.049, -0.03, -0.294, 0.055, -0.013, -0.0185, -0.2586, 0.0532, 0.2229, 0.5374, -0.0928, -0.7293, 1.1474, -0.3351, -0.0132, false, 0.08);
-      mAddedMassParams = {0.022, 0.223, 0.011};
-      mNumberProp=1;
-      mNumberRud=1;
-      mProp[0].Init(9.86, 0.22, -0.48, 0.35, 0.293, -0.275, -0.139, "right", 0.67);
-      mRudder[0].Init(15.8, 112.5, -0.5, 0.312, 0.387, -0.464, 1.09, 0.5, -0.71, 1.827, {0.395, 0.64}, 0.0407, 0.61);
-      // mShipWindParams = {4910, 1624, 750, 375, 160, 0, 1.225, 0 * 15.5 * 0.514, 90};
-      mEngine[0].Init("Caterpillar", "9M32C", 4500, 170, 177);
-    }
-  else
-    {
-      ret = -1;
     }
 
   return ret;
@@ -463,6 +470,7 @@ Engine& Ship::getEngine(std::string aNEngine)
     return mEngine[1];
 }
 
+Thruster& Ship::getThruster(void){return mThruster;}
 Hull& Ship::getHull(void){return mHull;}
 sGeoParams& Ship::getGeoParams(void){return mGeoParams;}
 double Ship::getM(void){return mM;}

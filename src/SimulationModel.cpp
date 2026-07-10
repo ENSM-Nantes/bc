@@ -553,6 +553,10 @@ void SimulationModel::update()
   mGuiData->spd = mOwnShip->getSpeedThroughWater();
   mGuiData->portEng = mOwnShip->getPortEngine();
   mGuiData->stbdEng = mOwnShip->getStbdEngine();
+  mGuiData->portEngActual = (mOwnShip->getEngine("port").getRpmMax() > 0) ? (mOwnShip->getPropeller("port").getRevsSigned() * 60 / mOwnShip->getEngine("port").getRpmMax()) : 0;
+  mGuiData->stbdEngActual = (mOwnShip->getEngine("starboard").getRpmMax() > 0) ? (mOwnShip->getPropeller("starboard").getRevsSigned() * 60 / mOwnShip->getEngine("starboard").getRpmMax()) : 0;
+  mGuiData->bowThruster = mOwnShip->getBowThruster();
+  mGuiData->sternThruster = mOwnShip->getSternThruster();
   mGuiData->rudder = mOwnShip->getRudder().getDelta()*180/PI;  // inner workings of this will be modified in model DEE
   mGuiData->wheel = mOwnShip->getWheel();    // inner workings of this will be modified in model DEE
   mGuiData->depth = mOwnShip->getDepth(getTerrain());

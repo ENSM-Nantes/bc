@@ -117,6 +117,12 @@ Eigen::VectorXd Solver::DiffEq(const Eigen::VectorXd& aVectEtaMu)
       mT += tYaw;
     }
 
+  //Add Thruster
+  if(mShip->getThruster().HasThruster())
+    {
+      mShip->getThruster().ComputeT(vMu, RHO_SW, mShip->getGeoParams());
+      mT += mShip->getThruster().GetT();
+    }
 
   //Add Collision
   mT += mTCol;

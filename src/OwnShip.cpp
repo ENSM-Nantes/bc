@@ -48,6 +48,7 @@ OwnShip::OwnShip()
   mRadarTilt = 0;
 
   mWheel=0;
+  mWheelLastStepped = 0;
   mIsTransparent = false;
     
   mPitchPeriod = 0;      
@@ -56,8 +57,12 @@ OwnShip::OwnShip()
   mBuffet = 0;           
   mPitch = 0;            
   mRollAngle = 0;             
-  mPortEngine = 0;       
-  mStbdEngine = 0;       
+  mPortEngine = 0;
+  mStbdEngine = 0;
+  mBowThruster = 0;
+  mSternThruster = 0;
+  mBowThrusterLastStepped = 0;
+  mSternThrusterLastStepped = 0;
   mOffsetPos = {0, 0, 0};
   mDeltaX = 0;
   mDeltaZ = 0;
@@ -354,15 +359,28 @@ void OwnShip::Update(sTime& aTime, float aTideHeight, float aWeather, Wind *aWin
 	  portThrust = mPortEngine*mEngine[0].getRpmMax()/60;
 	  stbdThrust = mStbdEngine*mEngine[1].getRpmMax()/60;
 
-	  mProp[0].SetRevs(portThrust);
-	  mProp[1].SetRevs(stbdThrust);
+	  mProp[0].SetRevs(portThrust, deltaTime);
+	  mProp[1].SetRevs(stbdThrust, deltaTime);
 	}
       else
 	{
 	  float monoThrust = 0;
-	  
-	  monoThrust = mPortEngine*mEngine[0].getRpmMax()/60;	 
-	  mProp[0].SetRevs(monoThrust);
+
+	  monoThrust = mPortEngine*mEngine[0].getRpmMax()/60;
+	  mProp[0].SetRevs(monoThrust, deltaTime);
+	}
+
+      //Thruster
+      if(mThruster.HasBowThruster())
+	{
+	  float bowThrusterRevsPerSec = mThruster.getRpmMax()/60;
+	  mThruster.GetBowPropeller().SetRevs(mBowThruster*bowThrusterRevsPerSec, deltaTime);
+	}
+
+      if(mThruster.HasSternThruster())
+	{
+	  float sternThrusterRevsPerSec = mThruster.getRpmMax()/60;
+	  mThruster.GetSternPropeller().SetRevs(mSternThruster*sternThrusterRevsPerSec, deltaTime);
 	}
 
       //Apply rudder angle
@@ -433,6 +451,30 @@ void OwnShip::setWheel(float aWheel)
     }
 }
 
+//Step size/rate used by increase/decreaseWheel: comparable sweep speed to increase/decreaseBowThruster & co
+static const float WHEEL_STEP = 1;
+static const float WHEEL_STEP_INTERVAL = 0.05; //seconds
+
+void OwnShip::increaseWheel()
+{
+  clock_t clockNow = clock();
+  float elapsed = (float)(clockNow - mWheelLastStepped)/CLOCKS_PER_SEC;
+  if (elapsed > WHEEL_STEP_INTERVAL) {
+    mWheelLastStepped = clockNow;
+    setWheel(mWheel + WHEEL_STEP);
+  }
+}
+
+void OwnShip::decreaseWheel()
+{
+  clock_t clockNow = clock();
+  float elapsed = (float)(clockNow - mWheelLastStepped)/CLOCKS_PER_SEC;
+  if (elapsed > WHEEL_STEP_INTERVAL) {
+    mWheelLastStepped = clockNow;
+    setWheel(mWheel - WHEEL_STEP);
+  }
+}
+
 /*void OwnShip::setRudder(float aDelta)
   {
   controlMode = MODE_ENGINE;
@@ -459,12 +501,78 @@ void OwnShip::setStbdEngine(float aStbd)
   mControlMode = MODE_ENGINE; // Switch to engine and rudder mode
 
   mStbdEngine = aStbd;
-  
-  if(mStbdEngine > 1)    
+
+  if(mStbdEngine > 1)
     mStbdEngine = 1;
-    
+
   if(mStbdEngine < -1)
     mStbdEngine = -1;
+}
+
+void OwnShip::setBowThruster(float aValue)
+{
+  mBowThruster = aValue;
+
+  if(mBowThruster > 1)
+    mBowThruster = 1;
+
+  if(mBowThruster < -1)
+    mBowThruster = -1;
+}
+
+void OwnShip::setSternThruster(float aValue)
+{
+  mSternThruster = aValue;
+
+  if(mSternThruster > 1)
+    mSternThruster = 1;
+
+  if(mSternThruster < -1)
+    mSternThruster = -1;
+}
+
+//Step size/rate used by increase/decreaseBowThruster & increase/decreaseSternThruster: full -1..1 sweep in ~2s if held
+static const float THRUSTER_STEP = 0.05;
+static const float THRUSTER_STEP_INTERVAL = 0.05; //seconds
+
+void OwnShip::increaseBowThruster()
+{
+  clock_t clockNow = clock();
+  float elapsed = (float)(clockNow - mBowThrusterLastStepped)/CLOCKS_PER_SEC;
+  if (elapsed > THRUSTER_STEP_INTERVAL) {
+    mBowThrusterLastStepped = clockNow;
+    setBowThruster(mBowThruster + THRUSTER_STEP);
+  }
+}
+
+void OwnShip::decreaseBowThruster()
+{
+  clock_t clockNow = clock();
+  float elapsed = (float)(clockNow - mBowThrusterLastStepped)/CLOCKS_PER_SEC;
+  if (elapsed > THRUSTER_STEP_INTERVAL) {
+    mBowThrusterLastStepped = clockNow;
+    setBowThruster(mBowThruster - THRUSTER_STEP);
+  }
+}
+
+void OwnShip::increaseSternThruster()
+{
+  clock_t clockNow = clock();
+  float elapsed = (float)(clockNow - mSternThrusterLastStepped)/CLOCKS_PER_SEC;
+  if (elapsed > THRUSTER_STEP_INTERVAL) {
+    mSternThrusterLastStepped = clockNow;
+    setSternThruster(mSternThruster + THRUSTER_STEP);
+  }
+}
+
+void OwnShip::decreaseSternThruster()
+{
+  clock_t clockNow = clock();
+  float elapsed = (float)(clockNow - mSternThrusterLastStepped)/CLOCKS_PER_SEC;
+  if (elapsed > THRUSTER_STEP_INTERVAL) {
+    mSternThrusterLastStepped = clockNow;
+    setSternThruster(mSternThruster - THRUSTER_STEP);
+  }
 }
 
 void OwnShip::setOffsetPos(irr::core::vector3d<int64_t> aOffsetPos, int aDeltaX, int aDeltaZ)
@@ -479,6 +587,8 @@ int  OwnShip::getOffsetX(void) {return mDeltaX;}
 int  OwnShip::getOffsetZ(void) {return mDeltaZ;}
 float OwnShip::getPortEngine() const {return mPortEngine;}
 float OwnShip::getStbdEngine() const {return mStbdEngine;}
+float OwnShip::getBowThruster() const {return mBowThruster;}
+float OwnShip::getSternThruster() const {return mSternThruster;}
 float OwnShip::getWheel() const {return mWheel;}
 float OwnShip::getPitch() const {return mPitch;}
 float OwnShip::getShipMass() const {return mM;}

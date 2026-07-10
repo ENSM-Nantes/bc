@@ -1,0 +1,244 @@
+{
+	"addedMass" : 
+	{
+		"pX" : 0.009106980636715889,
+		"pY" : 0.15496693551540375,
+		"pZ" : 0.0096105216071009636
+	},
+	"depthSounder" : 
+	{
+		"maxDepth" : 200.0,
+		"number" : true
+	},
+	"engine" : 
+	{
+		"brand" : "Engine",
+		"fuelCons" : 0.0,
+		"number" : 1,
+		"power" : 54018.0,
+		"rpmMax" : 150.0,
+		"type" : "type"
+	},
+	"general" : 
+	{
+		"boatName" : "KCS",
+		"desc" : "Use only to validate Yasukawa MMG model.\n\nReady to use.",
+		"imgName" : "KCS.jpg",
+		"type" : "Tanker",
+		"type": 80,
+        "mmsi": 123456789,
+        "imo": 123456789,
+        "callSign": "XXX",
+        "dest": "SOMEWHERE"
+	},
+	"geoParams" : 
+	{
+		"GM" : 2.5,
+		"KM" : 14.970000267028809,
+		"altGravityCenter" : -1.6700000762939453,
+		"blockCoef" : 0.64999997615814209,
+		"breadth" : 32.200000762939453,
+		"draugth" : 10.800000190734863,
+		"length" : 230.0,
+		"longGravityCenter" : -3.4000000953674316,
+		"rho" : 1025.0,
+		"subwaterVolume" : 52030.0,
+		"airHeight": 30.0,
+        "airDraftCoefH": 0.6,
+        "airDraftCoefL": 0.2
+	},
+	"gps" : 
+	{
+		"number" : true
+	},
+	"hull" : 
+	{
+		"invertRoll" : true,
+		"kpB" : -0.13670000433921814,
+		"kpBBB" : -1.4351999759674072,
+		"kpBBG" : 0.28189998865127563,
+		"kpBBR" : 1.163599967956543,
+		"kpBRG" : 0.29969999194145203,
+		"kpBRR" : -0.42329999804496765,
+		"kpG" : -0.029899999499320984,
+		"kpR" : 0.008500000461935997,
+		"kpRRG" : -0.048700001090764999,
+		"kpRRR" : 0.036299999803304672,
+		"linearExtCoeff" : 0.05000000074505806,
+		"npR" : -0.043400000780820847,
+		"npRRR" : -0.47699999809265137,
+		"npV" : -0.13570000231266022,
+		"npVRR" : 0.0076000001281499863,
+		"npVVR" : -0.20000000298023224,
+		"npVVV" : -0.85699999332427979,
+		"xp0" : 0.02199999988079071,
+		"xpRR" : 0.0025558157358318567,
+		"xpVR" : 0.061156939715147018,
+		"xpVV" : -0.075350001454353333,
+		"xpVVVV" : 0.49212002754211426,
+		"ypR" : 0.0093999998643994331,
+		"ypRRR" : 0.018999999389052391,
+		"ypV" : -0.27900001406669617,
+		"ypVRR" : -0.36469998955726624,
+		"ypVVR" : 0.90659999847412109,
+		"ypVVV" : -1.7348999977111816
+	},
+	"initialSpeed" : 
+	[
+		0,
+		0,
+		0
+	],
+	"mesh" : 
+	{
+		"angleCorrection" : 0,
+		"makeTransparent" : false,
+		"name" : "KCS.obj",
+		"numberOfViews" : 5,
+		"scaleFactor" : 1.0,
+		"views" : 
+		[
+			[
+				0.0,
+				25.0,
+				70.0,
+				false
+			],
+			[
+				50.0,
+				40.0,
+				0.0,
+				false
+			],
+			[
+				-50.0,
+				40.0,
+				0.0,
+				false
+			],
+			[
+				0.0,
+				50.0,
+				-50.0,
+				false
+			],
+			[
+				0.0,
+				200.0,
+				0.0,
+				false
+			]
+		],
+		"yCorrection" : -5.8000001907348633
+	},
+	"propeller" : 
+	{
+		"backwardEff" : 0.80000001192092896,
+		"diameter" : 7.9000000953674316,
+		"forwardRotDir" : "right",
+		"k0" : 0.29300001263618469,
+		"k1" : -0.27500000596046448,
+		"k2" : -0.13899999856948853,
+		"longPosition" : -0.47999998927116394,
+		"nominalWake" : 0.27499997615814209,
+		"number" : 1,
+		"spacing" : 0.0,
+		"thrustFactor" : 0.27000001072883606
+	},
+	"radar" : 
+	{
+		"number" : 1,
+		"pos" : 
+		[
+			0.0,
+			-10.0,
+			0.0
+		],
+		"size" : 1.0,
+		"tilt" : 0.0
+	},
+	"rotIndicator" : 
+	{
+		"number" : true
+	},
+	"rudder" : 
+	{
+		"areaMobPart" : 54.450000762939453,
+		"aspectRatio" : 1.7999999523162842,
+		"expConstUr" : 0.18443563580513,
+		"flowCoef" : 
+		[
+			0.32745999491176603,
+			0.32745999491176603
+		],
+		"forceIncreaseFactor" : 0.32760000228881836,
+		"longCoordinatePos" : -0.89999997615814209,
+		"longCoordinateRatio" : -0.5,
+		"longLateralForce" : -0.40000000596046448,
+		"maxAngle" : 0.61000001430511475,
+		"maxSpeed" : 0.030700000002980232,
+		"number" : 1,
+		"spacing" : 0.0,
+		"spanLength" : 9.8999996185302734,
+		"steeringResistanceFactor" : 0.38999998569488525,
+		"wakeFractionRatio" : 0.94049996137619019
+	},
+	"sail" : 
+	{
+		"number" : 0,
+		"pos" : 
+		[
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			],
+			[
+				0.0,
+				0.0,
+				0.0
+			]
+		],
+		"size" : "0x0",
+		"type" : "type"
+	},
+	"thruster" : {
+		"bow" : false,
+		"stern" : false,
+		"brand" : "Thruster",
+		"type" : "type",
+		"power" : 0,
+		"rpmMax" : 0,
+		"fuelCons" : 0,
+		"propDiam" : 0,
+		"thrustFactor" : 0,
+		"nominalWake" : 0,
+		"k0" : 0,
+		"k1" : 0,
+		"k2" : 0,
+		"forwardRotDir" : "right",
+		"backwardEff" : 0,
+		"pos" : {
+			"bow" : {
+				"x" : 0,
+				"yPort" : 0,
+				"yStbd" : 0
+			},
+			"stern" : {
+				"x" : 0,
+				"yPort" : 0,
+				"yStbd" : 0
+			}
+		}
+	}
+}

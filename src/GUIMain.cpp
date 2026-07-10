@@ -132,46 +132,121 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
 
   irr::core::array<irr::s32> centreTic; centreTic.push_back(0);
 
-  if (hasBowThruster) {
-    irr::f32 verticalScreenPos;
-    if (hasSternThruster) {
-      verticalScreenPos = 0.99-2*0.04;
-    } else {
-      verticalScreenPos = 0.99-1*0.04;
-    }
+  // Vertical stack in this corner, top to bottom: thruster rows (if any) -> wheel -> data display -> interface buttons.
+  // The button row is anchored to the true bottom of the screen; everything else builds upward from there.
+  // stdGap is the single standard spacing used everywhere in this stack: between rows, between stations,
+  // and (horizontally, further below) between a label and the control it names.
+  // Row heights are kept small throughout this stack so a "Wheel" label above the wheel scrollbar
+  // doesn't push the thruster rows up into the compass/RoT block above them.
+  irr::f32 stdGap = 0.005;
+  irr::f32 labelsRowHeight = 0.012;
+  irr::f32 scrollRowHeight = 0.025;
 
-    // DEE bowthruster position
-    bowThrusterScrollbar = new irr::gui::OutlineScrollBar(true,guienv,guienv->getRootGUIElement(),GUI_ID_BOWTHRUSTER_SCROLL_BAR,irr::core::rect<irr::s32>(0.01*su, verticalScreenPos*sh, 0.08*su, (verticalScreenPos+0.04)*sh),engineTics,centreTic);
-    bowThrusterScrollbar->setMax(100);
-    bowThrusterScrollbar->setMin(-100);
-    bowThrusterScrollbar->setPos(0);
-    bowThrusterScrollbar->setToolTipText(language->translate("bowThruster").c_str());
-  } else {
-    bowThrusterScrollbar = 0;
+  irr::f32 buttonRowBottom = 0.99f;
+  irr::f32 buttonRowTop = buttonRowBottom - 0.03f;
+
+  // Height a bow/stern row would take (scrollbar + its label, with gaps) - reclaimed into the data
+  // display below when the corresponding thruster isn't fitted, so there's less need to scroll it.
+  irr::f32 thrusterRowHeight = scrollRowHeight + stdGap + labelsRowHeight + stdGap;
+  irr::f32 dataDisplayReclaimedHeight = (hasBowThruster ? 0.0f : thrusterRowHeight) + (hasSternThruster ? 0.0f : thrusterRowHeight);
+
+  irr::f32 dataDisplayBottom = buttonRowTop - stdGap;
+  irr::f32 dataDisplayTop = dataDisplayBottom - 0.05f - dataDisplayReclaimedHeight;
+
+  irr::f32 wheelRowBottom = dataDisplayTop - stdGap;
+  irr::f32 wheelRowTop = wheelRowBottom - 0.03f;
+
+  irr::f32 wheelLabelHeight = 0.02f;
+  irr::f32 wheelLabelBottom = wheelRowTop - stdGap;
+  irr::f32 wheelLabelTop = wheelLabelBottom - wheelLabelHeight;
+
+  irr::f32 nextRowBottom = wheelLabelTop - stdGap; // top of the "Wheel" label, minus the gap
+
+  // Each station (if present) is a name label ("Bow"/"Stern") above a single bidirectional scrollbar,
+  // split red (port, left half)/green (stbd, right half) - same style as the wheel scrollbar.
+  irr::f32 sternLabelTop=0, sternLabelBottom=0, sternScrollTop=0, sternScrollBottom=0;
+  if (hasSternThruster) {
+    sternScrollBottom = nextRowBottom;
+    sternScrollTop = sternScrollBottom - scrollRowHeight;
+    sternLabelBottom = sternScrollTop - stdGap;
+    sternLabelTop = sternLabelBottom - labelsRowHeight;
+    nextRowBottom = sternLabelTop - stdGap;
   }
 
-  if (hasSternThruster) {
-    irr::f32 verticalScreenPos = 0.99-1*0.04;
-    sternThrusterScrollbar = new irr::gui::OutlineScrollBar(true,guienv,guienv->getRootGUIElement(),GUI_ID_STERNTHRUSTER_SCROLL_BAR,irr::core::rect<irr::s32>(0.01*su, verticalScreenPos*sh, 0.08*su, (verticalScreenPos+0.04)*sh),engineTics,centreTic);
-    sternThrusterScrollbar->setMax(100);
-    sternThrusterScrollbar->setMin(-100);
-    sternThrusterScrollbar->setPos(0);
-    sternThrusterScrollbar->setToolTipText(language->translate("sternThruster").c_str());
-  } else {
-    sternThrusterScrollbar = 0;
-  }	
+  irr::f32 bowLabelTop=0, bowLabelBottom=0, bowScrollTop=0, bowScrollBottom=0;
+  if (hasBowThruster) {
+    bowScrollBottom = nextRowBottom;
+    bowScrollTop = bowScrollBottom - scrollRowHeight;
+    bowLabelBottom = bowScrollTop - stdGap;
+    bowLabelTop = bowLabelBottom - labelsRowHeight;
+    nextRowBottom = bowLabelTop - stdGap;
+  }
+
+  {
+    // Color zones: left half = port (red), right half = stbd (green) - same style as the wheel scrollbar
+    irr::core::array<irr::s32> thrusterZoneThresholds;
+    irr::core::array<irr::video::SColor> thrusterZoneColors;
+    thrusterZoneThresholds.push_back(-100); thrusterZoneColors.push_back(irr::video::SColor(160, 200,  30,  30)); // port = red
+    thrusterZoneThresholds.push_back(   0); thrusterZoneColors.push_back(irr::video::SColor(160,  30, 180,  30)); // stbd = green
+
+    if (hasBowThruster) {
+      bowThrusterNameLabel = guienv->addStaticText(language->translate("bow").c_str(),irr::core::rect<irr::s32>(0.13*su, bowLabelTop*sh, 0.45*su, bowLabelBottom*sh));
+      bowThrusterNameLabel->setTextAlignment(irr::gui::EGUIA_CENTER,irr::gui::EGUIA_CENTER);
+
+      bowThrusterScrollbar = new irr::gui::OutlineScrollBar(true,guienv,guienv->getRootGUIElement(),GUI_ID_BOWTHRUSTER_SCROLL_BAR,irr::core::rect<irr::s32>(0.13*su, bowScrollTop*sh, 0.45*su, bowScrollBottom*sh),engineTics,centreTic);
+      bowThrusterScrollbar->setMax(100);
+      bowThrusterScrollbar->setMin(-100);
+      bowThrusterScrollbar->setPos(0);
+      bowThrusterScrollbar->setToolTipText(language->translate("bowThruster").c_str());
+      static_cast<irr::gui::OutlineScrollBar*>(bowThrusterScrollbar)->setColorZones(thrusterZoneThresholds, thrusterZoneColors);
+
+      // Left/right step buttons, same position/style as the wheel's NFU port/stbd buttons
+      bowThrusterLeftButton = guienv->addButton(irr::core::rect<irr::s32>(0.09*su, bowScrollTop*sh, 0.11*su, bowScrollBottom*sh),0,GUI_ID_BOWTHRUSTER_LEFT_BUTTON,language->translate("NFUPort").c_str());
+      bowThrusterLeftButton->setToolTipText(language->translate("bowThrusterPort").c_str());
+      bowThrusterRightButton = guienv->addButton(irr::core::rect<irr::s32>(0.11*su, bowScrollTop*sh, 0.13*su, bowScrollBottom*sh),0,GUI_ID_BOWTHRUSTER_RIGHT_BUTTON,language->translate("NFUStbd").c_str());
+      bowThrusterRightButton->setToolTipText(language->translate("bowThrusterStbd").c_str());
+    } else {
+      bowThrusterScrollbar = 0;
+      bowThrusterNameLabel = 0;
+      bowThrusterLeftButton = 0;
+      bowThrusterRightButton = 0;
+    }
+
+    if (hasSternThruster) {
+      sternThrusterNameLabel = guienv->addStaticText(language->translate("stern").c_str(),irr::core::rect<irr::s32>(0.13*su, sternLabelTop*sh, 0.45*su, sternLabelBottom*sh));
+      sternThrusterNameLabel->setTextAlignment(irr::gui::EGUIA_CENTER,irr::gui::EGUIA_CENTER);
+
+      sternThrusterScrollbar = new irr::gui::OutlineScrollBar(true,guienv,guienv->getRootGUIElement(),GUI_ID_STERNTHRUSTER_SCROLL_BAR,irr::core::rect<irr::s32>(0.13*su, sternScrollTop*sh, 0.45*su, sternScrollBottom*sh),engineTics,centreTic);
+      sternThrusterScrollbar->setMax(100);
+      sternThrusterScrollbar->setMin(-100);
+      sternThrusterScrollbar->setPos(0);
+      sternThrusterScrollbar->setToolTipText(language->translate("sternThruster").c_str());
+      static_cast<irr::gui::OutlineScrollBar*>(sternThrusterScrollbar)->setColorZones(thrusterZoneThresholds, thrusterZoneColors);
+
+      // Left/right step buttons, same position/style as the wheel's NFU port/stbd buttons
+      sternThrusterLeftButton = guienv->addButton(irr::core::rect<irr::s32>(0.09*su, sternScrollTop*sh, 0.11*su, sternScrollBottom*sh),0,GUI_ID_STERNTHRUSTER_LEFT_BUTTON,language->translate("NFUPort").c_str());
+      sternThrusterLeftButton->setToolTipText(language->translate("sternThrusterPort").c_str());
+      sternThrusterRightButton = guienv->addButton(irr::core::rect<irr::s32>(0.11*su, sternScrollTop*sh, 0.13*su, sternScrollBottom*sh),0,GUI_ID_STERNTHRUSTER_RIGHT_BUTTON,language->translate("NFUStbd").c_str());
+      sternThrusterRightButton->setToolTipText(language->translate("sternThrusterStbd").c_str());
+    } else {
+      sternThrusterScrollbar = 0;
+      sternThrusterNameLabel = 0;
+      sternThrusterLeftButton = 0;
+      sternThrusterRightButton = 0;
+    }
+  }
 
   portText = guienv->addStaticText(language->translate("portEngine").c_str(),irr::core::rect<irr::s32>(0.005*su, 0.61*sh, 0.045*su, 0.67*sh));
   portText->setTextAlignment(irr::gui::EGUIA_CENTER,irr::gui::EGUIA_CENTER);
   portText->setOverrideColor(irr::video::SColor(255,128,0,0));
-  portScrollbar = new irr::gui::OutlineScrollBar(false,guienv,guienv->getRootGUIElement(),GUI_ID_PORT_SCROLL_BAR,irr::core::rect<irr::s32>(0.01*su, 0.675*sh, 0.04*su, (0.99-0.04*hasBowThruster-0.04*hasSternThruster)*sh),engineTics,centreTic);
+  portScrollbar = new irr::gui::OutlineScrollBar(false,guienv,guienv->getRootGUIElement(),GUI_ID_PORT_SCROLL_BAR,irr::core::rect<irr::s32>(0.01*su, 0.675*sh, 0.04*su, 0.99*sh),engineTics,centreTic,true);
   portScrollbar->setMax(100);
   portScrollbar->setMin(-100);
   portScrollbar->setPos(0);
   stbdText = guienv->addStaticText(language->translate("stbdEngine").c_str(),irr::core::rect<irr::s32>(0.045*su, 0.61*sh, 0.085*su, 0.67*sh));
   stbdText->setTextAlignment(irr::gui::EGUIA_CENTER,irr::gui::EGUIA_CENTER);
   stbdText->setOverrideColor(irr::video::SColor(255,0,128,0));
-  stbdScrollbar = new irr::gui::OutlineScrollBar(false,guienv,guienv->getRootGUIElement(),GUI_ID_STBD_SCROLL_BAR,irr::core::rect<irr::s32>(0.05*su, 0.675*sh, 0.08*su, (0.99-0.04*hasBowThruster-0.04*hasSternThruster)*sh),engineTics,centreTic);
+  stbdScrollbar = new irr::gui::OutlineScrollBar(false,guienv,guienv->getRootGUIElement(),GUI_ID_STBD_SCROLL_BAR,irr::core::rect<irr::s32>(0.05*su, 0.675*sh, 0.08*su, 0.99*sh),engineTics,centreTic,true);
   stbdScrollbar->setMax(100);
   stbdScrollbar->setMin(-100);
   stbdScrollbar->setPos(0);
@@ -188,7 +263,12 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
     static_cast<irr::gui::OutlineScrollBar*>(stbdScrollbar)->setColorZones(ezThresholds, ezColors);
   }
 
-  wheelScrollbar = new irr::gui::OutlineScrollBar(true,guienv,guienv->getRootGUIElement(),GUI_ID_WHEEL_SCROLL_BAR,irr::core::rect<irr::s32>(0.13*su, 0.96*sh, 0.45*su, 0.99*sh),rudderTics,centreTic,true,rudderIndicatorTics);
+  // Label sits on its own row above the wheel scrollbar, same style as the compass/RoT labels
+  wheelLabel = guienv->addStaticText(language->translate("wheelText").c_str(),
+    irr::core::rect<irr::s32>(0.13*su, wheelLabelTop*sh, 0.45*su, wheelLabelBottom*sh));
+  wheelLabel->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
+
+  wheelScrollbar = new irr::gui::OutlineScrollBar(true,guienv,guienv->getRootGUIElement(),GUI_ID_WHEEL_SCROLL_BAR,irr::core::rect<irr::s32>(0.13*su, wheelRowTop*sh, 0.45*su, wheelRowBottom*sh),rudderTics,centreTic,true,rudderIndicatorTics);
   wheelScrollbar->setMax(30);
   wheelScrollbar->setMin(-30);
   wheelScrollbar->setPos(0);
@@ -202,8 +282,8 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
     wheelScrollbar->setColorZones(wzThresholds, wzColors);
   }
 
-  nonFollowUpPortButton = guienv->addButton(irr::core::rect<irr::s32>(0.09*su, 0.96*sh, 0.11*su, 0.99*sh),0,GUI_ID_NFU_PORT_BUTTON,language->translate("NFUPort").c_str());
-  nonFollowUpStbdButton = guienv->addButton(irr::core::rect<irr::s32>(0.11*su, 0.96*sh, 0.13*su, 0.99*sh),0,GUI_ID_NFU_STBD_BUTTON,language->translate("NFUStbd").c_str());
+  nonFollowUpPortButton = guienv->addButton(irr::core::rect<irr::s32>(0.09*su, wheelRowTop*sh, 0.11*su, wheelRowBottom*sh),0,GUI_ID_NFU_PORT_BUTTON,language->translate("NFUPort").c_str());
+  nonFollowUpStbdButton = guienv->addButton(irr::core::rect<irr::s32>(0.11*su, wheelRowTop*sh, 0.13*su, wheelRowBottom*sh),0,GUI_ID_NFU_STBD_BUTTON,language->translate("NFUStbd").c_str());
 
   //Adapt if single engine:
   if (1 == mOwnShip->getNumberProp()) {
@@ -238,38 +318,52 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
 	    
 
   //add data display:
-  stdDataDisplayPos = irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL,0.76*sh,0.45*su+azimuthGUIOffsetR,0.95*sh); //In normal view
+  // Sits directly under the wheel scrollbar, left-aligned with the first interface button below it.
+  // A list box (not a plain static text) so it gets a scrollbar automatically once the content overflows.
+  stdDataDisplayPos = irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL,dataDisplayTop*sh,0.45*su+azimuthGUIOffsetR,dataDisplayBottom*sh); //In normal view
   radDataDisplayPos = irr::core::rect<irr::s32>(0.83*su,0.96*sh,0.99*su,0.99*sh); //In maximised 3d view
   altDataDisplayPos = irr::core::rect<irr::s32>(0.83*su,0.96*sh,0.99*su,0.99*sh); //In maximised 3d view
-  dataDisplay = guienv->addStaticText(L"", stdDataDisplayPos, true, false, 0, -1, true); //Actual text set later
-  stdDataDisplayBG = dataDisplay->getBackgroundColor();
-  altDataDisplayBG = irr::video::SColor(200/4,255,255,255);
-  radDataDisplayBG = irr::video::SColor(200/4,255,255,255);
+  dataDisplay = guienv->addListBox(stdDataDisplayPos, 0, -1, true); //Actual content set later
+  dataDisplay->setAutoScrollEnabled(false); // Don't jump to the newest item - this list is rebuilt every frame
 
   guiHeading = 0;
   guiSpeed = 0;
 
   //Add heading indicator
-  stdHdgIndicatorPos = irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL,0.630*sh,0.45*su+azimuthGUIOffsetR,0.680*sh); //In normal view
+  // This whole block starts right at the top of the control cluster (matching the reference y already
+  // used by portText/stbdText/hdgScrollbar), so there's no dead space above it. Each element is its own
+  // row, top to bottom: "Compass" label -> gauge -> "RoT" label -> RoT scrollbar, each separated by stdGap.
+  // Kept compact (small label rows, smaller gauge/scrollbar) to leave more room below for the thruster rows.
+  irr::f32 labelRowHeight2 = 0.02f;
+  irr::f32 compassLabelTop = 0.61f;
+  irr::f32 compassLabelBottom = compassLabelTop + labelRowHeight2;
+  irr::f32 compassRowTop = compassLabelBottom + stdGap;
+  irr::f32 compassRowBottom = compassRowTop + 0.04f;
+  irr::f32 rotLabelTop = compassRowBottom + stdGap;
+  irr::f32 rotLabelBottom = rotLabelTop + labelRowHeight2;
+  irr::f32 rotRowTop = rotLabelBottom + stdGap;
+  irr::f32 rotRowBottom = rotRowTop + 0.025f;
+
+  stdHdgIndicatorPos = irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL,compassRowTop*sh,0.45*su+azimuthGUIOffsetR,compassRowBottom*sh); //In normal view
   radHdgIndicatorPos = irr::core::rect<irr::s32>(0.46*su, 0.96*sh, 0.82*su, 0.99*sh); //In maximised radar view
   maxHdgIndicatorPos = irr::core::rect<irr::s32>(0.46*su, 0.96*sh, 0.82*su, 0.99*sh); //In maximised 3d view
 
   // Cadet blue background behind the gauge (hidden in large radar mode)
   compassBG = guienv->addStaticText(L"",
-    irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, 0.630*sh, 0.45*su+azimuthGUIOffsetR, 0.680*sh));
+    irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, compassRowTop*sh, 0.45*su+azimuthGUIOffsetR, compassRowBottom*sh));
   compassBG->setBackgroundColor(irr::video::SColor(255, 95, 158, 160));
   compassBG->setDrawBackground(true);
 
   headingIndicator = new irr::gui::HeadingIndicator(guienv,guienv->getRootGUIElement(),stdHdgIndicatorPos);
 
   compassLabel = guienv->addStaticText(language->translate("compass").c_str(),
-    irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, 0.600*sh, 0.45*su+azimuthGUIOffsetR, 0.630*sh));
+    irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, compassLabelTop*sh, 0.45*su+azimuthGUIOffsetR, compassLabelBottom*sh));
   compassLabel->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
 
   // DEE vvvvv add very basic rate of turn indicator
   // rewrite this with its own class so that it is more realistic i.e. either a dial or a conning display
 
-  rateofturnScrollbar = new irr::gui::OutlineScrollBar(true,guienv,guienv->getRootGUIElement(),GUI_ID_RATE_OF_TURN_SCROLL_BAR,irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, 0.715*sh, 0.45*su+azimuthGUIOffsetR, 0.750*sh),rudderTics,centreTic);
+  rateofturnScrollbar = new irr::gui::OutlineScrollBar(true,guienv,guienv->getRootGUIElement(),GUI_ID_RATE_OF_TURN_SCROLL_BAR,irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, rotRowTop*sh, 0.45*su+azimuthGUIOffsetR, rotRowBottom*sh),rudderTics,centreTic);
 
   rateofturnScrollbar->setMax(50);
   rateofturnScrollbar->setMin(-50);
@@ -287,7 +381,7 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
   }
 
   rateofturnText = guienv->addStaticText(L"RoT: 0.0 °/min",
-    irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, 0.685*sh, 0.45*su+azimuthGUIOffsetR, 0.715*sh));
+    irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, rotLabelTop*sh, 0.45*su+azimuthGUIOffsetR, rotLabelBottom*sh));
   rateofturnText->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
 
   if (!hasRateOfTurnIndicator) {
@@ -405,7 +499,8 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
   magnificationScrollbar->setPos(1.0 * 10); // Initialise as 1x zoom
 
   //Add an additional window for lines (will normally be hidden)
-  irr::core::rect<irr::s32> linesWindowPos = stdDataDisplayPos;
+  // Anchored independently of stdDataDisplayPos, which now lives in the bottom row and is too short for this window.
+  irr::core::rect<irr::s32> linesWindowPos = irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL,0.76*sh,0.45*su+azimuthGUIOffsetR,0.95*sh);
   linesWindowPos.LowerRightCorner -= irr::core::position2d<irr::s32>(0,0.03*sh);
   // Scale lines window to make smaller if possible
   irr::core::dimension2d<irr::u32> sampleDimension = guienv->getSkin()->getFont()->getDimension(L"Example");
@@ -633,32 +728,32 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
 
   //show/hide interface
   showInterface = true; //If we start with the 2d interface shown
-  showInterfaceButton = guienv->addButton(irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL,0.92*sh,0.125*su+azimuthGUIOffsetL,0.95*sh),0,GUI_ID_SHOW_INTERFACE_BUTTON,language->translate("showinterface").c_str());
-  hideInterfaceButton = guienv->addButton(irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL,0.92*sh,0.125*su+azimuthGUIOffsetL,0.95*sh),0,GUI_ID_HIDE_INTERFACE_BUTTON,language->translate("hideinterface").c_str());
+  showInterfaceButton = guienv->addButton(irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL,buttonRowTop*sh,0.125*su+azimuthGUIOffsetL,buttonRowBottom*sh),0,GUI_ID_SHOW_INTERFACE_BUTTON,language->translate("showinterface").c_str());
+  hideInterfaceButton = guienv->addButton(irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL,buttonRowTop*sh,0.125*su+azimuthGUIOffsetL,buttonRowBottom*sh),0,GUI_ID_HIDE_INTERFACE_BUTTON,language->translate("hideinterface").c_str());
   showInterfaceButton->setVisible(false);
 
   //binoculars button
-  binosButton = guienv->addButton(irr::core::rect<irr::s32>(0.125*su+azimuthGUIOffsetL,0.92*sh,0.16*su+azimuthGUIOffsetL,0.95*sh),0,GUI_ID_BINOS_INTERFACE_BUTTON,language->translate("zoom").c_str());
+  binosButton = guienv->addButton(irr::core::rect<irr::s32>(0.125*su+azimuthGUIOffsetL,buttonRowTop*sh,0.16*su+azimuthGUIOffsetL,buttonRowBottom*sh),0,GUI_ID_BINOS_INTERFACE_BUTTON,language->translate("zoom").c_str());
   binosButton->setIsPushButton(true);
 
   //Take bearing button
-  bearingButton = guienv->addButton(irr::core::rect<irr::s32>(0.16*su+azimuthGUIOffsetL,0.92*sh,0.195*su+azimuthGUIOffsetL,0.95*sh),0,GUI_ID_BEARING_INTERFACE_BUTTON,language->translate("bearing").c_str());
+  bearingButton = guienv->addButton(irr::core::rect<irr::s32>(0.16*su+azimuthGUIOffsetL,buttonRowTop*sh,0.195*su+azimuthGUIOffsetL,buttonRowBottom*sh),0,GUI_ID_BEARING_INTERFACE_BUTTON,language->translate("bearing").c_str());
   bearingButton->setIsPushButton(true);
 
   // Change view button
-  changeViewButton = guienv->addButton(irr::core::rect<irr::s32>(0.195*su+azimuthGUIOffsetL,0.92*sh,0.23*su+azimuthGUIOffsetL,0.95*sh),0,GUI_ID_CHANGE_VIEW_BUTTON,language->translate("changeView").c_str());
+  changeViewButton = guienv->addButton(irr::core::rect<irr::s32>(0.195*su+azimuthGUIOffsetL,buttonRowTop*sh,0.23*su+azimuthGUIOffsetL,buttonRowBottom*sh),0,GUI_ID_CHANGE_VIEW_BUTTON,language->translate("changeView").c_str());
 
   //Exit button
-  exitButton = guienv->addButton(irr::core::rect<irr::s32>(0.23*su+azimuthGUIOffsetL,0.92*sh,0.265*su+azimuthGUIOffsetL,0.95*sh),0,GUI_ID_EXIT_BUTTON,language->translate("exit").c_str());
+  exitButton = guienv->addButton(irr::core::rect<irr::s32>(0.23*su+azimuthGUIOffsetL,buttonRowTop*sh,0.265*su+azimuthGUIOffsetL,buttonRowBottom*sh),0,GUI_ID_EXIT_BUTTON,language->translate("exit").c_str());
 
   //Show button to display extra controls window
-  showExtraControlsButton = guienv->addButton(irr::core::rect<irr::s32>(0.265*su+azimuthGUIOffsetL,0.92*sh,0.34*su+azimuthGUIOffsetL,0.95*sh),0,GUI_ID_SHOW_EXTRA_CONTROLS_BUTTON,language->translate("extraControls").c_str());
+  showExtraControlsButton = guienv->addButton(irr::core::rect<irr::s32>(0.265*su+azimuthGUIOffsetL,buttonRowTop*sh,0.34*su+azimuthGUIOffsetL,buttonRowBottom*sh),0,GUI_ID_SHOW_EXTRA_CONTROLS_BUTTON,language->translate("extraControls").c_str());
 
   //Show button to display lines control window
-  showLinesControlsButton = guienv->addButton(irr::core::rect<irr::s32>(0.34*su+azimuthGUIOffsetL,0.92*sh,0.375*su+azimuthGUIOffsetL,0.95*sh),0,GUI_ID_SHOW_LINES_CONTROLS_BUTTON,language->translate("lines").c_str());
+  showLinesControlsButton = guienv->addButton(irr::core::rect<irr::s32>(0.34*su+azimuthGUIOffsetL,buttonRowTop*sh,0.375*su+azimuthGUIOffsetL,buttonRowBottom*sh),0,GUI_ID_SHOW_LINES_CONTROLS_BUTTON,language->translate("lines").c_str());
 
   //Show internal log window button
-  pcLogButton = guienv->addButton(irr::core::rect<irr::s32>(0.375*su+azimuthGUIOffsetL,0.92*sh,0.39*su+azimuthGUIOffsetL,0.95*sh),0,GUI_ID_SHOW_LOG_BUTTON,language->translate("log").c_str());
+  pcLogButton = guienv->addButton(irr::core::rect<irr::s32>(0.375*su+azimuthGUIOffsetL,buttonRowTop*sh,0.39*su+azimuthGUIOffsetL,buttonRowBottom*sh),0,GUI_ID_SHOW_LOG_BUTTON,language->translate("log").c_str());
         
   //Set initial visibility
   updateVisibility();
@@ -921,16 +1016,15 @@ void GUIMain::updateVisibility(bool bHideFull)
     }
   }
   //Set position of data display
+  // (list boxes use the skin's background colour rather than a per-instance colour, so there's no
+  // separate background swap here any more - just repositioning between the three display modes)
   if (dataDisplay) {
     if (radarLarge) {
       dataDisplay->setRelativePosition(radDataDisplayPos);
-      dataDisplay->setBackgroundColor(radDataDisplayBG);
     } else if (!showInterface) {
       dataDisplay->setRelativePosition(altDataDisplayPos);
-      dataDisplay->setBackgroundColor(altDataDisplayBG);
     } else {
       dataDisplay->setRelativePosition(stdDataDisplayPos);
-      dataDisplay->setBackgroundColor(stdDataDisplayBG);
     }
   }
 
@@ -941,8 +1035,17 @@ void GUIMain::updateVisibility(bool bHideFull)
   if (portScrollbar) { portScrollbar->setVisible(showInterface); }
   if (stbdScrollbar) { stbdScrollbar->setVisible(showInterface && !singleEngine); }
   if (wheelScrollbar) { wheelScrollbar->setVisible(showInterface); }
+  if (wheelLabel) { wheelLabel->setVisible(showInterface); }
   if (nonFollowUpPortButton) { nonFollowUpPortButton->setVisible(showInterface); }
   if (nonFollowUpStbdButton) { nonFollowUpStbdButton->setVisible(showInterface); }
+  if (bowThrusterScrollbar) { bowThrusterScrollbar->setVisible(showInterface); }
+  if (bowThrusterNameLabel) { bowThrusterNameLabel->setVisible(showInterface); }
+  if (bowThrusterLeftButton) { bowThrusterLeftButton->setVisible(showInterface); }
+  if (bowThrusterRightButton) { bowThrusterRightButton->setVisible(showInterface); }
+  if (sternThrusterScrollbar) { sternThrusterScrollbar->setVisible(showInterface); }
+  if (sternThrusterNameLabel) { sternThrusterNameLabel->setVisible(showInterface); }
+  if (sternThrusterLeftButton) { sternThrusterLeftButton->setVisible(showInterface); }
+  if (sternThrusterRightButton) { sternThrusterRightButton->setVisible(showInterface); }
 
   //If we're in secondary mode, make sure things are hidden if they shouldn't be shown on the secondary screen
   if (controlsHidden || bHideFull) {
@@ -972,11 +1075,18 @@ void GUIMain::hideInSecondary() {
   if (stbdText) {stbdText->setVisible(false);}
   if (portText) {portText->setVisible(false);}
   if (wheelScrollbar) {wheelScrollbar->setVisible(false);}
+  if (wheelLabel) {wheelLabel->setVisible(false);}
   if (nonFollowUpPortButton) {nonFollowUpPortButton->setVisible(false);}
   if (nonFollowUpStbdButton) {nonFollowUpStbdButton->setVisible(false);}
   //rateofturnScrollbar->setVisible(false); // hides rate of turn indicator in full screen
   if (bowThrusterScrollbar) {bowThrusterScrollbar->setVisible(false);}
+  if (bowThrusterNameLabel) {bowThrusterNameLabel->setVisible(false);}
+  if (bowThrusterLeftButton) {bowThrusterLeftButton->setVisible(false);}
+  if (bowThrusterRightButton) {bowThrusterRightButton->setVisible(false);}
   if (sternThrusterScrollbar) {sternThrusterScrollbar->setVisible(false);}
+  if (sternThrusterNameLabel) {sternThrusterNameLabel->setVisible(false);}
+  if (sternThrusterLeftButton) {sternThrusterLeftButton->setVisible(false);}
+  if (sternThrusterRightButton) {sternThrusterRightButton->setVisible(false);}
 }
 
 std::wstring GUIMain::f32To1dp(irr::f32 value)
@@ -1013,16 +1123,6 @@ bool GUIMain::manuallyTriggerClick(irr::gui::IGUIButton* button)
   return device->postEventFromUser(triggerUpdateEvent);
 }
 
-bool GUIMain::manuallyTriggerScroll(irr::gui::IGUIScrollBar* bar)
-{
-  irr::SEvent triggerUpdateEvent;
-  triggerUpdateEvent.EventType = irr::EET_GUI_EVENT;
-  triggerUpdateEvent.GUIEvent.Caller = bar;
-  triggerUpdateEvent.GUIEvent.Element = 0;
-  triggerUpdateEvent.GUIEvent.EventType = irr::gui::EGET_SCROLL_BAR_CHANGED ;
-  return device->postEventFromUser(triggerUpdateEvent);
-}
-
 void GUIMain::updateGuiData(GUIData* guiData)
 {
 
@@ -1037,8 +1137,15 @@ void GUIMain::updateGuiData(GUIData* guiData)
   //Update scroll bars
   hdgScrollbar->setPos(Utilities::round(guiData->hdg));
   spdScrollbar->setPos(Utilities::round(guiData->spd));
-  if (portScrollbar) {portScrollbar->setPos(Utilities::round(guiData->portEng * -100));}//Engine units are +- 1, scale to -+100, inverted as astern is at bottom of scroll bar
-  if (stbdScrollbar) {stbdScrollbar->setPos(Utilities::round(guiData->stbdEng * -100));}
+  if (portScrollbar) {
+    //Engine units are +- 1, scale to -+100, inverted as astern is at bottom of scroll bar
+    static_cast<irr::gui::OutlineScrollBar*>(portScrollbar)->setSecondary(Utilities::round(guiData->portEngActual * -100));
+    portScrollbar->setPos(Utilities::round(guiData->portEng * -100));
+  }
+  if (stbdScrollbar) {
+    static_cast<irr::gui::OutlineScrollBar*>(stbdScrollbar)->setSecondary(Utilities::round(guiData->stbdEngActual * -100));
+    stbdScrollbar->setPos(Utilities::round(guiData->stbdEng * -100));
+  }
   //rudderScrollbar->setPos(Utilities::round(guiData->rudder));
   if (wheelScrollbar) {
     wheelScrollbar->setSecondary(Utilities::round(guiData->rudder));
@@ -1230,7 +1337,25 @@ void GUIMain::drawGUI()
     displayText.append(language->translate("paused"));
     displayText.append(L"\n");
   }
-  dataDisplay->setText(displayText.c_str());
+  {
+    // List box, not static text, so it gets a scrollbar automatically if the content overflows - split
+    // the accumulated (newline-joined) text back out into one item per line.
+    // This runs every frame, so preserve whatever scroll position the user has dragged to - otherwise
+    // clear() resets it to the top each time and the box appears unscrollable.
+    irr::s32 savedScrollPos = 0;
+    if (dataDisplay->getVerticalScrollBar()) {
+      savedScrollPos = dataDisplay->getVerticalScrollBar()->getPos();
+    }
+    dataDisplay->clear();
+    irr::core::array<irr::core::stringw> displayLines;
+    displayText.split(displayLines, L"\n", 1);
+    for (irr::u32 i = 0; i < displayLines.size(); i++) {
+      dataDisplay->addItem(displayLines[i].c_str());
+    }
+    if (dataDisplay->getVerticalScrollBar()) {
+      dataDisplay->getVerticalScrollBar()->setPos(savedScrollPos);
+    }
+  }
 
   //add radar text (reuse the displayText)
   irr::f32 displayEBLBearing = guiRadarEBLBrg;
@@ -1444,6 +1569,11 @@ void GUIMain::drawGUI()
   if (eblLeftButton2->isPressed()) {manuallyTriggerClick(eblLeftButton2);}
   if (eblRightButton2->isPressed()) {manuallyTriggerClick(eblRightButton2);}
 
+  if (bowThrusterLeftButton && bowThrusterLeftButton->isPressed()) {manuallyTriggerClick(bowThrusterLeftButton);}
+  if (bowThrusterRightButton && bowThrusterRightButton->isPressed()) {manuallyTriggerClick(bowThrusterRightButton);}
+  if (sternThrusterLeftButton && sternThrusterLeftButton->isPressed()) {manuallyTriggerClick(sternThrusterLeftButton);}
+  if (sternThrusterRightButton && sternThrusterRightButton->isPressed()) {manuallyTriggerClick(sternThrusterRightButton);}
+
   if (radarCursorLeftButton->isPressed()) {manuallyTriggerClick(radarCursorLeftButton);}
   if (radarCursorRightButton->isPressed()) {manuallyTriggerClick(radarCursorRightButton);}
   if (radarCursorUpButton->isPressed()) {manuallyTriggerClick(radarCursorUpButton);}
@@ -1454,32 +1584,16 @@ void GUIMain::drawGUI()
   if (radarCursorUpButton2->isPressed()) {manuallyTriggerClick(radarCursorUpButton2);}
   if (radarCursorDownButton2->isPressed()) {manuallyTriggerClick(radarCursorDownButton2);}
 
-  if (nonFollowUpPortButton && wheelScrollbar ) {
-    //Handle port NFU rudder button
-    if (nonFollowUpPortButton->isPressed() && !nfuPortDown) {
-      nfuPortDown = true; //Set this before we trigger the event, as this will be checked for override
-      wheelScrollbar->setPos(-30);
-      manuallyTriggerScroll(wheelScrollbar);
-    }
-    if (!nonFollowUpPortButton->isPressed() && nfuPortDown) {
-      wheelScrollbar->setPos(wheelScrollbar->getSecondary());
-      manuallyTriggerScroll(wheelScrollbar);
-      nfuPortDown = false; //Set this after we trigger the event, as this will be checked for override
-    }
+  if (nonFollowUpPortButton) {
+    //Step the wheel towards port while held, same rate-limited click mechanism as the thruster buttons
+    nfuPortDown = nonFollowUpPortButton->isPressed();
+    if (nfuPortDown) {manuallyTriggerClick(nonFollowUpPortButton);}
   }
 
-  if (nonFollowUpStbdButton && wheelScrollbar) {
-    //Handle stbd NFU rudder button
-    if (nonFollowUpStbdButton->isPressed() && !nfuStbdDown) {
-      nfuStbdDown = true; //Set this before we trigger the event, as this will be checked for override
-      wheelScrollbar->setPos(30);
-      manuallyTriggerScroll(wheelScrollbar);
-    }
-    if (!nonFollowUpStbdButton->isPressed() && nfuStbdDown) {
-      wheelScrollbar->setPos(wheelScrollbar->getSecondary());
-      manuallyTriggerScroll(wheelScrollbar);
-      nfuStbdDown = false; //Set this after we trigger the event, as this will be checked for override
-    }
+  if (nonFollowUpStbdButton) {
+    //Step the wheel towards stbd while held, same rate-limited click mechanism as the thruster buttons
+    nfuStbdDown = nonFollowUpStbdButton->isPressed();
+    if (nfuStbdDown) {manuallyTriggerClick(nonFollowUpStbdButton);}
   }
 
   // Update lines display

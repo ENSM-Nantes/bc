@@ -40,6 +40,8 @@ struct GUIData {
     irr::f32 spd; // Show speed through water
     irr::f32 portEng;
     irr::f32 stbdEng;
+    irr::f32 portEngActual; //Actual (spooled) engine RPM as a fraction of rpmMax, -1 to 1 - lags portEng, same relationship as rudder lags wheel
+    irr::f32 stbdEngActual;
     irr::f32 rudder;
     irr::f32 bowThruster;
     irr::f32 sternThruster;
@@ -99,6 +101,10 @@ public:
 // DEE ^^^^
         GUI_ID_BOWTHRUSTER_SCROLL_BAR,
         GUI_ID_STERNTHRUSTER_SCROLL_BAR,
+        GUI_ID_BOWTHRUSTER_LEFT_BUTTON,
+        GUI_ID_BOWTHRUSTER_RIGHT_BUTTON,
+        GUI_ID_STERNTHRUSTER_LEFT_BUTTON,
+        GUI_ID_STERNTHRUSTER_RIGHT_BUTTON,
         GUI_ID_START_BUTTON,
 		GUI_ID_RADAR_ONOFF_BUTTON,
         GUI_ID_BIG_RADAR_BUTTON,
@@ -224,9 +230,16 @@ private:
     irr::gui::OutlineScrollBar* wheelScrollbar;
     irr::gui::IGUIScrollBar* bowThrusterScrollbar;
     irr::gui::IGUIScrollBar* sternThrusterScrollbar;
+    irr::gui::IGUIButton* bowThrusterLeftButton;
+    irr::gui::IGUIButton* bowThrusterRightButton;
+    irr::gui::IGUIButton* sternThrusterLeftButton;
+    irr::gui::IGUIButton* sternThrusterRightButton;
     irr::gui::IGUIStaticText* portText;
     irr::gui::IGUIStaticText* stbdText;
-    irr::gui::IGUIStaticText* dataDisplay;
+    irr::gui::IGUIStaticText* bowThrusterNameLabel;
+    irr::gui::IGUIStaticText* sternThrusterNameLabel;
+    irr::gui::IGUIStaticText* wheelLabel;
+    irr::gui::IGUIListBox* dataDisplay; //List box (not static text) so it gets a built-in scrollbar when content overflows
     irr::gui::IGUIStaticText* radarText;
     irr::gui::IGUIScrollBar* rateofturnScrollbar;
     irr::gui::IGUIStaticText* rateofturnText = nullptr;
@@ -378,9 +391,6 @@ private:
     irr::core::rect<irr::s32> stdDataDisplayPos;
     irr::core::rect<irr::s32> radDataDisplayPos;
     irr::core::rect<irr::s32> altDataDisplayPos;
-    irr::video::SColor stdDataDisplayBG;
-    irr::video::SColor altDataDisplayBG;
-    irr::video::SColor radDataDisplayBG;
 
     irr::core::rect<irr::s32> stdRateOfTurnIndicatorPos;
 
@@ -396,7 +406,6 @@ private:
     std::wstring f32To2dp(irr::f32 value);
     std::wstring f32To3dp(irr::f32 value);
     bool manuallyTriggerClick(irr::gui::IGUIButton* button);
-    bool manuallyTriggerScroll(irr::gui::IGUIScrollBar* bar);
 
 };
 

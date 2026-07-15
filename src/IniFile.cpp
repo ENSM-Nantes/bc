@@ -117,7 +117,7 @@ bool IniCache::readFile(const std::string& fileName)
 
 bool IniCache::readWFile(const std::string& fileName)
 {
-    if (m_stringData.find(fileName) != m_stringData.end()) {
+    if (m_wstringData.find(fileName) != m_wstringData.end()) {
         return true; // file already read
     }
 

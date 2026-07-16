@@ -447,8 +447,8 @@ void NMEA::Update(sTime& aTime)
   
   
   double engineRPM[] = {
-    mOwnShip->getPortEngine()*mOwnShip->getEngine("port").getRpmMax()/60,  
-    mOwnShip->getStbdEngine()*mOwnShip->getEngine("starboard").getRpmMax()/60 
+    mOwnShip->getPropeller("port").getRevs(),  
+    mOwnShip->getPropeller("starboard").getRevs() 
   };
     
   float posZ = mOwnShip->getPosition().Z + mOwnShip->getOffsetPos().Z ;

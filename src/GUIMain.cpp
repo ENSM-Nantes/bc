@@ -1187,6 +1187,13 @@ void GUIMain::updateGuiData(GUIData* guiData)
   }
   // DEE ^^^^
 
+
+  if(compassLabel)
+    {
+      irr::core::stringw compassTxt = language->translate("compass") + L": " + f32To1dp(guiData->hdg).c_str() + L" °";
+      compassLabel->setText(compassTxt.c_str());
+    }
+  
   //Update text display data
   guiLat = guiData->lat;
   guiLong = guiData->longitude;

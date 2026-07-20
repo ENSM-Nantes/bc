@@ -36,6 +36,7 @@
 #include "Lang.hpp"
 #include "NMEA.hpp"
 #include "Sound.hpp"
+#include "ThrusterSerial.hpp"
 #include "Utilities.hpp"
 #include "OperatingModeEnum.hpp"
 #include "Update.hpp"
@@ -409,6 +410,10 @@ int main(int argc, char ** argv)
 
   //Load NMEA settings
 
+  //Thruster info serial output
+  std::string thrusterInfoComPort = IniFile::iniFileToString(iniFilename, "ThrusterInfo_ComPort");
+  irr::u32 thrusterInfoBaudrate = IniFile::iniFileTou32(iniFilename, "ThrusterInfo_Baudrate", 9600);
+
   //Conning
   std::string nmeaComPortConning = IniFile::iniFileToString(iniFilename, "NMEA_ComPort_Conning");
   irr::u32 nmeaBaudrateConning = IniFile::iniFileTou32(iniFilename, "NMEA_Baudrate_Conning", 4800);
@@ -722,6 +727,8 @@ int main(int argc, char ** argv)
   modelParameters.secondaryControlSternThruster = secondaryControlSternThruster;
   modelParameters.debugMode = debugMode;
 
+  //Serial com to thruster joystick, usefull to light bow/stern led(s) if ship is equipped
+  ThrusterSerial thrusterSerial;
 
   //create NMEA serial port and UDP, linked to model
   NMEA nmeaConning;
@@ -846,6 +853,9 @@ int main(int argc, char ** argv)
   }
 
   guiMain.load(device, model.getOwnShip(), model.getLines(), &language, &logMessages, hideEngineAndRudder, showTideHeight, model.getOwnShip()->getThruster().HasBowThruster(), model.getOwnShip()->getThruster().HasSternThruster(), showCollided, vr3dMode);
+
+  thrusterSerial.Init(thrusterInfoComPort, thrusterInfoBaudrate);
+  thrusterSerial.Send(model.getOwnShip()->getThruster().HasBowThruster(), model.getOwnShip()->getThruster().HasSternThruster());
 
   //load realistic water
   //RealisticWaterSceneNode* realisticWater = new RealisticWaterSceneNode(smgr, 4000, 4000, "./",irr::core::dimension2du(512, 512),smgr->getRootSceneNode());

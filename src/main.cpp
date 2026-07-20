@@ -135,98 +135,114 @@ sJsMapping getJoystickSetup(std::string iniFilename, sJsConf& aJsConf)
   aJsConf.rudderRangeMin = IniFile::iniFileTof32(iniFilename, "rudder_rangeMin");
   aJsConf.rudderRangeMax = IniFile::iniFileTof32(iniFilename, "rudder_rangeMax");
   aJsConf.rudderRangeCenter = IniFile::iniFileTof32(iniFilename, "rudder_rangeCenter");
+  aJsConf.bowThrusterRangeMin = IniFile::iniFileTof32(iniFilename, "bowThrusterLever_rangeMin");
+  aJsConf.bowThrusterRangeMax = IniFile::iniFileTof32(iniFilename, "bowThrusterLever_rangeMax");
+  aJsConf.bowThrusterRangeCenter = IniFile::iniFileTof32(iniFilename, "bowThrusterLever_rangeCenter");
+  aJsConf.sternThrusterRangeMin = IniFile::iniFileTof32(iniFilename, "sternThrusterLever_rangeMin");
+  aJsConf.sternThrusterRangeMax = IniFile::iniFileTof32(iniFilename, "sternThrusterLever_rangeMax");
+  aJsConf.sternThrusterRangeCenter = IniFile::iniFileTof32(iniFilename, "sternThrusterLever_rangeCenter");
   aJsConf.invertPort = (1 == IniFile::iniFileTou32(iniFilename, "invert_port")) ? true : false;
   aJsConf.invertStbd = (1 == IniFile::iniFileTou32(iniFilename, "invert_stbd")) ? true : false;
-  aJsConf.invertRudder = (1 == IniFile::iniFileTou32(iniFilename, "invert_rudder")) ? true : false; 
+  aJsConf.invertRudder = (1 == IniFile::iniFileTou32(iniFilename, "invert_rudder")) ? true : false;
+  aJsConf.invertBowThruster = (1 == IniFile::iniFileTou32(iniFilename, "invert_bowThruster")) ? true : false;
+  aJsConf.invertSternThruster = (1 == IniFile::iniFileTou32(iniFilename, "invert_sternThruster")) ? true : false;
   aJsConf.eventId = IniFile::iniFileToString(iniFilename, "rpi_event_id");
-  
+
 
   //Axis
   //Port
-  jsMapping.entry[0].type = AXIS;
-  jsMapping.entry[0].channel = IniFile::iniFileTou32(iniFilename, "portLever_channel")-1;
-  jsMapping.entry[0].jsNumber = IniFile::iniFileTou32(iniFilename, "port_js_number");
+  jsMapping.entry[AXIS_PORT].type = AXIS;
+  jsMapping.entry[AXIS_PORT].channel = IniFile::iniFileTou32(iniFilename, "portLever_channel")-1;
+  jsMapping.entry[AXIS_PORT].jsNumber = IniFile::iniFileTou32(iniFilename, "port_js_number");
   //Rudder
-  jsMapping.entry[2].type = AXIS;
-  jsMapping.entry[2].channel = IniFile::iniFileTou32(iniFilename, "rudder_channel")-1;
-  jsMapping.entry[2].jsNumber = IniFile::iniFileTou32(iniFilename, "rudder_js_number");
+  jsMapping.entry[AXIS_RUDDER].type = AXIS;
+  jsMapping.entry[AXIS_RUDDER].channel = IniFile::iniFileTou32(iniFilename, "rudder_channel")-1;
+  jsMapping.entry[AXIS_RUDDER].jsNumber = IniFile::iniFileTou32(iniFilename, "rudder_js_number");
   //Stbd
-  jsMapping.entry[1].type = AXIS;
-  jsMapping.entry[1].channel = IniFile::iniFileTou32(iniFilename, "stbdLever_channel")-1;
-  jsMapping.entry[1].jsNumber = IniFile::iniFileTou32(iniFilename, "stbd_js_number");
+  jsMapping.entry[AXIS_STBD].type = AXIS;
+  jsMapping.entry[AXIS_STBD].channel = IniFile::iniFileTou32(iniFilename, "stbdLever_channel")-1;
+  jsMapping.entry[AXIS_STBD].jsNumber = IniFile::iniFileTou32(iniFilename, "stbd_js_number");
+  //Bow thruster
+  jsMapping.entry[AXIS_BOW_THRUSTER].type = AXIS;
+  jsMapping.entry[AXIS_BOW_THRUSTER].channel = IniFile::iniFileTou32(iniFilename, "bowThrusterLever_channel")-1;
+  jsMapping.entry[AXIS_BOW_THRUSTER].jsNumber = IniFile::iniFileTou32(iniFilename, "bowThruster_js_number");
+  //Stern thruster
+  jsMapping.entry[AXIS_STERN_THRUSTER].type = AXIS;
+  jsMapping.entry[AXIS_STERN_THRUSTER].channel = IniFile::iniFileTou32(iniFilename, "sternThrusterLever_channel")-1;
+  jsMapping.entry[AXIS_STERN_THRUSTER].jsNumber = IniFile::iniFileTou32(iniFilename, "sternThruster_js_number");
 
   //POV
   //jsMapping.pov
 
   //Buttons
-  //Horn 
-  jsMapping.entry[3].type = BUTTON;
-  jsMapping.entry[3].channel = IniFile::iniFileTou32(iniFilename, "horn_button")-1;
-  jsMapping.entry[3].jsNumber = IniFile::iniFileTou32(iniFilename, "horn_js_number");
+  //Horn
+  jsMapping.entry[BUTTON_HORN].type = BUTTON;
+  jsMapping.entry[BUTTON_HORN].channel = IniFile::iniFileTou32(iniFilename, "horn_button")-1;
+  jsMapping.entry[BUTTON_HORN].jsNumber = IniFile::iniFileTou32(iniFilename, "horn_js_number");
   //
-  jsMapping.entry[4].type = BUTTON;
-  jsMapping.entry[4].channel = IniFile::iniFileTou32(iniFilename, "change_view_button") - 1;
-  jsMapping.entry[4].jsNumber = IniFile::iniFileTou32(iniFilename, "change_view_js_number");
+  jsMapping.entry[BUTTON_CHANGE_VIEW].type = BUTTON;
+  jsMapping.entry[BUTTON_CHANGE_VIEW].channel = IniFile::iniFileTou32(iniFilename, "change_view_button") - 1;
+  jsMapping.entry[BUTTON_CHANGE_VIEW].jsNumber = IniFile::iniFileTou32(iniFilename, "change_view_js_number");
 
-  jsMapping.entry[5].type = BUTTON;
-  jsMapping.entry[5].channel = IniFile::iniFileTou32(iniFilename, "change_and_lock_view_button") - 1;
-  jsMapping.entry[5].jsNumber = IniFile::iniFileTou32(iniFilename, "change_and_lock_view_js_number");
+  jsMapping.entry[BUTTON_CHANGE_LOCK_VIEW].type = BUTTON;
+  jsMapping.entry[BUTTON_CHANGE_LOCK_VIEW].channel = IniFile::iniFileTou32(iniFilename, "change_and_lock_view_button") - 1;
+  jsMapping.entry[BUTTON_CHANGE_LOCK_VIEW].jsNumber = IniFile::iniFileTou32(iniFilename, "change_and_lock_view_js_number");
 
-  jsMapping.entry[6].type = BUTTON;
-  jsMapping.entry[6].channel = IniFile::iniFileTou32(iniFilename, "look_step_left_button") - 1;
-  jsMapping.entry[6].jsNumber = IniFile::iniFileTou32(iniFilename, "look_step_left_js_number");
+  jsMapping.entry[BUTTON_STEP_LEFT].type = BUTTON;
+  jsMapping.entry[BUTTON_STEP_LEFT].channel = IniFile::iniFileTou32(iniFilename, "look_step_left_button") - 1;
+  jsMapping.entry[BUTTON_STEP_LEFT].jsNumber = IniFile::iniFileTou32(iniFilename, "look_step_left_js_number");
 
-  jsMapping.entry[7].type = BUTTON;
-  jsMapping.entry[7].channel = IniFile::iniFileTou32(iniFilename, "look_step_right_button") - 1;
-  jsMapping.entry[7].jsNumber = IniFile::iniFileTou32(iniFilename, "look_step_right_js_number");
+  jsMapping.entry[BUTTON_STEP_RIGHT].type = BUTTON;
+  jsMapping.entry[BUTTON_STEP_RIGHT].channel = IniFile::iniFileTou32(iniFilename, "look_step_right_button") - 1;
+  jsMapping.entry[BUTTON_STEP_RIGHT].jsNumber = IniFile::iniFileTou32(iniFilename, "look_step_right_js_number");
 
-  jsMapping.entry[8].type = BUTTON;
-  jsMapping.entry[8].channel = IniFile::iniFileTou32(iniFilename, "bearing_on_button") - 1;
-  jsMapping.entry[8].jsNumber = IniFile::iniFileTou32(iniFilename, "bearing_on_js_number");
+  jsMapping.entry[BUTTON_BEARING_ON].type = BUTTON;
+  jsMapping.entry[BUTTON_BEARING_ON].channel = IniFile::iniFileTou32(iniFilename, "bearing_on_button") - 1;
+  jsMapping.entry[BUTTON_BEARING_ON].jsNumber = IniFile::iniFileTou32(iniFilename, "bearing_on_js_number");
 
-  jsMapping.entry[9].type = BUTTON;
-  jsMapping.entry[9].channel = IniFile::iniFileTou32(iniFilename, "bearing_off_button") - 1;
-  jsMapping.entry[9].jsNumber = IniFile::iniFileTou32(iniFilename, "bearing_off_js_number");
+  jsMapping.entry[BUTTON_BEARING_OFF].type = BUTTON;
+  jsMapping.entry[BUTTON_BEARING_OFF].channel = IniFile::iniFileTou32(iniFilename, "bearing_off_button") - 1;
+  jsMapping.entry[BUTTON_BEARING_OFF].jsNumber = IniFile::iniFileTou32(iniFilename, "bearing_off_js_number");
 
-  jsMapping.entry[10].type = BUTTON;
-  jsMapping.entry[10].channel = IniFile::iniFileTou32(iniFilename, "zoom_on_button") - 1;
-  jsMapping.entry[10].jsNumber = IniFile::iniFileTou32(iniFilename, "zoom_on_js_number");
+  jsMapping.entry[BUTTON_ZOOM_ON].type = BUTTON;
+  jsMapping.entry[BUTTON_ZOOM_ON].channel = IniFile::iniFileTou32(iniFilename, "zoom_on_button") - 1;
+  jsMapping.entry[BUTTON_ZOOM_ON].jsNumber = IniFile::iniFileTou32(iniFilename, "zoom_on_js_number");
 
-  jsMapping.entry[11].type = BUTTON;
-  jsMapping.entry[11].channel = IniFile::iniFileTou32(iniFilename, "zoom_off_button") - 1;
-  jsMapping.entry[11].jsNumber = IniFile::iniFileTou32(iniFilename, "zoom_off_js_number");
+  jsMapping.entry[BUTTON_ZOOM_OFF].type = BUTTON;
+  jsMapping.entry[BUTTON_ZOOM_OFF].channel = IniFile::iniFileTou32(iniFilename, "zoom_off_button") - 1;
+  jsMapping.entry[BUTTON_ZOOM_OFF].jsNumber = IniFile::iniFileTou32(iniFilename, "zoom_off_js_number");
 
-  jsMapping.entry[12].type = BUTTON;
-  jsMapping.entry[12].channel = IniFile::iniFileTou32(iniFilename, "look_left_button") - 1;
-  jsMapping.entry[12].jsNumber = IniFile::iniFileTou32(iniFilename, "look_left_js_number");
+  jsMapping.entry[BUTTON_LOOK_LEFT].type = BUTTON;
+  jsMapping.entry[BUTTON_LOOK_LEFT].channel = IniFile::iniFileTou32(iniFilename, "look_left_button") - 1;
+  jsMapping.entry[BUTTON_LOOK_LEFT].jsNumber = IniFile::iniFileTou32(iniFilename, "look_left_js_number");
 
-  jsMapping.entry[13].type = BUTTON;
-  jsMapping.entry[13].channel = IniFile::iniFileTou32(iniFilename, "look_right_button") - 1;
-  jsMapping.entry[13].jsNumber = IniFile::iniFileTou32(iniFilename, "look_right_js_number");
+  jsMapping.entry[BUTTON_LOOK_RIGHT].type = BUTTON;
+  jsMapping.entry[BUTTON_LOOK_RIGHT].channel = IniFile::iniFileTou32(iniFilename, "look_right_button") - 1;
+  jsMapping.entry[BUTTON_LOOK_RIGHT].jsNumber = IniFile::iniFileTou32(iniFilename, "look_right_js_number");
 
-  jsMapping.entry[14].type = BUTTON;
-  jsMapping.entry[14].channel = IniFile::iniFileTou32(iniFilename, "look_up_button") - 1;
-  jsMapping.entry[14].jsNumber = IniFile::iniFileTou32(iniFilename, "look_up_js_number");
+  jsMapping.entry[BUTTON_LOOK_UP].type = BUTTON;
+  jsMapping.entry[BUTTON_LOOK_UP].channel = IniFile::iniFileTou32(iniFilename, "look_up_button") - 1;
+  jsMapping.entry[BUTTON_LOOK_UP].jsNumber = IniFile::iniFileTou32(iniFilename, "look_up_js_number");
 
-  jsMapping.entry[15].type = BUTTON;
-  jsMapping.entry[15].channel = IniFile::iniFileTou32(iniFilename, "look_down_button") - 1;
-  jsMapping.entry[15].jsNumber = IniFile::iniFileTou32(iniFilename, "look_down_js_number");
+  jsMapping.entry[BUTTON_LOOK_DOWN].type = BUTTON;
+  jsMapping.entry[BUTTON_LOOK_DOWN].channel = IniFile::iniFileTou32(iniFilename, "look_down_button") - 1;
+  jsMapping.entry[BUTTON_LOOK_DOWN].jsNumber = IniFile::iniFileTou32(iniFilename, "look_down_js_number");
 
-  jsMapping.entry[16].type = BUTTON;
-  jsMapping.entry[16].channel = IniFile::iniFileTou32(iniFilename, "alarm_button") - 1;
-  jsMapping.entry[16].jsNumber = IniFile::iniFileTou32(iniFilename, "alarm_js_number");
+  jsMapping.entry[BUTTON_ALARM].type = BUTTON;
+  jsMapping.entry[BUTTON_ALARM].channel = IniFile::iniFileTou32(iniFilename, "alarm_button") - 1;
+  jsMapping.entry[BUTTON_ALARM].jsNumber = IniFile::iniFileTou32(iniFilename, "alarm_js_number");
 
-  jsMapping.entry[17].type = BUTTON;
-  jsMapping.entry[17].channel = IniFile::iniFileTou32(iniFilename, "ack_alarm_button") - 1;
-  jsMapping.entry[17].jsNumber = IniFile::iniFileTou32(iniFilename, "ack_alarm_js_number");
+  jsMapping.entry[BUTTON_ACK_ALARM].type = BUTTON;
+  jsMapping.entry[BUTTON_ACK_ALARM].channel = IniFile::iniFileTou32(iniFilename, "ack_alarm_button") - 1;
+  jsMapping.entry[BUTTON_ACK_ALARM].jsNumber = IniFile::iniFileTou32(iniFilename, "ack_alarm_js_number");
 
-  jsMapping.entry[18].type = BUTTON;
-  jsMapping.entry[18].channel = IniFile::iniFileTou32(iniFilename, "start_sail_button") - 1;
-  jsMapping.entry[18].jsNumber = IniFile::iniFileTou32(iniFilename, "start_sail_button_js_number");
+  jsMapping.entry[BUTTON_START_SAIL].type = BUTTON;
+  jsMapping.entry[BUTTON_START_SAIL].channel = IniFile::iniFileTou32(iniFilename, "start_sail_button") - 1;
+  jsMapping.entry[BUTTON_START_SAIL].jsNumber = IniFile::iniFileTou32(iniFilename, "start_sail_button_js_number");
 
-  jsMapping.entry[19].type = BUTTON;
-  jsMapping.entry[19].channel = IniFile::iniFileTou32(iniFilename, "accelerator_button") - 1;
-  jsMapping.entry[19].jsNumber = IniFile::iniFileTou32(iniFilename, "accelerator_button_js_number");
+  jsMapping.entry[BUTTON_ACCEL].type = BUTTON;
+  jsMapping.entry[BUTTON_ACCEL].channel = IniFile::iniFileTou32(iniFilename, "accelerator_button") - 1;
+  jsMapping.entry[BUTTON_ACCEL].jsNumber = IniFile::iniFileTou32(iniFilename, "accelerator_button_js_number");
 
 
   return jsMapping;

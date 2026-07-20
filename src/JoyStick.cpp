@@ -179,8 +179,18 @@ void JoyStick::AxisProcess(int aJsNumber, float aRawValue, int aAxisNumber, sJsC
 		    }
 		  else if (AXIS_RUDDER == j) //Rudder
 		    {
-		      calibrateValue = JoyStick::GetCalibrateValue(aRawValue, aJsConf.rudderRangeMin, aJsConf.rudderRangeMax, aJsConf.rudderRangeCenter, aJsConf.invertRudder);    
+		      calibrateValue = JoyStick::GetCalibrateValue(aRawValue, aJsConf.rudderRangeMin, aJsConf.rudderRangeMax, aJsConf.rudderRangeCenter, aJsConf.invertRudder);
 		      pModel->getOwnShip()->setWheel(calibrateValue*(pModel->getOwnShip()->getRudder().getDeltaMax()*180/M_PI));
+		    }
+		  else if (AXIS_BOW_THRUSTER == j) //Bow thruster
+		    {
+		      calibrateValue = JoyStick::GetCalibrateValue(aRawValue, aJsConf.bowThrusterRangeMin, aJsConf.bowThrusterRangeMax, aJsConf.bowThrusterRangeCenter, aJsConf.invertBowThruster);
+		      pModel->getOwnShip()->setBowThruster(calibrateValue);
+		    }
+		  else if (AXIS_STERN_THRUSTER == j) //Stern thruster
+		    {
+		      calibrateValue = JoyStick::GetCalibrateValue(aRawValue, aJsConf.sternThrusterRangeMin, aJsConf.sternThrusterRangeMax, aJsConf.sternThrusterRangeCenter, aJsConf.invertSternThruster);
+		      pModel->getOwnShip()->setSternThruster(calibrateValue);
 		    }
 		}
 	    }

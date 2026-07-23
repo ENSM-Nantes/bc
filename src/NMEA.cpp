@@ -445,7 +445,6 @@ void NMEA::Update(sTime& aTime)
   
   double rudderAngleP = -mOwnShip->getRudder("port").getDelta()*180/PI;
   
-  
   double engineRPM[] = {
     mOwnShip->getPropeller("port").getRevs(),  
     mOwnShip->getPropeller("starboard").getRevs() 
@@ -470,7 +469,11 @@ void NMEA::Update(sTime& aTime)
   irr::f32 windSpeed = mWind->getTrueSpeed();
   irr::f32 apparentWindDir = mWind->getApparentDir() * irr::core::RADTODEG;
   irr::f32 apparentWindSpd = mWind->getApparentSpd();
-
+  irr::f32 bowThruster = mOwnShip->getBowThruster()*100;
+  irr::f32 sternThruster = mOwnShip->getSternThruster()*100;
+  irr::f32 hasBowThruster = mOwnShip->getThruster().HasBowThruster() ? 1 : 0;
+  irr::f32 hasSternThruster = mOwnShip->getThruster().HasSternThruster() ? 1 : 0;  
+  
   int signRoll = 0;
   if (mOwnShip->getHull().getInvertRoll())
     signRoll = -1;
@@ -637,6 +640,12 @@ void NMEA::Update(sTime& aTime)
   case XDR:
     {
       snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$IIXDR,A,%.1f,D,ROLL,A,%.1f,D,PITCH", roll, pitch);
+      mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
+      break;
+    }
+  case THR:
+    {
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$IITHR,BOW,%.1f,%.1f,STERN,%.1f,%.1f", hasBowThruster, bowThruster, hasSternThruster, sternThruster);
       mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }

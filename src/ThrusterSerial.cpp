@@ -48,7 +48,7 @@ void ThrusterSerial::Send(bool aHasBowThruster, bool aHasSternThruster)
     return;
 
   std::string message = "THRUSTER,BOW=" + std::string(aHasBowThruster ? "1" : "0") +
-    ",STERN=" + std::string(aHasSternThruster ? "1" : "0") + "\r\n";
+    ",STERN=" + std::string(aHasSternThruster ? "1" : "0") + "$";
 
   try
     {

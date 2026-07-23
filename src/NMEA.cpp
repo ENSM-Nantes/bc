@@ -471,8 +471,8 @@ void NMEA::Update(sTime& aTime)
   irr::f32 apparentWindSpd = mWind->getApparentSpd();
   irr::f32 bowThruster = mOwnShip->getBowThruster()*100;
   irr::f32 sternThruster = mOwnShip->getSternThruster()*100;
-  irr::f32 hasBowThruster = mOwnShip->getThruster().HasBowThruster() ? 1 : 0;
-  irr::f32 hasSternThruster = mOwnShip->getThruster().HasSternThruster() ? 1 : 0;  
+  unsigned char hasBowThruster = mOwnShip->getThruster().HasBowThruster() ? 1 : 0;
+  unsigned char hasSternThruster = mOwnShip->getThruster().HasSternThruster() ? 1 : 0;  
   
   int signRoll = 0;
   if (mOwnShip->getHull().getInvertRoll())
@@ -645,7 +645,7 @@ void NMEA::Update(sTime& aTime)
     }
   case THR:
     {
-      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$IITHR,BOW,%.1f,%.1f,STERN,%.1f,%.1f", hasBowThruster, bowThruster, hasSternThruster, sternThruster);
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$IITHR,BOW,%d,%.1f,STERN,%d,%.1f", hasBowThruster, bowThruster, hasSternThruster, sternThruster);
       mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }

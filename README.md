@@ -10,6 +10,8 @@ For more information, see https://www.bridgecommand.co.uk
 
 Fork to SOMOS-Project (ENSM-Nantes), for more information see : https://somos-project.fr/
 
+Wiki : https://somos-project.fr/dokuwiki/doku.php
+
 ## To rebuild Irrlicht on Windows (optionnal to build BC)
 1) (optionnal) Get Irrlicht from SVN repo here: svn://svn.code.sf.net/p/irrlicht/code/trunk
 2) (optionnal) Replace in lib/irrlicht

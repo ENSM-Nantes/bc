@@ -147,7 +147,12 @@ void OwnShip::InitOwnShipParams(OwnShipData aOwnShipData, Json::Value aJsonRoot)
   else
     mIsTransparent = false;
   
-  mScaleFactor = aJsonRoot["mesh"]["scaleFactor"].asFloat();
+  irr::core::vector3df meshNativeExtent = mShipScene->getBoundingBox().getExtent();
+  if(meshNativeExtent.Z > 0)
+    mScaleFactor = mGeoParams.lPP / meshNativeExtent.Z;
+  else
+    mScaleFactor = 1.0f;
+
   float yCorrection = aJsonRoot["mesh"]["yCorrection"].asFloat();
   mAngleCorrection = aJsonRoot["mesh"]["angleCorrection"].asFloat();
   mHeightCorrection = yCorrection * mScaleFactor;

@@ -75,7 +75,19 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
       mShipScene = smgr->addMeshSceneNode(shipMesh, 0, IDFlag_IsPickable, irr::core::vector3df(0, 0, 0));
     }
 
-  mScaleFactor = rootJson["mesh"]["scaleFactor"].asFloat();
+  if (mShipScene != nullptr)
+    {
+      irr::core::vector3df meshNativeExtent = mShipScene->getBoundingBox().getExtent();
+      if(meshNativeExtent.Z > 0)
+        mScaleFactor = mGeoParams.lPP / meshNativeExtent.Z;
+      else
+        mScaleFactor = 1.0f;
+    }
+  else
+    {
+      mScaleFactor = 1.0f;
+    }
+
   float yCorrection = rootJson["mesh"]["yCorrection"].asFloat();
   mAngleCorrection = rootJson["mesh"]["angleCorrection"].asFloat();
   mName = rootJson["general"]["boatName"].asString();

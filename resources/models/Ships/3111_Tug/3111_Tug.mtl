@@ -214,6 +214,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass.bmp
 
 newmtl Material__1118
@@ -769,6 +770,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass.bmp
 
 newmtl Material__995
@@ -896,6 +898,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass.bmp
 
 newmtl Material__1076

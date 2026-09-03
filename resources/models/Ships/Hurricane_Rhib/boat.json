@@ -84,7 +84,7 @@
     "mesh": {
         "angleCorrection": 0,
         "makeTransparent": false,
-        "name": "Hurricane_Rhib.x",
+        "name": "Hurricane_Rhib.obj",
         "numberOfViews": 2,
         "scaleFactor": 1.0,
         "views": [
@@ -213,33 +213,5 @@
                 "endAngle": 360.0
             }
         ]
-    },
-    "thruster": {
-        "bow": false,
-        "stern": false,
-        "brand": "Thruster",
-        "type": "type",
-        "power": 0,
-        "rpmMax": 0,
-        "fuelCons": 0,
-        "propDiam": 0,
-        "thrustFactor": 0,
-        "nominalWake": 0,
-        "k0": 0,
-        "k1": 0,
-        "k2": 0,
-        "forwardRotDir": "right",
-        "pos": {
-            "bow": {
-                "x": 0,
-                "yPort": 0,
-                "yStbd": 0
-            },
-            "stern": {
-                "x": 0,
-                "yPort": 0,
-                "yStbd": 0
-            }
-        }
     }
 }

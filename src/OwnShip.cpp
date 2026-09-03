@@ -142,7 +142,7 @@ void OwnShip::InitOwnShipParams(OwnShipData aOwnShipData, Json::Value aJsonRoot)
   std::cout << "Initial Longitude : " << aOwnShipData.initialLong << std::endl;
 
   //Mesh
-  if(1 == aJsonRoot["mesh"]["makeTransparent"].asInt())
+  if(true == aJsonRoot["mesh"]["makeTransparent"].asBool())
     mIsTransparent = true;
   else
     mIsTransparent = false;

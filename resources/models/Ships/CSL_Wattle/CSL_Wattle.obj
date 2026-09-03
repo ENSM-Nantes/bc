@@ -1,7 +1,7 @@
 # File produced by Open Asset Import Library (http://www.assimp.sf.net)
 # (assimp v5.3.0)
 
-mtllib boat.mtl
+mtllib CSL_Wattle.mtl
 
 # 10468 vertex positions
 v -10.3164196 17.3784294 -58.5173264

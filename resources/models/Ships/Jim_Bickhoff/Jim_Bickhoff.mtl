@@ -1,0 +1,662 @@
+# Blender 4.4.3 MTL File: 'None'
+# www.blender.org
+
+newmtl Material__130_Material__53Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Deck.bmp
+map_d Deck.bmp
+
+newmtl Material__130_Material__56Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd super.bmp
+map_d super.bmp
+
+newmtl Material__141_Material__56Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd super.bmp
+map_d super.bmp
+
+newmtl Material__141_Material__84Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd floor.bmp
+map_d floor.bmp
+
+newmtl Material__192_Material__53Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Deck.bmp
+map_d Deck.bmp
+
+newmtl Material__192_Material__56Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd super.bmp
+map_d super.bmp
+
+newmtl Material__205_18_-_DefaultSub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Kd 0.588235 0.588235 0.588235
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+
+newmtl Material__205_Material__53Sub2
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Deck.bmp
+map_d Deck.bmp
+
+newmtl Material__205_Material__59Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd orange.bmp
+map_d orange.bmp
+
+newmtl Material__216_24_-_DefaultSub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Kd 0.890196 0.647059 0.062745
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+
+newmtl Material__216_Material__57Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd black.bmp
+map_d black.bmp
+
+newmtl Material__227_Material__55Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd green.bmp
+map_d green.bmp
+
+newmtl Material__227_Material__56Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd super.bmp
+map_d super.bmp
+
+newmtl Material__238_Material__55Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd green.bmp
+map_d green.bmp
+
+newmtl Material__238_Material__59Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd orange.bmp
+map_d orange.bmp
+
+newmtl Material__249_Material__55Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd green.bmp
+map_d green.bmp
+
+newmtl Material__249_Material__59Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd orange.bmp
+map_d orange.bmp
+
+newmtl Material__26
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd timber.bmp
+map_d timber.bmp
+
+newmtl Material__260_Material__55Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd green.bmp
+map_d green.bmp
+
+newmtl Material__260_Material__59Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd orange.bmp
+map_d orange.bmp
+
+newmtl Material__261
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Rosewood.bmp
+map_d Rosewood.bmp
+
+newmtl Material__275_Material__262Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Steering.bmp
+map_d Steering.bmp
+
+newmtl Material__275_Material__83Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd funnel.bmp
+map_d funnel.bmp
+
+newmtl Material__28
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd mahagony.bmp
+map_d mahagony.bmp
+
+newmtl Material__286_Material__262Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Steering.bmp
+map_d Steering.bmp
+
+newmtl Material__286_Material__83Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd funnel.bmp
+map_d funnel.bmp
+
+newmtl Material__297_Material__264Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd engineco.bmp
+map_d engineco.bmp
+
+newmtl Material__297_Material__83Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd funnel.bmp
+map_d funnel.bmp
+
+newmtl Material__30
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd oro.bmp
+map_d oro.bmp
+
+newmtl Material__308_Material__264Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd engineco.bmp
+map_d engineco.bmp
+
+newmtl Material__308_Material__83Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd funnel.bmp
+map_d funnel.bmp
+
+newmtl Material__319_Material__263Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd panel.bmp
+map_d panel.bmp
+
+newmtl Material__319_Material__83Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd funnel.bmp
+map_d funnel.bmp
+
+newmtl Material__320
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd chart.bmp
+map_d chart.bmp
+
+newmtl Material__359_Material__347Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd side2.bmp
+map_d side2.bmp
+
+newmtl Material__359_Material__348Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd wx-fax.bmp
+map_d wx-fax.bmp
+
+newmtl Material__371_Material__346Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd side.bmp
+map_d side.bmp
+
+newmtl Material__371_Material__360Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd echosoun.bmp
+map_d echosoun.bmp
+
+newmtl Material__383_Material__345Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd side.bmp
+map_d side.bmp
+
+newmtl Material__383_Material__372Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd echosoun.bmp
+map_d echosoun.bmp
+
+newmtl Material__398_Material__386Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Rosewood.bmp
+map_d Rosewood.bmp
+
+newmtl Material__398_Material__399Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Jason.bmp
+map_d Jason.bmp
+
+newmtl Material__411_Material__386Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Rosewood.bmp
+map_d Rosewood.bmp
+
+newmtl Material__411_Material__400Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd network.bmp
+map_d network.bmp
+
+newmtl Material__423_Material__386Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Rosewood.bmp
+map_d Rosewood.bmp
+
+newmtl Material__423_Material__412Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd name.bmp
+map_d name.bmp
+
+newmtl Material__52_Material__25Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Hull.bmp
+map_d Hull.bmp
+
+newmtl Material__52_Material__26Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd timber.bmp
+map_d timber.bmp
+
+newmtl Material__52_Material__53Sub2
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Deck.bmp
+map_d Deck.bmp
+
+newmtl Material__55
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd green.bmp
+map_d green.bmp
+
+newmtl Material__56
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd super.bmp
+map_d super.bmp
+
+newmtl Material__57
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd black.bmp
+map_d black.bmp
+
+newmtl Material__58
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Hull.bmp
+map_d Hull.bmp
+
+newmtl Material__59
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd orange.bmp
+map_d orange.bmp
+
+newmtl Material__70_Material__53Sub2
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd Deck.bmp
+map_d Deck.bmp
+
+newmtl Material__70_Material__56Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd super.bmp
+map_d super.bmp
+
+newmtl Material__70_Material__59Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd orange.bmp
+map_d orange.bmp
+
+newmtl Material__70_Material__84Sub3
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd floor.bmp
+map_d floor.bmp
+
+newmtl Material__82_Material__57Sub1
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd black.bmp
+map_d black.bmp
+
+newmtl Material__82_Material__59Sub2
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd orange.bmp
+map_d orange.bmp
+
+newmtl Material__82_Material__71Sub0
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd stack.bmp
+map_d stack.bmp
+
+newmtl Material__83
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd funnel.bmp
+map_d funnel.bmp
+
+newmtl PDX03_-_Default
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Kd 0.862745 0.686275 0.588235
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+
+newmtl PDX12_-_Default
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Kd 0.658824 0.772549 0.772549
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+
+newmtl PDX16_-_Default
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Kd 0.035294 0.027451 0.121569
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+
+newmtl PDX19_-_Default
+Ns 14.366961
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1

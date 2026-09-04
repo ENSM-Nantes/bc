@@ -7,7 +7,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd VHF.BMP
+map_Kd VHF.bmp
 
 newmtl x3ds_mat_Material__1_3390
 Kd 0.58431375 0.58431375 0.58431375
@@ -15,7 +15,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd BLACK.BMP
+map_Kd black.bmp
 
 newmtl x3ds_mat_Material__2_3404
 Kd 0.58431375 0.58431375 0.58431375
@@ -23,7 +23,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd WHITE.BMP
+map_Kd white.bmp
 
 newmtl x3ds_mat_Material__3_3405
 Kd 0.58431375 0.58431375 0.58431375
@@ -31,7 +31,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd WHITE.BMP
+map_Kd white.bmp
 
 newmtl x3ds_mat_Material__4_3403
 Kd 0.58431375 0.58431375 0.58431375
@@ -39,7 +39,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd WHITE.BMP
+map_Kd white.bmp
 
 newmtl x3ds_mat_Material__5_3396
 Kd 0.58431375 0.58431375 0.58431375
@@ -47,7 +47,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd WHITE.BMP
+map_Kd white.bmp
 
 newmtl x3ds_mat_Material__6_3401
 Kd 0.58431375 0.58431375 0.58431375
@@ -55,7 +55,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd WHITE.BMP
+map_Kd white.bmp
 
 newmtl x3ds_mat_Material__7_3399
 Kd 0.58431375 0.58431375 0.58431375
@@ -63,7 +63,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd WHITE.BMP
+map_Kd white.bmp
 
 newmtl x3ds_mat_Material__8_3395
 Kd 0.58431375 0.58431375 0.58431375
@@ -71,7 +71,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd WHITE.BMP
+map_Kd white.bmp
 
 newmtl x3ds_mat_Material__9_3392
 Kd 0.58431375 0.58431375 0.58431375
@@ -79,7 +79,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd WHITE.BMP
+map_Kd white.bmp
 
 newmtl x3ds_mat_Material__10_3397
 Kd 0.58431375 0.58431375 0.58431375
@@ -87,7 +87,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd WHITE.BMP
+map_Kd white.bmp
 
 newmtl x3ds_mat_Material__11_3393
 Kd 0.58431375 0.58431375 0.58431375
@@ -95,7 +95,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd WHITE.BMP
+map_Kd white.bmp
 
 newmtl x3ds_mat_Material__12_3391
 Kd 0.58431375 0.58431375 0.58431375
@@ -103,7 +103,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd WEAPON.BMP
+map_Kd WEAPON.bmp
 
 newmtl x3ds_mat_Material__13_3289
 Kd 0.58431375 0.58431375 0.58431375
@@ -111,7 +111,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd ROSEWOOD.BMP
+map_Kd Rosewood.bmp
 
 newmtl x3ds_mat_Material__14_3297
 Kd 0.58431375 0.58431375 0.58431375
@@ -119,7 +119,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd ENSIGN.BMP
+map_Kd ensign.bmp
 
 newmtl x3ds_mat_Material__15_3378
 Kd 0.58431375 0.58431375 0.58431375
@@ -127,7 +127,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd BOX.BMP
+map_Kd box.bmp
 
 newmtl x3ds_mat_Material__16_3377
 Kd 0.58431375 0.58431375 0.58431375
@@ -135,7 +135,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd SUPER.BMP
+map_Kd super.bmp
 
 newmtl x3ds_mat_Material__17_3361
 Kd 0.58431375 0.58431375 0.58431375
@@ -143,7 +143,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd TIMBER.BMP
+map_Kd timber.bmp
 
 newmtl x3ds_mat_Material__18_3365
 Kd 0.58431375 0.58431375 0.58431375
@@ -151,7 +151,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd LOGO.BMP
+map_Kd logo.bmp
 
 newmtl x3ds_mat_Material__19_3364
 Kd 0.58431375 0.58431375 0.58431375
@@ -159,7 +159,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd WHITE.BMP
+map_Kd white.bmp
 
 newmtl x3ds_mat_Material__20_3299
 Kd 0.58431375 0.58431375 0.58431375
@@ -167,7 +167,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd DECK.BMP
+map_Kd deck.bmp
 
 newmtl x3ds_mat_x06_-_Default
 Kd 0.588235319 0.588235319 0.588235319
@@ -175,6 +175,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
+d 0.5
 
 newmtl x3ds_mat_Material__21_3294
 Kd 0.58431375 0.58431375 0.58431375
@@ -182,7 +183,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd SUPER.BMP
+map_Kd super.bmp
 
 newmtl x3ds_mat_Material__22_3298
 Kd 0.58431375 0.58431375 0.58431375
@@ -190,7 +191,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd DECK_1.BMP
+map_Kd DECK_1.bmp
 
 newmtl x3ds_mat_Material__23_332
 Kd 0.58431375 0.58431375 0.58431375
@@ -198,7 +199,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd BLACK.BMP
+map_Kd black.bmp
 
 newmtl x3ds_mat_Material__24_3231
 Kd 0.58431375 0.58431375 0.58431375
@@ -206,7 +207,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd BOTT.BMP
+map_Kd bott.bmp
 
 newmtl x3ds_mat_Material__25_3215
 Kd 0.58431375 0.58431375 0.58431375
@@ -214,7 +215,7 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd PAINT.BMP
+map_Kd paint.bmp
 
 newmtl x3ds_mat_Material__26_330
 Kd 0.58431375 0.58431375 0.58431375
@@ -222,5 +223,5 @@ Ks 0.898039222 0.898039222 0.898039222
 Ke 0 0 0
 Ns 17
 illum 2
-map_Kd HULL.BMP
+map_Kd hull.bmp
 

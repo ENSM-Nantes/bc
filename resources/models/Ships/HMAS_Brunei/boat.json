@@ -83,25 +83,37 @@
     ],
     "mesh": {
         "angleCorrection": 0,
-        "makeTransparent": false,
+        "makeTransparent": true,
         "name": "HMAS_Brunei.x",
-        "numberOfViews": 2,
+        "numberOfViews": 4,
         "scaleFactor": 0.3038,
         "views": [
             [
                 0.0,
-                70,
+                56,
+                -30,
+                false
+            ],
+			            [
+                -40.0,
+                56,
+                -30,
+                false
+            ],
+			            [
+                40.0,
+                56,
                 -30,
                 false
             ],
             [
                 0.0,
-                100.0,
+                200.0,
                 0,
                 true
             ]
         ],
-        "yCorrection": -12
+        "yCorrection": -6
     },
     "propeller": {
         "backwardEff": 0.8999999761581421,

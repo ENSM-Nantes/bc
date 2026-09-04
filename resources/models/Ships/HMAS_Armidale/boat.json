@@ -83,14 +83,26 @@
     ],
     "mesh": {
         "angleCorrection": 0,
-        "makeTransparent": false,
+        "makeTransparent": true,
         "name": "HMAS_Armidale.x",
-        "numberOfViews": 2,
+        "numberOfViews": 4,
         "scaleFactor": 0.3038,
         "views": [
             [
                 0.0,
-                70,
+                56,
+                -30,
+                false
+            ],
+			            [
+                -40.0,
+                56,
+                -30,
+                false
+            ],
+			            [
+                40.0,
+                56,
                 -30,
                 false
             ],

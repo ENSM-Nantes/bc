@@ -8,8 +8,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd WHITE.BMP
-map_d WHITE.BMP
+map_Kd white.bmp
+map_d white.bmp
 
 newmtl x3ds_mat_Material__10_778
 Ns 85.241585
@@ -18,8 +18,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd CHROME.BMP
-map_d CHROME.BMP
+map_Kd Chrome.bmp
+map_d Chrome.bmp
 
 newmtl x3ds_mat_Material__11_829
 Ns 85.241585
@@ -28,8 +28,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__13_806
 Ns 85.241585
@@ -38,8 +38,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd BLACK.BMP
-map_d BLACK.BMP
+map_Kd Black.bmp
+map_d Black.bmp
 
 newmtl x3ds_mat_Material__16_797
 Ns 85.241585
@@ -48,8 +48,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__17_785
 Ns 85.241585
@@ -58,8 +58,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__18_784
 Ns 85.241585
@@ -68,8 +68,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd HULL.jpg
-map_d HULL.jpg
+map_Kd hull.JPG
+map_d hull.JPG
 
 newmtl x3ds_mat_Material__19_740
 Ns 85.241585
@@ -78,8 +78,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__1_756
 Ns 85.241585
@@ -88,8 +88,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__20_722
 Ns 85.241585
@@ -98,8 +98,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__21_710
 Ns 85.241585
@@ -108,8 +108,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__22_709
 Ns 85.241585
@@ -118,8 +118,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY-2.jpg
-map_d GREY-2.jpg
+map_Kd Grey-2.JPG
+map_d Grey-2.JPG
 
 newmtl x3ds_mat_Material__23_628
 Ns 85.241585
@@ -128,8 +128,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__24_616
 Ns 85.241585
@@ -138,8 +138,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__25_615
 Ns 85.241585
@@ -148,8 +148,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY-2.jpg
-map_d GREY-2.jpg
+map_Kd Grey-2.JPG
+map_d Grey-2.JPG
 
 newmtl x3ds_mat_Material__26_825
 Ns 85.241585
@@ -158,8 +158,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__27_809
 Ns 85.241585
@@ -168,8 +168,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__28_761
 Ns 85.241585
@@ -178,8 +178,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__29_611
 Ns 85.241585
@@ -188,8 +188,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__2_744
 Ns 85.241585
@@ -198,8 +198,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__30_597
 Ns 85.241585
@@ -208,8 +208,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__31_585
 Ns 85.241585
@@ -218,8 +218,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__32_813
 Ns 85.241585
@@ -228,8 +228,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__33_811
 Ns 85.241585
@@ -238,8 +238,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__34_763
 Ns 85.241585
@@ -248,8 +248,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__35_613
 Ns 85.241585
@@ -258,8 +258,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__36_599
 Ns 85.241585
@@ -268,8 +268,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__37_584
 Ns 85.241585
@@ -278,8 +278,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY-3.jpg
-map_d GREY-3.jpg
+map_Kd Grey-3.JPG
+map_d Grey-3.JPG
 
 newmtl x3ds_mat_Material__38_706
 Ns 85.241585
@@ -288,8 +288,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__39_708
 Ns 85.241585
@@ -298,8 +298,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__3_743
 Ns 85.241585
@@ -308,8 +308,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd NOSE.jpg
-map_d NOSE.jpg
+map_Kd nose.JPG
+map_d nose.JPG
 
 newmtl x3ds_mat_Material__40_693
 Ns 85.241585
@@ -318,8 +318,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY-3.jpg
-map_d GREY-3.jpg
+map_Kd Grey-3.JPG
+map_d Grey-3.JPG
 
 newmtl x3ds_mat_Material__41_560
 Ns 85.241585
@@ -328,8 +328,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd SCREEN.JPG
-map_d SCREEN.JPG
+map_Kd screen.JPG
+map_d screen.JPG
 
 newmtl x3ds_mat_Material__42_557
 Ns 85.241585
@@ -338,8 +338,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd SCREEN2.JPG
-map_d SCREEN2.JPG
+map_Kd screen2.JPG
+map_d screen2.JPG
 
 newmtl x3ds_mat_Material__43_552
 Ns 85.241585
@@ -348,8 +348,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__44_836
 Ns 85.241585
@@ -358,8 +358,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd LJ.BMP
-map_d LJ.BMP
+map_Kd lj.bmp
+map_d lj.bmp
 
 newmtl x3ds_mat_Material__45_758
 Ns 85.241585
@@ -368,8 +368,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd BLACK.BMP
-map_d BLACK.BMP
+map_Kd Black.bmp
+map_d Black.bmp
 
 newmtl x3ds_mat_Material__46_539
 Ns 85.241585
@@ -378,8 +378,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd DIAL2.BMP
-map_d DIAL2.BMP
+map_Kd dial2.bmp
+map_d dial2.bmp
 
 newmtl x3ds_mat_Material__47_524
 Ns 85.241585
@@ -388,8 +388,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd EXT.BMP
-map_d EXT.BMP
+map_Kd ext.bmp
+map_d ext.bmp
 
 newmtl x3ds_mat_Material__48_526
 Ns 85.241585
@@ -398,8 +398,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd CHROME.BMP
-map_d CHROME.BMP
+map_Kd Chrome.bmp
+map_d Chrome.bmp
 
 newmtl x3ds_mat_Material__49_525
 Ns 85.241585
@@ -408,8 +408,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd CHROME.BMP
-map_d CHROME.BMP
+map_Kd Chrome.bmp
+map_d Chrome.bmp
 
 newmtl x3ds_mat_Material__4_851
 Ns 85.241585
@@ -418,8 +418,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd LJ.BMP
-map_d LJ.BMP
+map_Kd lj.bmp
+map_d lj.bmp
 
 newmtl x3ds_mat_Material__50_511
 Ns 85.241585
@@ -428,8 +428,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd DIAL.BMP
-map_d DIAL.BMP
+map_Kd DIAL.bmp
+map_d DIAL.bmp
 
 newmtl x3ds_mat_Material__51_498
 Ns 85.241585
@@ -438,8 +438,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd VHF.JPG
-map_d VHF.JPG
+map_Kd vhf.JPG
+map_d vhf.JPG
 
 newmtl x3ds_mat_Material__52_527
 Ns 85.241585
@@ -448,8 +448,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd DIAL2.BMP
-map_d DIAL2.BMP
+map_Kd dial2.bmp
+map_d dial2.bmp
 
 newmtl x3ds_mat_Material__53_486
 Ns 85.241585
@@ -458,8 +458,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd SIDE.JPG
-map_d SIDE.JPG
+map_Kd side.JPG
+map_d side.JPG
 
 newmtl x3ds_mat_Material__54_485
 Ns 85.241585
@@ -468,8 +468,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd HF.JPG
-map_d HF.JPG
+map_Kd hf.jpg
+map_d hf.jpg
 
 newmtl x3ds_mat_Material__55_224
 Ns 85.241585
@@ -478,8 +478,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd BLACK.BMP
-map_d BLACK.BMP
+map_Kd Black.bmp
+map_d Black.bmp
 
 newmtl x3ds_mat_Material__56_217
 Ns 85.241585
@@ -488,8 +488,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd LEATHER.JPG
-map_d LEATHER.JPG
+map_Kd leather.jpg
+map_d leather.jpg
 
 newmtl x3ds_mat_Material__57_219
 Ns 85.241585
@@ -498,8 +498,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd CHROME.BMP
-map_d CHROME.BMP
+map_Kd Chrome.bmp
+map_d Chrome.bmp
 
 newmtl x3ds_mat_Material__58_218
 Ns 85.241585
@@ -508,8 +508,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd CHROME.BMP
-map_d CHROME.BMP
+map_Kd Chrome.bmp
+map_d Chrome.bmp
 
 newmtl x3ds_mat_Material__59_203
 Ns 85.241585
@@ -518,8 +518,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd CHROME.BMP
-map_d CHROME.BMP
+map_Kd Chrome.bmp
+map_d Chrome.bmp
 
 newmtl x3ds_mat_Material__5_837
 Ns 85.241585
@@ -528,8 +528,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd LJ.BMP
-map_d LJ.BMP
+map_Kd lj.bmp
+map_d lj.bmp
 
 newmtl x3ds_mat_Material__60_163
 Ns 85.241585
@@ -538,8 +538,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd LEATHER.JPG
-map_d LEATHER.JPG
+map_Kd leather.jpg
+map_d leather.jpg
 
 newmtl x3ds_mat_Material__61_145
 Ns 85.241585
@@ -548,8 +548,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd LEATHER.JPG
-map_d LEATHER.JPG
+map_Kd leather.jpg
+map_d leather.jpg
 
 newmtl x3ds_mat_Material__62_144
 Ns 85.241585
@@ -558,8 +558,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd LEATHER.JPG
-map_d LEATHER.JPG
+map_Kd leather.jpg
+map_d leather.jpg
 
 newmtl x3ds_mat_Material__63_143
 Ns 85.241585
@@ -568,8 +568,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd LEATHER.JPG
-map_d LEATHER.JPG
+map_Kd leather.jpg
+map_d leather.jpg
 
 newmtl x3ds_mat_Material__64_151
 Ns 85.241585
@@ -578,8 +578,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd CHROME.BMP
-map_d CHROME.BMP
+map_Kd Chrome.bmp
+map_d Chrome.bmp
 
 newmtl x3ds_mat_Material__65_152
 Ns 85.241585
@@ -588,8 +588,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd CHROME.BMP
-map_d CHROME.BMP
+map_Kd Chrome.bmp
+map_d Chrome.bmp
 
 newmtl x3ds_mat_Material__66_150
 Ns 85.241585
@@ -598,8 +598,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd CHROME.BMP
-map_d CHROME.BMP
+map_Kd Chrome.bmp
+map_d Chrome.bmp
 
 newmtl x3ds_mat_Material__67_149
 Ns 85.241585
@@ -608,8 +608,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd CHROME.BMP
-map_d CHROME.BMP
+map_Kd Chrome.bmp
+map_d Chrome.bmp
 
 newmtl x3ds_mat_Material__68_154
 Ns 85.241585
@@ -618,8 +618,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd CHROME.BMP
-map_d CHROME.BMP
+map_Kd Chrome.bmp
+map_d Chrome.bmp
 
 newmtl x3ds_mat_Material__69_147
 Ns 85.241585
@@ -628,8 +628,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd CHROME.BMP
-map_d CHROME.BMP
+map_Kd Chrome.bmp
+map_d Chrome.bmp
 
 newmtl x3ds_mat_Material__6_839
 Ns 85.241585
@@ -638,8 +638,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd LJ.BMP
-map_d LJ.BMP
+map_Kd lj.bmp
+map_d lj.bmp
 
 newmtl x3ds_mat_Material__70_148
 Ns 85.241585
@@ -648,8 +648,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd CHROME.BMP
-map_d CHROME.BMP
+map_Kd Chrome.bmp
+map_d Chrome.bmp
 
 newmtl x3ds_mat_Material__71_146
 Ns 85.241585
@@ -658,8 +658,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd CHROME.BMP
-map_d CHROME.BMP
+map_Kd Chrome.bmp
+map_d Chrome.bmp
 
 newmtl x3ds_mat_Material__72_155
 Ns 85.241585
@@ -668,8 +668,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd CHROME.BMP
-map_d CHROME.BMP
+map_Kd Chrome.bmp
+map_d Chrome.bmp
 
 newmtl x3ds_mat_Material__73_131
 Ns 85.241585
@@ -678,8 +678,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd ENSIGN.jpg
-map_d ENSIGN.jpg
+map_Kd ensign.JPG
+map_d ensign.JPG
 
 newmtl x3ds_mat_Material__74_25
 Ns 85.241585
@@ -688,8 +688,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd BLACK.BMP
-map_d BLACK.BMP
+map_Kd Black.bmp
+map_d Black.bmp
 
 newmtl x3ds_mat_Material__75_27
 Ns 85.241585
@@ -698,8 +698,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__76_153
 Ns 85.241585
@@ -708,8 +708,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__77_760
 Ns 85.241585
@@ -718,8 +718,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd BLACK.BMP
-map_d BLACK.BMP
+map_Kd Black.bmp
+map_d Black.bmp
 
 newmtl x3ds_mat_Material__78_759
 Ns 85.241585
@@ -728,8 +728,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd BLACK.BMP
-map_d BLACK.BMP
+map_Kd Black.bmp
+map_d Black.bmp
 
 newmtl x3ds_mat_Material__79_162
 Ns 85.241585
@@ -738,8 +738,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd LEATHER.JPG
-map_d LEATHER.JPG
+map_Kd leather.jpg
+map_d leather.jpg
 
 newmtl x3ds_mat_Material__7_838
 Ns 85.241585
@@ -748,8 +748,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd LJ2.BMP
-map_d LJ2.BMP
+map_Kd lj2.bmp
+map_d lj2.bmp
 
 newmtl x3ds_mat_Material__80_161
 Ns 85.241585
@@ -758,8 +758,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd LEATHER.JPG
-map_d LEATHER.JPG
+map_Kd leather.jpg
+map_d leather.jpg
 
 newmtl x3ds_mat_Material__81_805
 Ns 85.241585
@@ -768,8 +768,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd DECK.BMP
-map_d DECK.BMP
+map_Kd deck.bmp
+map_d deck.bmp
 
 newmtl x3ds_mat_Material__82_666
 Ns 85.241585
@@ -778,8 +778,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd BLACK.BMP
-map_d BLACK.BMP
+map_Kd Black.bmp
+map_d Black.bmp
 
 newmtl x3ds_mat_Material__83_664
 Ns 85.241585
@@ -788,8 +788,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__84_662
 Ns 85.241585
@@ -798,8 +798,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__85_650
 Ns 85.241585
@@ -808,8 +808,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__86_649
 Ns 85.241585
@@ -818,8 +818,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY-3.jpg
-map_d GREY-3.jpg
+map_Kd Grey-3.JPG
+map_d Grey-3.JPG
 
 newmtl x3ds_mat_Material__87_647
 Ns 85.241585
@@ -828,8 +828,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd BLACK.BMP
-map_d BLACK.BMP
+map_Kd Black.bmp
+map_d Black.bmp
 
 newmtl x3ds_mat_Material__88_645
 Ns 85.241585
@@ -838,8 +838,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__89_643
 Ns 85.241585
@@ -848,8 +848,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__8_225
 Ns 85.241585
@@ -858,8 +858,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd WHITE.BMP
-map_d WHITE.BMP
+map_Kd white.bmp
+map_d white.bmp
 
 newmtl x3ds_mat_Material__90_631
 Ns 85.241585
@@ -868,8 +868,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY.jpg
-map_d GREY.jpg
+map_Kd Grey.JPG
+map_d Grey.JPG
 
 newmtl x3ds_mat_Material__91_630
 Ns 85.241585
@@ -878,8 +878,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd GREY-3.jpg
-map_d GREY-3.jpg
+map_Kd Grey-3.JPG
+map_d Grey-3.JPG
 
 newmtl x3ds_mat_Material__92_405
 Ns 85.241585
@@ -888,8 +888,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd BLUE.BMP
-map_d BLUE.BMP
+map_Kd Blue.bmp
+map_d Blue.bmp
 
 newmtl x3ds_mat_Material__93_404
 Ns 85.241585
@@ -898,8 +898,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd BLUE.BMP
-map_d BLUE.BMP
+map_Kd Blue.bmp
+map_d Blue.bmp
 
 newmtl x3ds_mat_Material__94_833
 Ns 85.241585
@@ -908,8 +908,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd HEAD.BMP
-map_d HEAD.BMP
+map_Kd Head.bmp
+map_d Head.bmp
 
 newmtl x3ds_mat_Material__95_831
 Ns 85.241585
@@ -918,8 +918,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd SKIN.BMP
-map_d SKIN.BMP
+map_Kd skin.bmp
+map_d skin.bmp
 
 newmtl x3ds_mat_Material__96_406
 Ns 85.241585
@@ -928,8 +928,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd TOP.jpg
-map_d TOP.jpg
+map_Kd Top.JPG
+map_d Top.JPG
 
 newmtl x3ds_mat_Material__97_403
 Ns 85.241585
@@ -938,8 +938,8 @@ Ks 0.200000 0.200000 0.200000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd HEAD.BMP
-map_d HEAD.BMP
+map_Kd Head.bmp
+map_d Head.bmp
 
 newmtl x3ds_mat_Material__9_132
 Ns 85.241585

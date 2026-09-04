@@ -85,19 +85,31 @@
         "angleCorrection": 0,
         "makeTransparent": false,
         "name": "Hurricane_Rhib.obj",
-        "numberOfViews": 2,
+        "numberOfViews": 4,
         "scaleFactor": 1.0,
         "views": [
             [
                 0.0,
-                8.0,
-                -0.3499999940395355,
+                8,
+                -7,
+                false
+            ],
+			[
+                -4.0,
+                8,
+                -7,
+                false
+            ],
+			[
+                4.0,
+                8,
+				-7,
                 false
             ],
             [
                 0.0,
-                100.0,
-                0.6000000238418579,
+                50.0,
+                0,
                 true
             ]
         ],

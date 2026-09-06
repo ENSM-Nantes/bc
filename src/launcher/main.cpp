@@ -447,8 +447,13 @@ int main (int argc, char ** argv)
     irr::video::IVideoDriver* driver = device->getVideoDriver();
 
     irr::video::ITexture* imgTexture = driver->getTexture("media/logo.png");
-    irr::core::dimension2d<irr::u32> imgSize = imgTexture->getSize();
-
+    irr::core::dimension2d<irr::u32> imgSize;
+    if (imgTexture) {
+        imgSize = imgTexture->getSize();
+    } else {
+        // Fallback defaults
+        imgSize = irr::core::dimension2du(289, 100);
+    }
     driver->OnResize(irr::core::dimension2d<irr::u32>(imgSize.Width, graphicsHeight));
 
     #ifdef __APPLE__
@@ -494,7 +499,10 @@ int main (int argc, char ** argv)
     short x2 = x1 + bW;
     short y1, y2;
 
-    device->getGUIEnvironment()->addImage(imgTexture, irr::core::position2d<int>(bC, 10));
+    
+    if (imgTexture) {
+        device->getGUIEnvironment()->addImage(imgTexture, irr::core::position2d<int>(bC, 10));
+    }
 
     y1 = imgSize.Height +   2*bR; y2 = y1 + 2*bH; 
     irr::gui::IGUIButton* launchBC    = device->getGUIEnvironment()->addButton(irr::core::rect<irr::s32>(x1,y1,x2,y2),0,BC_BUTTON,language.translate("startBC").c_str()); //i18n

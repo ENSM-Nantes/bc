@@ -83,15 +83,15 @@
     ],
     "mesh": {
         "angleCorrection": 0,
-        "makeTransparent": false,
+        "makeTransparent": true,
         "name": "KVLCC2.obj",
-        "numberOfViews": 5,
+        "numberOfViews": 4,
         "scaleFactor": 1.0,
         "views": [
             [
                 0.0,
-                25.0,
-                70.0,
+                50.0,
+                0.0,
                 false
             ],
             [
@@ -104,12 +104,6 @@
                 -50.0,
                 40.0,
                 0.0,
-                false
-            ],
-            [
-                0.0,
-                50.0,
-                -50.0,
                 false
             ],
             [
@@ -119,7 +113,7 @@
                 true
             ]
         ],
-        "yCorrection": -5.800000190734863
+        "yCorrection": 0
     },
     "propeller": {
         "backwardEff": 0.699999988079071,

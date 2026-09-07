@@ -83,21 +83,21 @@
     ],
     "mesh": {
         "angleCorrection": 0,
-        "makeTransparent": false,
+        "makeTransparent": true,
         "name": "SmallTrawler.3ds",
         "numberOfViews": 2,
         "scaleFactor": 0.3,
         "views": [
             [
                 0.0,
-                8.0,
-                -0.3499999940395355,
+                15.0,
+                22,
                 false
             ],
             [
                 0.0,
-                100.0,
-                0.6000000238418579,
+                80.0,
+                0,
                 true
             ]
         ],

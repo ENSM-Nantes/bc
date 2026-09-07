@@ -82,7 +82,7 @@
         0
     ],
     "mesh": {
-        "angleCorrection": 0,
+        "angleCorrection": 180,
         "makeTransparent": false,
         "name": "Waverley.obj",
         "numberOfViews": 4,
@@ -91,24 +91,24 @@
             [
                 0.0,
                 39.0,
-                56.79999923706055,
+                -60,
                 false
             ],
             [
                 -15.5,
-                39.70000076293945,
-                60.0,
+                40,
+                -60.0,
                 false
             ],
             [
                 15.5,
-                39.70000076293945,
-                60.0,
+                40,
+                -60.0,
                 false
             ],
             [
                 0.0,
-                400.0,
+                300.0,
                 -30.0,
                 true
             ]

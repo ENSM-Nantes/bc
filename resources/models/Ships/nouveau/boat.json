@@ -83,21 +83,21 @@
     ],
     "mesh": {
         "angleCorrection": 0,
-        "makeTransparent": false,
+        "makeTransparent": true,
         "name": "nouveau.x",
         "numberOfViews": 2,
         "scaleFactor": 0.3,
         "views": [
             [
                 0.0,
-                8.0,
-                -0.3499999940395355,
+                17.0,
+                -2.5,
                 false
             ],
             [
                 0.0,
                 100.0,
-                0.6000000238418579,
+                0,
                 true
             ]
         ],

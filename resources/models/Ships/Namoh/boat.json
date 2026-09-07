@@ -83,15 +83,15 @@
     ],
     "mesh": {
         "angleCorrection": 0,
-        "makeTransparent": false,
+        "makeTransparent": true,
         "name": "Namoh.x",
         "numberOfViews": 2,
         "scaleFactor": 0.3,
         "views": [
             [
                 0.0,
-                8.0,
-                -0.3499999940395355,
+                18.0,
+                6,
                 false
             ],
             [

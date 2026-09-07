@@ -82,7 +82,7 @@
         0
     ],
     "mesh": {
-        "angleCorrection": 180,
+        "angleCorrection": 0,
         "makeTransparent": true,
         "name": "Aquarius_Tug.obj",
         "numberOfViews": 4,
@@ -91,19 +91,19 @@
             [
                 0.0,
                 11.149999618530273,
-                0.4000000059604645,
-                false
-            ],
-            [
-                5.0,
-                11.0,
-                0.4,
+                -0.4000000059604645,
                 false
             ],
             [
                 -5.0,
                 11.0,
-                0.4,
+                -0.4,
+                false
+            ],
+            [
+                5.0,
+                11.0,
+                -0.4,
                 false
             ],
             [

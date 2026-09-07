@@ -82,7 +82,7 @@
         0
     ],
     "mesh": {
-        "angleCorrection": 180,
+        "angleCorrection": 0,
         "makeTransparent": true,
         "name": "3111_Tug.obj",
         "numberOfViews": 4,
@@ -91,19 +91,19 @@
             [
                 0.0,
                 10.25,
-                -3.619999885559082,
-                false
-            ],
-            [
-                -1.7999999523162842,
-                10.199999809265137,
-                -3.200000047683716,
+                3.619999885559082,
                 false
             ],
             [
                 1.7999999523162842,
                 10.199999809265137,
-                -3.200000047683716,
+                3.200000047683716,
+                false
+            ],
+            [
+                -1.7999999523162842,
+                10.199999809265137,
+                3.200000047683716,
                 false
             ],
             [
@@ -192,48 +192,48 @@
         "numberOfLights": 4,
         "list": [
             {
-                "x": 2.0,
+                "x": -2.0,
                 "y": 10.5,
-                "z": 3.5,
+                "z": -3.5,
                 "range": 4,
                 "red": 0,
                 "green": 255,
                 "blue": 0,
-                "startAngle": -1.0,
-                "endAngle": 112.5
+                "startAngle": 179.0,
+                "endAngle": 292.5
             },
             {
-                "x": -2.0,
+                "x": 2.0,
                 "y": 10.5,
-                "z": 3.5,
+                "z": -3.5,
                 "range": 4,
                 "red": 255,
                 "green": 0,
                 "blue": 0,
-                "startAngle": 247.5,
-                "endAngle": 361.0
+                "startAngle": 427.5,
+                "endAngle": 541.0
             },
             {
                 "x": 0.0,
                 "y": 18.0,
-                "z": 2.5,
+                "z": -2.5,
                 "range": 4,
                 "red": 255,
                 "green": 255,
                 "blue": 255,
-                "startAngle": 247.5,
-                "endAngle": 472.5
+                "startAngle": 427.5,
+                "endAngle": 652.5
             },
             {
                 "x": 0.0,
                 "y": 12.0,
-                "z": 1.0,
+                "z": -1.0,
                 "range": 4,
                 "red": 255,
                 "green": 255,
                 "blue": 255,
-                "startAngle": 112.5,
-                "endAngle": 247.5
+                "startAngle": 292.5,
+                "endAngle": 427.5
             }
         ]
     },

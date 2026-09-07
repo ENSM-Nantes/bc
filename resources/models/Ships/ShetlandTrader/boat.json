@@ -82,7 +82,7 @@
         0
     ],
     "mesh": {
-        "angleCorrection": 180,
+        "angleCorrection": 0,
         "makeTransparent": false,
         "name": "ShetlandTrader.3ds",
         "numberOfViews": 4,
@@ -91,19 +91,19 @@
             [
                 0.0,
                 13.0,
-                -17,
+                17,
                 false
             ],
             [
-                -10.0,
+                10.0,
                 13.0,
-                -17.0,
+                17.0,
                 false
             ],
             [
-                10,
+                -10,
                 13.0,
-                -17.0,
+                17.0,
                 false
             ],
             [
@@ -192,37 +192,37 @@
         "numberOfLights": 5,
         "list": [
             {
-                "x": 4.25,
+                "x": -4.25,
                 "y": 9.25,
-                "z": 9.6,
+                "z": -9.6,
                 "range": 6,
                 "red": 0,
                 "green": 255,
                 "blue": 0,
-                "startAngle": -1.0,
-                "endAngle": 112.5
+                "startAngle": 179.0,
+                "endAngle": 292.5
             },
             {
-                "x": -4.05,
+                "x": 4.05,
                 "y": 9.25,
-                "z": 9.6,
+                "z": -9.6,
                 "range": 6,
                 "red": 255,
                 "green": 0,
                 "blue": 0,
-                "startAngle": 247.5,
-                "endAngle": 361.0
+                "startAngle": 427.5,
+                "endAngle": 541.0
             },
             {
                 "x": 0.0,
                 "y": 18.0,
-                "z": 16.05,
+                "z": -16.05,
                 "range": 6,
                 "red": 255,
                 "green": 255,
                 "blue": 255,
-                "startAngle": 247.5,
-                "endAngle": 472.5
+                "startAngle": 427.5,
+                "endAngle": 652.5
             },
             {
                 "x": 0.0,
@@ -232,19 +232,19 @@
                 "red": 255,
                 "green": 255,
                 "blue": 255,
-                "startAngle": 0.0,
-                "endAngle": 360.0
+                "startAngle": 180.0,
+                "endAngle": 540.0
             },
             {
                 "x": 0.0,
                 "y": 10.5,
-                "z": 2.3,
+                "z": -2.3,
                 "range": 6,
                 "red": 255,
                 "green": 255,
                 "blue": 255,
-                "startAngle": 112.5,
-                "endAngle": 247.5
+                "startAngle": 292.5,
+                "endAngle": 427.5
             }
         ]
     },

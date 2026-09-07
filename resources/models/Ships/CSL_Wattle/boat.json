@@ -82,7 +82,7 @@
         0
     ],
     "mesh": {
-        "angleCorrection": 180,
+        "angleCorrection": 0,
         "makeTransparent": true,
         "name": "CSL_Wattle.obj",
         "numberOfViews": 4,
@@ -91,25 +91,25 @@
             [
                 0.0,
                 37.16999816894531,
-                29.0,
-                false
-            ],
-            [
-                33.0,
-                37.16999816894531,
-                29.0,
+                -29.0,
                 false
             ],
             [
                 -33.0,
                 37.16999816894531,
-                29.0,
+                -29.0,
+                false
+            ],
+            [
+                33.0,
+                37.16999816894531,
+                -29.0,
                 false
             ],
             [
                 0.0,
                 150.0,
-                29.0,
+                -29.0,
                 true
             ]
         ],
@@ -192,48 +192,48 @@
         "numberOfLights": 4,
         "list": [
             {
-                "x": 17.4,
+                "x": -17.4,
                 "y": 32.1,
-                "z": -25.5,
+                "z": 25.5,
                 "range": 6,
                 "red": 0,
                 "green": 255,
                 "blue": 0,
-                "startAngle": -1.0,
-                "endAngle": 112.5
+                "startAngle": 179.0,
+                "endAngle": 292.5
             },
             {
-                "x": -17.4,
+                "x": 17.4,
                 "y": 32.1,
-                "z": -25.5,
+                "z": 25.5,
                 "range": 6,
                 "red": 255,
                 "green": 0,
                 "blue": 0,
-                "startAngle": 247.5,
-                "endAngle": 361.0
+                "startAngle": 427.5,
+                "endAngle": 541.0
             },
             {
                 "x": 0.0,
                 "y": 61.9,
-                "z": -34.6,
+                "z": 34.6,
                 "range": 6,
                 "red": 255,
                 "green": 255,
                 "blue": 255,
-                "startAngle": 247.5,
-                "endAngle": 472.5
+                "startAngle": 427.5,
+                "endAngle": 652.5
             },
             {
                 "x": 0.0,
                 "y": 22.9,
-                "z": -49.9,
+                "z": 49.9,
                 "range": 6,
                 "red": 255,
                 "green": 255,
                 "blue": 255,
-                "startAngle": 112.5,
-                "endAngle": 247.5
+                "startAngle": 292.5,
+                "endAngle": 427.5
             }
         ]
     },

@@ -86,7 +86,7 @@
         "makeTransparent": true,
         "name": "Namoh.x",
         "numberOfViews": 2,
-        "scaleFactor": 0.3,
+        "scaleFactor": 0,
         "views": [
             [
                 0.0,

@@ -78,7 +78,10 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
   if (mShipScene != nullptr)
     {
       irr::core::vector3df meshNativeExtent = mShipScene->getBoundingBox().getExtent();
-      if(meshNativeExtent.Z > 0)
+      float jsonScaleFactor = rootJson["mesh"]["scaleFactor"].asFloat();
+      if (jsonScaleFactor != 0)
+        mScaleFactor = jsonScaleFactor;
+      else if(meshNativeExtent.Z > 0)
         mScaleFactor = mGeoParams.lPP / meshNativeExtent.Z;
       else
         mScaleFactor = 1.0f;

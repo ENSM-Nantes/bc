@@ -157,7 +157,7 @@
 		"makeTransparent" : true,
 		"name" : "AliceUpjohn.x",
 		"numberOfViews" : 4,
-		"scaleFactor" : 0.30000001192092896,
+		"scaleFactor" : 0,
 		"views" : 
 		[
 			[

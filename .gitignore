@@ -59,10 +59,9 @@ bin/linux/iniEditor/
 bin/linux/launcher/
 bin/linux/multiplayerHub/
 bin/linux/repeater/
-install/createDeb/bridgecommand-somos-5.10.3-SOMOS.deb
-install/createDeb/bridgecommand-somos/
+install/bc_installer_linux/bridgecommand-somos
 lib/irrlicht/source/Irrlicht/libIrrlicht.so.1.9.0
 TAGS
-resources/models/Ownship/SC-Connector/*
-resources/models/Ownship/CopenhagenFerry/*
+resources/models/Ships/SC-Connector/*
+resources/models/Ships/CopenhagenFerry/*
 

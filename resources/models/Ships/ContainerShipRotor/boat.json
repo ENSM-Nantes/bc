@@ -113,7 +113,7 @@
                 true
             ]
         ],
-        "yCorrection": -1.0
+        "yCorrection": -5.0
     },
     "propeller": {
         "backwardEff": 0.6700000166893005,

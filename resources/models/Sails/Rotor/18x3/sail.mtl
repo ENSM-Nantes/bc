@@ -9,7 +9,6 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 illum 2
 map_Kd ensm_fill.png
-map_d ensm_fill.png
 
 newmtl metalblanc
 Ns 250.000000

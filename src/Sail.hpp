@@ -52,6 +52,7 @@ class Sail
 
   //Mesh Sails
   irr::scene::IMeshSceneNode* mSailsScene[SAILS_MAX];
+  int mCountMeshScene;
 
   //Rotor
   bool mOnOff;

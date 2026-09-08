@@ -16,6 +16,8 @@ Sail::Sail(void)
   mSailsType = "";
   mSailsSize = "";
   memset(mSailsPos, 0, sizeof(mSailsPos));
+  memset(mSailsScene, 0, sizeof(mSailsScene));
+  mCountMeshScene = 0;
   mSailVarY = 0;
   mSailVarX = 0;
   mStw = {0};
@@ -142,13 +144,11 @@ void Sail::Init(int aSailsCount, std::string aSailsType, std::string aSailsSize,
 
 void Sail::SetMeshScene(irr::scene::IMeshSceneNode *aMeshScene)
 {
-  static int gCountMeshScene = 0;
+  if(mCountMeshScene < SAILS_MAX)
+    mSailsScene[mCountMeshScene] = aMeshScene;
 
-  if(gCountMeshScene < SAILS_MAX)
-    mSailsScene[gCountMeshScene] = aMeshScene;
-  
-  gCountMeshScene++;
-  
+  mCountMeshScene++;
+
 }
 
 irr::scene::IMeshSceneNode* Sail::GetMeshScene(unsigned char aIndex)

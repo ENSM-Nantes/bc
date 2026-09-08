@@ -18,6 +18,7 @@
 #define __OWNSHIP_HPP_INCLUDED__
 
 #include <vector>
+#include <ctime> //To rate limit increase/decreaseBowThruster & co when a button is held down
 #include "irrlicht.h"
 #include "Sail.hpp"
 #include "Ship.hpp"
@@ -52,13 +53,26 @@ public:
   irr::f32 getRadarTilt() const;
   irr::f32 getAngleCorrection() const;
   void setWheel(irr::f32 aWheel);      // Set the wheel (-ve is port, +ve is stbd). Clamps to +-30 DEE. Set force to true to apply even if follow up rudder has failed
+  void increaseWheel();                // Step the wheel towards stbd. Rate limited, so safe to call every frame while a button is held
+  void decreaseWheel();                // Step the wheel towards port. Rate limited, so safe to call every frame while a button is held
   //void setRudder(irr::f32 aDelta);
   void setPortEngine(irr::f32);                                 // Set the engine, (-ve astern, +ve ahead), range is +-1. This method limits the range applied
   void setStbdEngine(irr::f32);                                 // Set the engine, (-ve astern, +ve ahead), range is +-1. This method limits the range applied
   void setRateOfTurn(irr::f32 rateOfTurn);                      // Sets the rate of turn (used when controlled as secondary)
 
+  void setBowThruster(irr::f32);                                // Set the bow thruster, (-ve port, +ve stbd), range is +-1. This method limits the range applied
+  void setSternThruster(irr::f32);                              // Set the stern thruster, (-ve port, +ve stbd), range is +-1. This method limits the range applied
+
+  void increaseBowThruster();                                   // Step the bow thruster towards +1 (stbd). Rate limited, so safe to call every frame while a button is held
+  void decreaseBowThruster();                                   // Step the bow thruster towards -1 (port). Rate limited, so safe to call every frame while a button is held
+  void increaseSternThruster();                                 // Step the stern thruster towards +1 (stbd). Rate limited, so safe to call every frame while a button is held
+  void decreaseSternThruster();                                 // Step the stern thruster towards -1 (port). Rate limited, so safe to call every frame while a button is held
+
   irr::f32 getPortEngine() const; //-1 to 1
   irr::f32 getStbdEngine() const; //-1 to 1
+
+  irr::f32 getBowThruster() const; //-1 to 1
+  irr::f32 getSternThruster() const; //-1 to 1
 
   irr::f32 getWheel() const;            // DEE -30 to +30
   irr::f32 getPitch() const;
@@ -108,6 +122,11 @@ private:
                
   irr::f32 mPortEngine;       //-1 to + 1
   irr::f32 mStbdEngine;       //-1 to + 1
+  irr::f32 mBowThruster;   //-1 to 1
+  irr::f32 mSternThruster; //-1 to 1
+  clock_t mBowThrusterLastStepped;   //Rate limits increase/decreaseBowThruster so they can be called every frame while a button is held
+  clock_t mSternThrusterLastStepped; //Rate limits increase/decreaseSternThruster so they can be called every frame while a button is held
+  clock_t mWheelLastStepped;         //Rate limits increase/decreaseWheel so they can be called every frame while a button is held
   irr::f32 mWheel;             //-30 to + 30
   bool mSingleEngine;
 

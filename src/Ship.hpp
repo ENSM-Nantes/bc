@@ -31,6 +31,7 @@
 #include "Terrain.hpp"
 #include "Sail.hpp"
 #include "Engine.hpp"
+#include "Thruster.hpp"
 
 enum eControlMode
   {
@@ -77,7 +78,6 @@ public:
   std::string getName() const;
   void setName(std::string aName);
   float getDepth(Terrain *aTerrain) const;
-  int InitShipParams(const std::string& aType);
   int InitShipParams(const Json::Value& aJsonRoot);
   double getM(void);
   double getMY(void);
@@ -104,6 +104,7 @@ public:
   unsigned char getNumberRud(void);
   Sail& getSail(void);
   Engine& getEngine(std::string aNEngine = "mono");
+  Thruster& getThruster(void);
   
   //Print Ship params
   void PrintGeoParams(void);
@@ -153,7 +154,8 @@ protected:
   Rudder mRudder[2];
   Sail mSails;
   Engine mEngine[2];
-
+  Thruster mThruster;
+  
   //Global informations
   unsigned int mMmsi;
   unsigned int mImo;

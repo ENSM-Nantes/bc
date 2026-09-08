@@ -94,10 +94,6 @@ typedef struct{
   float rudder;
   float portEng;
   float stbdEng;
-  float portSch;
-  float stbdSch;
-  float portThrust;
-  float stbdThrust;
   float bowThrust;
   float sternThrust;
 }sCtrlsInf;

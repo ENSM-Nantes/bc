@@ -83,21 +83,21 @@
     ],
     "mesh": {
         "angleCorrection": 0,
-        "makeTransparent": false,
+        "makeTransparent": true,
         "name": "SmallTrawler.3ds",
         "numberOfViews": 2,
-        "scaleFactor": 0.3,
+        "scaleFactor": 0,
         "views": [
             [
                 0.0,
-                8.0,
-                -0.3499999940395355,
+                15.0,
+                22,
                 false
             ],
             [
                 0.0,
-                100.0,
-                0.6000000238418579,
+                80.0,
+                0,
                 true
             ]
         ],
@@ -224,5 +224,33 @@
                 "endAngle": 247.5
             }
         ]
+    },
+    "thruster": {
+        "bow": false,
+        "stern": false,
+        "brand": "Thruster",
+        "type": "type",
+        "power": 0,
+        "rpmMax": 0,
+        "fuelCons": 0,
+        "propDiam": 0,
+        "thrustFactor": 0,
+        "nominalWake": 0,
+        "k0": 0,
+        "k1": 0,
+        "k2": 0,
+        "forwardRotDir": "right",
+        "pos": {
+            "bow": {
+                "x": 0,
+                "yPort": 0,
+                "yStbd": 0
+            },
+            "stern": {
+                "x": 0,
+                "yPort": 0,
+                "yStbd": 0
+            }
+        }
     }
 }

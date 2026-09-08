@@ -304,12 +304,12 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
             if (id == GUIMain::GUI_ID_BOWTHRUSTER_SCROLL_BAR)
             {
                 irr::f32 value = ((irr::gui::IGUIScrollBar *)event.GUIEvent.Caller)->getPos() / 100.0; // Convert to from +-100 to +-1
-                //model->setBowThruster(value);
+                model->getOwnShip()->setBowThruster(value);
             }
             if (id == GUIMain::GUI_ID_STERNTHRUSTER_SCROLL_BAR)
             {
                 irr::f32 value = ((irr::gui::IGUIScrollBar *)event.GUIEvent.Caller)->getPos() / 100.0; // Convert to from +-100 to +-1
-                //model->setSternThruster(value);
+                model->getOwnShip()->setSternThruster(value);
             }
 
             if (id == GUIMain::GUI_ID_RADAR_GAIN_SCROLL_BAR)
@@ -460,6 +460,36 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
             if (id == GUIMain::GUI_ID_RADAR_EBL_DOWN_BUTTON)
             {
                 model->getRadarCalculation()->decreaseEBLRange();
+            }
+
+            if (id == GUIMain::GUI_ID_BOWTHRUSTER_LEFT_BUTTON)
+            {
+                model->getOwnShip()->decreaseBowThruster();
+            }
+
+            if (id == GUIMain::GUI_ID_BOWTHRUSTER_RIGHT_BUTTON)
+            {
+                model->getOwnShip()->increaseBowThruster();
+            }
+
+            if (id == GUIMain::GUI_ID_STERNTHRUSTER_LEFT_BUTTON)
+            {
+                model->getOwnShip()->decreaseSternThruster();
+            }
+
+            if (id == GUIMain::GUI_ID_STERNTHRUSTER_RIGHT_BUTTON)
+            {
+                model->getOwnShip()->increaseSternThruster();
+            }
+
+            if (id == GUIMain::GUI_ID_NFU_PORT_BUTTON)
+            {
+                model->getOwnShip()->decreaseWheel();
+            }
+
+            if (id == GUIMain::GUI_ID_NFU_STBD_BUTTON)
+            {
+                model->getOwnShip()->increaseWheel();
             }
 
             if (id == GUIMain::GUI_ID_RADAR_INCREASE_X_BUTTON)
@@ -939,16 +969,24 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
                     break;
 
 
-                case irr::KEY_KEY_J:
-		    break;
-
-                case irr::KEY_KEY_L:
+                // Keyboard control of thrusters
+                case irr::KEY_KEY_U:
+		  model->getOwnShip()->decreaseBowThruster();
                     break;
 
                 case irr::KEY_KEY_I:
+		  model->getOwnShip()->increaseBowThruster();
                     break;
 
-                case irr::KEY_KEY_K:
+                case irr::KEY_KEY_J:
+		  model->getOwnShip()->decreaseSternThruster();
+		    break;
+
+		case irr::KEY_KEY_K:
+		  model->getOwnShip()->increaseSternThruster();
+		    break;
+
+                case irr::KEY_KEY_L:
 		  
 		  acc++;
 		  model->setAccelerator(acc);
@@ -1033,7 +1071,7 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
                 case irr::KEY_KEY_B:
 		   model->getOwnShip()->setWheel(model->getOwnShip()->getWheel() + 1);
 		  break;
-                
+
 
                 default:
                     // don't do anything

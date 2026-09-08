@@ -75,7 +75,22 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
       mShipScene = smgr->addMeshSceneNode(shipMesh, 0, IDFlag_IsPickable, irr::core::vector3df(0, 0, 0));
     }
 
-  mScaleFactor = rootJson["mesh"]["scaleFactor"].asFloat();
+  if (mShipScene != nullptr)
+    {
+      irr::core::vector3df meshNativeExtent = mShipScene->getBoundingBox().getExtent();
+      float jsonScaleFactor = rootJson["mesh"]["scaleFactor"].asFloat();
+      if (jsonScaleFactor != 0)
+        mScaleFactor = jsonScaleFactor;
+      else if(meshNativeExtent.Z > 0)
+        mScaleFactor = mGeoParams.lPP / meshNativeExtent.Z;
+      else
+        mScaleFactor = 1.0f;
+    }
+  else
+    {
+      mScaleFactor = 1.0f;
+    }
+
   float yCorrection = rootJson["mesh"]["yCorrection"].asFloat();
   mAngleCorrection = rootJson["mesh"]["angleCorrection"].asFloat();
   mName = rootJson["general"]["boatName"].asString();
@@ -127,6 +142,29 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
   mShipScene->setName(aInternalName.c_str());
 
   mSolidHeight = mScaleFactor * 5.f * mHeight;
+
+  /*Load Sails*/
+  if(mSails.GetCount() > 0)
+    {
+      std::string sailMeshFile = basePath + "../../Sails/" + mSails.GetType() + "/" + mSails.GetSize() + "/" + "sail.obj";
+
+      for (int i = 0; i < mSails.GetCount(); i++)
+	{
+	  irr::scene::IMesh* sailMesh = smgr->getMesh(sailMeshFile.c_str());
+	  mSails.SetMeshScene(smgr->addMeshSceneNode(sailMesh));
+	  mSails.GetMeshScene(i)->setParent(mShipScene);
+	  mSails.GetMeshScene(i)->setPosition(irr::core::vector3df(mSails.GetPos()[i][0], mSails.GetPos()[i][1], mSails.GetPos()[i][2]));
+	  mSails.GetMeshScene(i)->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
+
+	  if(mSails.GetMeshScene(i)->getMaterialCount() > 0)
+	    {
+	      for (unsigned int mat = 0; mat < mSails.GetMeshScene(i)->getMaterialCount(); mat++)
+		{
+		  mSails.GetMeshScene(i)->getMaterial(mat).ColorMaterial = irr::video::ECM_DIFFUSE_AND_AMBIENT;
+		}
+	    }
+	}
+    }
 
   //Set lighting to use diffuse and ambient, so lighting of untextured models works
   if(mShipScene->getMaterialCount()>0) {

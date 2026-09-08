@@ -240,6 +240,8 @@
     <ClCompile Include="..\Sound.cpp" />
     <ClCompile Include="..\StartupEventReceiver.cpp" />
     <ClCompile Include="..\Terrain.cpp" />
+    <ClCompile Include="..\Thruster.cpp" />
+    <ClCompile Include="..\ThrusterSerial.cpp" />
     <ClCompile Include="..\Tide.cpp" />
     <ClCompile Include="..\Update.cpp" />
     <ClCompile Include="..\Utilities.cpp" />
@@ -314,6 +316,8 @@
     <ClInclude Include="..\Sound.hpp" />
     <ClInclude Include="..\StartupEventReceiver.hpp" />
     <ClInclude Include="..\Terrain.hpp" />
+    <ClInclude Include="..\Thruster.hpp" />
+    <ClInclude Include="..\ThrusterSerial.hpp" />
     <ClInclude Include="..\Tide.hpp" />
     <ClInclude Include="..\Time.hpp" />
     <ClInclude Include="..\Update.hpp" />

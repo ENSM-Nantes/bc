@@ -86,29 +86,29 @@
         "makeTransparent": true,
         "name": "Smit_Rotterdam.x",
         "numberOfViews": 4,
-        "scaleFactor": 0.3,
+        "scaleFactor": 0,
         "views": [
             [
                 0.0,
-                10.25,
-                3.619999885559082,
+                63,
+                15,
                 false
             ],
             [
-                -1.7999999523162842,
-                10.199999809265137,
-                3.200000047683716,
+                -10,
+                63,
+                15,
                 false
             ],
             [
-                1.7999999523162842,
-                10.199999809265137,
-                3.200000047683716,
+                10,
+                63,
+                15,
                 false
             ],
             [
                 0.0,
-                350.0,
+                150.0,
                 0.0,
                 true
             ]
@@ -247,5 +247,33 @@
                 "endAngle": 472.5
             }
         ]
+    },
+    "thruster": {
+        "bow": false,
+        "stern": false,
+        "brand": "Thruster",
+        "type": "type",
+        "power": 0,
+        "rpmMax": 0,
+        "fuelCons": 0,
+        "propDiam": 0,
+        "thrustFactor": 0,
+        "nominalWake": 0,
+        "k0": 0,
+        "k1": 0,
+        "k2": 0,
+        "forwardRotDir": "right",
+        "pos": {
+            "bow": {
+                "x": 0,
+                "yPort": 0,
+                "yStbd": 0
+            },
+            "stern": {
+                "x": 0,
+                "yPort": 0,
+                "yStbd": 0
+            }
+        }
     }
 }

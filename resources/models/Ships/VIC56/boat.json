@@ -85,25 +85,31 @@
         "angleCorrection": 0,
         "makeTransparent": false,
         "name": "VIC56.3ds",
-        "numberOfViews": 3,
-        "scaleFactor": 0.30000001192092896,
+        "numberOfViews": 4,
+        "scaleFactor": 0,
         "views": [
             [
-                3.700000047683716,
-                24.049999237060547,
-                -9.800000190734863,
+                0,
+                24,
+                -9,
                 false
             ],
             [
-                -3.700000047683716,
-                24.049999237060547,
-                -9.800000190734863,
+                -10,
+                24,
+                -9,
+                false
+            ],
+			            [
+                10,
+                24,
+                -9,
                 false
             ],
             [
                 0.0,
-                350.0,
-                -9.800000190734863,
+                150.0,
+                0,
                 true
             ]
         ],
@@ -185,5 +191,33 @@
     "lights": {
         "numberOfLights": 0,
         "list": []
+    },
+    "thruster": {
+        "bow": false,
+        "stern": false,
+        "brand": "Thruster",
+        "type": "type",
+        "power": 0,
+        "rpmMax": 0,
+        "fuelCons": 0,
+        "propDiam": 0,
+        "thrustFactor": 0,
+        "nominalWake": 0,
+        "k0": 0,
+        "k1": 0,
+        "k2": 0,
+        "forwardRotDir": "right",
+        "pos": {
+            "bow": {
+                "x": 0,
+                "yPort": 0,
+                "yStbd": 0
+            },
+            "stern": {
+                "x": 0,
+                "yPort": 0,
+                "yStbd": 0
+            }
+        }
     }
 }

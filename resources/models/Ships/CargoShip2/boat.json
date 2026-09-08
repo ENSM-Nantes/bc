@@ -146,7 +146,7 @@
         "makeTransparent": false,
         "name": "CargoShip2.x",
         "numberOfViews": 4,
-        "scaleFactor": 0.30379998683929443,
+        "scaleFactor": 0,
         "views": [
             [
                 0.0,
@@ -168,7 +168,7 @@
             ],
             [
                 0.0,
-                400.0,
+                600.0,
                 0.0,
                 true
             ]
@@ -247,5 +247,33 @@
         ],
         "size": "xxx",
         "type": "xxx"
+    },
+    "thruster": {
+        "bow": false,
+        "stern": false,
+        "brand": "Thruster",
+        "type": "type",
+        "power": 0,
+        "rpmMax": 0,
+        "fuelCons": 0,
+        "propDiam": 0,
+        "thrustFactor": 0,
+        "nominalWake": 0,
+        "k0": 0,
+        "k1": 0,
+        "k2": 0,
+        "forwardRotDir": "right",
+        "pos": {
+            "bow": {
+                "x": 0,
+                "yPort": 0,
+                "yStbd": 0
+            },
+            "stern": {
+                "x": 0,
+                "yPort": 0,
+                "yStbd": 0
+            }
+        }
     }
 }

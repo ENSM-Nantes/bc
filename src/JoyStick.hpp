@@ -6,8 +6,8 @@
 struct libevdev;
 
 #define MAX_JS (5)
-#define MAX_JS_ENTRY (20)
-#define MAX_JS_AXIS (3)
+#define MAX_JS_ENTRY (22)
+#define MAX_JS_AXIS (5)
 #define MAX_JS_POV (0)
 #define MAX_JS_BUTTON (MAX_JS_ENTRY - MAX_JS_AXIS - MAX_JS_POV)
 
@@ -16,6 +16,8 @@ enum eJsEntryChannel
     AXIS_PORT = 0x00,
     AXIS_STBD,
     AXIS_RUDDER,
+    AXIS_BOW_THRUSTER,
+    AXIS_STERN_THRUSTER,
     BUTTON_HORN,
     BUTTON_CHANGE_VIEW,
     BUTTON_CHANGE_LOCK_VIEW,
@@ -66,9 +68,17 @@ struct sJsConf
   float rudderRangeMin;
   float rudderRangeMax;
   float rudderRangeCenter;
+  float bowThrusterRangeMin;
+  float bowThrusterRangeMax;
+  float bowThrusterRangeCenter;
+  float sternThrusterRangeMin;
+  float sternThrusterRangeMax;
+  float sternThrusterRangeCenter;
   bool invertRudder;
   bool invertPort;
   bool invertStbd;
+  bool invertBowThruster;
+  bool invertSternThruster;
 };
 
 class JoyStick

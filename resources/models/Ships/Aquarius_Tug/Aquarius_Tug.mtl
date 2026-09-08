@@ -39,7 +39,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
-map_Kd flagbin3.JPG
+map_Kd flagbin3.jpg
 
 newmtl Material__11466
 Kd 1 1 1
@@ -47,7 +47,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
-map_Kd flagbin.JPG
+map_Kd flagbin.jpg
 
 newmtl Material__17973
 Kd 1 1 1
@@ -63,7 +63,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
-map_Kd Teak.JPG
+map_Kd teak.jpg
 
 newmtl Material__17972
 Kd 1 1 1
@@ -111,6 +111,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass.jpg
 
 newmtl Material__17981
@@ -127,6 +128,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass.jpg
 
 newmtl Material__17978
@@ -143,6 +145,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass.jpg
 
 newmtl Material__17979
@@ -151,6 +154,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass.jpg
 
 newmtl Material__18308
@@ -1150,6 +1154,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass.bmp
 
 newmtl Material__11546
@@ -1190,6 +1195,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass.bmp
 
 newmtl Material__17071
@@ -1206,6 +1212,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass.bmp
 
 newmtl Material__11607
@@ -1222,7 +1229,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
-map_Kd Chain_a.bmp
+map_Kd chain_a.bmp
 
 newmtl Material__17248
 Kd 1 1 1
@@ -1230,7 +1237,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
-map_Kd Chain_a.bmp
+map_Kd chain_a.bmp
 
 newmtl Material__11605
 Kd 1 1 1
@@ -1238,6 +1245,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass.bmp
 
 newmtl Material__17249
@@ -1246,7 +1254,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
-map_Kd Chain_a.bmp
+map_Kd chain_a.bmp
 
 newmtl Material__17246
 Kd 1 1 1
@@ -1254,7 +1262,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
-map_Kd Chain_a.bmp
+map_Kd chain_a.bmp
 
 newmtl Material__11580
 Kd 1 1 1
@@ -1462,6 +1470,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass-1.jpg
 
 newmtl Material__32261
@@ -1478,6 +1487,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass.jpg
 
 newmtl Material__18222
@@ -1526,6 +1536,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass.jpg
 
 newmtl Material__37790
@@ -1558,6 +1569,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass-1.jpg
 
 newmtl Material__16775
@@ -1598,6 +1610,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
+d 0.5
 map_Kd glass.jpg
 
 newmtl Material__18001
@@ -1870,7 +1883,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
-map_Kd screen3.JPG
+map_Kd screen3.jpg
 
 newmtl Material__18094
 Kd 1 1 1
@@ -1942,7 +1955,7 @@ Ks 0 0 0
 Ke 0 0 0
 Ns 10
 illum 2
-map_Kd deckhead.JPG
+map_Kd deckhead.jpg
 
 newmtl Material__16672
 Kd 1 1 1

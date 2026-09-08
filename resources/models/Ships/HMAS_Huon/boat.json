@@ -86,7 +86,7 @@
         "makeTransparent": false,
         "name": "HMAS_Huon.x",
         "numberOfViews": 2,
-        "scaleFactor": 0.3038,
+        "scaleFactor": 0,
         "views": [
             [
                 0.0,
@@ -235,5 +235,33 @@
                 "endAngle": 472.5
             }
         ]
+    },
+    "thruster": {
+        "bow": false,
+        "stern": false,
+        "brand": "Thruster",
+        "type": "type",
+        "power": 0,
+        "rpmMax": 0,
+        "fuelCons": 0,
+        "propDiam": 0,
+        "thrustFactor": 0,
+        "nominalWake": 0,
+        "k0": 0,
+        "k1": 0,
+        "k2": 0,
+        "forwardRotDir": "right",
+        "pos": {
+            "bow": {
+                "x": 0,
+                "yPort": 0,
+                "yStbd": 0
+            },
+            "stern": {
+                "x": 0,
+                "yPort": 0,
+                "yStbd": 0
+            }
+        }
     }
 }

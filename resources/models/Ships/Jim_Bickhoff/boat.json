@@ -84,31 +84,31 @@
     "mesh": {
         "angleCorrection": 0,
         "makeTransparent": true,
-        "name": "Jim_Bickhoff.x",
+        "name": "Jim_Bickhoff.obj",
         "numberOfViews": 4,
-        "scaleFactor": 0.30480000376701355,
+        "scaleFactor": 0,
         "views": [
             [
                 0.0,
-                100.5,
-                185.5,
+                60,
+                120,
                 false
             ],
             [
                 50.0,
-                99.30000305175781,
-                182.8000030517578,
+                60,
+                120,
                 false
             ],
             [
                 -50.0,
-                99.30000305175781,
-                182.8000030517578,
+                60,
+                120,
                 false
             ],
             [
                 0.0,
-                900.0,
+                300.0,
                 0.0,
                 true
             ]

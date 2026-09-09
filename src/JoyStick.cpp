@@ -140,7 +140,7 @@ float JoyStick::GetCalibrateValue(float aRawValue, float aRangeMin, float aRange
     }
   else
     {
-      processValue = ((aRawValue - aRangeMin) / aRangeCenter) - 1;
+      processValue = ((aRawValue - aRangeMin) / (aRangeCenter - aRangeMin)) - 1;
     }
 
   if(aInvert)

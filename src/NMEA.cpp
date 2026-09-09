@@ -645,7 +645,7 @@ void NMEA::Update(sTime& aTime)
     }
   case THR:
     {
-      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$IITHR,BOW,%d,%.1f,STERN,%d,%.1f", hasBowThruster, bowThruster, hasSternThruster, sternThruster);
+      snprintf(messageBuffer,MAX_NMEA_SENTENCE_CHARS,"$IITHR,BOW,%d,%.1f,STERN,%d,%.1f,P", hasBowThruster, bowThruster, hasSternThruster, sternThruster);
       mMessageQueue.push_back(AddChecksum(std::string(messageBuffer)));
       break;
     }

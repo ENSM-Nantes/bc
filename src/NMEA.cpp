@@ -446,8 +446,8 @@ void NMEA::Update(sTime& aTime)
   double rudderAngleP = -mOwnShip->getRudder("port").getDelta()*180/PI;
   
   double engineRPM[] = {
-    mOwnShip->getPropeller("port").getRevsSigned() * 60,
-    mOwnShip->getPropeller("starboard").getRevsSigned() * 60
+    mOwnShip->getPropeller("port").getRevsSigned(),
+    mOwnShip->getPropeller("starboard").getRevsSigned()
   };
     
   float posZ = mOwnShip->getPosition().Z + mOwnShip->getOffsetPos().Z ;

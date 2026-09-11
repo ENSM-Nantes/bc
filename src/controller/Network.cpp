@@ -169,6 +169,11 @@ void Network::setStringToSend(std::string stringToSend)
     this->stringToSend.append("|");
 }
 
+bool Network::shutdownRequested()
+{
+    return mShutdownRequested;
+}
+
 void Network::sendMessage(ENetPeer* peer)
 {
     //Assumes that event contains a received message
@@ -204,7 +209,10 @@ void Network::receiveMessage(irr::f32& time, ShipData& ownShipData, std::vector<
     std::string receivedString(tempString);
 
     //Basic checks
-    if (receivedString.length() > 2) { //Check if more than 2 chars long, ie we have at least some data
+    if (receivedString.substr(0,2).compare("SD") == 0) {
+        mShutdownRequested = true;
+    }
+    else if (receivedString.length() > 2) { 
         if (receivedString.substr(0,2).compare("BC") == 0 ) { //Check if it starts with BC
             //Strip 'BC'
             receivedString = receivedString.substr(2,receivedString.length()-2);

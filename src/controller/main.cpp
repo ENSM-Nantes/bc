@@ -265,7 +265,7 @@ int main (int argc, char ** argv)
         aisThreadObject = new std::thread(&AISOverUDP::AISThread,AISOverUDP(aisPort)); //TODO - Remove hardcoding of port, and only start if needed
     }
 
-    while(device->run()) {
+    while(device->run() && !network.shutdownRequested()) {
 
         driver->beginScene();
 

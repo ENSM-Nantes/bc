@@ -86,9 +86,9 @@ int Com::ClientConnect(ENetPeer** aPeer, unsigned int aData)
   
   std::cout << "-- Connect Event received --"  << std::endl;
 
-  if(mClientCounter <= MAX_CLIENT_CONNEXION)
+  if(mClientCounter < MAX_CLIENT_CONNEXION)
     {
-      for(unsigned char i=0; i<=mClientCounter; i++)
+      for(unsigned char i=0; i<mClientCounter; i++)
 	{
 	  if(NULL != mPeerClient[i])
 	    {
@@ -121,31 +121,30 @@ int Com::ClientConnect(ENetPeer** aPeer, unsigned int aData)
 
 int Com::ClientDisconnect(ENetPeer** aPeer)
 {
-  char ipAddr[16] ={0};
-  
+  char ipAddr[16] = {0};
+
   std::cout << "-- Disconnect Event received --"  << std::endl;
 
-  for(unsigned char i=0; i<=mClientCounter; i++)
+  for(unsigned char i=0; i<mClientCounter; i++)
     {
-      if(NULL != mPeerClient[i])
-	{	  
-	  if((*aPeer)->address.host == mPeerClient[i]->address.host &&
-	     (*aPeer)->address.port == mPeerClient[i]->address.port)
-	    {
-	      enet_address_get_host_ip(&mPeerClient[i]->address, ipAddr, 16);
-	      std::cout << "Client :" << ipAddr << ":" << mPeerClient[i]->address.port << " disconnected" << std::endl;
+      if(NULL != mPeerClient[i] &&
+	 (*aPeer)->address.host == mPeerClient[i]->address.host &&
+	 (*aPeer)->address.port == mPeerClient[i]->address.port)
+	{
+	  enet_address_get_host_ip(&mPeerClient[i]->address, ipAddr, 16);
+	  std::cout << "Client :" << ipAddr << ":" << mPeerClient[i]->address.port << " disconnected" << std::endl;
 
-	      mPeerClient[i] = {0};
-	      mClientCounter--;
-	      return  0;
-	    }
+	  unsigned char last = mClientCounter - 1;
+	  mPeerClient[i] = mPeerClient[last];
+	  mTypeClient[i] = mTypeClient[last];
+	  mPeerClient[last] = NULL;
+	  mClientCounter--;
+	  return 0;
 	}
-      else
-	return -1;
     }
 
   enet_address_get_host_ip(&(*aPeer)->address, ipAddr, 16);
-  std::cout << "Client :" << ipAddr << "never been connected" << std::endl;
+  std::cout << "Client :" << ipAddr << " never been connected" << std::endl;
     
   return 1;
 }

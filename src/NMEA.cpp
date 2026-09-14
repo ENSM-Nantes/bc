@@ -71,21 +71,6 @@ void NMEA::Init(unsigned int aStartTime, std::string serialPortName, irr::u32 se
       std::cout << "NMEA::Error : " << e.what() << std::endl;
     }
 
-  asio::ip::tcp::socket sock(mIoService);
-  asio::error_code ec;
-  sock.connect(asio::ip::tcp::endpoint(mReceiverEndpoint.address(), 22),ec);
-  
-  if (ec || mReceiverEndpoint.address().to_v4().to_string() == "0.0.0.0") {
-    mIsHostAlive=false;
-    std::cout << "NMEA::HostALive : " << mReceiverEndpoint.address() << " : " << mIsHostAlive << std::endl;
-    return;
-  }
-  else
-    {
-      mIsHostAlive=true;
-      std::cout << "NMEA::HostALive : " << mReceiverEndpoint.address() << " : "  << mIsHostAlive << std::endl;
-    }
-
   // create send socket
   mSocket = new asio::ip::udp::socket(mIoService);
 
@@ -718,10 +703,4 @@ std::string NMEA::AddChecksum(std::string messageIn)
     }
   snprintf(checksumBuffer,sizeof(checksumBuffer),"%02X",checksum);
   return messageIn + "*" + std::string(checksumBuffer) + "\r\n";
-}
-
-
-bool NMEA::GetHostStatus(void)
-{
-  return mIsHostAlive;
 }

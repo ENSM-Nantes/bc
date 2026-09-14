@@ -49,8 +49,12 @@ SectionIn RO
 SetOutPath $INSTDIR
 
 ;include all files, excluding the .svn directories
-File /r /x *.cpp /x *.hpp /x *.h /x *.rc /x *.bat /x *.aps /x *.depend /x *.layout /x *.cbp /x *.iobj /x *.ipdb /x *.pdb /x *.tmp /x *.gcc /x macOScopy /x makeAndBuildApp /x CMakeLists.txt /x createDeb /x "Visual Studio solution" /x Irrlicht_mingw.dll /x Irrlicht_mingw64.dll /x Irrlicht_VS.dll /x Irrlicht_VS64.dll /x libenet32.dll /x libenet64.dll /x CompilingLinuxAndMac.txt /x Makefile /x MakefileWithSound /x MakefileForDeb /x controller /x repeater /x editor /x launcher /x iniEditor /x multiplayerHub /x libs /x .svn /x .objs /x .git /x .gitignore /x EnetServer /x BridgeCommand.app /x *.db /x *.m /x *.nsi /x *.cscope_file_list /x RadarCache /x misc /x shiplights.ods /x gmon.out /x cscope.out /x Cubemaps_HLSL_Test /x Portsmouth /x StraitOfJuanDeFuca /x "h) Haro Strait" ..\*.*
+File /r /x lib /x README.md /x doc /x install /x src /x linux /x .github /x .vs /x *.cpp /x *.hpp /x *.h /x *.rc /x *.bat /x *.aps /x *.depend /x *.layout /x *.cbp /x *.iobj /x *.ipdb /x *.pdb /x *.tmp /x *.gcc /x macOScopy /x makeAndBuildApp /x CMakeLists.txt /x createDeb /x "Visual Studio solution" /x Irrlicht_mingw.dll /x Irrlicht_mingw64.dll /x Irrlicht_VS.dll /x Irrlicht_VS64.dll /x libenet32.dll /x libenet64.dll /x CompilingLinuxAndMac.txt /x Makefile /x MakefileWithSound /x MakefileForDeb /x controller /x repeater /x editor /x launcher /x iniEditor /x multiplayerHub /x libs /x .svn /x .objs /x .git /x .gitignore /x EnetServer /x BridgeCommand.app /x *.db /x *.m /x *.nsi /x *.cscope_file_list /x RadarCache /x misc /x shiplights.ods /x gmon.out /x cscope.out /x Cubemaps_HLSL_Test /x Portsmouth /x StraitOfJuanDeFuca /x "h) Haro Strait" ..\*.*
 ;File /r /x src ..\doc
+;the recursive copy above excludes *.bat everywhere, so bring back just the windows scenario scripts
+SetOutPath $INSTDIR\resources\scripts\win
+File "..\resources\scripts\win\*.bat"
+SetOutPath $INSTDIR
 
 SetOutPath $INSTDIR\bin\win\
 

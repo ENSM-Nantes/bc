@@ -1,9 +1,9 @@
 @echo off
 setlocal
 
-tasklist | findstr /I "bridgecommand-es.exe" > serverStatus.log
+tasklist | findstr /I "bridgecommand-es.exe" > "%TEMP%\serverStatus.log"
 
-for /f %%i in ('find /c /v "" ^< serverStatus.log') do set COUNT=%%i
+for /f %%i in ('find /c /v "" ^< "%TEMP%\serverStatus.log"') do set COUNT=%%i
 
 if %COUNT% == 0 (
 	echo -------- Start EnetServer
@@ -13,4 +13,4 @@ if %COUNT% == 0 (
     echo -------- EnetServer is already running
 )
 
-del serverStatus.log
+del "%TEMP%\serverStatus.log"

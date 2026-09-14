@@ -14,8 +14,8 @@ int Message::Process(std::string& aMsg)
 { 
   //std::cout << "----------> " << aMsg << std::endl;
 
-  if(aMsg.substr(0,2) == "BC" || aMsg.substr(0,2) == "SD")
-                                return (E_MSG_TO_SLAVE | E_MSG_TO_MC);
+  if(aMsg.substr(0,2) == "BC")  return (E_MSG_TO_SLAVE | E_MSG_TO_MC);
+  if(aMsg.substr(0,2) == "SD")  return (E_MSG_TO_SLAVE | E_MSG_TO_MC | E_MSG_TO_WI);
   if(aMsg.substr(0,3) == "SCN") return (E_MSG_TO_SLAVE | E_MSG_TO_MASTER_MP | E_MSG_TO_MC);
   if(aMsg.substr(0,3) == "MPF") return E_MSG_TO_MH;
   if(aMsg.substr(0,2) == "MC")  return E_MSG_TO_MASTER;

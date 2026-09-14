@@ -69,7 +69,6 @@ public:
   void ClearQueue(void);
   void ReceiveThread(std::string udpListenPortName);
   void Receive(void);
-  bool GetHostStatus(void);
   void SetModelData(OwnShip *aOwnShip, OtherShips *aOtherShips, Terrain *aTerrain, Wind *aWind, RadarCalculation *aRadarCalc, unsigned int aIntervalReport = SENSOR_REPORT_INTERVAL);
 
 
@@ -90,7 +89,6 @@ private:
   std::vector<std::string> mMessageQueue;
   int mCurrentMessageType; 
 
-  bool mIsHostAlive;
   asio::io_service mIoService;
   asio::ip::udp::endpoint mReceiverEndpoint;
   asio::ip::udp::socket* mSocket;

@@ -39,12 +39,14 @@ public:
     int getPort();
     void update(irr::f32& time, ShipData& ownShipData, std::vector<OtherShipDisplayData>& otherShipsData, std::vector<PositionData>& buoysData, irr::f32& weather, irr::f32& visibility, irr::f32& rain, bool& mobVisible, PositionData& mobData, irr::f32& windDirection, irr::f32& windSpeed, irr::f32& streamDirection, irr::f32& streamSpeed, bool& streamOverride);
     void setStringToSend(std::string stringToSend);
+    bool shutdownRequested();
 
 private:
 
     ControllerModel* model;
     ENetAddress address;
     ENetHost * client;
+    bool mShutdownRequested = false;
 
     ENetEvent event;
     std::string stringToSend;

@@ -939,41 +939,29 @@ int main(int argc, char ** argv)
 
        { IPROF("NMEA");
 
-	 if(nmeaConning.GetHostStatus())
-	   {
-	     if (!nmeaUDPListenPortConning.empty()) nmeaConning.Receive();
-	     if (!nmeaComPortConning.empty() || (!nmeaUDPAddrConning.empty() && !nmeaUDPPortConning.empty())) nmeaConning.Update(model.getTime());
-	     if (!nmeaComPortConning.empty())  nmeaConning.SendSerial();
-	     if (!nmeaUDPAddrConning.empty() && !nmeaUDPPortConning.empty()) nmeaConning.SendUdp();
-	     nmeaConning.ClearQueue();   
-	   }
+	 if (!nmeaUDPListenPortConning.empty()) nmeaConning.Receive();
+	 if (!nmeaComPortConning.empty() || (!nmeaUDPAddrConning.empty() && !nmeaUDPPortConning.empty())) nmeaConning.Update(model.getTime());
+	 if (!nmeaComPortConning.empty())  nmeaConning.SendSerial();
+	 if (!nmeaUDPAddrConning.empty() && !nmeaUDPPortConning.empty()) nmeaConning.SendUdp();
+	 nmeaConning.ClearQueue();
 
-	 if(nmeaOpCpn.GetHostStatus())
-	   { 
-	     if (!nmeaUDPListenPortOpCpn.empty()) nmeaOpCpn.Receive();
-	     if (!nmeaComPortOpCpn.empty() || (!nmeaUDPAddrOpCpn.empty() && !nmeaUDPPortOpCpn.empty())) nmeaOpCpn.Update(model.getTime());
-	     if (!nmeaComPortOpCpn.empty())  nmeaOpCpn.SendSerial();
-	     if (!nmeaUDPAddrOpCpn.empty() && !nmeaUDPPortOpCpn.empty()) nmeaOpCpn.SendUdp();
-	     nmeaOpCpn.ClearQueue();
-	   }
+	 if (!nmeaUDPListenPortOpCpn.empty()) nmeaOpCpn.Receive();
+	 if (!nmeaComPortOpCpn.empty() || (!nmeaUDPAddrOpCpn.empty() && !nmeaUDPPortOpCpn.empty())) nmeaOpCpn.Update(model.getTime());
+	 if (!nmeaComPortOpCpn.empty())  nmeaOpCpn.SendSerial();
+	 if (!nmeaUDPAddrOpCpn.empty() && !nmeaUDPPortOpCpn.empty()) nmeaOpCpn.SendUdp();
+	 nmeaOpCpn.ClearQueue();
 
-	 if(nmeaVDR.GetHostStatus())
-	   {	 
-	     if (!nmeaUDPListenPortVDR.empty()) nmeaVDR.Receive();
-	     if (!nmeaComPortVDR.empty() || (!nmeaUDPAddrVDR.empty() && !nmeaUDPPortVDR.empty())) nmeaVDR.Update(model.getTime());
-	     if (!nmeaComPortVDR.empty())  nmeaVDR.SendSerial();
-	     if (!nmeaUDPAddrVDR.empty() && !nmeaUDPPortVDR.empty()) nmeaVDR.SendUdp();
-	     nmeaVDR.ClearQueue();
-	   }
+	 if (!nmeaUDPListenPortVDR.empty()) nmeaVDR.Receive();
+	 if (!nmeaComPortVDR.empty() || (!nmeaUDPAddrVDR.empty() && !nmeaUDPPortVDR.empty())) nmeaVDR.Update(model.getTime());
+	 if (!nmeaComPortVDR.empty())  nmeaVDR.SendSerial();
+	 if (!nmeaUDPAddrVDR.empty() && !nmeaUDPPortVDR.empty()) nmeaVDR.SendUdp();
+	 nmeaVDR.ClearQueue();
 
-	 if(nmeaGateway.GetHostStatus())
-	   {	 
-	     if (!nmeaUDPListenPortGateway.empty()) nmeaGateway.Receive();
-	     if (!nmeaComPortGateway.empty() || (!nmeaUDPAddrGateway.empty() && !nmeaUDPPortGateway.empty())) nmeaGateway.Update(model.getTime());
-	     if (!nmeaComPortGateway.empty())  nmeaGateway.SendSerial();
-	     if (!nmeaUDPAddrGateway.empty() && !nmeaUDPPortGateway.empty()) nmeaGateway.SendUdp();
-	     nmeaGateway.ClearQueue();
-	   }
+	 if (!nmeaUDPListenPortGateway.empty()) nmeaGateway.Receive();
+	 if (!nmeaComPortGateway.empty() || (!nmeaUDPAddrGateway.empty() && !nmeaUDPPortGateway.empty())) nmeaGateway.Update(model.getTime());
+	 if (!nmeaComPortGateway.empty())  nmeaGateway.SendSerial();
+	 if (!nmeaUDPAddrGateway.empty() && !nmeaUDPPortGateway.empty()) nmeaGateway.SendUdp();
+	 nmeaGateway.ClearQueue();
       }
       { IPROF("Render setup");
         driver->setViewPort(irr::core::rect<irr::s32>(0,0,graphicsWidth,graphicsHeight)); //Full screen before beginScene

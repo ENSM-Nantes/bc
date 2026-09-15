@@ -81,7 +81,7 @@ class GUIMain //Create, build and update GUI
 public:
     GUIMain();
     ~GUIMain();
-  void load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines, Lang* language, std::vector<std::string>* logMessages, bool controlsHidden, bool showTideHeight, bool hasBowThruster, bool hasSternThruster, bool showCollided, bool vr3dMode);
+  void load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines, Lang* language, std::vector<std::string>* logMessages, bool controlsHidden, bool showTideHeight, bool hasBowThruster, bool hasSternThruster, bool showCollided, bool vr3dMode, std::string fontName, float fontScale);
 
     enum GUI_ELEMENTS// Define some values that we'll use to identify individual GUI controls.
     {
@@ -163,6 +163,8 @@ public:
         GUI_ID_HIDE_EXTRA_CONTROLS_BUTTON,
         GUI_ID_SHOW_LINES_CONTROLS_BUTTON,
         GUI_ID_HIDE_LINES_CONTROLS_BUTTON,
+        GUI_ID_SHOW_CONTROLS_BUTTON,
+        GUI_ID_HIDE_CONTROLS_BUTTON,
         GUI_ID_RUDDERPUMP_1_WORKING_BUTTON,
         GUI_ID_RUDDERPUMP_1_FAILED_BUTTON,
         GUI_ID_RUDDERPUMP_2_WORKING_BUTTON,
@@ -208,6 +210,7 @@ public:
     void drawGUI();
     void setExtraControlsWindowVisible(bool windowVisible);
     void setLinesControlsWindowVisible(bool windowVisible);
+    void setControlsWindowVisible(bool windowVisible);
     void setLinesControlsText(std::string textToShow);
     void setDrawBackground(bool){};
     bool isDrawBackgroundEnabled(){return false;};
@@ -311,6 +314,7 @@ private:
     irr::gui::IGUIButton* pcLogButton;
     irr::gui::IGUIButton* showExtraControlsButton;
     irr::gui::IGUIButton* showLinesControlsButton;
+    irr::gui::IGUIButton* showControlsButton;
 
     irr::gui::IGUIButton* addLine;
     irr::gui::IGUIButton* removeLine;
@@ -328,6 +332,7 @@ private:
 
     irr::gui::IGUIWindow* extraControlsWindow;
     irr::gui::IGUIWindow* linesControlsWindow;
+    irr::gui::IGUIWindow* controlsWindow;
 
     irr::u32 su;
     irr::u32 sh;

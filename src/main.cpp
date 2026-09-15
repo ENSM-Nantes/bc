@@ -817,7 +817,7 @@ int main(int argc, char ** argv)
     }
   }
 
-  guiMain.load(device, model.getOwnShip(), model.getLines(), &language, &logMessages, hideEngineAndRudder, showTideHeight, model.getOwnShip()->getThruster().HasBowThruster(), model.getOwnShip()->getThruster().HasSternThruster(), showCollided, vr3dMode);
+  guiMain.load(device, model.getOwnShip(), model.getLines(), &language, &logMessages, hideEngineAndRudder, showTideHeight, model.getOwnShip()->getThruster().HasBowThruster(), model.getOwnShip()->getThruster().HasSternThruster(), showCollided, vr3dMode, fontName, fontScale);
 
   thrusterSerial.Init(thrusterInfoComPort, thrusterInfoBaudrate);
   thrusterSerial.Send(model.getOwnShip()->getThruster().HasBowThruster(), model.getOwnShip()->getThruster().HasSternThruster());

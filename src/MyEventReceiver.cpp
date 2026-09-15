@@ -594,6 +594,16 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
                 gui->setLinesControlsWindowVisible(true);
             }
 
+            if (id == GUIMain::GUI_ID_HIDE_CONTROLS_BUTTON)
+            {
+                gui->setControlsWindowVisible(false);
+            }
+
+            if (id == GUIMain::GUI_ID_SHOW_CONTROLS_BUTTON)
+            {
+                gui->setControlsWindowVisible(true);
+            }
+
             if (id == GUIMain::GUI_ID_RUDDERPUMP_1_WORKING_BUTTON)
             {
 	      /*model->setRudderPumpState(1, true);

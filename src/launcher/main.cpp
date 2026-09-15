@@ -16,10 +16,12 @@
 #include "irrlicht.h"
 #include <iostream>
 #include <thread>
+#include <vector>
 #include "../IniFile.hpp"
 #include "../Lang.hpp"
 #include "../Utilities.hpp"
 #include "../Constants.hpp"
+#include "../Credits.hpp"
 
 //headers for execl
 #ifdef _WIN32
@@ -53,14 +55,179 @@ const irr::s32 SHIP_ED_BUTTON = 10;
 const irr::s32 DOC_BUTTON = 11;
 const irr::s32 USER_BUTTON = 12;
 const irr::s32 EXIT_BUTTON = 13;
+const irr::s32 CREDITS_BUTTON = 14;
+
+const irr::s32 CREDITS_WINDOW_ID = 100;
+const irr::s32 CREDITS_CLOSE_BUTTON = 101;
+const irr::s32 CREDITS_SCROLLBAR_ID = 102;
 
 std::string userFolder;
+
+//Event receiver used only while the credits popup is open: handles closing it
+//(Close button, Escape) and scrolling the credits text (scrollbar, mouse wheel)
+class CreditsReceiver : public irr::IEventReceiver
+{
+public:
+  CreditsReceiver(irr::gui::IGUIStaticText* aText, irr::gui::IGUIScrollBar* aScrollBar, irr::s32 aTextTop)
+    : text(aText), scrollBar(aScrollBar), textTop(aTextTop), closed(false) { }
+
+  virtual bool OnEvent(const irr::SEvent& event)
+  {
+    if (event.EventType == irr::EET_GUI_EVENT) {
+      if (event.GUIEvent.EventType == irr::gui::EGET_BUTTON_CLICKED
+          && event.GUIEvent.Caller->getID() == CREDITS_CLOSE_BUTTON) {
+	closed = true;
+      }
+      if (event.GUIEvent.EventType == irr::gui::EGET_SCROLL_BAR_CHANGED
+          && event.GUIEvent.Caller->getID() == CREDITS_SCROLLBAR_ID) {
+	applyScroll();
+      }
+    }
+    if (event.EventType == irr::EET_KEY_INPUT_EVENT
+        && event.KeyInput.PressedDown && event.KeyInput.Key == irr::KEY_ESCAPE) {
+      closed = true;
+    }
+    if (event.EventType == irr::EET_MOUSE_INPUT_EVENT
+        && event.MouseInput.Event == irr::EMIE_MOUSE_WHEEL) {
+      irr::s32 newPos = scrollBar->getPos() - (irr::s32)(event.MouseInput.Wheel * 40);
+      if (newPos < scrollBar->getMin()) {newPos = scrollBar->getMin();}
+      if (newPos > scrollBar->getMax()) {newPos = scrollBar->getMax();}
+      scrollBar->setPos(newPos);
+      applyScroll();
+    }
+    return false;
+  }
+
+  bool isClosed() const { return closed; }
+
+private:
+  void applyScroll()
+  {
+    irr::core::rect<irr::s32> r = text->getRelativePosition();
+    irr::s32 height = r.getHeight();
+    r.UpperLeftCorner.Y = textTop - scrollBar->getPos();
+    r.LowerRightCorner.Y = r.UpperLeftCorner.Y + height;
+    text->setRelativePosition(r);
+  }
+
+  irr::gui::IGUIStaticText* text;
+  irr::gui::IGUIScrollBar* scrollBar;
+  irr::s32 textTop;
+  bool closed;
+};
+
+//Shows the credits in a scrollable modal popup over the launcher window
+void showCreditsPopup(irr::IrrlichtDevice* device, Lang& language)
+{
+  irr::video::IVideoDriver* driver = device->getVideoDriver();
+  irr::gui::IGUIEnvironment* gui = device->getGUIEnvironment();
+
+  irr::core::dimension2d<irr::u32> screenSize = driver->getScreenSize();
+  irr::s32 su = (irr::s32)screenSize.Width;
+  irr::s32 sh = (irr::s32)screenSize.Height;
+
+  //Hide the launcher's own buttons while the popup is open - the default skin draws
+  //window/button faces with partial transparency, so anything left visible behind the
+  //popup bleeds through it
+  irr::gui::IGUIElement* root = gui->getRootGUIElement();
+  std::vector<irr::gui::IGUIElement*> hiddenElements;
+  for (irr::gui::IGUIElement* child : root->getChildren()) {
+    hiddenElements.push_back(child);
+    child->setVisible(false);
+  }
+
+  irr::s32 margin = su / 12;
+  if (margin < 6) {margin = 6;}
+  irr::s32 closeButtonHeight = 26;
+  irr::s32 closeButtonGap = 8;
+
+  //The window stops short of the bottom margin, leaving room for the Close button to sit
+  //below it - kept outside the window so it can't be overdrawn by the tall (clipped) text
+  irr::core::rect<irr::s32> windowRect(margin, margin, su - margin, sh - margin - closeButtonHeight - closeButtonGap);
+  //Not modal: we already hide every other element above, and a modal window restricts input
+  //to its own subtree, which would swallow clicks on the Close button living outside it
+  irr::gui::IGUIWindow* creditsWindow = gui->addWindow(windowRect, false, language.translate("creditsTitle").c_str(), 0, CREDITS_WINDOW_ID);
+  //We provide our own Close button below, so hide the window's built-in one to keep a single, unambiguous close path
+  creditsWindow->getCloseButton()->setVisible(false);
+  creditsWindow->setDraggable(false);
+
+  irr::core::rect<irr::s32> clientRect = creditsWindow->getClientRect();
+  irr::s32 scrollBarWidth = 16;
+  irr::s32 pad = 6;
+
+  irr::core::rect<irr::s32> visibleTextRect(
+    clientRect.UpperLeftCorner.X + pad,
+    clientRect.UpperLeftCorner.Y + pad,
+    clientRect.LowerRightCorner.X - scrollBarWidth - pad,
+    clientRect.LowerRightCorner.Y - pad
+  );
+
+  //Tall rect so the whole word-wrapped text exists; the window clips it to visibleTextRect's
+  //height for us, and we scroll by shifting this rect's Y - a standard Irrlicht scrolling trick
+  irr::core::rect<irr::s32> fullTextRect(
+    visibleTextRect.UpperLeftCorner.X,
+    visibleTextRect.UpperLeftCorner.Y,
+    visibleTextRect.LowerRightCorner.X,
+    visibleTextRect.UpperLeftCorner.Y + 6000
+  );
+
+  irr::gui::IGUIStaticText* creditsText = gui->addStaticText(getCredits().c_str(), fullTextRect, false, true, creditsWindow);
+
+  irr::s32 visibleHeight = visibleTextRect.getHeight();
+  irr::s32 maxScroll = creditsText->getTextHeight() - visibleHeight;
+  if (maxScroll < 0) {maxScroll = 0;}
+
+  irr::core::rect<irr::s32> scrollRect(
+    clientRect.LowerRightCorner.X - scrollBarWidth,
+    visibleTextRect.UpperLeftCorner.Y,
+    clientRect.LowerRightCorner.X,
+    visibleTextRect.LowerRightCorner.Y
+  );
+  irr::gui::IGUIScrollBar* scrollBar = gui->addScrollBar(false, scrollRect, creditsWindow, CREDITS_SCROLLBAR_ID);
+  scrollBar->setMin(0);
+  scrollBar->setMax(maxScroll);
+  scrollBar->setSmallStep(20);
+  irr::s32 largeStep = visibleHeight - 20;
+  if (largeStep < 20) {largeStep = 20;}
+  scrollBar->setLargeStep(largeStep);
+  scrollBar->setPos(0);
+
+  irr::s32 centreX = su / 2;
+  irr::core::rect<irr::s32> closeButtonRect(
+    centreX - 40, sh - margin - closeButtonHeight,
+    centreX + 40, sh - margin
+  );
+  irr::gui::IGUIButton* closeButton = gui->addButton(closeButtonRect, 0, CREDITS_CLOSE_BUTTON, language.translate("creditsClose").c_str());
+
+  CreditsReceiver creditsReceiver(creditsText, scrollBar, visibleTextRect.UpperLeftCorner.Y);
+  irr::IEventReceiver* oldReceiver = device->getEventReceiver();
+  device->setEventReceiver(&creditsReceiver);
+
+  //Flush old key/clicks etc, so the click that opened this popup doesn't also close it
+  device->sleep(200);
+  device->clearSystemMessages();
+
+  while (device->run() && !creditsReceiver.isClosed()) {
+    driver->beginScene(irr::video::ECBF_COLOR | irr::video::ECBF_DEPTH, irr::video::SColor(0, 200, 200, 200));
+    gui->drawAll();
+    driver->endScene();
+    device->sleep(10);
+  }
+
+  device->setEventReceiver(oldReceiver);
+  creditsWindow->remove();
+  closeButton->remove();
+
+  for (irr::gui::IGUIElement* el : hiddenElements) {
+    el->setVisible(true);
+  }
+}
 
 //Event receiver: This does the actual launching
 class Receiver : public irr::IEventReceiver
 {
 public:
-  Receiver() { }
+  Receiver(irr::IrrlichtDevice* aDevice, Lang* aLanguage) : device(aDevice), language(aLanguage) { }
 
   virtual bool OnEvent(const irr::SEvent& event)
   {
@@ -70,6 +237,10 @@ public:
 
 	if (id == EXIT_BUTTON) {
 	  exit(EXIT_SUCCESS);
+	}
+
+	if (id == CREDITS_BUTTON) {
+	  showCreditsPopup(device, *language);
 	}
 
 	if (id == BC_BUTTON) {
@@ -197,6 +368,10 @@ public:
     }
     return false;
   }
+
+private:
+  irr::IrrlichtDevice* device;
+  Lang* language;
 };
 
 int main (int argc, char ** argv)
@@ -254,7 +429,7 @@ int main (int argc, char ** argv)
   }
 
   irr::u32 graphicsWidth = 300;
-  irr::u32 graphicsHeight = 650;
+  irr::u32 graphicsHeight = 680;
   irr::u32 graphicsDepth = 32;
   bool fullScreen = false;
 
@@ -353,6 +528,9 @@ int main (int argc, char ** argv)
   y1 = y2 + 3*bR; y2 = y1 +   bH; irr::gui::IGUIButton* launchDOC   = device->getGUIEnvironment()->addButton(irr::core::rect<irr::s32>(x1,y1,x2,y2),0,DOC_BUTTON,language.translate("startDOC").c_str()); //i18n
   launchDOC->setImage(driver->getTexture("media/startDOC.png"));
   launchDOC->setUseAlphaChannel();
+  y1 = y2 +   bR; y2 = y1 +   bH; irr::gui::IGUIButton* launchCREDITS = device->getGUIEnvironment()->addButton(irr::core::rect<irr::s32>(x1,y1,x2,y2),0,CREDITS_BUTTON,language.translate("credits").c_str()); //i18n
+  launchCREDITS->setImage(driver->getTexture("media/startDOC.png"));
+  launchCREDITS->setUseAlphaChannel();
   y1 = y2 +   bR; y2 = y1 +   bH; irr::gui::IGUIButton* launchFOLDER= device->getGUIEnvironment()->addButton(irr::core::rect<irr::s32>(x1,y1,x2,y2),0,USER_BUTTON,language.translate("user").c_str()); //i18n
   launchFOLDER->setImage(driver->getTexture("media/user.png"));
   launchFOLDER->setUseAlphaChannel();
@@ -367,7 +545,7 @@ int main (int argc, char ** argv)
   device->getGUIEnvironment()->addStaticText(wVer.c_str(), irr::core::rect<irr::s32>(165+wVer.size(), y1, x2, y2), true);
   device->getGUIEnvironment()->setFocus(launchBC);
 
-  Receiver receiver;
+  Receiver receiver(device, &language);
   device->setEventReceiver(&receiver);
 
 #ifdef _WIN32

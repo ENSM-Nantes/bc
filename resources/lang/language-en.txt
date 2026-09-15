@@ -5,6 +5,7 @@ This file must be saved with default (ANSI) encoding on Windows, and UTF-8 encod
 
 ok="OK"
 scnChoose="Please choose a scenario:"
+launchScenario="Launch scenario"
 secondary="Use as secondary display"
 secondaryWait="Waiting for connection. This computer's hostname and port is:\n"
 moveMessage="Please move this message box to the monitor where Bridge Command should run, and click OK"

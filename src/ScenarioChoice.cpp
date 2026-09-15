@@ -59,14 +59,23 @@ void ScenarioChoice::chooseScenario(std::string& scenarioName, OperatingMode::Mo
 
     irr::gui::IGUIStaticText* instruction = gui->addStaticText(language->translate("scnChoose").c_str(),irr::core::rect<irr::s32>(0.02*su,0.13*sh,0.30*su, 0.17*sh));
     irr::gui::IGUIListBox* scenarioListBox = gui->addListBox(irr::core::rect<irr::s32>(0.02*su,0.17*sh,0.30*su,0.50*sh),0,GUI_ID_SCENARIO_LISTBOX);
-    irr::gui::IGUIStaticText* description = gui->addStaticText(L"",irr::core::rect<irr::s32>(0.02*su,0.59*sh,0.30*su,0.99*sh));
-    irr::gui::IGUIButton* okButton = gui->addButton(irr::core::rect<irr::s32>(0.02*su,0.51*sh,0.30*su,0.58*sh),0,GUI_ID_OK_BUTTON,language->translate("ok").c_str());
+    irr::gui::IGUIStaticText* description = gui->addStaticText(L"",irr::core::rect<irr::s32>(0.02*su,0.51*sh,0.30*su,0.62*sh));
+    //Launch button sits in the bottom-right corner of the window
+    irr::gui::IGUIButton* okButton = gui->addButton(irr::core::rect<irr::s32>(0.70*su,0.90*sh,0.98*su,0.98*sh),0,GUI_ID_OK_BUTTON,language->translate("launchScenario").c_str());
+    //Exit button sits in the bottom-left corner of the window, for quitting without choosing a scenario
+    irr::gui::IGUIButton* exitButton = gui->addButton(irr::core::rect<irr::s32>(0.02*su,0.90*sh,0.20*su,0.98*sh),0,GUI_ID_EXIT_BUTTON,language->translate("exit").c_str());
 
-    irr::gui::IGUIStaticText* secondaryText = gui->addStaticText(language->translate("secondary").c_str(),irr::core::rect<irr::s32>(0.52*su,0.13*sh,1.00*su, 0.17*sh));
-    irr::gui::IGUICheckBox* secondaryCheckbox = gui->addCheckBox(false,irr::core::rect<irr::s32>(0.52*su,0.18*sh,0.54*su,0.20*sh),0,GUI_ID_SECONDARY_CHECKBOX);
+    irr::core::stringw secondaryLabel = language->translate("secondary");
+    irr::u32 secondaryLabelWidth = gui->getSkin()->getFont()->getDimension(secondaryLabel.c_str()).Width;
+    irr::gui::IGUIStaticText* secondaryText = gui->addStaticText(secondaryLabel.c_str(),irr::core::rect<irr::s32>(0.02*su,0.64*sh,0.02*su+secondaryLabelWidth, 0.68*sh));
+    secondaryText->setTextAlignment(irr::gui::EGUIA_UPPERLEFT, irr::gui::EGUIA_CENTER);
+    irr::gui::IGUICheckBox* secondaryCheckbox = gui->addCheckBox(false,irr::core::rect<irr::s32>(0.02*su+secondaryLabelWidth+0.01*su,0.64*sh,0.02*su+secondaryLabelWidth+0.03*su,0.68*sh),0,GUI_ID_SECONDARY_CHECKBOX);
 
-    irr::gui::IGUIStaticText* multiplayerText = gui->addStaticText(language->translate("multiplayer").c_str(),irr::core::rect<irr::s32>(0.52*su,0.23*sh,1.00*su, 0.27*sh));
-    irr::gui::IGUICheckBox* multiplayerCheckbox = gui->addCheckBox(false,irr::core::rect<irr::s32>(0.52*su,0.28*sh,0.54*su,0.30*sh),0,GUI_ID_MULTIPLAYER_CHECKBOX);
+    irr::core::stringw multiplayerLabel = language->translate("multiplayer");
+    irr::u32 multiplayerLabelWidth = gui->getSkin()->getFont()->getDimension(multiplayerLabel.c_str()).Width;
+    irr::gui::IGUIStaticText* multiplayerText = gui->addStaticText(multiplayerLabel.c_str(),irr::core::rect<irr::s32>(0.02*su,0.69*sh,0.02*su+multiplayerLabelWidth, 0.73*sh));
+    multiplayerText->setTextAlignment(irr::gui::EGUIA_UPPERLEFT, irr::gui::EGUIA_CENTER);
+    irr::gui::IGUICheckBox* multiplayerCheckbox = gui->addCheckBox(false,irr::core::rect<irr::s32>(0.02*su+multiplayerLabelWidth+0.01*su,0.69*sh,0.02*su+multiplayerLabelWidth+0.03*su,0.73*sh),0,GUI_ID_MULTIPLAYER_CHECKBOX);
 
     //add credits text
     //irr::gui::IGUIStaticText* creditsText = gui->addStaticText((getCredits()).c_str(),irr::core::rect<irr::s32>(0.35*su,0.35*sh,0.95*su, 0.95*sh),true);
@@ -87,7 +96,7 @@ void ScenarioChoice::chooseScenario(std::string& scenarioName, OperatingMode::Mo
     device->clearSystemMessages();
 
     //Link to our event receiver
-    StartupEventReceiver startupReceiver(scenarioListBox,instruction,secondaryCheckbox,multiplayerCheckbox,description,GUI_ID_SCENARIO_LISTBOX,GUI_ID_OK_BUTTON,GUI_ID_SECONDARY_CHECKBOX,GUI_ID_MULTIPLAYER_CHECKBOX, device);
+    StartupEventReceiver startupReceiver(scenarioListBox,instruction,secondaryCheckbox,multiplayerCheckbox,description,GUI_ID_SCENARIO_LISTBOX,GUI_ID_OK_BUTTON,GUI_ID_SECONDARY_CHECKBOX,GUI_ID_MULTIPLAYER_CHECKBOX,GUI_ID_EXIT_BUTTON, device);
     irr::IEventReceiver* oldReceiver = device->getEventReceiver();
     device->setEventReceiver(&startupReceiver);
 
@@ -136,6 +145,7 @@ void ScenarioChoice::chooseScenario(std::string& scenarioName, OperatingMode::Mo
     //Clean up
     scenarioListBox->remove(); scenarioListBox = 0;
     okButton->remove(); okButton = 0;
+    exitButton->remove(); exitButton = 0;
     title->remove(); title = 0;
     instruction->remove(); instruction=0;
     secondaryText->remove(); secondaryText=0;

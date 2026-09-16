@@ -594,6 +594,16 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
                 gui->setLinesControlsWindowVisible(true);
             }
 
+            if (id == GUIMain::GUI_ID_HIDE_CONTROLS_BUTTON)
+            {
+                gui->setControlsWindowVisible(false);
+            }
+
+            if (id == GUIMain::GUI_ID_SHOW_CONTROLS_BUTTON)
+            {
+                gui->setControlsWindowVisible(true);
+            }
+
             if (id == GUIMain::GUI_ID_RUDDERPUMP_1_WORKING_BUTTON)
             {
 	      /*model->setRudderPumpState(1, true);
@@ -838,6 +848,46 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
         if (!(focussedElement && focussedElement->getType() == irr::gui::EGUIET_EDIT_BOX))
         {
 
+            // Accelerator via the actual typed character, as a layout-independent
+            // fallback for the top-row digit keys. On AZERTY keyboards the unshifted
+            // main row produces symbols (&,",etc.), not digits, so KeyInput.Key never
+            // becomes KEY_KEY_0-7 there - not even with Shift held, since the engine's
+            // X11 key-code lookup ignores the live modifier state. KeyInput.Char is
+            // computed from XLookupString/XwcLookupString instead, which does respect
+            // Shift, so it reliably reflects the digit actually typed on any layout.
+            if (!event.KeyInput.Control)
+            {
+                switch (event.KeyInput.Char)
+                {
+                case L'0':
+                    model->setAccelerator(0.0);
+                    break;
+                case L'1':
+                    model->setAccelerator(1.0);
+                    break;
+                case L'2':
+                    model->setAccelerator(2.0);
+                    break;
+                case L'3':
+                    model->setAccelerator(5.0);
+                    break;
+                case L'4':
+                    model->setAccelerator(15.0);
+                    break;
+                case L'5':
+                    model->setAccelerator(30.0);
+                    break;
+                case L'6':
+                    model->setAccelerator(60.0);
+                    break;
+                case L'7':
+                    model->setAccelerator(3600.0);
+                    break;
+                default:
+                    break;
+                }
+            }
+
             if (event.KeyInput.Shift && event.KeyInput.Control)
             {
 
@@ -923,33 +973,10 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
 
                 switch (event.KeyInput.Key)
                 {
-                // Accelerator
-                case irr::KEY_KEY_0:
-                    model->setAccelerator(0.0);
-                    break;
+                // Accelerator 0-7 is handled above via KeyInput.Char (layout-independent).
+                // Return is kept here as a separate, deliberate "resume 1x" convenience key.
                 case irr::KEY_RETURN:
                     model->setAccelerator(1.0);
-                    break;
-                case irr::KEY_KEY_1:
-                    model->setAccelerator(1.0);
-                    break;
-                case irr::KEY_KEY_2:
-                    model->setAccelerator(2.0);
-                    break;
-                case irr::KEY_KEY_3:
-                    model->setAccelerator(5.0);
-                    break;
-                case irr::KEY_KEY_4:
-                    model->setAccelerator(15.0);
-                    break;
-                case irr::KEY_KEY_5:
-                    model->setAccelerator(30.0);
-                    break;
-                case irr::KEY_KEY_6:
-                    model->setAccelerator(60.0);
-                    break;
-                case irr::KEY_KEY_7:
-                    model->setAccelerator(3600.0);
                     break;
                 case irr::KEY_KEY_H:
 		  model->getSound()->startHorn();

@@ -642,14 +642,13 @@ public:
 	*/
 	virtual IGUIElement* getNextElement(bool reverse=false, bool group=false) = 0;
 
-	//! Set the way the gui will handle automatic focus changes
-	/** The default is (EFF_SET_ON_LMOUSE_DOWN | EFF_SET_ON_TAB).
-	with the left mouse button.
+	//! Set focus behavior, like the way the gui will handle automatic focus changes
+	/** The default is EFF_DEFAULT.
 	This does not affect the setFocus function itself - users can still call that whenever they want on any element.
 	\param flags A bitmask which is a combination of ::EFOCUS_FLAG flags.*/
 	virtual void setFocusBehavior(u32 flags) = 0;
 
-	//! Get the way the gui does handle focus changes
+	//! Get the way the gui does handle focus
 	/** \returns A bitmask which is a combination of ::EFOCUS_FLAG flags.*/
 	virtual u32 getFocusBehavior() const = 0;
 

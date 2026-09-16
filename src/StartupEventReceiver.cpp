@@ -20,7 +20,7 @@
 
 //using namespace irr;
 
-StartupEventReceiver::StartupEventReceiver(irr::gui::IGUIListBox* scenarioListBox, irr::gui::IGUIStaticText* scenarioText, irr::gui::IGUICheckBox* secondaryBox, irr::gui::IGUICheckBox* multiplayerBox, irr::gui::IGUIStaticText* description, irr::s32 listBoxID, irr::s32 okButtonID, irr::s32 secondaryBoxID, irr::s32 multiplayerBoxID, irr::IrrlichtDevice* dev)
+StartupEventReceiver::StartupEventReceiver(irr::gui::IGUIListBox* scenarioListBox, irr::gui::IGUIStaticText* scenarioText, irr::gui::IGUICheckBox* secondaryBox, irr::gui::IGUICheckBox* multiplayerBox, irr::gui::IGUIStaticText* description, irr::s32 listBoxID, irr::s32 okButtonID, irr::s32 secondaryBoxID, irr::s32 multiplayerBoxID, irr::s32 exitButtonID, irr::IrrlichtDevice* dev)
 	{
 		device = dev;
 		this->scenarioListBox = scenarioListBox;
@@ -32,6 +32,7 @@ StartupEventReceiver::StartupEventReceiver(irr::gui::IGUIListBox* scenarioListBo
 		this->okButtonID = okButtonID;
 		this->secondaryBoxID = secondaryBoxID;
 		this->multiplayerBoxID = multiplayerBoxID;
+		this->exitButtonID = exitButtonID;
 		scenarioSelected = -1; //Set as initially invalid
 	}
 
@@ -46,6 +47,11 @@ StartupEventReceiver::StartupEventReceiver(irr::gui::IGUIListBox* scenarioListBo
                 if (scenarioListBox->getSelected() > -1 ) {
                     scenarioSelected = scenarioListBox->getSelected();
                 }
+            }
+
+            if (event.GUIEvent.EventType==irr::gui::EGET_BUTTON_CLICKED && id == exitButtonID)
+            {
+                device->closeDevice(); //Shutdown.
             }
 
             if (event.GUIEvent.EventType==irr::gui::EGET_CHECKBOX_CHANGED) {

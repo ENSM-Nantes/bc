@@ -28,10 +28,10 @@ class ScenarioChoice
 {
 public:
     ScenarioChoice(irr::IrrlichtDevice* device, Lang* language);
-    void chooseScenario(std::string& scenarioName, OperatingMode::Mode& mode, std::string scenarioPath);
+    void chooseScenario(std::string& scenarioName, OperatingMode::Mode& mode, std::string scenarioPath, float fontScale);
 
 private:
-    void getScenarioList(std::vector<std::string>&scenarioList, std::vector<std::string>&scenarioDescription, std::string scenarioPath);
+    void getScenarioList(std::vector<std::string>&scenarioList, std::vector<std::string>&scenarioDescription, std::vector<std::string>&scenarioShipsAndMap, std::string scenarioPath);
     irr::IrrlichtDevice* device;
     irr::gui::IGUIEnvironment* gui;
     Lang* language;
@@ -41,7 +41,8 @@ private:
         GUI_ID_SCENARIO_LISTBOX = 101,
         GUI_ID_OK_BUTTON,
         GUI_ID_SECONDARY_CHECKBOX,
-        GUI_ID_MULTIPLAYER_CHECKBOX
+        GUI_ID_MULTIPLAYER_CHECKBOX,
+        GUI_ID_EXIT_BUTTON
     };
 
 };

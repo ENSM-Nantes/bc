@@ -19,7 +19,7 @@ namespace scene
 		class IVertexList
 		{
 		public:
-			virtual ~IVertexList(){};
+			virtual ~IVertexList() {}
 
 			virtual u32 stride() const =0;
 
@@ -33,7 +33,7 @@ namespace scene
 			virtual void setValue(u32 index, const video::S3DVertexTangents &value) =0;
 
 			virtual video::S3DVertex& operator [](u32 index) = 0;
-			virtual video::S3DVertex& operator [](const u32 index) const =0;
+			virtual const video::S3DVertex& operator [](const u32 index) const =0;
 			virtual video::S3DVertex& getLast() =0;
 			virtual void set_used(u32 usedNow) =0;
 			virtual void reallocate(u32 new_size, bool canShrink=true) =0;
@@ -70,8 +70,8 @@ namespace scene
 			virtual video::S3DVertex& operator [](u32 index) IRR_OVERRIDE
 			{return (video::S3DVertex&)Vertices[index];}
 
-			virtual video::S3DVertex& operator [](const u32 index) const IRR_OVERRIDE
-			{return (video::S3DVertex&)Vertices[index];}
+			virtual const video::S3DVertex& operator [](const u32 index) const IRR_OVERRIDE
+			{return (const video::S3DVertex&)Vertices[index];}
 
 			virtual video::S3DVertex& getLast() IRR_OVERRIDE
 			{return (video::S3DVertex&)Vertices.getLast();}
@@ -221,7 +221,7 @@ namespace scene
 			return (*Vertices)[index];
 		}
 
-		virtual video::S3DVertex& operator [](const u32 index) const IRR_OVERRIDE
+		virtual const video::S3DVertex& operator [](const u32 index) const IRR_OVERRIDE
 		{
 			return (*Vertices)[index];
 		}

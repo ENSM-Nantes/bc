@@ -618,7 +618,6 @@
 		<Unit filename="CBoneSceneNode.cpp" />
 		<Unit filename="CBoneSceneNode.h" />
 		<Unit filename="CBufferRenderNode.h" />
-		<Unit filename="CBurningShader_Raster_Reference.cpp" />
 		<Unit filename="CCSMLoader.cpp" />
 		<Unit filename="CCSMLoader.h" />
 		<Unit filename="CCameraSceneNode.cpp" />
@@ -654,7 +653,6 @@
 		<Unit filename="CDefaultSceneNodeAnimatorFactory.h" />
 		<Unit filename="CDefaultSceneNodeFactory.cpp" />
 		<Unit filename="CDefaultSceneNodeFactory.h" />
-		<Unit filename="CDepthBuffer.cpp" />
 		<Unit filename="CDepthBuffer.h" />
 		<Unit filename="CDummyTransformationSceneNode.cpp" />
 		<Unit filename="CDummyTransformationSceneNode.h" />
@@ -836,7 +834,6 @@
 		<Unit filename="COpenGLCoreFeature.h" />
 		<Unit filename="COpenGLCoreRenderTarget.h" />
 		<Unit filename="COpenGLCoreTexture.h" />
-		<Unit filename="COpenGLCommon.h" />
 		<Unit filename="COpenGLDriver.cpp" />
 		<Unit filename="COpenGLDriver.h" />
 		<Unit filename="COpenGLExtensionHandler.cpp" />
@@ -942,9 +939,6 @@
 		<Unit filename="CTRFlat.cpp" />
 		<Unit filename="CTRFlatWire.cpp" />
 		<Unit filename="CTRGouraud.cpp" />
-		<Unit filename="CTRGouraud2.cpp" />
-		<Unit filename="CTRGouraudAlphaNoZ2.cpp" />
-		<Unit filename="CTRGouraudNoZ2.cpp" />
 		<Unit filename="CTRGouraudWire.cpp" />
 		<Unit filename="CTRNormalMap.cpp" />
 		<Unit filename="CTRParallaxMap.cpp" />

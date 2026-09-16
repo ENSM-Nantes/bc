@@ -192,13 +192,13 @@
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Static lib - Release|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Static lib - Release|x64'" />
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(DXSDK_DIR)include;$(IncludePath)</IncludePath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(DXSDK_DIR)include;$(IncludePath)</IncludePath>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">obj\$(Configuration)\</IntDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">obj\$(Configuration)64\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(DXSDK_DIR)include;$(IncludePath)</IncludePath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IncludePath);</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(DXSDK_DIR)include;$(IncludePath)</IncludePath>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='SDL-Debug|Win32'">$(DXSDK_DIR)include;$(IncludePath)</IncludePath>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='SDL-Debug|x64'">$(DXSDK_DIR)include;$(IncludePath)</IncludePath>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Static lib - Debug|Win32'">$(DXSDK_DIR)include;$(IncludePath)</IncludePath>
@@ -210,8 +210,8 @@
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='SDL-Debug|Win32'">$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Static lib - Debug|Win32'">$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Static lib - Release|Win32'">$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(LibraryPath);$(VSInstallDir);$(VSInstallDir)lib\amd64</LibraryPath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(LibraryPath);$(VSInstallDir);$(VSInstallDir)lib\amd64;</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(DXSDK_DIR)Lib\x64;$(LibraryPath);$(VSInstallDir);$(VSInstallDir)lib\amd64</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(DXSDK_DIR)Lib\x64;$(LibraryPath);$(VSInstallDir);$(VSInstallDir)lib\amd64</LibraryPath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='SDL-Debug|x64'">$(DXSDK_DIR)Lib\x64;$(LibraryPath);$(VSInstallDir);$(VSInstallDir)lib\amd64</LibraryPath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Static lib - Debug|x64'">$(DXSDK_DIR)Lib\x64;$(LibraryPath);$(VSInstallDir);$(VSInstallDir)lib\amd64</LibraryPath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Static lib - Release|x64'">$(DXSDK_DIR)Lib\x64;$(LibraryPath);$(VSInstallDir);$(VSInstallDir)lib\amd64</LibraryPath>
@@ -222,11 +222,10 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
-    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
-    <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+    <EnableMicrosoftCodeAnalysis>true</EnableMicrosoftCodeAnalysis>
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -278,7 +277,7 @@
     </Midl>
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\include;zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NO_IRR_COMPILE_WITH_DIRECT3D_9_;WIN32;WIN64;_DEBUG;_WINDOWS;_USRDLL;IRRLICHT_EXPORTS;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions); _ITERATOR_DEBUG_LEVEL=0</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;WIN64;_DEBUG;_WINDOWS;_USRDLL;IRRLICHT_EXPORTS;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions); _ITERATOR_DEBUG_LEVEL=0</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
@@ -360,7 +359,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>..\..\include;zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NO_IRR_COMPILE_WITH_DIRECT3D_9_;WIN32;WIN64;NDEBUG;_WINDOWS;_USRDLL;IRRLICHT_EXPORTS;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;WIN64;NDEBUG;_WINDOWS;_USRDLL;IRRLICHT_EXPORTS;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -640,6 +639,7 @@
     <ClInclude Include="..\..\include\ITimer.h" />
     <ClInclude Include="..\..\include\IVertexBuffer.h" />
     <ClInclude Include="..\..\include\Keycodes.h" />
+    <ClInclude Include="..\..\include\SExposedTextureData.h" />
     <ClInclude Include="..\..\include\SIrrCreationParameters.h" />
     <ClInclude Include="..\..\include\SKeyMap.h" />
     <ClInclude Include="..\..\include\EDriverTypes.h" />
@@ -798,6 +798,8 @@
     <ClInclude Include="burning_shader_compile_start.h" />
     <ClInclude Include="burning_shader_compile_triangle.h" />
     <ClInclude Include="burning_shader_compile_verify.h" />
+    <ClInclude Include="burning_shader_glsl_emu_define.h" />
+    <ClInclude Include="burning_shader_glsl_emu_undefine.h" />
     <ClInclude Include="CB3DMeshWriter.h" />
     <ClInclude Include="CBlit.h" />
     <ClInclude Include="CBufferRenderNode.h" />
@@ -946,12 +948,10 @@
     <ClInclude Include="CD3D9ParallaxMapRenderer.h" />
     <ClInclude Include="CD3D9ShaderMaterialRenderer.h" />
     <ClInclude Include="CD3D9Texture.h" />
-    <ClInclude Include="CDepthBuffer.h" />
     <ClInclude Include="CSoftware2MaterialRenderer.h" />
     <ClInclude Include="CSoftwareDriver2.h" />
     <ClInclude Include="CSoftwareTexture2.h" />
     <ClInclude Include="IBurningShader.h" />
-    <ClInclude Include="IDepthBuffer.h" />
     <ClInclude Include="S4DVertex.h" />
     <ClInclude Include="SoftwareDriver2_compile_config.h" />
     <ClInclude Include="SoftwareDriver2_helper.h" />
@@ -1096,7 +1096,6 @@
     <ClCompile Include="CQ3LevelMesh.cpp" />
     <ClCompile Include="CSkinnedMesh.cpp" />
     <ClCompile Include="CSTLMeshFileLoader.cpp" />
-    <ClCompile Include="CTRGouraudNoZ2.cpp" />
     <ClCompile Include="CTRParallaxMap.cpp" />
     <ClCompile Include="CTR_transparent_reflection_2_layer.cpp" />
     <ClCompile Include="CWGLManager.cpp" />
@@ -1196,12 +1195,8 @@
     <ClCompile Include="CD3D9ParallaxMapRenderer.cpp" />
     <ClCompile Include="CD3D9ShaderMaterialRenderer.cpp" />
     <ClCompile Include="CD3D9Texture.cpp" />
-    <ClCompile Include="CBurningShader_Raster_Reference.cpp" />
-    <ClCompile Include="CDepthBuffer.cpp" />
     <ClCompile Include="CSoftwareDriver2.cpp" />
     <ClCompile Include="CSoftwareTexture2.cpp" />
-    <ClCompile Include="CTRGouraud2.cpp" />
-    <ClCompile Include="CTRGouraudAlphaNoZ2.cpp" />
     <ClCompile Include="CTRNormalMap.cpp" />
     <ClCompile Include="CTRStencilShadow.cpp" />
     <ClCompile Include="CTRTextureBlend.cpp" />

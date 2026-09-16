@@ -7,6 +7,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native")
+# Disable PIE: on AArch64 (e.g. GitHub Actions ubuntu-22.04-arm), the default
+# -fPIE/-pie small code model can overflow ADRP page-relative relocations
+# (R_AARCH64_ADR_PREL_PG_HI21) in large translation units such as
+# GUIMain.cpp and Credits.cpp, causing "relocation truncated to fit" link errors.
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-pie")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -no-pie")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 find_package(X11 REQUIRED)

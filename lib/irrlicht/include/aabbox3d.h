@@ -191,6 +191,18 @@ class aabbox3d
 			corners[5].set(middle.X, middle.Y, MaxEdge.Z);
 		}
 
+		//! Stores the 6 planes defining the box into an array
+		/** \param planes: Pointer to array of 6 planes
+		*   Direction of planes is outwards	*/
+		void getPlanes(plane3d<T> *planes) const
+		{
+			planes[0].setPlane( vector3d<T>(MinEdge.X,0,0), vector3d<T>(-1,0,0));
+			planes[1].setPlane( vector3d<T>(MaxEdge.X,0,0), vector3d<T>(1,0,0));
+			planes[2].setPlane( vector3d<T>(0,MinEdge.Y,0), vector3d<T>(0,-1,0));
+			planes[3].setPlane( vector3d<T>(0,MaxEdge.Y,0), vector3d<T>(0,1,0));
+			planes[4].setPlane( vector3d<T>(0,0,MinEdge.Z), vector3d<T>(0,0,-1));
+			planes[5].setPlane( vector3d<T>(0,0,MaxEdge.Z), vector3d<T>(0,0,1));
+		}
 
 		//! Repairs the box.
 		/** Necessary if for example MinEdge and MaxEdge are swapped. */

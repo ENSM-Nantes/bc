@@ -161,12 +161,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Credits.cpp" />
     <ClCompile Include="..\launcher\main.cpp" />
     <ClCompile Include="..\IniFile.cpp" />
     <ClCompile Include="..\Lang.cpp" />
     <ClCompile Include="..\Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Credits.hpp" />
     <ClInclude Include="..\IniFile.hpp" />
     <ClInclude Include="..\Lang.hpp" />
     <ClInclude Include="..\Utilities.hpp" />

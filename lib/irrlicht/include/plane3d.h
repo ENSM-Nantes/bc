@@ -151,7 +151,7 @@ class plane3d
 			D = - MPoint.dotProduct(Normal);
 		}
 
-		//! Flip plane direction to opposide side
+		//! Flip plane direction to opposite side
 		void flip()
 		{
 			Normal = -Normal;

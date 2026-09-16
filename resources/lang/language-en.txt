@@ -4,7 +4,9 @@ The characters \n will be replaced with a line break, so multiple lines of text 
 This file must be saved with default (ANSI) encoding on Windows, and UTF-8 encoding on other platforms (Linux, OSX, ...)
 
 ok="OK"
-scnChoose="Please choose a scenario:"
+scnChoose="Please choose a scenario"
+scenarioDetails="Scenario details"
+launchScenario="Launch scenario"
 secondary="Use as secondary display"
 secondaryWait="Waiting for connection. This computer's hostname and port is:\n"
 moveMessage="Please move this message box to the monitor where Bridge Command should run, and click OK"
@@ -15,7 +17,7 @@ udpListenPort="Port to receive data on:"
 udpListenPortHelp="In general leave this as the default. It can be changed if more than one instance of the program is running on this computer."
 loadingmsg="Loading scenario..."
 
-pausedbutton="PAUSED: CLICK HERE TO START\n\n"
+pausedbutton="Paused : Click here to start"
 normalpausedbutton="Mouse:\nThe rudder, engine and the control dials are all clickable.\nRight click on the engine controls to set both at once.\nScroll wheel/2 finger scroll also controls the rudder.\n\nKeyboard:\nArrow keys - look around\n    Ctrl + Arrow keys: Look ahead/port/stbd/astern\n    Shift + L/R Arrow keys: Look around in steps\nSpace: Change view\n    Shift + space: Lock view in secondary mode\n    Ctrl + Shift + space: Toggle if camera moves with ship\nF: Toggle controls visibility\n0-7: Time compression\n'H': Horn\n'M': Release man overboard dummy\nCtrl + 'M': Retrieve man overboard dummy\n'A'/'Z': Control port engine\n'S'/'X': Control stbd engine\n'D'/'C': Control both engines\n'V'/'B':Control rudder\n'U'/'I': Control bow thruster\n'J'/'K': Control stern thruster\nEsc: Quit"
 vrpausedbutton="Show/hide this VR 2d display with VR controller menu button.\n\nWhile VR 2d display is shown, interface can be used by\npointing controller and using 'select'\n\nWhile VR 2d display is hidden:\n==============================\nControl engines by moving left VR controller with 'select' pressed.\nChoose which engine is controlled by tilting controller to\nleft/right, or keeping central for both.\n\nControl the wheel by moving the right VR controller with 'select' pressed.\n\nIf Azimuth drives are being used then control with the left\nand right VR controllers with 'select' pressed."
 startupHelpEngine="Click here to control the engine\n\n Right click to control both together"
@@ -129,6 +131,7 @@ log="!"
 extraControls="Extra controls"
 
 lines="Lines"
+controls="Controls"
 
 addLine="Add line"
 removeLine="Remove line"

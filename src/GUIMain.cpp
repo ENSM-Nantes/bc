@@ -32,7 +32,7 @@ GUIMain::GUIMain()
 
 }
 
-void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines, Lang* language, std::vector<std::string>* logMessages, bool controlsHidden, bool showTideHeight, bool hasBowThruster, bool hasSternThruster, bool showCollided, bool vr3dMode)
+void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines, Lang* language, std::vector<std::string>* logMessages, bool controlsHidden, bool showTideHeight, bool hasBowThruster, bool hasSternThruster, bool showCollided, bool vr3dMode, float fontScale)
 {
   mOwnShip = aOwnShip;
   mLines = aLines;
@@ -543,7 +543,24 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
   anchorLineText->setTextAlignment(irr::gui::EGUIA_LOWERRIGHT, irr::gui::EGUIA_CENTER);
 
   linesText = guienv->addStaticText(L"",irr::core::rect<irr::s32>(0.325*lwSu, 0.01*lwSh + lwVO, 0.95*lwSu, 0.425*lwSh + lwVO),true,true,linesControlsWindow);
- 
+
+  //Add a window listing the mouse/keyboard commands (will normally be hidden) - opened
+  //from the "Controls" button, rather than crammed into the pause screen's button
+  irr::core::rect<irr::s32> controlsWindowPos(0.15*su,0.06*sh,0.85*su,0.94*sh);
+  controlsWindow = guienv->addWindow(controlsWindowPos);
+  controlsWindow->getCloseButton()->setVisible(false);
+  controlsWindow->setText(language->translate("controls").c_str());
+  guienv->addButton(controlsWindow->getCloseButton()->getRelativePosition(),controlsWindow,GUI_ID_HIDE_CONTROLS_BUTTON,L"X");
+  controlsWindow->setVisible(false);
+
+  irr::core::rect<irr::s32> controlsWindowSize = controlsWindow->getRelativePosition();
+  irr::s32 cwVO = guienv->getSkin() ? guienv->getSkin()->getSize(irr::gui::EGDS_WINDOW_BUTTON_WIDTH) + 5 : 20; // Vertical offset, below the title bar
+  irr::core::rect<irr::s32> controlsTextPos(0.02*controlsWindowSize.getWidth(), cwVO,
+					     0.98*controlsWindowSize.getWidth(), 0.98*controlsWindowSize.getHeight());
+  irr::core::stringw controlsMessage = vr3dMode ? language->translate("vrpausedbutton") : language->translate("normalpausedbutton");
+  irr::gui::IGUIStaticText* controlsText = guienv->addStaticText(controlsMessage.c_str(), controlsTextPos, false, true, controlsWindow);
+  controlsText->setOverrideColor(irr::video::SColor(255,40,40,40));
+
   //add radar buttons
   //add tab control for radar
   radarTabControl = guienv->addTabControl(irr::core::rect<irr::s32>(0.455*su+azimuthGUIOffsetR,0.695*sh,0.697*su+azimuthGUIOffsetR,0.990*sh),0,true);
@@ -717,14 +734,27 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
   guienv->addButton(irr::core::rect<irr::s32>(0.136*radarSu,0.675*radarSu,0.200*radarSu,0.695*radarSu),largeRadarControls,GUI_ID_MANUAL_CLEAR_BUTTON,language->translate("clear").c_str());
 
 
-  //Add paused button
-  irr::core::stringw pausedButtonMessage = language->translate("pausedbutton");
-  if (vr3dMode) {
-    pausedButtonMessage = pausedButtonMessage + language->translate("vrpausedbutton");
-  } else {
-    pausedButtonMessage = pausedButtonMessage + language->translate("normalpausedbutton");
+  //Add paused button: a compact styled headline (click to start), centred on screen.
+  //The full list of commands used to be crammed into this button's caption - Irrlicht
+  //buttons don't word-wrap or scroll a long caption, so it was liable to get silently
+  //clipped. It now lives in its own "Controls" window instead (see controlsWindow
+  //below), reachable any time via a button in the main control row.
+  //Deliberately uses open-sans rather than the user's configured font (fontName, usually
+  //comfortaa) - comfortaa's bitmap atlas packs glyph rows tightly enough that tall accent
+  //marks from one row bleed into the row above at larger sizes, showing as stray pixels
+  //under some letters. open-sans's atlas has proper row spacing and stays clean at this
+  //size. Only used for this kind of large decorative headline text - everything else
+  //still renders in the user's configured font.
+  irr::s32 pausedFontSize = (irr::s32)(18 * fontScale + 0.5);
+  if (pausedFontSize > 22) {pausedFontSize = 22;}
+  std::string pausedFontPath = "media/fonts/open-sans/open-sans-" + std::to_string(pausedFontSize) + ".xml";
+  irr::gui::IGUIFont* pausedFont = guienv->getFont(pausedFontPath.c_str());
+
+  pausedButton = guienv->addButton(irr::core::rect<irr::s32>(0.25*su,0.45*sh,0.75*su,0.55*sh),0,GUI_ID_START_BUTTON, language->translate("pausedbutton").c_str());
+  pausedButton->setOverrideColor(irr::video::SColor(255,20,70,160));
+  if (pausedFont != 0) {
+    pausedButton->setOverrideFont(pausedFont);
   }
-  pausedButton = guienv->addButton(irr::core::rect<irr::s32>(0.2*su,0.1*sh,0.8*su,0.9*sh),0,GUI_ID_START_BUTTON, pausedButtonMessage.c_str());
 
   //show/hide interface
   showInterface = true; //If we start with the 2d interface shown
@@ -751,6 +781,9 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
 
   //Show button to display lines control window
   showLinesControlsButton = guienv->addButton(irr::core::rect<irr::s32>(0.34*su+azimuthGUIOffsetL,buttonRowTop*sh,0.375*su+azimuthGUIOffsetL,buttonRowBottom*sh),0,GUI_ID_SHOW_LINES_CONTROLS_BUTTON,language->translate("lines").c_str());
+
+  //Show button to display the mouse/keyboard controls window
+  showControlsButton = guienv->addButton(irr::core::rect<irr::s32>(0.39*su+azimuthGUIOffsetL,buttonRowTop*sh,0.425*su+azimuthGUIOffsetL,buttonRowBottom*sh),0,GUI_ID_SHOW_CONTROLS_BUTTON,language->translate("controls").c_str());
 
   //Show internal log window button
   pcLogButton = guienv->addButton(irr::core::rect<irr::s32>(0.375*su+azimuthGUIOffsetL,buttonRowTop*sh,0.39*su+azimuthGUIOffsetL,buttonRowBottom*sh),0,GUI_ID_SHOW_LOG_BUTTON,language->translate("log").c_str());
@@ -979,6 +1012,7 @@ void GUIMain::updateVisibility(bool bHideFull)
   if (pcLogButton) { pcLogButton->setVisible(showInterface); }
   if (showExtraControlsButton) { showExtraControlsButton->setVisible(showInterface); }
   if (showLinesControlsButton) { showLinesControlsButton->setVisible(showInterface); }
+  if (showControlsButton) { showControlsButton->setVisible(showInterface); }
 
   if (exitButton) { exitButton->setVisible(showInterface); }
 
@@ -1836,4 +1870,12 @@ void GUIMain::setLinesControlsWindowVisible(bool windowVisible)
 void GUIMain::setLinesControlsText(std::string textToShow)
 {
   linesText->setText(irr::core::stringw(textToShow.c_str()).c_str());
+}
+
+void GUIMain::setControlsWindowVisible(bool windowVisible)
+{
+  controlsWindow->setVisible(windowVisible);
+  if (windowVisible) {
+    guienv->setFocus(controlsWindow);
+  }
 }

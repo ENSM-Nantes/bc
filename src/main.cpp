@@ -39,6 +39,7 @@
 #include "ThrusterSerial.hpp"
 #include "Utilities.hpp"
 #include "OperatingModeEnum.hpp"
+#include "LoadingQuotes.hpp"
 #include "Update.hpp"
 #include "JoyStick.hpp"
 
@@ -96,31 +97,6 @@ namespace IniFile {
 
 // Irrlicht Namespaces
 //using namespace irr;
-
-irr::core::stringw getCredits(){
-
-  irr::core::stringw creditsString(L"NO DATA SUPPLIED WITH THIS PROGRAM, OR DERIVED FROM IT IS TO BE USED FOR NAVIGATION.\n\n");
-  creditsString.append(L"Bridge Command is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 2 as published by the Free Software Foundation.\n\n");
-  creditsString.append(L"Bridge Command  is distributed  in the  hope that  it will  be useful, but WITHOUT ANY WARRANTY; without even the implied  warranty of  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\n");
-  creditsString.append(L"In memory of Sergio Fuentes, who provided many useful suggestions for the program's development.\n\n");
-  creditsString.append(L"Many thanks to those who have made their models available for use in Bridge Command:\n");
-  creditsString.append(L"> Juergen Klemp\n");
-  creditsString.append(L"> Simon D Richardson\n");
-  creditsString.append(L"> Jason Simpson\n");
-  creditsString.append(L"> Ragnar\n");
-  creditsString.append(L"> Thierry Videlaine\n");
-  creditsString.append(L"> NETC (Naval Education and Training Command)\n");
-  creditsString.append(L"> Sky image from 0ptikz\n\n");
-  creditsString.append(L"Many thanks to Ken Trethewey for making his images of the Eddystone lighthouse available.\n\n");
-
-  creditsString.append(L"Many thanks to contributors including David Elir Evans, Antoine Saillard, Konrad Wolsing, Jan Bauer, AndreySSH, Manfred, ceeac.\n\n");
-
-  creditsString.append(L"Bridge Command uses the Irrlicht Engine, the ENet networking library, ASIO, PortAudio, water based on Keith Lantz FFT water implementation, RealisticWaterSceneNode by elvman, AIS Parser by Brian C. Lane, and the Serial library by William Woodall. Bridge Command depends on libsndfile, which is released under the GNU Lesser General Public License version 2.1 or 3.\n\n");
-
-  creditsString.append(L"The Irrlicht Engine is based in part on the work of the Independent JPEG Group, the zlib, and libpng.");
-
-  return creditsString;
-}
 
 sJsMapping getJoystickSetup(std::string iniFilename, sJsConf& aJsConf) 
 {
@@ -620,7 +596,7 @@ int main(int argc, char ** argv)
     
   if (mode == OperatingMode::Normal) {
     ScenarioChoice scenarioChoice(device,&language);
-    scenarioChoice.chooseScenario(scenarioName, mode, scenarioPath);
+    scenarioChoice.chooseScenario(scenarioName, mode, scenarioPath, fontScale);
   }
 
   Utilities::trim(hostname);
@@ -654,11 +630,28 @@ int main(int argc, char ** argv)
     }
   }
   //Show loading message
-  irr::u32 creditsStartTime = device->getTimer()->getRealTime();
-  irr::core::stringw creditsText = language.translate("loadingmsg");
-  creditsText.append(L"\n\n");
-  creditsText.append(getCredits());
-  irr::gui::IGUIStaticText* loadingMessage = device->getGUIEnvironment()->addStaticText(creditsText.c_str(), irr::core::rect<irr::s32>(0.05*su,0.05*sh,0.95*su,0.95*sh),true);
+  //Deliberately uses open-sans rather than the user's configured font (fontName, usually
+  //comfortaa) - comfortaa's bitmap atlas packs glyph rows tightly enough that tall accent
+  //marks from one row bleed into the row above at larger sizes, showing as stray pixels
+  //under some letters. open-sans's atlas has proper row spacing and stays clean at this
+  //size. Only used for this kind of large decorative headline text - everything else
+  //still renders in the user's configured font.
+  irr::core::stringw loadingText = language.translate("loadingmsg");
+  irr::s32 loadingFontSize = (irr::s32)(18 * fontScale + 0.5);
+  if (loadingFontSize > 22) {loadingFontSize = 22;}
+  std::string loadingFontPath = "media/fonts/open-sans/open-sans-" + std::to_string(loadingFontSize) + ".xml";
+  irr::gui::IGUIFont* loadingFont = device->getGUIEnvironment()->getFont(loadingFontPath.c_str());
+  irr::gui::IGUIStaticText* loadingMessage = device->getGUIEnvironment()->addStaticText(loadingText.c_str(), irr::core::rect<irr::s32>(0.05*su,0.40*sh,0.95*su,0.60*sh));
+  loadingMessage->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
+  loadingMessage->setOverrideColor(irr::video::SColor(255,20,70,160));
+  if (loadingFont != 0) {
+    loadingMessage->setOverrideFont(loadingFont);
+  }
+  irr::gui::IGUIStaticText* loadingQuote = device->getGUIEnvironment()->addStaticText(
+    getRandomLoadingQuote((irr::u32)device->getTimer()->getRealTime()).c_str(),
+    irr::core::rect<irr::s32>(0.15*su,0.62*sh,0.85*su,0.78*sh));
+  loadingQuote->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_UPPERLEFT);
+  loadingQuote->setOverrideColor(irr::video::SColor(255,120,120,120));
   device->run();
   driver->beginScene(true, true, irr::video::SColor(0,255,255,255));
   device->getGUIEnvironment()->drawAll();
@@ -803,31 +796,9 @@ int main(int argc, char ** argv)
   // Set up the VR interface
   VRInterface vrInterface(device, device->getSceneManager(), device->getVideoDriver(), su, sh);
 
-
-  //check enough time has elapsed to show the credits screen (5s)
-  while (device->getTimer()->getRealTime() - creditsStartTime < 5000) {
-    device->run();
-  }
-    
-  // Show world model credits if available
-  std::string worldReadme = model.getWorldReadme();
-  if (worldReadme.size() > 0) {
-    std::wstring wideWorldReadme = std::wstring(worldReadme.begin(), worldReadme.end());
-    loadingMessage->setText(wideWorldReadme.c_str());
-    device->run();
-    driver->beginScene(irr::video::ECBF_COLOR | irr::video::ECBF_DEPTH, irr::video::SColor(0, 200, 200, 200));
-    device->getGUIEnvironment()->drawAll();
-    driver->endScene();
-        
-    //check enough time has elapsed to show the credits screen (10s) in total (5s main, 5s world)
-    while (device->getTimer()->getRealTime() - creditsStartTime < 10000) {
-      device->run();
-    }
-
-  }
-    
   // Remove loading message, as not needed again
   loadingMessage->remove(); loadingMessage = 0;
+  loadingQuote->remove(); loadingQuote = 0;
 
 
   // Load the VR interface, allowing link to model
@@ -852,7 +823,7 @@ int main(int argc, char ** argv)
     }
   }
 
-  guiMain.load(device, model.getOwnShip(), model.getLines(), &language, &logMessages, hideEngineAndRudder, showTideHeight, model.getOwnShip()->getThruster().HasBowThruster(), model.getOwnShip()->getThruster().HasSternThruster(), showCollided, vr3dMode);
+  guiMain.load(device, model.getOwnShip(), model.getLines(), &language, &logMessages, hideEngineAndRudder, showTideHeight, model.getOwnShip()->getThruster().HasBowThruster(), model.getOwnShip()->getThruster().HasSternThruster(), showCollided, vr3dMode, fontScale);
 
   thrusterSerial.Init(thrusterInfoComPort, thrusterInfoBaudrate);
   thrusterSerial.Send(model.getOwnShip()->getThruster().HasBowThruster(), model.getOwnShip()->getThruster().HasSternThruster());

@@ -20,7 +20,7 @@ namespace scene
 		class IIndexList
 		{
 		public:
-			virtual ~IIndexList(){};
+			virtual ~IIndexList() {}
 
 			virtual u32 stride() const =0;
 			virtual u32 size() const =0;

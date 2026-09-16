@@ -3,6 +3,7 @@ file(GLOB SRC_FILES
     "../IniFile.cpp"
     "../Lang.cpp"
     "../Utilities.cpp"
+    "../Credits.cpp"
 )
 add_executable(bridgecommand ${SRC_FILES})
 

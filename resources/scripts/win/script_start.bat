@@ -7,7 +7,7 @@ for /f %%i in ('find /c /v "" ^< "%TEMP%\serverStatus.log"') do set COUNT=%%i
 
 if %COUNT% == 0 (
 	echo -------- Start EnetServer
-    cd /d "C:\Program Files\Bridge Command SOMOS 3.3\bin\win"
+    cd /d "C:\Program Files\Bridge Command SOMOS 3.4\bin\win"
     bridgecommand-es.exe
 ) else (
     echo -------- EnetServer is already running

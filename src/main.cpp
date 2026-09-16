@@ -596,7 +596,7 @@ int main(int argc, char ** argv)
     
   if (mode == OperatingMode::Normal) {
     ScenarioChoice scenarioChoice(device,&language);
-    scenarioChoice.chooseScenario(scenarioName, mode, scenarioPath);
+    scenarioChoice.chooseScenario(scenarioName, mode, scenarioPath, fontScale);
   }
 
   Utilities::trim(hostname);
@@ -630,10 +630,16 @@ int main(int argc, char ** argv)
     }
   }
   //Show loading message
+  //Deliberately uses open-sans rather than the user's configured font (fontName, usually
+  //comfortaa) - comfortaa's bitmap atlas packs glyph rows tightly enough that tall accent
+  //marks from one row bleed into the row above at larger sizes, showing as stray pixels
+  //under some letters. open-sans's atlas has proper row spacing and stays clean at this
+  //size. Only used for this kind of large decorative headline text - everything else
+  //still renders in the user's configured font.
   irr::core::stringw loadingText = language.translate("loadingmsg");
   irr::s32 loadingFontSize = (irr::s32)(18 * fontScale + 0.5);
   if (loadingFontSize > 22) {loadingFontSize = 22;}
-  std::string loadingFontPath = "media/fonts/" + fontName + "/" + fontName + "-" + std::to_string(loadingFontSize) + ".xml";
+  std::string loadingFontPath = "media/fonts/open-sans/open-sans-" + std::to_string(loadingFontSize) + ".xml";
   irr::gui::IGUIFont* loadingFont = device->getGUIEnvironment()->getFont(loadingFontPath.c_str());
   irr::gui::IGUIStaticText* loadingMessage = device->getGUIEnvironment()->addStaticText(loadingText.c_str(), irr::core::rect<irr::s32>(0.05*su,0.40*sh,0.95*su,0.60*sh));
   loadingMessage->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
@@ -817,7 +823,7 @@ int main(int argc, char ** argv)
     }
   }
 
-  guiMain.load(device, model.getOwnShip(), model.getLines(), &language, &logMessages, hideEngineAndRudder, showTideHeight, model.getOwnShip()->getThruster().HasBowThruster(), model.getOwnShip()->getThruster().HasSternThruster(), showCollided, vr3dMode, fontName, fontScale);
+  guiMain.load(device, model.getOwnShip(), model.getLines(), &language, &logMessages, hideEngineAndRudder, showTideHeight, model.getOwnShip()->getThruster().HasBowThruster(), model.getOwnShip()->getThruster().HasSternThruster(), showCollided, vr3dMode, fontScale);
 
   thrusterSerial.Init(thrusterInfoComPort, thrusterInfoBaudrate);
   thrusterSerial.Send(model.getOwnShip()->getThruster().HasBowThruster(), model.getOwnShip()->getThruster().HasSternThruster());

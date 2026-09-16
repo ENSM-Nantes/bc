@@ -4,7 +4,8 @@ The characters \n will be replaced with a line break, so multiple lines of text 
 This file must be saved with default (ANSI) encoding on Windows, and UTF-8 encoding on other platforms (Linux, OSX, ...)
 
 ok="OK"
-scnChoose="Veuillez choisir un scénario :"
+scnChoose="Veuillez choisir un scénario"
+scenarioDetails="Détails du scénario"
 launchScenario="Lancer le scénario"
 secondary="Utiliser comme affichage secondaire"
 secondaryWait="En attente de connexion. Le nom et le port de l'ordinateur sont :\n"

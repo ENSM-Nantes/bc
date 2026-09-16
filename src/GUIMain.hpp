@@ -81,7 +81,7 @@ class GUIMain //Create, build and update GUI
 public:
     GUIMain();
     ~GUIMain();
-  void load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines, Lang* language, std::vector<std::string>* logMessages, bool controlsHidden, bool showTideHeight, bool hasBowThruster, bool hasSternThruster, bool showCollided, bool vr3dMode, std::string fontName, float fontScale);
+  void load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines, Lang* language, std::vector<std::string>* logMessages, bool controlsHidden, bool showTideHeight, bool hasBowThruster, bool hasSternThruster, bool showCollided, bool vr3dMode, float fontScale);
 
     enum GUI_ELEMENTS// Define some values that we'll use to identify individual GUI controls.
     {

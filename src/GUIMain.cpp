@@ -32,7 +32,7 @@ GUIMain::GUIMain()
 
 }
 
-void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines, Lang* language, std::vector<std::string>* logMessages, bool controlsHidden, bool showTideHeight, bool hasBowThruster, bool hasSternThruster, bool showCollided, bool vr3dMode, std::string fontName, float fontScale)
+void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines, Lang* language, std::vector<std::string>* logMessages, bool controlsHidden, bool showTideHeight, bool hasBowThruster, bool hasSternThruster, bool showCollided, bool vr3dMode, float fontScale)
 {
   mOwnShip = aOwnShip;
   mLines = aLines;
@@ -739,11 +739,15 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
   //buttons don't word-wrap or scroll a long caption, so it was liable to get silently
   //clipped. It now lives in its own "Controls" window instead (see controlsWindow
   //below), reachable any time via a button in the main control row.
-  //Note: kept to a modest size bump rather than a large one - at larger sizes the
-  //comfortaa font shows faint stray marks under some letters.
-  irr::s32 pausedFontSize = (irr::s32)(16 * fontScale + 0.5);
-  if (pausedFontSize > 18) {pausedFontSize = 18;}
-  std::string pausedFontPath = "media/fonts/" + fontName + "/" + fontName + "-" + std::to_string(pausedFontSize) + ".xml";
+  //Deliberately uses open-sans rather than the user's configured font (fontName, usually
+  //comfortaa) - comfortaa's bitmap atlas packs glyph rows tightly enough that tall accent
+  //marks from one row bleed into the row above at larger sizes, showing as stray pixels
+  //under some letters. open-sans's atlas has proper row spacing and stays clean at this
+  //size. Only used for this kind of large decorative headline text - everything else
+  //still renders in the user's configured font.
+  irr::s32 pausedFontSize = (irr::s32)(18 * fontScale + 0.5);
+  if (pausedFontSize > 22) {pausedFontSize = 22;}
+  std::string pausedFontPath = "media/fonts/open-sans/open-sans-" + std::to_string(pausedFontSize) + ".xml";
   irr::gui::IGUIFont* pausedFont = guienv->getFont(pausedFontPath.c_str());
 
   pausedButton = guienv->addButton(irr::core::rect<irr::s32>(0.25*su,0.45*sh,0.75*su,0.55*sh),0,GUI_ID_START_BUTTON, language->translate("pausedbutton").c_str());

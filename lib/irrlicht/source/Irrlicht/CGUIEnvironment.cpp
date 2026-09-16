@@ -59,7 +59,7 @@ const io::path CGUIEnvironment::DefaultFontName = "#DefaultFont";
 CGUIEnvironment::CGUIEnvironment(io::IFileSystem* fs, video::IVideoDriver* driver, IOSOperator* op)
 : IGUIElement(EGUIET_ROOT, 0, 0, 0, core::rect<s32>(driver ? core::dimension2d<s32>(driver->getScreenSize()) : core::dimension2d<s32>(0,0))),
 	Driver(driver), Hovered(0), HoveredNoSubelement(0), Focus(0), LastHoveredMousePos(0,0), CurrentSkin(0),
-	FileSystem(fs), UserReceiver(0), Operator(op), FocusFlags(EFF_SET_ON_LMOUSE_DOWN|EFF_SET_ON_TAB), MenuShowDelay(400)
+	FileSystem(fs), UserReceiver(0), Operator(op), FocusFlags(EFF_DEFAULT), MenuShowDelay(400)
 {
 	if (Driver)
 		Driver->grab();
@@ -629,7 +629,7 @@ bool CGUIEnvironment::postEventFromUser(const SEvent& event)
 			return true;
 
 		// focus could have died in last call
-		if (!Focus && Hovered)
+		if (!Focus && Hovered && FocusFlags & EFF_HOVERED_HANDLES_UNFOCUSED_MOUSE_EVENTS)
 		{
 			return Hovered->OnEvent(event);
 		}

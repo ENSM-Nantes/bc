@@ -195,6 +195,7 @@
     <ClCompile Include="..\Camera.cpp" />
     <ClCompile Include="..\Collision.cpp" />
     <ClCompile Include="..\ControlVisualiser.cpp" />
+    <ClCompile Include="..\Credits.cpp" />
     <ClCompile Include="..\DefaultEventReceiver.cpp" />
     <ClCompile Include="..\Engine.cpp" />
     <ClCompile Include="..\FFTWave.cpp" />
@@ -211,6 +212,7 @@
     <ClCompile Include="..\Line.cpp" />
     <ClCompile Include="..\Lines.cpp" />
     <ClCompile Include="..\Light.cpp" />
+    <ClCompile Include="..\LoadingQuotes.cpp" />
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\ManOverboard.cpp" />
     <ClCompile Include="..\Message.cpp" />
@@ -266,6 +268,7 @@
     <ClInclude Include="..\Collision.hpp" />
     <ClInclude Include="..\Constants.hpp" />
     <ClInclude Include="..\ControlVisualiser.hpp" />
+    <ClInclude Include="..\Credits.hpp" />
     <ClInclude Include="..\DefaultEventReceiver.hpp" />
     <ClInclude Include="..\Engine.hpp" />
     <ClInclude Include="..\FFTWave.hpp" />
@@ -283,6 +286,7 @@
     <ClInclude Include="..\Light.hpp" />
     <ClInclude Include="..\Line.hpp" />
     <ClInclude Include="..\Lines.hpp" />
+    <ClInclude Include="..\LoadingQuotes.hpp" />
     <ClInclude Include="..\ManOverboard.hpp" />
     <ClInclude Include="..\Message.hpp" />
     <ClInclude Include="..\MessageMisc.hpp" />

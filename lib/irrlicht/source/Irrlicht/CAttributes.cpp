@@ -537,7 +537,7 @@ void CAttributes::getAttributeEnumerationLiteralsOfEnumeration(const c8* attribu
 	const IAttribute* att = getAttributeP(attributeName);
 
 	if (att && att->getType() == EAT_ENUM)
-		outLiterals = ((CEnumAttribute*)att)->EnumLiterals;
+		outLiterals = ((const CEnumAttribute*)att)->EnumLiterals;
 }
 
 //! Sets an attribute as texture reference

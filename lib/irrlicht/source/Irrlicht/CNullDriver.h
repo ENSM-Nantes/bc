@@ -319,11 +319,11 @@ namespace video
 
 		//! Creates a render target texture.
 		virtual ITexture* addRenderTargetTexture(const core::dimension2d<u32>& size,
-			const io::path& name, const ECOLOR_FORMAT format = ECF_UNKNOWN) IRR_OVERRIDE;
+			const io::path& name, const ECOLOR_FORMAT format, u32 multiSamples, bool mipmap) IRR_OVERRIDE;
 
 		//! Creates a render target texture for a cubemap
 		ITexture* addRenderTargetTextureCubemap(const irr::u32 sideLen,
-				const io::path& name, const ECOLOR_FORMAT format) IRR_OVERRIDE;
+				const io::path& name, const ECOLOR_FORMAT format, bool mipmap) IRR_OVERRIDE;
 
 		//! Creates an 1bit alpha channel of the texture based of an color key.
 		virtual void makeColorKeyTexture(video::ITexture* texture, video::SColor color, bool zeroTexels) const IRR_OVERRIDE;
@@ -781,7 +781,7 @@ namespace video
 
 		struct SDummyTexture : public ITexture
 		{
-			SDummyTexture(const io::path& name, E_TEXTURE_TYPE type) : ITexture(name, type) {};
+			SDummyTexture(const io::path& name, E_TEXTURE_TYPE type) : ITexture(name, type) {}
 
 			virtual void* lock(E_TEXTURE_LOCK_MODE mode = ETLM_READ_WRITE, u32 mipmapLevel=0, u32 layer = 0, E_TEXTURE_LOCK_FLAGS lockFlags = ETLF_FLIP_Y_UP_RTT) IRR_OVERRIDE { return 0; }
 			virtual void unlock()IRR_OVERRIDE {}

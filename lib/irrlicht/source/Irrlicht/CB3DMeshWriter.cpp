@@ -198,7 +198,7 @@ bool CB3DMeshWriter::writeMesh(io::IWriteFile* file, IMesh* const mesh, s32 flag
 			{
                 case EVT_STANDARD:
                 {
-                    S3DVertex *v = (S3DVertex *) mb->getVertices();
+                    const S3DVertex *v = (const S3DVertex *) mb->getVertices();
                     const SColorf col(v[j].Color);
                     writeColor(file, col);
 
@@ -212,7 +212,7 @@ bool CB3DMeshWriter::writeMesh(io::IWriteFile* file, IMesh* const mesh, s32 flag
                 break;
                 case EVT_2TCOORDS:
                 {
-                    S3DVertex2TCoords *v = (S3DVertex2TCoords *) mb->getVertices();
+                    const S3DVertex2TCoords *v = (const S3DVertex2TCoords *) mb->getVertices();
                     const SColorf col(v[j].Color);
                     writeColor(file, col);
 
@@ -224,7 +224,7 @@ bool CB3DMeshWriter::writeMesh(io::IWriteFile* file, IMesh* const mesh, s32 flag
                 break;
                 case EVT_TANGENTS:
                 {
-                    S3DVertexTangents *v = (S3DVertexTangents *) mb->getVertices();
+                    const S3DVertexTangents *v = (const S3DVertexTangents *) mb->getVertices();
                     const SColorf col(v[j].Color);
                     writeColor(file, col);
 

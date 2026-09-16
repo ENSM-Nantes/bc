@@ -184,6 +184,8 @@ namespace quake3
 			case 2:
 				ret = false;
 				break;
+			default:
+				break;
 		}
 		return ret;
 	}
@@ -207,6 +209,8 @@ namespace quake3
 				break;
 			case 1:
 				ret = video::ECFN_EQUAL;
+				break;
+			default:
 				break;
 		}
 		return ret;
@@ -274,6 +278,8 @@ namespace quake3
 						blendfunc.isTransparent = 1;
 						resolved = 1;
 						break;
+					default:
+						break;
 				} break;
 
 			case video::EBF_ONE:
@@ -292,6 +298,8 @@ namespace quake3
 						blendfunc.isTransparent = 1;
 						resolved = 1;
 						break;
+					default:
+						break;
 				} break;
 
 			case video::EBF_SRC_ALPHA:
@@ -303,6 +311,8 @@ namespace quake3
 						blendfunc.param0 = 1.f/255.f;
 						blendfunc.isTransparent = 1;
 						resolved = 1;
+						break;
+					default:
 						break;
 				} break;
 
@@ -340,7 +350,8 @@ namespace quake3
 				blendfunc.isTransparent = 1;
 				resolved = 1;
 				break;
-
+			default:
+				break;
 		}
 
 		// use the generic blender

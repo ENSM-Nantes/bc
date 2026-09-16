@@ -21,7 +21,7 @@
 
 //using namespace irr;
 
-StartupEventReceiver::StartupEventReceiver(irr::gui::IGUIListBox* scenarioListBox, irr::gui::IGUIStaticText* scenarioText, irr::gui::IGUICheckBox* secondaryBox, irr::gui::IGUICheckBox* multiplayerBox, irr::gui::IGUIStaticText* description, irr::s32 listBoxID, irr::s32 okButtonID, irr::s32 secondaryBoxID, irr::s32 multiplayerBoxID, irr::s32 exitButtonID, irr::IrrlichtDevice* dev, Network* network)
+StartupEventReceiver::StartupEventReceiver(irr::gui::IGUIListBox* scenarioListBox, irr::gui::IGUIStaticText* scenarioText, irr::gui::IGUICheckBox* secondaryBox, irr::gui::IGUICheckBox* multiplayerBox, irr::gui::IGUIStaticText* description, irr::s32 listBoxID, irr::s32 okButtonID, irr::s32 secondaryBoxID, irr::s32 multiplayerBoxID, irr::s32 exitButtonID, irr::IrrlichtDevice* dev, std::string enetSrvAddr, irr::u32 enetSrvPort)
 	{
 		device = dev;
 		this->scenarioListBox = scenarioListBox;
@@ -34,7 +34,8 @@ StartupEventReceiver::StartupEventReceiver(irr::gui::IGUIListBox* scenarioListBo
 		this->secondaryBoxID = secondaryBoxID;
 		this->multiplayerBoxID = multiplayerBoxID;
 		this->exitButtonID = exitButtonID;
-		this->network = network;
+		this->enetSrvAddr = enetSrvAddr;
+		this->enetSrvPort = enetSrvPort;
 		scenarioSelected = -1; //Set as initially invalid
 	}
 
@@ -53,9 +54,12 @@ StartupEventReceiver::StartupEventReceiver(irr::gui::IGUIListBox* scenarioListBo
 
             if (event.GUIEvent.EventType==irr::gui::EGET_BUTTON_CLICKED && id == exitButtonID)
             {
-                if (network != 0) {
+                //Briefly connect just to notify other stations (ShipPolars, MapController,
+                //secondary displays) that we're shutting down before any scenario was chosen.
+                Network exitNetwork;
+                if (exitNetwork.Connect(enetSrvAddr, enetSrvPort, OperatingMode::Normal) == 0) {
                     std::string shut = Message::ShutDown();
-                    network->SendMessage(shut, true);
+                    exitNetwork.SendMessage(shut, true);
                 }
                 device->closeDevice(); //Shutdown.
             }

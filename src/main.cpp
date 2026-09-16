@@ -594,12 +594,9 @@ int main(int argc, char ** argv)
   //Start sound
   Sound sound;
 
-  Network network;
-  network.Connect(enetSrvAddr, enetSrvPort, mode);
-
   if (mode == OperatingMode::Normal) {
     ScenarioChoice scenarioChoice(device,&language);
-    scenarioChoice.chooseScenario(scenarioName, mode, scenarioPath, fontScale, &network);
+    scenarioChoice.chooseScenario(scenarioName, mode, scenarioPath, fontScale, enetSrvAddr, enetSrvPort);
   }
 
   Utilities::trim(hostname);
@@ -738,8 +735,11 @@ int main(int argc, char ** argv)
   nmeaGateway.Init(device->getTimer()->getRealTime(), nmeaComPortGateway, nmeaBaudrateGateway, nmeaUDPAddrGateway, nmeaUDPPortGateway, nmeaUDPListenPortGateway);
  
   
+  Network network;
+  network.Connect(enetSrvAddr, enetSrvPort, mode);
+
   ScenarioData scenarioData;
-     
+
   if(mode == OperatingMode::Normal)
     {
       scenarioData = Utilities::getScenarioDataFromFile(scenarioPath + scenarioName, scenarioName);
@@ -759,13 +759,19 @@ int main(int argc, char ** argv)
       eCmdMsg msgType = E_CMD_MESSAGE_UNKNOWN;
       void* dataScn = NULL;
 
-      while(device->run() && msgType != E_CMD_MESSAGE_SCENARIO)
+      while(device->run() && msgType != E_CMD_MESSAGE_SCENARIO && msgType != E_CMD_MESSAGE_SHUTDOWN)
 	{
 	  network.WaitMessage(inMsg, msgType, &dataScn, 1000);
 	}
+      if (msgType == E_CMD_MESSAGE_SHUTDOWN)
+	{
+	  std::cout << "Shutdown requested by master, closing." << std::endl;
+	  device->closeDevice();
+	  return EXIT_SUCCESS;
+	}
       if(dataScn != NULL)
 	{
-	  std::string scnStr((char*)dataScn);	    
+	  std::string scnStr((char*)dataScn);
 	  scenarioData.deserialise(scnStr);
 	}
     }

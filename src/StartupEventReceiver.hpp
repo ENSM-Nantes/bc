@@ -24,7 +24,7 @@ class StartupEventReceiver : public irr::IEventReceiver
 {
 public:
 
-    StartupEventReceiver(irr::gui::IGUIListBox* scenarioListBox, irr::gui::IGUIStaticText* scenarioText, irr::gui::IGUICheckBox* secondaryBox, irr::gui::IGUICheckBox* multiplayerBox, irr::gui::IGUIStaticText* description, irr::s32 listBoxID, irr::s32 okButtonID, irr::s32 secondaryBoxID, irr::s32 multiplayerBoxID, irr::s32 exitButtonID, irr::IrrlichtDevice* dev, Network* network);
+    StartupEventReceiver(irr::gui::IGUIListBox* scenarioListBox, irr::gui::IGUIStaticText* scenarioText, irr::gui::IGUICheckBox* secondaryBox, irr::gui::IGUICheckBox* multiplayerBox, irr::gui::IGUIStaticText* description, irr::s32 listBoxID, irr::s32 okButtonID, irr::s32 secondaryBoxID, irr::s32 multiplayerBoxID, irr::s32 exitButtonID, irr::IrrlichtDevice* dev, std::string enetSrvAddr, irr::u32 enetSrvPort);
     bool OnEvent(const irr::SEvent& event);
 
     irr::s32 getScenarioSelected() const;
@@ -43,7 +43,8 @@ private:
     irr::s32 multiplayerBoxID;
     irr::s32 exitButtonID;
     irr::s32 scenarioSelected;
-    Network* network;
+    std::string enetSrvAddr;
+    irr::u32 enetSrvPort;
 
 };
 

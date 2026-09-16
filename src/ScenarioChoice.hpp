@@ -29,7 +29,7 @@ class ScenarioChoice
 {
 public:
     ScenarioChoice(irr::IrrlichtDevice* device, Lang* language);
-    void chooseScenario(std::string& scenarioName, OperatingMode::Mode& mode, std::string scenarioPath, float fontScale, Network* network);
+    void chooseScenario(std::string& scenarioName, OperatingMode::Mode& mode, std::string scenarioPath, float fontScale, std::string enetSrvAddr, irr::u32 enetSrvPort);
 
 private:
     void getScenarioList(std::vector<std::string>&scenarioList, std::vector<std::string>&scenarioDescription, std::vector<std::string>&scenarioShipsAndMap, std::string scenarioPath);

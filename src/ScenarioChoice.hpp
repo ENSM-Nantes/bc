@@ -19,6 +19,7 @@
 
 #include "irrlicht.h"
 #include "Lang.hpp"
+#include "Network.hpp"
 #include "OperatingModeEnum.hpp"
 #include <asio.hpp> //To find hostname
 #include <string>
@@ -28,7 +29,7 @@ class ScenarioChoice
 {
 public:
     ScenarioChoice(irr::IrrlichtDevice* device, Lang* language);
-    void chooseScenario(std::string& scenarioName, OperatingMode::Mode& mode, std::string scenarioPath, float fontScale);
+    void chooseScenario(std::string& scenarioName, OperatingMode::Mode& mode, std::string scenarioPath, float fontScale, Network* network);
 
 private:
     void getScenarioList(std::vector<std::string>&scenarioList, std::vector<std::string>&scenarioDescription, std::vector<std::string>&scenarioShipsAndMap, std::string scenarioPath);

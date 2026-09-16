@@ -35,7 +35,7 @@ ScenarioChoice::ScenarioChoice(irr::IrrlichtDevice* device, Lang* language)
     gui = device->getGUIEnvironment();
 }
 
-void ScenarioChoice::chooseScenario(std::string& scenarioName, OperatingMode::Mode& mode, std::string scenarioPath, float fontScale)
+void ScenarioChoice::chooseScenario(std::string& scenarioName, OperatingMode::Mode& mode, std::string scenarioPath, float fontScale, Network* network)
 {
     irr::video::IVideoDriver* driver = device->getVideoDriver();
 
@@ -131,7 +131,7 @@ void ScenarioChoice::chooseScenario(std::string& scenarioName, OperatingMode::Mo
     device->clearSystemMessages();
 
     //Link to our event receiver
-    StartupEventReceiver startupReceiver(scenarioListBox,instruction,secondaryCheckbox,multiplayerCheckbox,description,GUI_ID_SCENARIO_LISTBOX,GUI_ID_OK_BUTTON,GUI_ID_SECONDARY_CHECKBOX,GUI_ID_MULTIPLAYER_CHECKBOX,GUI_ID_EXIT_BUTTON, device);
+    StartupEventReceiver startupReceiver(scenarioListBox,instruction,secondaryCheckbox,multiplayerCheckbox,description,GUI_ID_SCENARIO_LISTBOX,GUI_ID_OK_BUTTON,GUI_ID_SECONDARY_CHECKBOX,GUI_ID_MULTIPLAYER_CHECKBOX,GUI_ID_EXIT_BUTTON, device, network);
     irr::IEventReceiver* oldReceiver = device->getEventReceiver();
     device->setEventReceiver(&startupReceiver);
 

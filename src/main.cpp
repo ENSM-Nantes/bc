@@ -593,10 +593,13 @@ int main(int argc, char ** argv)
 
   //Start sound
   Sound sound;
-    
+
+  Network network;
+  network.Connect(enetSrvAddr, enetSrvPort, mode);
+
   if (mode == OperatingMode::Normal) {
     ScenarioChoice scenarioChoice(device,&language);
-    scenarioChoice.chooseScenario(scenarioName, mode, scenarioPath, fontScale);
+    scenarioChoice.chooseScenario(scenarioName, mode, scenarioPath, fontScale, &network);
   }
 
   Utilities::trim(hostname);
@@ -734,9 +737,6 @@ int main(int argc, char ** argv)
   nmeaVDR.Init(device->getTimer()->getRealTime(), nmeaComPortVDR, nmeaBaudrateVDR, nmeaUDPAddrVDR, nmeaUDPPortVDR, nmeaUDPListenPortVDR);
   nmeaGateway.Init(device->getTimer()->getRealTime(), nmeaComPortGateway, nmeaBaudrateGateway, nmeaUDPAddrGateway, nmeaUDPPortGateway, nmeaUDPListenPortGateway);
  
-  
-  Network network;
-  network.Connect(enetSrvAddr, enetSrvPort, mode);
   
   ScenarioData scenarioData;
      

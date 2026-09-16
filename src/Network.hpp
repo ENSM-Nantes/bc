@@ -21,6 +21,7 @@
 #include <vector>
 #include <enet/enet.h>
 #include "irrlicht.h"
+#include "MessageMisc.hpp"
 #include "OperatingModeEnum.hpp"
 
 class Message;

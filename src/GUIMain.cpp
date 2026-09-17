@@ -380,7 +380,7 @@ void GUIMain::load(irr::IrrlichtDevice* device, OwnShip *aOwnShip, Lines *aLines
     static_cast<irr::gui::OutlineScrollBar*>(rateofturnScrollbar)->setColorZones(rotThresholds, rotColors);
   }
 
-  rateofturnText = guienv->addStaticText(L"RoT: 0.0 °/min",
+  rateofturnText = guienv->addStaticText(L"RoT: 0.0 \u00B0/min",
     irr::core::rect<irr::s32>(0.09*su+azimuthGUIOffsetL, rotLabelTop*sh, 0.45*su+azimuthGUIOffsetR, rotLabelBottom*sh));
   rateofturnText->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
 
@@ -1215,7 +1215,7 @@ void GUIMain::updateGuiData(GUIData* guiData)
     irr::f32 rotDegMin = 3438 * guiData->RateOfTurn;
     if (rateofturnScrollbar) { rateofturnScrollbar->setPos(Utilities::round(rotDegMin)); }
     if (rateofturnText) {
-      std::wstring rotLabel = L"RoT: " + f32To1dp(rotDegMin) + L" °/min";
+      std::wstring rotLabel = L"RoT: " + f32To1dp(rotDegMin) + L" \u00B0/min";
       rateofturnText->setText(rotLabel.c_str());
     }
   }
@@ -1224,7 +1224,7 @@ void GUIMain::updateGuiData(GUIData* guiData)
 
   if(compassLabel)
     {
-      irr::core::stringw compassTxt = language->translate("compass") + L": " + f32To1dp(guiData->hdg).c_str() + L" °";
+      irr::core::stringw compassTxt = language->translate("compass") + L": " + f32To1dp(guiData->hdg).c_str() + L" \u00B0";
       compassLabel->setText(compassTxt.c_str());
     }
   

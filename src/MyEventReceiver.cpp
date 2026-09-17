@@ -26,7 +26,7 @@
 
 // using namespace irr;
 
-MyEventReceiver::MyEventReceiver(irr::IrrlichtDevice *dev, void *aModel, GUIMain *gui, Network *network, VRInterface* vrInterface,  std::vector<std::string> *logMessages) // Constructor
+MyEventReceiver::MyEventReceiver(irr::IrrlichtDevice *dev, void *aModel, GUIMain *gui, Network *network, VRInterface* vrInterface,  std::vector<std::string> *logMessages, Lang* language) // Constructor
 {
 
     mModel = aModel; // Link to the model
@@ -42,6 +42,7 @@ MyEventReceiver::MyEventReceiver(irr::IrrlichtDevice *dev, void *aModel, GUIMain
     net = network;
 
     this->logMessages = logMessages;
+    this->language = language;
 
     // assume mouse buttons not pressed initially
     leftMouseDown = false;
@@ -848,13 +849,6 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
         if (!(focussedElement && focussedElement->getType() == irr::gui::EGUIET_EDIT_BOX))
         {
 
-            // Accelerator via the actual typed character, as a layout-independent
-            // fallback for the top-row digit keys. On AZERTY keyboards the unshifted
-            // main row produces symbols (&,",etc.), not digits, so KeyInput.Key never
-            // becomes KEY_KEY_0-7 there - not even with Shift held, since the engine's
-            // X11 key-code lookup ignores the live modifier state. KeyInput.Char is
-            // computed from XLookupString/XwcLookupString instead, which does respect
-            // Shift, so it reliably reflects the digit actually typed on any layout.
             if (!event.KeyInput.Control)
             {
                 switch (event.KeyInput.Char)
@@ -869,19 +863,13 @@ bool MyEventReceiver::OnEvent(const irr::SEvent &event)
                     model->setAccelerator(2.0);
                     break;
                 case L'3':
-                    model->setAccelerator(5.0);
+                    model->setAccelerator(4.0);
                     break;
                 case L'4':
-                    model->setAccelerator(15.0);
+                    model->setAccelerator(8.0);
                     break;
                 case L'5':
-                    model->setAccelerator(30.0);
-                    break;
-                case L'6':
-                    model->setAccelerator(60.0);
-                    break;
-                case L'7':
-                    model->setAccelerator(3600.0);
+                    model->setAccelerator(16.0);
                     break;
                 default:
                     break;
@@ -1204,7 +1192,7 @@ void MyEventReceiver::startShutdown()
     if (!shutdownDialogActive)
     {
         device->getGUIEnvironment()->getRootGUIElement()->setVisible(true);
-        device->getGUIEnvironment()->addMessageBox(L"Quit?", L"Quit?", true, irr::gui::EMBF_OK | irr::gui::EMBF_CANCEL, 0, GUIMain::GUI_ID_CLOSE_BOX); // I18n
+        device->getGUIEnvironment()->addMessageBox(language->translate("exit").c_str(), language->translate("exitQuestion").c_str(), true, irr::gui::EMBF_OK | irr::gui::EMBF_CANCEL, 0, GUIMain::GUI_ID_CLOSE_BOX);
         shutdownDialogActive = true;
     }
 }

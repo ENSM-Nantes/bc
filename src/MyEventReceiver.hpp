@@ -21,6 +21,7 @@
 #include <string>
 #include <vector>
 #include "Network.hpp"
+#include "Lang.hpp"
 
 //forward declarations
 class GUIMain;
@@ -31,7 +32,7 @@ class MyEventReceiver : public irr::IEventReceiver
 {
 public:
 
-  MyEventReceiver(irr::IrrlichtDevice* dev, void* aModel, GUIMain* gui, Network* network, VRInterface* vrInterface, std::vector<std::string>* logMessages);
+  MyEventReceiver(irr::IrrlichtDevice* dev, void* aModel, GUIMain* gui, Network* network, VRInterface* vrInterface, std::vector<std::string>* logMessages, Lang* language);
 
     bool OnEvent(const irr::SEvent& event);
     //irr::s32 GetScrollBarPosSpeed() const;
@@ -50,6 +51,7 @@ private:
   GUIMain* gui;
     VRInterface* vrInterface;
     Network* net;
+    Lang* language;
     bool leftMouseDown;
     bool rightMouseDown;
     irr::IrrlichtDevice* device;

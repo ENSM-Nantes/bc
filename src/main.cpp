@@ -637,8 +637,7 @@ int main(int argc, char ** argv)
   //size. Only used for this kind of large decorative headline text - everything else
   //still renders in the user's configured font.
   irr::core::stringw loadingText = language.translate("loadingmsg");
-  irr::s32 loadingFontSize = (irr::s32)(18 * fontScale + 0.5);
-  if (loadingFontSize > 22) {loadingFontSize = 22;}
+  irr::s32 loadingFontSize = (irr::s32)(32 * fontScale + 0.5);
   std::string loadingFontPath = "media/fonts/open-sans/open-sans-" + std::to_string(loadingFontSize) + ".xml";
   irr::gui::IGUIFont* loadingFont = device->getGUIEnvironment()->getFont(loadingFontPath.c_str());
   irr::gui::IGUIStaticText* loadingMessage = device->getGUIEnvironment()->addStaticText(loadingText.c_str(), irr::core::rect<irr::s32>(0.05*su,0.40*sh,0.95*su,0.60*sh));
@@ -647,9 +646,15 @@ int main(int argc, char ** argv)
   if (loadingFont != 0) {
     loadingMessage->setOverrideFont(loadingFont);
   }
-  irr::gui::IGUIStaticText* loadingQuote = device->getGUIEnvironment()->addStaticText(
-    getRandomLoadingQuote((irr::u32)device->getTimer()->getRealTime()).c_str(),
-    irr::core::rect<irr::s32>(0.15*su,0.62*sh,0.85*su,0.78*sh));
+
+  irr::s32 loadingQuoteFontSize = (irr::s32)(24 * fontScale + 0.5);
+  std::string loadingQuoteFontPath = "media/fonts/open-sans/open-sans-" + std::to_string(loadingQuoteFontSize) + ".xml";
+  irr::gui::IGUIFont* loadingQuoteFont = device->getGUIEnvironment()->getFont(loadingQuoteFontPath.c_str());
+  irr::gui::IGUIStaticText* loadingQuote = device->getGUIEnvironment()->addStaticText(getRandomLoadingQuote((irr::u32)device->getTimer()->getRealTime()).c_str(), irr::core::rect<irr::s32>(0.15*su,0.62*sh,0.85*su,0.78*sh));
+  if (loadingQuoteFont != 0) {
+    loadingQuote->setOverrideFont(loadingQuoteFont);
+  }
+  
   loadingQuote->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_UPPERLEFT);
   loadingQuote->setOverrideColor(irr::video::SColor(255,120,120,120));
   device->run();
@@ -842,7 +847,7 @@ int main(int argc, char ** argv)
   sJsMapping jsMapping = getJoystickSetup(iniFilename, jsConf);
 
   //create event receiver, linked to model
-  MyEventReceiver receiver(device, &model, &guiMain, &network, &vrInterface, &logMessages);
+  MyEventReceiver receiver(device, &model, &guiMain, &network, &vrInterface, &logMessages, &language);
   device->setEventReceiver(&receiver);
 
   JoyStick hJoySticks(jsMapping, jsConf);

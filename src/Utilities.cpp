@@ -157,6 +157,81 @@ namespace Utilities
     return splitStrings;
   }
 
+  std::wstring utf8ToWString(const std::string &utf8In) {
+    //Manual UTF-8 decoder, so behaviour doesn't depend on the platform/locale
+    //(unlike std::wifstream locale imbuing or mbstowcs, which differ between
+    //Windows (ANSI codepage) and Linux/Mac (needs a UTF-8 locale to be available),
+    //causing accented/special characters to display differently, or not at all,
+    //between platforms). Handles both UTF-16 (eg Windows wchar_t) and UTF-32
+    //(eg Linux/Mac wchar_t) output, using surrogate pairs for the former where needed.
+    std::wstring result;
+    result.reserve(utf8In.size());
+
+    size_t i = 0;
+    const size_t n = utf8In.size();
+    while (i < n) {
+      const unsigned char c0 = (unsigned char)utf8In[i];
+      unsigned int codepoint = 0;
+      size_t extraBytes = 0;
+
+      if (c0 < 0x80) {
+        codepoint = c0;
+        extraBytes = 0;
+      } else if ((c0 & 0xE0) == 0xC0) {
+        codepoint = c0 & 0x1F;
+        extraBytes = 1;
+      } else if ((c0 & 0xF0) == 0xE0) {
+        codepoint = c0 & 0x0F;
+        extraBytes = 2;
+      } else if ((c0 & 0xF8) == 0xF0) {
+        codepoint = c0 & 0x07;
+        extraBytes = 3;
+      } else {
+        //Invalid leading byte - skip it
+        i++;
+        continue;
+      }
+
+      if (i + extraBytes >= n) {
+        //Truncated sequence at the end of the string - stop here
+        break;
+      }
+
+      bool validSequence = true;
+      for (size_t k = 1; k <= extraBytes; k++) {
+        const unsigned char cx = (unsigned char)utf8In[i + k];
+        if ((cx & 0xC0) != 0x80) {
+          validSequence = false;
+          break;
+        }
+        codepoint = (codepoint << 6) | (cx & 0x3F);
+      }
+
+      if (!validSequence) {
+        i++;
+        continue;
+      }
+
+      i += extraBytes + 1;
+
+      if (sizeof(wchar_t) == 2) {
+        //UTF-16: codepoints above the BMP need a surrogate pair
+        if (codepoint <= 0xFFFF) {
+          result.push_back((wchar_t)codepoint);
+        } else {
+          const unsigned int c = codepoint - 0x10000;
+          result.push_back((wchar_t)(0xD800 + (c >> 10)));
+          result.push_back((wchar_t)(0xDC00 + (c & 0x3FF)));
+        }
+      } else {
+        //UTF-32: one wchar_t per codepoint
+        result.push_back((wchar_t)codepoint);
+      }
+    }
+
+    return result;
+  }
+
   std::string getUserDirBase() {
     // Return the user directory (eg %appdata%/Bridge Command/ on Windows,
     // ~/.Bridge Command/ on Linux

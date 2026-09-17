@@ -23,9 +23,6 @@
 #include <map>
 
 #include "Utilities.hpp" //for ini loading
-#ifndef _WIN32
-#include <codecvt> //For UTF-8 reading
-#endif // _WIN32
 
 // Irrlicht Namespaces
 //using namespace irr;
@@ -121,23 +118,13 @@ bool IniCache::readWFile(const std::string& fileName)
         return true; // file already read
     }
 
-    std::wifstream file(fileName.c_str());
-
-    //Set UTF-8 on Linux/OSX etc
-    #ifndef _WIN32
-    try {
-        #  ifdef __APPLE__
-        char* thisLocale = setlocale(LC_ALL, "");
-        if (thisLocale) {
-            file.imbue(std::locale(thisLocale));
-        }
-        #  else
-        file.imbue(std::locale("en_US.UTF8"));
-        #  endif
-    } catch (const std::runtime_error& runtimeError) {
-        file.imbue(std::locale(""));
-    }
-    #endif
+    //Read as raw bytes and decode UTF-8 manually (see Utilities::utf8ToWString),
+    //rather than relying on std::wifstream locale imbuing: that needs a UTF-8
+    //locale to be installed/named consistently, which isn't available the same
+    //way on Windows as on Linux/Mac, so accented/special characters in the
+    //(UTF-8 encoded) language files would decode differently - or not at all -
+    //depending on platform.
+    std::ifstream file(fileName.c_str());
 
     if (!file.is_open()) {
         if (IniFile::irrlichtLogger) {
@@ -151,9 +138,16 @@ bool IniCache::readWFile(const std::string& fileName)
         return false;
     }
 
-    std::wstring line;
-    while ( std::getline (file,line) )
+    std::string rawLine;
+    while ( std::getline (file,rawLine) )
     {
+        //Strip a trailing carriage return, in case the file has CRLF line endings
+        if (!rawLine.empty() && rawLine.back() == '\r') {
+            rawLine.pop_back();
+        }
+
+        std::wstring line = Utilities::utf8ToWString(rawLine);
+
         const std::size_t equalsPos = line.find_first_of(L"=");
         if (equalsPos != std::wstring::npos) {
 	  std::wstring key = line.substr(0, equalsPos);

@@ -55,6 +55,7 @@ namespace Utilities
     void trim(std::wstring& inString, std::wstring trimChrs = L" \f\n\r\t\v");
 
     std::vector<std::string> split(const std::string &inputString, char delim);
+    std::wstring utf8ToWString(const std::string &utf8In); //Decode UTF-8 bytes to the platform's native wchar_t representation (UTF-16 or UTF-32), without relying on locale support
     std::string getUserDirBase(); //Returns the directory path (absolute, with trailing slash) for a user read/writable directory, the first level folder in the user's filesystem (eg %appdata%/Bridge Command/ on windows)
     std::string getUserDir(); //Returns the directory path (absolute, with trailing slash) for a user read/writable directory (eg %appdata%/Bridge Command/VERSIONUMBER/ on windows)
     bool pathExists(std::string filePath);

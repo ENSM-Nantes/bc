@@ -267,7 +267,7 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
 
 #ifndef _WIN32
       //send a copy to ShipPolars
-      std::string scpCmd = "scp -q -o BatchMode=yes -o ConnectTimeout=5 " + basePath + "/nc/polar.nc" + " somos@polars.local &";
+      std::string scpCmd = "scp -q -o BatchMode=yes -o ConnectTimeout=5 " + basePath + "/nc/polar.nc" + " somos@polars.local:/home/somos/ShipPolars/polar &";
       system(scpCmd.c_str());
 #endif
       

@@ -368,7 +368,7 @@ std::string AIS::BitsToArmoredASCII(std::vector<bool> aBits) {
     payload[index] <<= 1;
     payload[index] |= aBits[i];
     counter += 1;
-        
+    
     if (counter % 6 == 0) {
       counter = 0;
       payload[index] += 48;

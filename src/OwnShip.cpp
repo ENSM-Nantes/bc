@@ -264,6 +264,13 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
     { 
       irr::scene::IMesh* sailMesh[SAILS_MAX] = {NULL}; //4 sails max for now 
       //Load sail parameters
+
+#ifndef _WIN32
+      //send a copy to ShipPolars
+      std::string scpCmd = "scp -q -o BatchMode=yes -o ConnectTimeout=5 " + basePath + "/nc/polar.nc" + " somos@polars.local &";
+      system(scpCmd.c_str());
+#endif
+      
       mSails.OpenPolar(basePath + "/nc/polar.nc", "TotalSails_X", "TotalSails_Y");
       mSails.InitPolar("STW_kt", "TWS_kt", "TWA_deg");
       std::string meshFile = basePath + "../../Sails/" + mSails.GetType() + "/" + mSails.GetSize() + "/" + "sail.obj";

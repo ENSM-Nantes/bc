@@ -28,26 +28,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -80,17 +80,17 @@
     <IntDir>$(Configuration)\bc\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\lib\asio\include;..\..\lib\libsndfile\include;..\..\lib\portaudio\include;..\..\lib\irrlicht\include;..\..\lib\enet\include;C:\Program Files\netCDF 4.9.3\include;..\..\lib\eigen-5.0.0;..\..\lib\jsoncpp\include;..\..\lib\SDL2-2.32.10\include\</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\lib\asio\include;..\..\lib\libsndfile\include;..\..\lib\portaudio\include;..\..\lib\irrlicht\include;..\..\lib\enet\include;C:\Program Files\netCDF 4.10.1\include;..\..\lib\eigen-5.0.0;..\..\lib\jsoncpp\include;..\..\lib\SDL2-2.32.10\include\</IncludePath>
     <OutDir>..\..\bin\win</OutDir>
     <IntDir>$(Configuration)\bc\</IntDir>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);..\..\lib\OpenXR\OpenXR-SDK-main\build\win64\src\loader\Release;..\..\lib\libsndfile\lib;..\..\lib\portaudio\lib;..\..\lib\irrlicht\lib\Win64-visualStudio;..\..\lib\enet;C:\Program Files\netCDF 4.9.3\lib\;..\..\lib\jsoncpp\build\lib\Release;;..\..\lib\SDL2-2.32.10\lib\x64\</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);..\..\lib\OpenXR\OpenXR-SDK-main\build\win64\src\loader\Release;..\..\lib\libsndfile\lib;..\..\lib\portaudio\lib;..\..\lib\irrlicht\lib\Win64-visualStudio;..\..\lib\enet;C:\Program Files\netCDF 4.10.1\lib\;..\..\lib\jsoncpp\build\lib\Release;;..\..\lib\SDL2-2.32.10\lib\x64\</LibraryPath>
     <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\lib\asio\include;..\..\lib.\libsndfile\include;..\..\lib\portaudio\include;..\..\lib\irrlicht\include;..\..\lib\enet\include;C:\Program Files\netCDF 4.9.3\include;..\..\lib\eigen-5.0.0;..\..\lib\jsoncpp\include;..\..\lib\SDL2-2.32.10\include\</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\..\lib\asio\include;..\..\lib.\libsndfile\include;..\..\lib\portaudio\include;..\..\lib\irrlicht\include;..\..\lib\enet\include;C:\Program Files\netCDF 4.10.1\include;..\..\lib\eigen-5.0.0;..\..\lib\jsoncpp\include;..\..\lib\SDL2-2.32.10\include\</IncludePath>
     <OutDir>..\..\bin\win</OutDir>
     <IntDir>$(Configuration)\bc\</IntDir>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);..\..\lib\OpenXR\OpenXR-SDK-main\build\win64\src\loader\Release;..\..\lib\libsndfile\lib;..\..\lib\portaudio\lib;..\..\lib\irrlicht\lib\Win64-visualStudio;..\..\lib\enet;C:\Program Files\netCDF 4.9.3\lib\;..\..\lib\jsoncpp\build\lib\Release;..\..\lib\SDL2-2.32.10\lib\x64\</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);..\..\lib\OpenXR\OpenXR-SDK-main\build\win64\src\loader\Release;..\..\lib\libsndfile\lib;..\..\lib\portaudio\lib;..\..\lib\irrlicht\lib\Win64-visualStudio;..\..\lib\enet;C:\Program Files\netCDF 4.10.1\lib\;..\..\lib\jsoncpp\build\lib\Release;..\..\lib\SDL2-2.32.10\lib\x64\</LibraryPath>
     <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

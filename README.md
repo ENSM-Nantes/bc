@@ -28,8 +28,8 @@ Wiki : https://somos-project.fr/dokuwiki/doku.php
 2) Untar into: lib/enet
 
 ## To compile BC on Windows
-1) Visual Studio 2022 (or greater) are used
-2) Download NetCdf-4 library here : https://downloads.unidata.ucar.edu/netcdf/
+1) Visual Studio 2026 (or greater) are used
+2) Download NetCdf-4.10.1 library here : https://downloads.unidata.ucar.edu/netcdf/
 3) Install by default
 4) Add BC project -> Generate
 

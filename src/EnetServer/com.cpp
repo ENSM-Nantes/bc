@@ -106,6 +106,9 @@ int Com::ClientConnect(ENetPeer** aPeer, unsigned int aData)
 	{
 	  mTypeClient[mClientCounter] = aData;
 	  mPeerClient[mClientCounter] = *aPeer;
+	  // Match the client-side timeout (Network::Connect) so the relay doesn't
+	  // give up on a station that's legitimately busy loading a scenario.
+	  enet_peer_timeout(mPeerClient[mClientCounter], 32, 60000, 60000);
 	  enet_address_get_host_ip(&mPeerClient[mClientCounter]->address, ipAddr, 16);
 	  std::cout << "Client :" << ipAddr << ":" << mPeerClient[mClientCounter]->address.port << " connected - type : " << mTypeClient[mClientCounter] << std::endl;
 	  mClientCounter++;

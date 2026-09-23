@@ -70,6 +70,11 @@ int Network::Connect(std::string aAddr, unsigned int aPort, OperatingMode::Mode 
      event.type == ENET_EVENT_TYPE_CONNECT)
     {
       std::cout << "Connect to server : " << aAddr << ":" << aPort << std::endl;
+      // Loading a scenario (especially the master loading every other ship's
+      // full model synchronously) can legitimately take well beyond ENet's
+      // default ~5s minimum timeout. Give this connection much more slack
+      // before either side considers it dead.
+      enet_peer_timeout(mPeer, 32, 60000, 60000);
       enet_host_flush(mClient);
       ret=0;
     }

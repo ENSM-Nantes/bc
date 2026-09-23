@@ -57,7 +57,7 @@ void Update::UpdateNetwork(void* aModel, Network* aNet, OperatingMode::Mode aMod
       else if (pModel->getLoopNumber() % 6 == 0)
 	{
 	  std::string msgKeepAlive = outMsg.KeepAlive();
-	  aNet->SendMessage(msgKeepAlive, true);
+	  aNet->SendMessage(msgKeepAlive);
 
 	  if (OperatingMode::Multiplayer == aMode)
 	    {

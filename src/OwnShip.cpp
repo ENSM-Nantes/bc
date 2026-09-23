@@ -28,6 +28,7 @@
 #include "Terrain.hpp"
 #include "Angles.hpp"
 #include "Utilities.hpp"
+#include "IniFile.hpp"
 #include "Solver.hpp"
 #include "Collision.hpp"
 #include "Wind.hpp"
@@ -265,14 +266,33 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
       irr::scene::IMesh* sailMesh[SAILS_MAX] = {NULL}; //4 sails max for now 
       //Load sail parameters
 
-#ifndef _WIN32
-      //send a copy to ShipPolars
-      std::string scpCmd = "scp -q -o BatchMode=yes -o ConnectTimeout=5 " + basePath + "/nc/polar.nc" + " somos@polars.local:/home/somos/ShipPolars/polar &";
-      system(scpCmd.c_str());
-#endif
-      
-      mSails.OpenPolar(basePath + "/nc/polar.nc", "TotalSails_X", "TotalSails_Y");
+      std::string polarFile = basePath + "/nc/polar.nc";
+      int polarOpenResult = mSails.OpenPolar(polarFile, "TotalSails_X", "TotalSails_Y");
       mSails.InitPolar("STW_kt", "TWS_kt", "TWA_deg");
+
+#ifndef _WIN32
+      if (polarOpenResult == 0) {
+        // only scp the file out if it actually opened (ie a polar file exists for this ship)
+        // destination is read from bc5.ini so it isn't hard-coded in the binary:
+        //   Polar_Send_User=<remote username>
+        //   Polar_Send_Host=<remote host or IP>
+        //   Polar_Send_Path=<remote destination path, eg /home/somos/ShipPolars/polar>
+        std::string userFolder = Utilities::getUserDir();
+        std::string iniFilename = "bc5.ini";
+        if (Utilities::pathExists(userFolder + "bc5.ini")) {
+          iniFilename = userFolder + "bc5.ini";
+        }
+        std::string polarSendUser = IniFile::iniFileToString(iniFilename, "Polar_Send_User", "");
+        std::string polarSendHost = IniFile::iniFileToString(iniFilename, "Polar_Send_Host", "");
+        std::string polarSendPath = IniFile::iniFileToString(iniFilename, "Polar_Send_Path", "");
+
+        if (!polarSendUser.empty() && !polarSendHost.empty() && !polarSendPath.empty()) {
+          std::string scpCmd = "scp -q -o BatchMode=yes -o ConnectTimeout=5 " + polarFile + " "
+                              + polarSendUser + "@" + polarSendHost + ":" + polarSendPath + " &";
+          system(scpCmd.c_str());
+        }
+      }
+#endif
       std::string meshFile = basePath + "../../Sails/" + mSails.GetType() + "/" + mSails.GetSize() + "/" + "sail.obj";
 
       for (int i = 0; i < mSails.GetCount(); i++)

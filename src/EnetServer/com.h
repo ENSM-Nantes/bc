@@ -37,7 +37,7 @@ class Com
   
  private:
 
-  int ClientConnect(ENetPeer** aPeer, unsigned int aData);
+  int ClientConnect(ENetPeer** aPeer, unsigned int aData); // returns 0=newly registered, 1=already connected, 2=refused (server full, non-fatal), -1=reserved for fatal errors
   int ClientDisconnect(ENetPeer** aPeer);
   int ClientMsg(const char *aData, size_t aDataSize);  
   void SendMsg(eTarget aTarget);

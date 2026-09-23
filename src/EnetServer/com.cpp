@@ -107,14 +107,24 @@ int Com::ClientConnect(ENetPeer** aPeer, unsigned int aData)
 	  mTypeClient[mClientCounter] = aData;
 	  mPeerClient[mClientCounter] = *aPeer;
 	  enet_address_get_host_ip(&mPeerClient[mClientCounter]->address, ipAddr, 16);
-	  std::cout << "Client :" << ipAddr << ":" << mPeerClient[mClientCounter]->address.port << " connected - type : " << mTypeClient[mClientCounter] << std::endl;
 	  mClientCounter++;
+	  std::cout << "Client :" << ipAddr << ":" << mPeerClient[mClientCounter-1]->address.port << " connected - type : " << mTypeClient[mClientCounter-1]
+		    << " (" << (unsigned int)mClientCounter << "/" << MAX_CLIENT_CONNEXION << " slots used)" << std::endl;
 	  ret = 0;
 	}
     }
   else
-    std::cout << "No more connexions available!"  << std::endl;
-  
+    {
+      // Non-fatal: decline this client, but don't treat it as a WaitEvent()
+      // failure - Fsm::Run() would otherwise shut down the whole relay,
+      // disconnecting every already-connected client, just because one
+      // extra client tried to join a full server.
+      enet_address_get_host_ip(&(*aPeer)->address, ipAddr, 16);
+      std::cout << "No more connexions available! Refused client " << ipAddr << ":" << (*aPeer)->address.port
+		<< " (" << (unsigned int)mClientCounter << "/" << MAX_CLIENT_CONNEXION << " slots used)" << std::endl;
+      ret = 2;
+    }
+
   return ret;
 }
 
@@ -139,6 +149,7 @@ int Com::ClientDisconnect(ENetPeer** aPeer)
 	  mTypeClient[i] = mTypeClient[last];
 	  mPeerClient[last] = NULL;
 	  mClientCounter--;
+	  std::cout << "(" << (unsigned int)mClientCounter << "/" << MAX_CLIENT_CONNEXION << " slots used)" << std::endl;
 	  return 0;
 	}
     }

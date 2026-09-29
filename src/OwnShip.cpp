@@ -272,11 +272,6 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
 
 #ifndef _WIN32
       if (polarOpenResult == 0) {
-        // only scp the file out if it actually opened (ie a polar file exists for this ship)
-        // destination is read from bc5.ini so it isn't hard-coded in the binary:
-        //   Polar_Send_User=<remote username>
-        //   Polar_Send_Host=<remote host or IP>
-        //   Polar_Send_Path=<remote destination path, eg /home/somos/ShipPolars/polar>
         std::string userFolder = Utilities::getUserDir();
         std::string iniFilename = "bc5.ini";
         if (Utilities::pathExists(userFolder + "bc5.ini")) {

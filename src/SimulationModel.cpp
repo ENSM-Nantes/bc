@@ -742,6 +742,7 @@ void SimulationModel::updateFromNetwork(eCmdMsg aMsgType, void* aDataCmd)
 		mOtherShips->setPos(i, dataMasterCmds->otherShips.ships[i].posX - mOffsetPosition.X, dataMasterCmds->otherShips.ships[i].posZ - mOffsetPosition.Z);
 	      }
 	    delete[] dataMasterCmds->otherShips.ships;
+	    dataMasterCmds->otherShips.ships = nullptr;
 	  }
 	
 	/************************************************************************/	
@@ -961,6 +962,7 @@ void SimulationModel::updateFromNetwork(eCmdMsg aMsgType, void* aDataCmd)
                 mOtherShips->setPos(i, dataMasterCmds->otherShips.ships[i].posX, dataMasterCmds->otherShips.ships[i].posZ);
 	      }
             delete[] dataMasterCmds->otherShips.ships;
+            dataMasterCmds->otherShips.ships = nullptr;
 	  }
 
         break;

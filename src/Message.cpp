@@ -585,6 +585,13 @@ eCmdMsg Message::ParseMultiPlayer(std::string& aMsg, void** aCmdData)
 	      masterCmdsData.otherShips.ships = new sShipInf[numberOthers];
 	      GetInfosOtherShips(otherShipsData, numberOthers, masterCmdsData.otherShips);
 	    }
+	  else
+	    {
+	      // masterCmdsData is static and reused across calls: without this,
+	      // a stale nbrShips>0 from a previous message would make the
+	      // consumer read/delete an already-freed ships array.
+	      masterCmdsData.otherShips.nbrShips = 0;
+	    }
 
 	  //Buoys
 	  //Not recovered
@@ -648,6 +655,13 @@ eCmdMsg Message::ParseMasterCommand(std::string& aMsg, void** aCmdData)
 	      std::vector<std::string> otherShipsData = Utilities::split(bcRec.at(3),'|');
 	      masterCmdsData.otherShips.ships = new sShipInf[numberOthers];
 	      GetInfosOtherShips(otherShipsData, numberOthers, masterCmdsData.otherShips);
+	    }
+	  else
+	    {
+	      // masterCmdsData is static and reused across calls: without this,
+	      // a stale nbrShips>0 from a previous message would make the
+	      // consumer read/delete an already-freed ships array.
+	      masterCmdsData.otherShips.nbrShips = 0;
 	    }
 	  
 	  //Buoys

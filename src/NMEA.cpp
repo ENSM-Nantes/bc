@@ -159,7 +159,7 @@ void NMEA::ReceiveThread(std::string udpListenPortName)
 	  terminateNmeaReceiveMutex.unlock();
 
 	  int bufferSize = 128;
-	  char * buf = new char[bufferSize]();
+	  char buf[128] = {0};
             
 	  // set socket timeout as in AISOverUDP
 #ifdef WIN32

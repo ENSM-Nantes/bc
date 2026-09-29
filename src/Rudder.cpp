@@ -84,7 +84,7 @@ void Rudder::ComputeT(const Eigen::Vector3d& aMu, const double aRho, const sGeoP
   if(0 != aMu[0])
     rp = (aMu[2] * aGeo.lPP)/u;
   else
-    u = 0;
+    rp = 0;
 
   betap = beta - (aProp.getLongPos() * rp);/*Equation (15)*/
   wp = aProp.getWakeFraction() * exp(-4 * pow(betap, 2));/*Equation (12)*/

@@ -148,7 +148,7 @@ void Solver::Run(sTime& aTime, Eigen::Vector3d aEta, Eigen::Vector3d aMu, float 
   float aDt = aTime.deltaTime;
   SetDeltaT(aDt);
   SetDataCollision(aColX, aColY, aColN);
-  SetWindDrag(aWind->getAxialDrag() * MPS_TO_KTS, aWind->getLateralDrag() * MPS_TO_KTS);
+  SetWindDrag(aWind->getAxialDrag(), aWind->getLateralDrag());
 
   SolveRk4(aEta, aMu);
   SolveRoll();

@@ -388,12 +388,13 @@ void Sail::SetWind(double aTrueWindSpeed, double aApparentWindDir)
 void Sail::ComputeT(void)
 {
   float sailsForceX = 0, sailsForceY = 0;
+  double apparentWindDeg = mApparentWindDir * 180/PI; //mApparentWindDir is in rad [-PI, PI]
 
-  sailsForceX = GetForce('X', mSpeedThroughWater, mTrueWindSpeed * MPS_TO_KTS, (mApparentWindDir * 180/PI));
-  sailsForceY = GetForce('Y', mSpeedThroughWater, mTrueWindSpeed * MPS_TO_KTS, (mApparentWindDir * 180/PI));
+  sailsForceX = GetForce('X', mSpeedThroughWater, mTrueWindSpeed * MPS_TO_KTS, apparentWindDeg);
+  sailsForceY = GetForce('Y', mSpeedThroughWater, mTrueWindSpeed * MPS_TO_KTS, apparentWindDeg);
 
   //Starboard wind
-  if((mApparentWindDir * 180/PI) >= 0 && (mApparentWindDir * 180/PI) <= 180)
+  if(apparentWindDeg >= 30 && apparentWindDeg <= 180)
     {
       //rot right
       if(mRotDirection == 1)
@@ -403,7 +404,7 @@ void Sail::ComputeT(void)
 	}
     }
   //Port wind
-  else
+  else if(apparentWindDeg <= -30 && apparentWindDeg >= -180)
     {
       //rot left
       if(mRotDirection == -1)

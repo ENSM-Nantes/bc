@@ -390,8 +390,8 @@ void Sail::ComputeT(void)
   float sailsForceX = 0, sailsForceY = 0;
   double apparentWindDeg = mApparentWindDir * 180/PI; //mApparentWindDir is in rad [-PI, PI]
 
-  sailsForceX = GetForce('X', mSpeedThroughWater, mTrueWindSpeed * MPS_TO_KTS, apparentWindDeg);
-  sailsForceY = GetForce('Y', mSpeedThroughWater, mTrueWindSpeed * MPS_TO_KTS, apparentWindDeg);
+  sailsForceX = GetForce('X', mSpeedThroughWater, mTrueWindSpeed * MPS_TO_KTS, fabs(apparentWindDeg));
+  sailsForceY = GetForce('Y', mSpeedThroughWater, mTrueWindSpeed * MPS_TO_KTS, fabs(apparentWindDeg));
 
   //Starboard wind
   if(apparentWindDeg >= 30 && apparentWindDeg <= 180)

@@ -44,6 +44,8 @@ public:
   ~OwnShip();
   int Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain *aTerrain, irr::IrrlichtDevice *aDev);
   void Update(sTime& aTime, irr::f32 aTideHeight, irr::f32 aWeather, Wind *aWind, Solver *aSolver, irr::core::vector3d<int64_t> aOffsetMap);
+  void UpdateSecondary(sTime& aTime, irr::f32 aTideHeight);
+  void setPrimaryState(Eigen::Vector3d aEta, Eigen::Vector3d aMu, double aStw, double aRollAngle, irr::f32 aPitch);
   void InitOwnShipParams(OwnShipData aOwnShipData, Json::Value aJsonRoot);
 
   std::vector<irr::core::vector3df> getCameraViews() const;
@@ -98,6 +100,7 @@ public:
 protected:
 private:
   irr::f32 requiredEngineProportion(irr::f32 speed);
+  void ApplyControls(irr::f32 deltaTime);
 
   irr::IrrlichtDevice *mDevice;
   std::vector<irr::core::vector3df> mViews; 

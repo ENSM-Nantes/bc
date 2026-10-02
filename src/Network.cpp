@@ -84,7 +84,7 @@ int Network::Connect(std::string aAddr, unsigned int aPort, OperatingMode::Mode 
   return ret;
 }
 
-void Network::WaitMessage(Message& aInMessage, eCmdMsg& aMsgType, void** aCmdData, unsigned int aTimeout, bool aParse)
+bool Network::WaitMessage(Message& aInMessage, eCmdMsg& aMsgType, void** aCmdData, unsigned int aTimeout, bool aParse)
 {
   ENetEvent event;    
 
@@ -95,7 +95,9 @@ void Network::WaitMessage(Message& aInMessage, eCmdMsg& aMsgType, void** aCmdDat
 	  aMsgType = aInMessage.Parse((char*)event.packet->data, event.packet->dataLength, aCmdData);
 	  enet_packet_destroy(event.packet);
         }
+      return true;
     }
+  return false;
 }
 
 int Network::SendMessage(std::string& aMsg, bool aIsReliable)

@@ -23,6 +23,7 @@ int Message::Process(std::string& aMsg)
   if(aMsg.substr(0,2) == "OS")  return E_MSG_TO_WI;
   if(aMsg.substr(0,2) == "WI")  return E_MSG_TO_MASTER | E_MSG_TO_MC;
   if(aMsg.substr(0,2) == "SA")  return E_MSG_TO_MASTER;
+  if(aMsg.substr(0,2) == "SS")  return E_MSG_TO_SLAVE;
 
   return E_MSG_TO_UNKNOW_HOST;
 }

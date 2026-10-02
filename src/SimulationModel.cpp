@@ -461,11 +461,18 @@ void SimulationModel::update()
   float colX = 0, colY= 0, colN = 0;
   mCollision->DetectAndRespond(colX, colY, colN); 
   
-  //Solver Man 3Ddl
-  mSolver->Run(mTime, mOwnShip->getEta(), mOwnShip->getMu(), colX, colY, colN, mWind);
+  if(mModelParameters.mode == OperatingMode::Secondary)
+    {
+      mOwnShip->UpdateSecondary(mTime, mTideHeight);
+    }
+  else
+    {
+      //Solver Man 3Ddl
+      mSolver->Run(mTime, mOwnShip->getEta(), mOwnShip->getMu(), colX, colY, colN, mWind);
 
-  //update own ship
-  mOwnShip->Update(mTime, mTideHeight, mWeather, mWind, mSolver, mOffsetPosition);
+      //update own ship
+      mOwnShip->Update(mTime, mTideHeight, mWeather, mWind, mSolver, mOffsetPosition);
+    }
 
   if (mOwnShip->getNumberProp() > 1)
     mSound->setVolumeEngine(fabs(mOwnShip->getPortEngine())*0.5);
@@ -986,6 +993,23 @@ void SimulationModel::updateFromNetwork(eCmdMsg aMsgType, void* aDataCmd)
 	  {
 	    mOwnShip->getSail().SetOnOff(dataRotor->onOff);
 	    mOwnShip->getSail().SetRotDirection(dataRotor->rotDir);
+	  }
+
+	break;
+      }
+
+    case E_CMD_MESSAGE_SECONDARY_SHIP:
+      {
+	sSecShipInf *dataSecShip = (sSecShipInf*)aDataCmd;
+	Eigen::Vector3d eta(dataSecShip->posZ - mOffsetPosition.Z, dataSecShip->posX - mOffsetPosition.X, dataSecShip->hdg);
+	Eigen::Vector3d mu(dataSecShip->surge, dataSecShip->sway, dataSecShip->rot);
+
+	mOwnShip->setPrimaryState(eta, mu, dataSecShip->stw, dataSecShip->roll, dataSecShip->pitch);
+
+	if(mOwnShip->getSail().GetCount() > 0)
+	  {
+	    mOwnShip->getSail().SetOnOff(dataSecShip->sailOnOff);
+	    mOwnShip->getSail().SetRotDirection(dataSecShip->sailRotDir == -1 ? "left" : "right");
 	  }
 
 	break;

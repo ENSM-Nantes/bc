@@ -270,7 +270,6 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
       int polarOpenResult = mSails.OpenPolar(polarFile, "TotalSails_X", "TotalSails_Y");
       mSails.InitPolar("STW_kt", "TWS_kt", "TWA_deg");
 
-#ifndef _WIN32
       if (polarOpenResult == 0) {
         std::string userFolder = Utilities::getUserDir();
         std::string iniFilename = "bc5.ini";
@@ -284,10 +283,15 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
         if (!polarSendUser.empty() && !polarSendHost.empty() && !polarSendPath.empty()) {
           std::string scpCmd = "scp -q -o BatchMode=yes -o ConnectTimeout=5 " + polarFile + " "
                               + polarSendUser + "@" + polarSendHost + ":" + polarSendPath + " &";
-          system(scpCmd.c_str());
+
+#ifdef _WIN32
+    ShellExecute(NULL, "open", scpCmd.c_str(), NULL, NULL, SW_MINIMIZE);
+#else
+    system(scpCmd.c_str());
+#endif
         }
       }
-#endif
+
       std::string meshFile = basePath + "../../Sails/" + mSails.GetType() + "/" + mSails.GetSize() + "/" + "sail.obj";
 
       for (int i = 0; i < mSails.GetCount(); i++)

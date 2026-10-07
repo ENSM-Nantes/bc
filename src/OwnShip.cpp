@@ -35,6 +35,10 @@
 #include "Water.hpp"
 #include "Tide.hpp"
 
+#ifdef _WIN32
+#include <Windows.h>
+#endif
+
 OwnShip::OwnShip()
 {  
   mHasGps = false;
@@ -281,14 +285,16 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
         std::string polarSendPath = IniFile::iniFileToString(iniFilename, "Polar_Send_Path", "");
 
         if (!polarSendUser.empty() && !polarSendHost.empty() && !polarSendPath.empty()) {
-          std::string scpCmd = "scp -q -o BatchMode=yes -o ConnectTimeout=5 " + polarFile + " "
-                              + polarSendUser + "@" + polarSendHost + ":" + polarSendPath + " &";
+
 
 #ifdef _WIN32
-    ShellExecute(NULL, "open", scpCmd.c_str(), NULL, NULL, SW_MINIMIZE);
+          std::string scpCmd = "scp -o BatchMode=yes -o ConnectTimeout=5 " + polarFile + " "
+              + "\"" + polarSendUser + "@" + polarSendHost + ":" + polarSendPath + "\"";
 #else
-    system(scpCmd.c_str());
+    std::string scpCmd = "scp -o BatchMode=yes -o ConnectTimeout=5 " + polarFile + " "
+                              + polarSendUser + "@" + polarSendHost + ":" + polarSendPath + " &";
 #endif
+        system(scpCmd.c_str());
         }
       }
 
@@ -472,11 +478,11 @@ void OwnShip::UpdateSecondary(sTime& aTime, float aTideHeight)
   mEta[1] += (sin(hdg)*mMu[0] + cos(hdg)*mMu[1]) * deltaTime;
   mEta[2] += mMu[2] * deltaTime;
 
-  if(mEta[2] > (2*M_PI))
-    mEta[2] -= (2*M_PI);
+  if(mEta[2] > (2*PI))
+    mEta[2] -= (2*PI);
 
   if(mEta[2] < 0)
-    mEta[2] += (2*M_PI);
+    mEta[2] += (2*PI);
 
   ApplyControls(deltaTime);
 

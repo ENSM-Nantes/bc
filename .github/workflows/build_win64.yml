@@ -45,6 +45,11 @@ jobs:
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m:1 /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=${{env.BUILD_ARCHITECTURE}} "${{env.SOLUTION_FILE_PATH}}"
 
+    - name: Install NSIS
+      shell: powershell
+      run: |
+        choco install nsis -y
+
     - name: Build Installer
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: "makensis.exe install/bc_installer_win64.nsi"

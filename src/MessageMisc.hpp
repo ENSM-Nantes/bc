@@ -3,7 +3,7 @@
 
 #include <string>
 
-#define MAX_HEADER_MSG (8)
+#define MAX_HEADER_MSG (9)
 #define MAX_RECORD_BC_MSG (13)
 
 /*****************Enum cmds*****************************/
@@ -25,6 +25,7 @@ typedef enum{
   E_CMD_MESSAGE_MULTIPLAYER_COMMAND,
   E_CMD_MESSAGE_WIND_INJECTION,
   E_CMD_MESSAGE_ROTOR,
+  E_CMD_MESSAGE_SECONDARY_SHIP,
   E_CMD_MESSAGE_UNKNOWN=0x99
 }eCmdMsg;
 
@@ -175,6 +176,20 @@ typedef struct{
   bool onOff;
   std::string rotDir;
 }sRotorCtrl;
+
+typedef struct{
+  double posX;
+  double posZ;
+  double hdg;
+  double surge;
+  double sway;
+  double rot;
+  double stw;
+  double roll;
+  float pitch;
+  bool sailOnOff;
+  int sailRotDir;
+}sSecShipInf;
 
 
 #endif

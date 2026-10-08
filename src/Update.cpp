@@ -33,8 +33,11 @@ void Update::UpdateNetwork(void* aModel, Network* aNet, OperatingMode::Mode aMod
   
   msgType = E_CMD_MESSAGE_UNKNOWN;
 
-  aNet->WaitMessage(inMsg, msgType, &dataCmd, timeout);
-  pModel->updateFromNetwork(msgType, dataCmd);
+  while(aNet->WaitMessage(inMsg, msgType, &dataCmd, timeout))
+    {
+      pModel->updateFromNetwork(msgType, dataCmd);
+      msgType = E_CMD_MESSAGE_UNKNOWN;
+    }
 
   if (OperatingMode::Secondary == aMode)
     {
@@ -43,6 +46,9 @@ void Update::UpdateNetwork(void* aModel, Network* aNet, OperatingMode::Mode aMod
     }
   else
     {
+      std::string msgSecShip = outMsg.SecondaryShip();
+      aNet->SendMessage(msgSecShip);
+
 
       if (pModel->getLoopNumber() % 100 == 0)
 	{

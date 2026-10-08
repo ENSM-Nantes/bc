@@ -13,7 +13,8 @@ sParseHeader tParseHeader[MAX_HEADER_MSG] = {{"MC", &Message::ParseMapController
 					     {"SD", &Message::ParseShutDown},
 					     {"MH", &Message::ParseMultiPlayer},
 					     {"WI", &Message::ParseWindInjection},
-					     {"SA", &Message::ParseSailManagement}
+					     {"SA", &Message::ParseSailManagement},
+					     {"SS", &Message::ParseSecondaryShip}
 };
 
 
@@ -423,6 +424,30 @@ eCmdMsg Message::ParseOwnShip(std::string& aMsg, void** aCmdData)
       ownShipInfos = GetInfosOwnShip(osRec);
       *aCmdData = (void*)&ownShipInfos;
       return E_CMD_MESSAGE_OWN_SHIP;
+    }
+  return E_CMD_MESSAGE_UNKNOWN;
+}
+
+eCmdMsg Message::ParseSecondaryShip(std::string& aMsg, void** aCmdData)
+{
+  std::vector<std::string> ssRec = Utilities::split(aMsg,',');
+  static sSecShipInf secShipInfos = {0};
+
+  if(ssRec.size() == 11)
+    {
+      secShipInfos.posX = Utilities::lexical_cast<double>(ssRec.at(0));
+      secShipInfos.posZ = Utilities::lexical_cast<double>(ssRec.at(1));
+      secShipInfos.hdg = Utilities::lexical_cast<double>(ssRec.at(2));
+      secShipInfos.surge = Utilities::lexical_cast<double>(ssRec.at(3));
+      secShipInfos.sway = Utilities::lexical_cast<double>(ssRec.at(4));
+      secShipInfos.rot = Utilities::lexical_cast<double>(ssRec.at(5));
+      secShipInfos.stw = Utilities::lexical_cast<double>(ssRec.at(6));
+      secShipInfos.roll = Utilities::lexical_cast<double>(ssRec.at(7));
+      secShipInfos.pitch = Utilities::lexical_cast<float>(ssRec.at(8));
+      secShipInfos.sailOnOff = Utilities::lexical_cast<int>(ssRec.at(9)) != 0;
+      secShipInfos.sailRotDir = Utilities::lexical_cast<int>(ssRec.at(10));
+      *aCmdData = (void*)&secShipInfos;
+      return E_CMD_MESSAGE_SECONDARY_SHIP;
     }
   return E_CMD_MESSAGE_UNKNOWN;
 }
@@ -1018,6 +1043,41 @@ std::string& Message::KeepAliveShort(void)
   return msg;
 }
 
+
+std::string& Message::SecondaryShip(void)
+{
+  static std::string msg;
+  SimulationModel *pModel = (SimulationModel*)mModel;
+  OwnShip *pOwnShip = pModel->getOwnShip();
+  Eigen::Vector3d eta = pOwnShip->getEta();
+  Eigen::Vector3d mu = pOwnShip->getMu();
+
+  msg.clear();
+  msg = "SS";
+  msg.append(std::to_string(eta[1] + pModel->getOffsetPos().X));
+  msg.append(",");
+  msg.append(std::to_string(eta[0] + pModel->getOffsetPos().Z));
+  msg.append(",");
+  msg.append(std::to_string(eta[2]));
+  msg.append(",");
+  msg.append(std::to_string(mu[0]));
+  msg.append(",");
+  msg.append(std::to_string(mu[1]));
+  msg.append(",");
+  msg.append(std::to_string(mu[2]));
+  msg.append(",");
+  msg.append(std::to_string(pOwnShip->getSpeedThroughWater()));
+  msg.append(",");
+  msg.append(std::to_string(pOwnShip->getRollAngle()));
+  msg.append(",");
+  msg.append(std::to_string(pOwnShip->getPitch()));
+  msg.append(",");
+  msg.append(std::to_string(pOwnShip->getSail().GetOnOff()));
+  msg.append(",");
+  msg.append(std::to_string(pOwnShip->getSail().GetRotDirection()));
+
+  return msg;
+}
 
 std::string& Message::ShutDown(void)
 {

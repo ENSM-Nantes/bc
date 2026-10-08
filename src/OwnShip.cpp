@@ -35,6 +35,10 @@
 #include "Water.hpp"
 #include "Tide.hpp"
 
+#ifdef _WIN32
+#include <Windows.h>
+#endif
+
 OwnShip::OwnShip()
 {  
   mHasGps = false;
@@ -270,7 +274,6 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
       int polarOpenResult = mSails.OpenPolar(polarFile, "TotalSails_X", "TotalSails_Y");
       mSails.InitPolar("STW_kt", "TWS_kt", "TWA_deg");
 
-#ifndef _WIN32
       if (polarOpenResult == 0) {
         std::string userFolder = Utilities::getUserDir();
         std::string iniFilename = "bc5.ini";
@@ -282,12 +285,19 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
         std::string polarSendPath = IniFile::iniFileToString(iniFilename, "Polar_Send_Path", "");
 
         if (!polarSendUser.empty() && !polarSendHost.empty() && !polarSendPath.empty()) {
-          std::string scpCmd = "scp -q -o BatchMode=yes -o ConnectTimeout=5 " + polarFile + " "
+
+
+#ifdef _WIN32
+          std::string scpCmd = "scp -o BatchMode=yes -o ConnectTimeout=5 " + polarFile + " "
+              + "\"" + polarSendUser + "@" + polarSendHost + ":" + polarSendPath + "\"";
+#else
+    std::string scpCmd = "scp -o BatchMode=yes -o ConnectTimeout=5 " + polarFile + " "
                               + polarSendUser + "@" + polarSendHost + ":" + polarSendPath + " &";
-          system(scpCmd.c_str());
+#endif
+        system(scpCmd.c_str());
         }
       }
-#endif
+
       std::string meshFile = basePath + "../../Sails/" + mSails.GetType() + "/" + mSails.GetSize() + "/" + "sail.obj";
 
       for (int i = 0; i < mSails.GetCount(); i++)
@@ -380,43 +390,7 @@ void OwnShip::Update(sTime& aTime, float aTideHeight, float aWeather, Wind *aWin
 	  mSails.SetWind(aWind->getTrueSpeed(), aWind->getApparentDir());
 	}     
 
-      //Apply engine power 
-      if(mNumberProp > 1)
-	{
-	  float portThrust = 0; 
-	  float stbdThrust = 0;
-	  
-	  portThrust = mPortEngine*mEngine[0].getRpmMax()/60;
-	  stbdThrust = mStbdEngine*mEngine[1].getRpmMax()/60;
-
-	  mProp[0].SetRevs(portThrust, deltaTime);
-	  mProp[1].SetRevs(stbdThrust, deltaTime);
-	}
-      else
-	{
-	  float monoThrust = 0;
-
-	  monoThrust = mPortEngine*mEngine[0].getRpmMax()/60;
-	  mProp[0].SetRevs(monoThrust, deltaTime);
-	}
-
-      //Thruster
-      if(mThruster.HasBowThruster())
-	{
-	  float bowThrusterRevsPerSec = mThruster.getRpmMax()/60;
-	  mThruster.GetBowPropeller().SetRevs(mBowThruster*bowThrusterRevsPerSec, deltaTime);
-	}
-
-      if(mThruster.HasSternThruster())
-	{
-	  float sternThrusterRevsPerSec = mThruster.getRpmMax()/60;
-	  mThruster.GetSternPropeller().SetRevs(mSternThruster*sternThrusterRevsPerSec, deltaTime);
-	}
-
-      //Apply rudder angle
-      for(unsigned char i = 0;i<getNumberRud();i++)
-	mRudder[i].SetDelta((mWheel*PI)/180, deltaTime);
-      
+      ApplyControls(deltaTime);
     }
 
     /*Sign correction*/
@@ -453,6 +427,81 @@ void OwnShip::Update(sTime& aTime, float aTideHeight, float aWeather, Wind *aWin
   mShipScene->setPosition(irr::core::vector3df(mEta[1], yPos, mEta[0]));
   mShipScene->setRotation(Angles::irrAnglesFromYawPitchRoll(mEta[2]*180/PI, mPitch, mRollAngle*signRoll*(180/PI)));
   
+}
+
+void OwnShip::ApplyControls(float deltaTime)
+{
+  //Apply engine power 
+  if(mNumberProp > 1)
+    {
+      float portThrust = 0; 
+      float stbdThrust = 0;
+      
+      portThrust = mPortEngine*mEngine[0].getRpmMax()/60;
+      stbdThrust = mStbdEngine*mEngine[1].getRpmMax()/60;
+
+      mProp[0].SetRevs(portThrust, deltaTime);
+      mProp[1].SetRevs(stbdThrust, deltaTime);
+    }
+  else
+    {
+      float monoThrust = 0;
+
+      monoThrust = mPortEngine*mEngine[0].getRpmMax()/60;
+      mProp[0].SetRevs(monoThrust, deltaTime);
+    }
+
+  //Thruster
+  if(mThruster.HasBowThruster())
+    {
+      float bowThrusterRevsPerSec = mThruster.getRpmMax()/60;
+      mThruster.GetBowPropeller().SetRevs(mBowThruster*bowThrusterRevsPerSec, deltaTime);
+    }
+
+  if(mThruster.HasSternThruster())
+    {
+      float sternThrusterRevsPerSec = mThruster.getRpmMax()/60;
+      mThruster.GetSternPropeller().SetRevs(mSternThruster*sternThrusterRevsPerSec, deltaTime);
+    }
+
+  //Apply rudder angle
+  for(unsigned char i = 0;i<getNumberRud();i++)
+    mRudder[i].SetDelta((mWheel*PI)/180, deltaTime);
+}
+
+void OwnShip::UpdateSecondary(sTime& aTime, float aTideHeight)
+{
+  double deltaTime = aTime.deltaTime;
+  double hdg = mEta[2];
+
+  mEta[0] += (cos(hdg)*mMu[0] - sin(hdg)*mMu[1]) * deltaTime;
+  mEta[1] += (sin(hdg)*mMu[0] + cos(hdg)*mMu[1]) * deltaTime;
+  mEta[2] += mMu[2] * deltaTime;
+
+  if(mEta[2] > (2*PI))
+    mEta[2] -= (2*PI);
+
+  if(mEta[2] < 0)
+    mEta[2] += (2*PI);
+
+  ApplyControls(deltaTime);
+
+  mSails.UpdateMesh(mDevice);
+
+  int signRoll = mHull.getInvertRoll() ? -1 : 1;
+  double yPos = aTideHeight + mHeightCorrection;
+
+  mShipScene->setPosition(irr::core::vector3df(mEta[1], yPos, mEta[0]));
+  mShipScene->setRotation(Angles::irrAnglesFromYawPitchRoll(mEta[2]*180/PI, mPitch, mRollAngle*signRoll*(180/PI)));
+}
+
+void OwnShip::setPrimaryState(Eigen::Vector3d aEta, Eigen::Vector3d aMu, double aStw, double aRollAngle, float aPitch)
+{
+  mEta = aEta;
+  mMu = aMu;
+  mSpeedThroughWater = aStw;
+  mRollAngle = aRollAngle;
+  mPitch = aPitch;
 }
 
 void OwnShip::setRateOfTurn(float rateOfTurn)

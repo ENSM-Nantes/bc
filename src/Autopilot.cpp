@@ -64,7 +64,7 @@ bool Autopilot::receiveAPB(APB sentence)
 
   float bearingToSteer = Angles::normaliseAngle(sentence.heading_to_dest);
   float currentHeading = Angles::normaliseAngle(((OwnShip*)mOwnShip)->getHeading()*irr::core::RADTODEG);
-  float relativeBearing = bearingToSteer - currentHeading;
+  float relativeBearing = 90 - currentHeading;
 
   if (relativeBearing >= 180.0) {
     relativeBearing -= 360.0;

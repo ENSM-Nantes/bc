@@ -71,24 +71,24 @@ bool Autopilot::receiveAPB(APB sentence)
   if (relativeBearing <= -180.0) {
     relativeBearing += 360.0;
   }
-  float rot = ((OwnShip*)mOwnShip)->getRateOfTurn()*irr::core::RADTODEG;
-  float dampening = 1.0;
+  //float rot = ((OwnShip*)mOwnShip)->getRateOfTurn()*irr::core::RADTODEG;
+  //float dampening = 1.0;
   float timeUntilOvershoot = 0;
   
-  if (rot != 0.0) {
+  /*if (rot != 0.0) {
     timeUntilOvershoot = relativeBearing / rot;
     if (0 <= timeUntilOvershoot && timeUntilOvershoot < 15) {
       // linear scale from no dampening at 15s to steering into the
       // opposite direction at less than 2.0
       dampening = (1.0 / 13.0) * timeUntilOvershoot - (2.0 / 13.0);
     }
-  }
+    }*/
 
   // set wheel to val between -30.0 (>=60 deg L) and 30.0 (>=60 deg R) (setWheel clamps vals)
-  float wheel = (relativeBearing / 60.0) * 30.0;
+  float wheel = relativeBearing;
   
   // Normal case, just set the wheel
-  ((OwnShip*)mOwnShip)->setWheel(wheel * dampening);
+  ((OwnShip*)mOwnShip)->setWheel(wheel);
 
 
   return false;
@@ -136,8 +136,8 @@ bool Autopilot::receiveRMB(RMB sentence)
   if (leg_progress > 0.75) {
     throttle = std::max(0.1, throttle * (-3.6 * leg_progress + 3.7));
   }
-  ((OwnShip*)mOwnShip)->setPortEngine(throttle);
-  ((OwnShip*)mOwnShip)->setStbdEngine(throttle);
+  //((OwnShip*)mOwnShip)->setPortEngine(throttle);
+  //((OwnShip*)mOwnShip)->setStbdEngine(throttle);
   return false;
 }
 

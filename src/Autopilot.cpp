@@ -65,27 +65,14 @@ bool Autopilot::receiveAPB(APB sentence)
   float bearingToSteer = Angles::normaliseAngle(sentence.heading_to_dest);
   float currentHeading = Angles::normaliseAngle(((OwnShip*)mOwnShip)->getHeading()*irr::core::RADTODEG);
   float relativeBearing = bearingToSteer - currentHeading;
+
   if (relativeBearing >= 180.0) {
     relativeBearing -= 360.0;
   }
   if (relativeBearing <= -180.0) {
     relativeBearing += 360.0;
   }
-  //float rot = ((OwnShip*)mOwnShip)->getRateOfTurn()*irr::core::RADTODEG;
-  //float dampening = 1.0;
-  float timeUntilOvershoot = 0;
-  
-  /*if (rot != 0.0) {
-    timeUntilOvershoot = relativeBearing / rot;
-    if (0 <= timeUntilOvershoot && timeUntilOvershoot < 15) {
-      // linear scale from no dampening at 15s to steering into the
-      // opposite direction at less than 2.0
-      dampening = (1.0 / 13.0) * timeUntilOvershoot - (2.0 / 13.0);
-    }
-    }*/
-
-  // set wheel to val between -30.0 (>=60 deg L) and 30.0 (>=60 deg R) (setWheel clamps vals)
-  float wheel = relativeBearing;
+    float wheel = 0.25 * relativeBearing;
   
   // Normal case, just set the wheel
   ((OwnShip*)mOwnShip)->setWheel(wheel);
@@ -106,36 +93,8 @@ bool Autopilot::receiveRMB(RMB sentence)
 					 sentence.dest_waypoint_longitude,
 					 sentence.dest_waypoint_longitude_dir);
 
-  if (destWaypointLat != INVALID_LAT && destWaypointLong != INVALID_LONG) {
-    currentWaypointPos[0] = destWaypointLat;
-    currentWaypointPos[1] = destWaypointLong;
-  }
 
-  if (sentence.dest_waypoint_id != currentWaypointId) {
-    currentLegLen = sentence.range_to_dest * M_IN_NM;
-    currentWaypointId = sentence.dest_waypoint_id;
-  }
-
-  // adjust motor throttle based on leg length if desired
-  float throttle = 1.0;
-  if (currentLegLen < 150) {
-    // very short leg, navigate cautiously
-    throttle = 0.15;
-  } else if (currentLegLen < 900) {
-    throttle = currentLegLen / 900;
-  } else {
-    throttle = 1.0;
-  }
-  // start "breaking" when near the end of a leg (> 75% there)
-  // breaking is linear from no breaking up to 0.1 of the leg throttle at 100%
-  // with a minimum of 0.1 throttle
-  if (currentLegLen == 0) {
-    return true;
-  }
-  float leg_progress = 1.0 - ((sentence.range_to_dest * M_IN_NM) / currentLegLen);
-  if (leg_progress > 0.75) {
-    throttle = std::max(0.1, throttle * (-3.6 * leg_progress + 3.7));
-  }
+  
   //((OwnShip*)mOwnShip)->setPortEngine(throttle);
   //((OwnShip*)mOwnShip)->setStbdEngine(throttle);
   return false;

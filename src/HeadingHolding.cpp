@@ -2,7 +2,7 @@
 #include "OwnShip.hpp"
 #include "Angles.hpp"
 
-static const float KP = 0.20;
+static const float KP = 0.15;
 static const float KD = 7;
 
 HeadingHolding::HeadingHolding()

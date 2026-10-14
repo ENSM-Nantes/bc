@@ -17,6 +17,7 @@ typedef enum{
   MULTIHUB,
   MAP_CTRL,
   WIND_INJ,
+  HDG_HOLD,
   UNKNOWN
 }eTarget;
 

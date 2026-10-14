@@ -168,6 +168,7 @@ int Com::ClientMsg(const char *aData, size_t aDataSize)
       if(E_MSG_TO_MASTER_MP & msgTo) SendMsg(MASTER_MP);
       if(E_MSG_TO_MC & msgTo) SendMsg(MAP_CTRL);
       if(E_MSG_TO_WI & msgTo) SendMsg(WIND_INJ);
+      if(E_MSG_TO_HH & msgTo) SendMsg(HDG_HOLD);
     }
 
   return 0;

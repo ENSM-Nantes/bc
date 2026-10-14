@@ -24,6 +24,8 @@ int Message::Process(std::string& aMsg)
   if(aMsg.substr(0,2) == "WI")  return E_MSG_TO_MASTER | E_MSG_TO_MC;
   if(aMsg.substr(0,2) == "SA")  return E_MSG_TO_MASTER;
   if(aMsg.substr(0,2) == "SS")  return E_MSG_TO_SLAVE;
+  if(aMsg.substr(0,2) == "HC")  return E_MSG_TO_MASTER;
+  if(aMsg.substr(0,2) == "HS")  return E_MSG_TO_HH;
 
   return E_MSG_TO_UNKNOW_HOST;
 }

@@ -4,6 +4,7 @@
 #include "SimulationModel.hpp"
 #include "ModelParams.hpp"
 #include "Utilities.hpp"
+#include "Angles.hpp"
 
 
 sParseHeader tParseHeader[MAX_HEADER_MSG] = {{"MC", &Message::ParseMapController},
@@ -14,7 +15,8 @@ sParseHeader tParseHeader[MAX_HEADER_MSG] = {{"MC", &Message::ParseMapController
 					     {"MH", &Message::ParseMultiPlayer},
 					     {"WI", &Message::ParseWindInjection},
 					     {"SA", &Message::ParseSailManagement},
-					     {"SS", &Message::ParseSecondaryShip}
+					     {"SS", &Message::ParseSecondaryShip},
+					     {"HC", &Message::ParseHeadingHolding}
 };
 
 
@@ -448,6 +450,21 @@ eCmdMsg Message::ParseSecondaryShip(std::string& aMsg, void** aCmdData)
       secShipInfos.sailRotDir = Utilities::lexical_cast<int>(ssRec.at(10));
       *aCmdData = (void*)&secShipInfos;
       return E_CMD_MESSAGE_SECONDARY_SHIP;
+    }
+  return E_CMD_MESSAGE_UNKNOWN;
+}
+
+eCmdMsg Message::ParseHeadingHolding(std::string& aMsg, void** aCmdData)
+{
+  std::vector<std::string> hcRec = Utilities::split(aMsg,',');
+  static sHdgHold hdgHoldInfos = {false, 0};
+
+  if(hcRec.size() == 2)
+    {
+      hdgHoldInfos.enable = Utilities::lexical_cast<int>(hcRec.at(0)) != 0;
+      hdgHoldInfos.heading = Utilities::lexical_cast<float>(hcRec.at(1));
+      *aCmdData = (void*)&hdgHoldInfos;
+      return E_CMD_MESSAGE_HEADING_HOLDING;
     }
   return E_CMD_MESSAGE_UNKNOWN;
 }
@@ -1040,6 +1057,21 @@ std::string& Message::KeepAliveShort(void)
   msg.append(",");
   msg.append(std::to_string(pModel->getOwnShip()->getSail().GetRotSpeed()));
   
+  return msg;
+}
+
+
+std::string& Message::HeadingHoldingStatus(void)
+{
+  static std::string msg;
+  SimulationModel *pModel = (SimulationModel*)mModel;
+
+  msg.clear();
+  msg = "HS";
+  msg.append(std::to_string(Angles::normaliseAngle(pModel->getOwnShip()->getHeading()*irr::core::RADTODEG)));
+  msg.append(",");
+  msg.append(std::to_string(pModel->getHeadingHolding()->getEnabled()));
+
   return msg;
 }
 

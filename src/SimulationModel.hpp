@@ -48,6 +48,7 @@
 #include "OperatingModeEnum.hpp"
 #include "Solver.hpp"
 #include "Wind.hpp"
+#include "HeadingHolding.hpp"
 
 
 
@@ -122,6 +123,7 @@ public:
   ManOverboard* getMoB(void);
   Collision* getCollision(void);
   Wind* getWind(void);
+  HeadingHolding* getHeadingHolding(void);
   
   /*Update*/
   void update(void);
@@ -176,6 +178,7 @@ private:
   Light* mLight;
   Collision* mCollision;
   Wind* mWind;
+  HeadingHolding* mHeadingHolding;
   
   /*Views*/
   float mCurrentZoom; // Zoom currently in use

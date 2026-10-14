@@ -52,6 +52,7 @@ SimulationModel::SimulationModel(irr::IrrlichtDevice* aDev, GUIMain* aGui, Sound
   mCollision = new Collision();
   mSolver = new Solver();
   mWind = new Wind();
+  mHeadingHolding = new HeadingHolding();
   
   mDevice = aDev;
   mSmgr = mDevice->getSceneManager();;
@@ -198,6 +199,8 @@ SimulationModel::SimulationModel(irr::IrrlichtDevice* aDev, GUIMain* aGui, Sound
   //Wind
   mWind->load(mOwnShip);
 
+  mHeadingHolding->load(mOwnShip);
+
   //MoB
   mManOverboard->load(irr::core::vector3df(0,0,0),mTerrain, mWater, mWind, mTide, mDevice);
   
@@ -254,6 +257,7 @@ SimulationModel::~SimulationModel()
   delete mLight;
   delete mCollision;
   delete mWind;
+  delete mHeadingHolding;
 }
 
 OwnShip* SimulationModel::getOwnShip(void)
@@ -349,6 +353,12 @@ Collision* SimulationModel::getCollision(void)
 Wind* SimulationModel::getWind(void)
 {
   if(NULL != mWind) return mWind;
+  else return NULL;
+}
+
+HeadingHolding* SimulationModel::getHeadingHolding(void)
+{
+  if(NULL != mHeadingHolding) return mHeadingHolding;
   else return NULL;
 }
 
@@ -467,6 +477,8 @@ void SimulationModel::update()
     }
   else
     {
+      mHeadingHolding->update();
+
       //Solver Man 3Ddl
       mSolver->Run(mTime, mOwnShip->getEta(), mOwnShip->getMu(), colX, colY, colN, mWind);
 
@@ -980,6 +992,14 @@ void SimulationModel::updateFromNetwork(eCmdMsg aMsgType, void* aDataCmd)
 
 	if(dataWeather->windSpeed > 0) {mWind->setTrueSpeed(dataWeather->windSpeed);}
 	if(dataWeather->windDirection > 0) {mWind->setTrueDirection(dataWeather->windDirection);}
+
+	break;
+      }
+    case E_CMD_MESSAGE_HEADING_HOLDING:
+      {
+	sHdgHold *dataHdgHold = (sHdgHold*)aDataCmd;
+
+	mHeadingHolding->setCommand(dataHdgHold->enable, dataHdgHold->heading);
 
 	break;
       }

@@ -15,7 +15,8 @@ typedef enum{
 #define E_MSG_TO_MH		 (0x08)
 #define E_MSG_TO_MASTER_MP   (0x10)
 #define E_MSG_TO_WI   (0x20)
-#define E_MSG_TO_UNKNOW_HOST (0x40)
+#define E_MSG_TO_HH   (0x40)
+#define E_MSG_TO_UNKNOW_HOST (0x80)
 
 
 

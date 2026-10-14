@@ -59,6 +59,9 @@ void Update::UpdateNetwork(void* aModel, Network* aNet, OperatingMode::Mode aMod
 	{
 	  std::string msgKeepAliveShort = outMsg.KeepAliveShort();
 	  aNet->SendMessage(msgKeepAliveShort);
+
+	  std::string msgHdgHold = outMsg.HeadingHoldingStatus();
+	  aNet->SendMessage(msgHdgHold);
 	}
       else if (pModel->getLoopNumber() % 6 == 0)
 	{

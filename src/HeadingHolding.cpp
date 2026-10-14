@@ -3,6 +3,7 @@
 #include "Angles.hpp"
 
 static const float KP = 0.25;
+static const float KD = 0.7;
 
 HeadingHolding::HeadingHolding()
 {
@@ -37,7 +38,7 @@ void HeadingHolding::update(void)
       headingError += 360.0;
     }
 
-  mOwnShip->setWheel(KP * headingError);
+  mOwnShip->setWheel((KP * headingError) - ((KD * mOwnShip->getRateOfTurn())*180/M_PI));
 }
 
 void HeadingHolding::setCommand(bool aEnable, float aHeading)

@@ -2,7 +2,7 @@
 #include "OwnShip.hpp"
 #include "Angles.hpp"
 
-static const float HEADING_GAIN = 1.0;
+static const float KP = 0.25;
 
 HeadingHolding::HeadingHolding()
 {
@@ -37,7 +37,7 @@ void HeadingHolding::update(void)
       headingError += 360.0;
     }
 
-  mOwnShip->setWheel(HEADING_GAIN * headingError);
+  mOwnShip->setWheel(KP * headingError);
 }
 
 void HeadingHolding::setCommand(bool aEnable, float aHeading)

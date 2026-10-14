@@ -3,7 +3,7 @@
 #include "Angles.hpp"
 
 static const float KP = 0.25;
-static const float KD = 2;
+static const float KD = 7;
 
 HeadingHolding::HeadingHolding()
 {

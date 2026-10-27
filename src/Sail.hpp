@@ -12,6 +12,14 @@
 #define ROTOR_TIME_TO_MAX_SPEED (30)
 #define ROTOR_MAX_SPEED (3.12)
 
+/*Suction sail penalty applied to the polar force (1 = optimal settings)*/
+#define SUCTION_OFF_FACTOR (0.3f)        //Suction off : the thick body stalls
+#define SUCTION_FLAP_ZERO_FACTOR (0.2f)  //Flap centred : no trailing edge, little lift
+#define SUCTION_FLAP_MAX (35.0f)
+#define SUCTION_AOA_OPT (20.0f)          //Incidence of maximum force
+#define SUCTION_AOA_MAX (50.0f)          //Incidence where the force is lost
+#define SUCTION_DOWNWIND_DEG (150.0f)    //Downwind the sail only works as drag
+
 class Sail
 {
  public:
@@ -36,6 +44,9 @@ class Sail
   float GetRotSpeed(void);
   bool GetOnOff(void);
   int GetRotDirection(void);
+  /*Suction sail*/
+  void SetSuction(bool aSuctionOn, float aBodyAngle, float aFlapAngle);
+  float GetSuctionEfficiency(double aAwaDeg);
   
   /*Polar file*/
   int OpenPolar(const std::string aPolarFile, std::string aVarNameX, std::string aVarNameY);
@@ -60,6 +71,11 @@ class Sail
   bool mWaitForStart;
   int mRotDirection;
   float mRotSpeed;
+
+  //Suction sail
+  bool mSuctionOn;
+  float mBodyAngle;
+  float mFlapAngle;
   
   //Sail management
   int mSailsCount;

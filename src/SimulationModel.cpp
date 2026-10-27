@@ -997,6 +997,17 @@ void SimulationModel::updateFromNetwork(eCmdMsg aMsgType, void* aDataCmd)
 
 	break;
       }
+    case E_CMD_MESSAGE_SUCTION:
+      {
+	sSuctionCtrl *dataSuction = (sSuctionCtrl*)aDataCmd;
+
+	if(mOwnShip->getSail().GetType() == "Suction" && mOwnShip->getSail().GetCount() > 0)
+	  {
+	    mOwnShip->getSail().SetSuction(dataSuction->suctionOn, dataSuction->bodyAngle, dataSuction->flapAngle);
+	  }
+
+	break;
+      }
 
     case E_CMD_MESSAGE_SECONDARY_SHIP:
       {

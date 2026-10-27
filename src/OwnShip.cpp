@@ -303,6 +303,11 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
       for (int i = 0; i < mSails.GetCount(); i++)
 	{
 	  sailMesh[i] = smgr->getMesh(meshFile.c_str());
+	  if(NULL == sailMesh[i])
+	    {
+	      std::cout << "Sail mesh not found : " << meshFile << std::endl;
+	      break;
+	    }
 	  mSails.SetMeshScene(smgr->addMeshSceneNode(sailMesh[i]));
 	  mSails.GetMeshScene(i)->setParent(mShipScene);
 	  mSails.GetMeshScene(i)->setPosition(irr::core::vector3df(mSails.GetPos()[i][0], mSails.GetPos()[i][1], mSails.GetPos()[i][2])); 

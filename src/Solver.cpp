@@ -75,7 +75,8 @@ Eigen::VectorXd Solver::DiffEq(const Eigen::VectorXd& aVectEtaMu)
   //Get Force from sails
   if(mShip->getSail().GetCount() > 0)
     {
-      if(mShip->getSail().GetOnOff())
+      //Suction sail always produces a force, penalised by its settings
+      if(mShip->getSail().GetOnOff() || mShip->getSail().GetType() == "Suction")
 	{
 	  mShip->getSail().ComputeT();
 	  mT += mShip->getSail().getT();

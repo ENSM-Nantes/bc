@@ -13,6 +13,7 @@ Sail::Sail(void)
   mSuctionOn = false;
   mBodyAngle = 0;
   mFlapAngle = 0;
+  memset(mFlapPivot, 0, sizeof(mFlapPivot));
   mDimCountX = 0;
   mDimCountY = 0;
   mSailsCount = 0;
@@ -342,9 +343,42 @@ void Sail::UpdateMesh(irr::IrrlichtDevice *aDev)
 	  GetMeshScene(i)->setRotation(rotation);
 	}  
     }
-  else
+  else if(GetType() == "Suction")
     {
-      //TODO for other kind of sails
+      for(int i = 0; i < GetCount() && i < mCountMeshScene && i < SAILS_MAX; i++)
+	{
+	  if(mSailsScene[i])
+	    mSailsScene[i]->setRotation(irr::core::vector3df(0, mBodyAngle, 0));
+
+	  if(mFlapPivot[i])
+	    mFlapPivot[i]->setRotation(irr::core::vector3df(0, -mFlapAngle, 0));
+	}
+    }
+}
+
+void Sail::AddFlapMesh(irr::scene::ISceneManager *aSmgr, std::string aMeshFile)
+{
+  irr::scene::IMesh* flapMesh = aSmgr->getMesh(aMeshFile.c_str());
+
+  if(NULL == flapMesh)
+    {
+      std::cout << "Flap mesh not found : " << aMeshFile << std::endl;
+      return;
+    }
+
+  for(int i = 0; i < GetCount() && i < mCountMeshScene && i < SAILS_MAX; i++)
+    {
+      if(NULL == mSailsScene[i])
+	continue;
+
+      mFlapPivot[i] = aSmgr->addEmptySceneNode(mSailsScene[i]);
+      mFlapPivot[i]->setPosition(irr::core::vector3df(0, 0, SUCTION_FLAP_PIVOT_Z));
+
+      irr::scene::IMeshSceneNode* flapScene = aSmgr->addMeshSceneNode(flapMesh, mFlapPivot[i], -1, irr::core::vector3df(0, 0, -SUCTION_FLAP_PIVOT_Z));
+      flapScene->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
+
+      for(unsigned int mat = 0; mat < flapScene->getMaterialCount(); mat++)
+	flapScene->getMaterial(mat).ColorMaterial = irr::video::ECM_DIFFUSE_AND_AMBIENT;
     }
 }
 

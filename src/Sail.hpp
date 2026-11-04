@@ -19,6 +19,7 @@
 #define SUCTION_AOA_OPT (20.0f)          //Incidence of maximum force
 #define SUCTION_AOA_MAX (50.0f)          //Incidence where the force is lost
 #define SUCTION_DOWNWIND_DEG (150.0f)    //Downwind the sail only works as drag
+#define SUCTION_FLAP_PIVOT_Z (-1.5f)
 
 class Sail
 {
@@ -38,6 +39,7 @@ class Sail
   float (*GetPos(void))[3];
   void PrintParams(void);
   void UpdateMesh(irr::IrrlichtDevice *aDev);
+  void AddFlapMesh(irr::scene::ISceneManager *aSmgr, std::string aMeshFile);
   /*Rotor*/
   void SetOnOff(bool aOnOff);
   void SetRotDirection(std::string aRotDirection);
@@ -76,6 +78,7 @@ class Sail
   bool mSuctionOn;
   float mBodyAngle;
   float mFlapAngle;
+  irr::scene::ISceneNode* mFlapPivot[SAILS_MAX];
   
   //Sail management
   int mSailsCount;

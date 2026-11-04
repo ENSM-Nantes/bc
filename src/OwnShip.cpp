@@ -322,6 +322,9 @@ int OwnShip::Load(OwnShipData aOwnShipData, Water *aWater, Tide *aTide, Terrain 
 		}
 	    }
 	}
+
+      if(mSails.GetType() == "Suction")
+	mSails.AddFlapMesh(smgr, basePath + "../../Sails/" + mSails.GetType() + "/" + mSails.GetSize() + "/" + "flap.obj");
     }
 
   mShipScene->setMaterialFlag(irr::video::EMF_FOG_ENABLE, true);

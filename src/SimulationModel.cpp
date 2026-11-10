@@ -477,7 +477,7 @@ void SimulationModel::update()
     }
   else
     {
-      mHeadingHolding->update();
+      mHeadingHolding->update(mTime);
 
       //Solver Man 3Ddl
       mSolver->Run(mTime, mOwnShip->getEta(), mOwnShip->getMu(), colX, colY, colN, mWind);

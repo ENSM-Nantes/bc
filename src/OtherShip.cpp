@@ -164,6 +164,9 @@ OtherShip::OtherShip(const std::string& aName, const std::string& aInternalName,
 		}
 	    }
 	}
+
+      if(mSails.GetType() == "Suction")
+	mSails.AddFlapMesh(smgr, basePath + "../../Sails/" + mSails.GetType() + "/" + mSails.GetSize() + "/" + "flap.obj");
     }
 
   //Set lighting to use diffuse and ambient, so lighting of untextured models works

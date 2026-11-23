@@ -22,8 +22,8 @@ public:
 private:
   OwnShip *mOwnShip;
   bool mEnabled;
-  float mSetHeading;
-  float mSlopeStarted;
+  float mHeadingGoal;
+  float mHdgGoalRamp;
 };
 
 #endif

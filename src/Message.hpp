@@ -23,6 +23,7 @@ public:
   eCmdMsg ParseSailManagement(std::string& aMsg, void** aCmdData);
   eCmdMsg ParseWindInjection(std::string& aMsg, void** aCmdData);
   eCmdMsg ParseSecondaryShip(std::string& aMsg, void** aCmdData);
+  eCmdMsg ParseTalkToShip(std::string& aMsg, void** aCmdData);
   std::string& KeepAliveShort(void);
   std::string& KeepAlive(void);
   std::string& SecondaryShip(void);

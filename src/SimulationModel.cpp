@@ -1015,6 +1015,23 @@ void SimulationModel::updateFromNetwork(eCmdMsg aMsgType, void* aDataCmd)
 	break;
       }
 
+    case E_CMD_MESSAGE_TALK_TO_SHIP:
+      {
+	sTalkToShip *dataTalkToShip = (sTalkToShip*)aDataCmd;
+
+	if(dataTalkToShip->subId == 1)
+	  {
+	    mOwnShip->setWheel(dataTalkToShip->wheel);
+	  }
+	else if(dataTalkToShip->subId == 2)
+	  {
+	    mOwnShip->setPortEngine(dataTalkToShip->engine);
+	    mOwnShip->setStbdEngine(dataTalkToShip->engine);
+	  }
+
+	break;
+      }
+
     case E_CMD_MESSAGE_UNKNOWN:
     default:
       {	

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 #include "Message.hpp"
 #include "SimulationModel.hpp"
 #include "ModelParams.hpp"
@@ -14,7 +15,8 @@ sParseHeader tParseHeader[MAX_HEADER_MSG] = {{"MC", &Message::ParseMapController
 					     {"MH", &Message::ParseMultiPlayer},
 					     {"WI", &Message::ParseWindInjection},
 					     {"SA", &Message::ParseSailManagement},
-					     {"SS", &Message::ParseSecondaryShip}
+					     {"SS", &Message::ParseSecondaryShip},
+					     {"TS", &Message::ParseTalkToShip}
 };
 
 
@@ -450,6 +452,40 @@ eCmdMsg Message::ParseSecondaryShip(std::string& aMsg, void** aCmdData)
       return E_CMD_MESSAGE_SECONDARY_SHIP;
     }
   return E_CMD_MESSAGE_UNKNOWN;
+}
+
+eCmdMsg Message::ParseTalkToShip(std::string& aMsg, void** aCmdData)
+{
+  std::vector<std::string> tsRec = Utilities::split(aMsg,',');
+  static sTalkToShip talkToShip = {0};
+
+  if(tsRec.size() < 2) return E_CMD_MESSAGE_UNKNOWN;
+
+  talkToShip.subId = Utilities::lexical_cast<int>(tsRec.at(1));
+
+  switch(talkToShip.subId)
+    {
+    case 1:
+      {
+	if(tsRec.size() != 4) return E_CMD_MESSAGE_UNKNOWN;
+	float angle = std::fabs(Utilities::lexical_cast<float>(tsRec.at(2)));
+	if(tsRec.at(3) == "S") talkToShip.wheel = angle;
+	else if(tsRec.at(3) == "P") talkToShip.wheel = -angle;
+	else return E_CMD_MESSAGE_UNKNOWN;
+	break;
+      }
+    case 2:
+      {
+	if(tsRec.size() != 3) return E_CMD_MESSAGE_UNKNOWN;
+	talkToShip.engine = Utilities::lexical_cast<float>(tsRec.at(2)) / 100.0f;
+	break;
+      }
+    default:
+      return E_CMD_MESSAGE_UNKNOWN;
+    }
+
+  *aCmdData = (void*)&talkToShip;
+  return E_CMD_MESSAGE_TALK_TO_SHIP;
 }
 
 eCmdMsg Message::ParseScenario(std::string& aMsg, void** aCmdData)

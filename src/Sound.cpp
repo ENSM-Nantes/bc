@@ -41,10 +41,16 @@ float Sound::hornVolume = 0.0;
 float Sound::waveVolume = 1.0;
 float Sound::engineVolume=0.0;
 float Sound::alarmVolume=0.0;
+float Sound::bellVolume=0.0;
+float Sound::gongVolume=0.0;
 
 bool Sound::waveSoundLoaded = false;
 bool Sound::hornSoundLoaded = false;
 bool Sound::alarmSoundLoaded = false;
+bool Sound::bellSoundLoaded = false;
+bool Sound::gongSoundLoaded = false;
+std::atomic<bool> Sound::bellRestart(false);
+std::atomic<bool> Sound::gongRestart(false);
 
 Sound::Sound() {
 
@@ -76,6 +82,8 @@ void Sound::load(std::string aBasePath)
   data.fileWave = 0;
   data.fileHorn = 0;
   data.fileAlarm = 0;
+  data.fileBell = 0;
+  data.fileGong = 0;
 
   data.infoEngine.format = 0;
   data.fileEngine = sf_open(mEnginePath.c_str(), SFM_READ, &data.infoEngine);
@@ -128,6 +136,9 @@ void Sound::load(std::string aBasePath)
   } else {
     alarmSoundLoaded = true;
   }
+
+  bellSoundLoaded = openOptionalSound(mBellPath, "bell", data.fileBell, data.infoBell);
+  gongSoundLoaded = openOptionalSound(mGongPath, "gong", data.fileGong, data.infoGong);
 
   /* Open PaStream with values read from the file - all should be same, so any can be used*/
   portAudioError = Pa_OpenDefaultStream(&stream
@@ -207,6 +218,58 @@ void Sound::startHorn() {setVolumeHorn(1);}
 
 void Sound::endHorn() {setVolumeHorn(0);}
 
+void Sound::startBell()
+{
+  bellRestart = true;
+  bellVolume = 1.0;
+}
+
+void Sound::endBell()
+{
+  bellVolume = 0.0;
+}
+
+void Sound::startGong()
+{
+  gongRestart = true;
+  gongVolume = 1.0;
+}
+
+void Sound::endGong()
+{
+  gongVolume = 0.0;
+}
+
+bool Sound::openOptionalSound(const std::string& aPath, const std::string& aName, SNDFILE*& aFile, SF_INFO& aInfo)
+{
+  if (aPath.empty())
+    {
+      std::cerr << "No " << aName << " sound file found, " << aName << " sound not loaded." << std::endl;
+      return false;
+    }
+
+  aInfo.format = 0;
+  aFile = sf_open(aPath.c_str(), SFM_READ, &aInfo);
+  if (sf_error(aFile) != SF_ERR_NO_ERROR)
+    {
+      std::cerr << "sf_error on " << aName << "SoundFile " << aPath << " Error: " << sf_strerror(aFile) << std::endl;
+      if (aFile)
+	{
+	  sf_close(aFile);
+	  aFile = 0;
+	}
+      return false;
+    }
+
+  if (aInfo.channels != data.infoEngine.channels || aInfo.samplerate != data.infoEngine.samplerate)
+    {
+      std::cerr << "Inconsistent formats of " << aName << " and engine sounds, " << aName << " sound not loaded." << std::endl;
+      return false;
+    }
+
+  return true;
+}
+
 void Sound::setAlarm(bool alarmState)
 {
   if (alarmState) {
@@ -219,64 +282,37 @@ void Sound::setAlarm(bool alarmState)
 
 void Sound::setOwnShipSounds(void)
 {
-  std::string parts[16] = {"Engine.wav","engine.wav","sounds/Engine.wav","sounds/engine.wav",
-			   "Bwave.wav","bwave.wav","sounds/Bwave.wav","sounds/bwave.wav",
-			   "Horn.wav","horn.wav","sounds/Horn.wav","sounds/horn.wav",
-			   "Alarm.wav","alarm.wav","sounds/Alarm.wav","sounds/alarm.wav",
+  const std::vector<std::pair<std::string*, std::string>> sounds = {
+    {&mEnginePath, "ngine.wav"},
+    {&mBwavePath, "wave.wav"},
+    {&mHornPath, "orn.wav"},
+    {&mAlarmPath, "larm.wav"},
+    {&mBellPath, "ell.wav"},
+    {&mGongPath, "ong.wav"},
   };
-  
-  std::string *pSoundPath;
-  std::string soundPath;
-  std::ifstream file;
-  
-  for(unsigned char i=0,j=0;i<16,j<4;i+=4,j++)
+  const std::vector<std::pair<std::string, std::string>> initials = {
+    {"E", "e"}, {"B", "b"}, {"H", "h"}, {"A", "a"}, {"B", "b"}, {"G", "g"},
+  };
+
+  for (unsigned int i = 0; i < sounds.size(); i++)
     {
-      if(0==j) pSoundPath = &mEnginePath;
-      else if(1==j) pSoundPath = &mBwavePath;
-      else if(2==j) pSoundPath = &mHornPath;
-      else if(3==j) pSoundPath = &mAlarmPath;
-      else return;
-      //Define into model folder
-      
-      //Upper case
-      soundPath = mBasePath;
-      soundPath.append(parts[i]);
-      file.open(soundPath.c_str());
-      if(file.good())
+      const std::string upper = initials[i].first + sounds[i].second;
+      const std::string lower = initials[i].second + sounds[i].second;
+      const std::string candidates[4] = {
+	mBasePath + upper,
+	mBasePath + lower,
+	"sounds/" + upper,
+	"sounds/" + lower,
+      };
+      for (const std::string& candidate : candidates)
 	{
-	  *pSoundPath = soundPath;
-	  file.close();
+	  std::ifstream file(candidate.c_str());
+	  if (file.good())
+	    {
+	      *sounds[i].first = candidate;
+	      break;
+	    }
 	}
-
-      //Lower case
-      soundPath = mBasePath;
-      soundPath.append(parts[i+1]);  
-      file.open(soundPath.c_str());
-      if(file.good())
-	{
-	  *pSoundPath = soundPath;
-	  file.close();
-	}
-      //Default if not define into model folder
-
-      //Upper case
-      soundPath = parts[i+2];
-      file.open(soundPath.c_str());
-      if(file.good())
-	{
-	  *pSoundPath = soundPath;
-	   file.close();
-	}
-      
-      //Lower case
-      soundPath = parts[i+3];
-      file.open(soundPath.c_str());
-      if(file.good())
-	{
-	  *pSoundPath = soundPath;
-	   file.close();
-	}
-      
     }
 }
 
@@ -293,6 +329,8 @@ Sound::~Sound() {
   if (data.fileEngine) {sf_close(data.fileEngine);}
   if (data.fileHorn) {sf_close(data.fileHorn);}
   if (data.fileAlarm) {sf_close(data.fileAlarm);}
+  if (data.fileBell) {sf_close(data.fileBell);}
+  if (data.fileGong) {sf_close(data.fileGong);}
 }
 
 #endif // WITH_SOUND

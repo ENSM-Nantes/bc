@@ -29,6 +29,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <atomic>
 
 class Sound
 {
@@ -49,6 +50,10 @@ public:
   void setAlarm(bool alarmState);
   void startHorn();
   void endHorn();
+  void startBell();
+  void endBell();
+  void startGong();
+  void endGong();
   void setOwnShipSounds(void);
 
   
@@ -61,10 +66,14 @@ private:
     SNDFILE     *fileEngine;
     SNDFILE     *fileHorn;
     SNDFILE     *fileAlarm;
+    SNDFILE     *fileBell;
+    SNDFILE     *fileGong;
     SF_INFO      infoWave;
     SF_INFO      infoEngine;
     SF_INFO      infoHorn;
     SF_INFO      infoAlarm;
+    SF_INFO      infoBell;
+    SF_INFO      infoGong;
   } callback_data_s;
 
   std::string mBasePath;
@@ -72,15 +81,39 @@ private:
   std::string mBwavePath;
   std::string mHornPath;
   std::string mAlarmPath;
+  std::string mBellPath;
+  std::string mGongPath;
   static float hornVolume;
   static float waveVolume;
   static float engineVolume;
   static float alarmVolume;
+  static float bellVolume;
+  static float gongVolume;
 
   bool soundLoaded;
   static bool waveSoundLoaded;
   static bool hornSoundLoaded;
   static bool alarmSoundLoaded;
+  static bool bellSoundLoaded;
+  static bool gongSoundLoaded;
+  static std::atomic<bool> bellRestart;
+  static std::atomic<bool> gongRestart;
+
+  bool openOptionalSound(const std::string& aPath, const std::string& aName, SNDFILE*& aFile, SF_INFO& aInfo);
+
+  static void readLoop(SNDFILE* aFile, std::atomic<bool>& aRestart, float* aBuffer, sf_count_t aCount)
+  {
+    if (aRestart.exchange(false))
+      sf_seek(aFile, 0, SEEK_SET);
+    sf_count_t done = sf_read_float(aFile, aBuffer, aCount);
+    if (done < aCount)
+      {
+	sf_seek(aFile, 0, SEEK_SET);
+	done += sf_read_float(aFile, aBuffer + done, aCount - done);
+      }
+    if (done < aCount)
+      memset(aBuffer + done, 0, sizeof(float) * (aCount - done));
+  }
   PaError portAudioError;
   PaStream *stream;
   //SNDFILE *file;
@@ -112,6 +145,8 @@ private:
     std::vector<float> waveBuffer(sizeof(float) * frameCount * p_data->infoEngine.channels);
     std::vector<float> hornBuffer(sizeof(float) * frameCount * p_data->infoEngine.channels);
     std::vector<float> alarmBuffer(sizeof(float) * frameCount * p_data->infoEngine.channels);
+    std::vector<float> bellBuffer(sizeof(float) * frameCount * p_data->infoEngine.channels);
+    std::vector<float> gongBuffer(sizeof(float) * frameCount * p_data->infoEngine.channels);
 
     /* read into buffers */
     num_read = sf_read_float(p_data->fileEngine, engineBuffer.data(), frameCount * p_data->infoEngine.channels);
@@ -204,6 +239,12 @@ private:
 	}
     }
 
+    if (bellSoundLoaded)
+      readLoop(p_data->fileBell, bellRestart, bellBuffer.data(), frameCount * p_data->infoEngine.channels);
+
+    if (gongSoundLoaded)
+      readLoop(p_data->fileGong, gongRestart, gongBuffer.data(), frameCount * p_data->infoEngine.channels);
+
     //Copy into output buffer, with mixing
     for (int i = 0; i < frameCount * p_data->infoWave.channels; i++) {
       out[i] = engineVolume*engineBuffer[i] * 0.33;
@@ -215,6 +256,12 @@ private:
       }
       if (alarmSoundLoaded) {
 	out[i] += alarmVolume*alarmBuffer[i] * 0.33;
+      }
+      if (bellSoundLoaded) {
+	out[i] += bellVolume*bellBuffer[i] * 0.33;
+      }
+      if (gongSoundLoaded) {
+	out[i] += gongVolume*gongBuffer[i] * 0.33;
       }
     }
 

@@ -507,6 +507,32 @@ eCmdMsg Message::ParseSailManagement(std::string& aMsg, void** aCmdData)
     {
       rotorCtrl.rotDir = "left";
     }
+  //Suction sail : SUS<0|1>, SUB<body angle deg>, SUF<flap angle deg>
+  else if(aMsg.length() > 3 && aMsg.substr(0,2) == "SU")
+    {
+      static sSuctionCtrl suctionCtrl = {false, 0, 0};
+
+      try
+	{
+	  float value = std::stof(aMsg.substr(3));
+
+	  if(aMsg[2] == 'S')
+	    suctionCtrl.suctionOn = (value != 0);
+	  else if(aMsg[2] == 'B')
+	    suctionCtrl.bodyAngle = value;
+	  else if(aMsg[2] == 'F')
+	    suctionCtrl.flapAngle = value;
+	  else
+	    return E_CMD_MESSAGE_UNKNOWN;
+	}
+      catch(const std::exception&)
+	{
+	  return E_CMD_MESSAGE_UNKNOWN;
+	}
+
+      *aCmdData = (void*)&suctionCtrl;
+      return E_CMD_MESSAGE_SUCTION;
+    }
   else
     {
       return E_CMD_MESSAGE_UNKNOWN;
@@ -1039,6 +1065,8 @@ std::string& Message::KeepAliveShort(void)
   msg.append(std::to_string(pModel->getOwnShip()->getSail().GetRotDirection()));
   msg.append(",");
   msg.append(std::to_string(pModel->getOwnShip()->getSail().GetRotSpeed()));
+  msg.append(",");
+  msg.append(pModel->getOwnShip()->getSail().GetType());
   
   return msg;
 }

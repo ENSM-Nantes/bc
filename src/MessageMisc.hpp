@@ -25,6 +25,7 @@ typedef enum{
   E_CMD_MESSAGE_MULTIPLAYER_COMMAND,
   E_CMD_MESSAGE_WIND_INJECTION,
   E_CMD_MESSAGE_ROTOR,
+  E_CMD_MESSAGE_SUCTION,
   E_CMD_MESSAGE_SECONDARY_SHIP,
   E_CMD_MESSAGE_UNKNOWN=0x99
 }eCmdMsg;
@@ -176,6 +177,12 @@ typedef struct{
   bool onOff;
   std::string rotDir;
 }sRotorCtrl;
+
+typedef struct{
+  bool suctionOn;
+  float bodyAngle;
+  float flapAngle;
+}sSuctionCtrl;
 
 typedef struct{
   double posX;

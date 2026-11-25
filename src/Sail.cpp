@@ -10,6 +10,10 @@ Sail::Sail(void)
   mWaitForStop = false;
   mWaitForStart = false;
   mRotDirection = -1;
+  mSuctionOn = false;
+  mBodyAngle = 0;
+  mFlapAngle = 0;
+  memset(mFlapPivot, 0, sizeof(mFlapPivot));
   mDimCountX = 0;
   mDimCountY = 0;
   mSailsCount = 0;
@@ -213,6 +217,43 @@ int Sail::GetRotDirection(void)
   return mRotDirection;
 }
 
+void Sail::SetSuction(bool aSuctionOn, float aBodyAngle, float aFlapAngle)
+{
+  mSuctionOn = aSuctionOn;
+  mBodyAngle = aBodyAngle;
+  mFlapAngle = aFlapAngle;
+}
+
+//aAwaDeg : apparent wind angle, negative to port. Same rule as ShipPolars
+float Sail::GetSuctionEfficiency(double aAwaDeg)
+{
+  float awa = (float)aAwaDeg;
+  //Incidence between the body and the apparent wind [-180, 180[
+  float aoa = fmodf(mBodyAngle - awa + 540.0f, 360.0f) - 180.0f;
+  float fSuction = mSuctionOn ? 1.0f : SUCTION_OFF_FACTOR;
+  float fFlap, fAoa;
+
+  //Flap on the windward side : flap and wind on the same side
+  if(fabsf(mFlapAngle) < 1.0f)
+    fFlap = SUCTION_FLAP_ZERO_FACTOR;
+  else if(mFlapAngle * awa < 0)
+    fFlap = 0;
+  else
+    fFlap = fmaxf(SUCTION_FLAP_ZERO_FACTOR, fabsf(mFlapAngle) / SUCTION_FLAP_MAX);
+
+  //Body turned from the apparent wind toward the bow
+  if(fabsf(awa) > SUCTION_DOWNWIND_DEG)
+    fAoa = 1;
+  else if(aoa * awa >= 0)
+    fAoa = 0;
+  else if(fabsf(aoa) <= SUCTION_AOA_OPT)
+    fAoa = fabsf(aoa) / SUCTION_AOA_OPT;
+  else
+    fAoa = fmaxf(0, 1 - (fabsf(aoa) - SUCTION_AOA_OPT) / (SUCTION_AOA_MAX - SUCTION_AOA_OPT));
+
+  return fSuction * fFlap * fAoa;
+}
+
 void Sail::UpdateMesh(irr::IrrlichtDevice *aDev)
 {
   static float time = 0, timeStart = 0, timeStop = 0, timeOn = 0, timeOff = 0;
@@ -302,9 +343,42 @@ void Sail::UpdateMesh(irr::IrrlichtDevice *aDev)
 	  GetMeshScene(i)->setRotation(rotation);
 	}  
     }
-  else
+  else if(GetType() == "Suction")
     {
-      //TODO for other kind of sails
+      for(int i = 0; i < GetCount() && i < mCountMeshScene && i < SAILS_MAX; i++)
+	{
+	  if(mSailsScene[i])
+	    mSailsScene[i]->setRotation(irr::core::vector3df(0, mBodyAngle, 0));
+
+	  if(mFlapPivot[i])
+	    mFlapPivot[i]->setRotation(irr::core::vector3df(0, -mFlapAngle, 0));
+	}
+    }
+}
+
+void Sail::AddFlapMesh(irr::scene::ISceneManager *aSmgr, std::string aMeshFile)
+{
+  irr::scene::IMesh* flapMesh = aSmgr->getMesh(aMeshFile.c_str());
+
+  if(NULL == flapMesh)
+    {
+      std::cout << "Flap mesh not found : " << aMeshFile << std::endl;
+      return;
+    }
+
+  for(int i = 0; i < GetCount() && i < mCountMeshScene && i < SAILS_MAX; i++)
+    {
+      if(NULL == mSailsScene[i])
+	continue;
+
+      mFlapPivot[i] = aSmgr->addEmptySceneNode(mSailsScene[i]);
+      mFlapPivot[i]->setPosition(irr::core::vector3df(0, 0, SUCTION_FLAP_PIVOT_Z));
+
+      irr::scene::IMeshSceneNode* flapScene = aSmgr->addMeshSceneNode(flapMesh, mFlapPivot[i], -1, irr::core::vector3df(0, 0, -SUCTION_FLAP_PIVOT_Z));
+      flapScene->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
+
+      for(unsigned int mat = 0; mat < flapScene->getMaterialCount(); mat++)
+	flapScene->getMaterial(mat).ColorMaterial = irr::video::ECM_DIFFUSE_AND_AMBIENT;
     }
 }
 
@@ -393,8 +467,14 @@ void Sail::ComputeT(void)
   sailsForceX = GetForce('X', mSpeedThroughWater, mTrueWindSpeed * MPS_TO_KTS, fabs(apparentWindDeg));
   sailsForceY = GetForce('Y', mSpeedThroughWater, mTrueWindSpeed * MPS_TO_KTS, fabs(apparentWindDeg));
 
+  if(GetType() == "Suction")
+    {
+      float efficiency = GetSuctionEfficiency(apparentWindDeg);
+      sailsForceX *= efficiency;
+      sailsForceY *= efficiency;
+    }
   //Starboard wind
-  if(apparentWindDeg >= 30 && apparentWindDeg <= 180)
+  else if(apparentWindDeg >= 30 && apparentWindDeg <= 180)
     {
       //rot right
       if(mRotDirection == 1)

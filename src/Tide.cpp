@@ -27,7 +27,12 @@
 
 Tide::Tide()
 {
-
+  mIsStreamOverride = false;
+  mStreamOverrideDirection = 0;
+  mStreamOverrideSpeed = 0;
+  tideHeight = 0;
+  meanRangeSprings = 0;
+  meanRangeNeaps = 0;
 }
 
 Tide::~Tide()

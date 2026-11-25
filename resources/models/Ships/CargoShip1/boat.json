@@ -275,20 +275,20 @@
 		"fuelCons" : 0.0,
 		"power" : 0.0,
 		"propDiam" : 1.2000000476837158,
-		"thrustFactor" : 0,
+		"thrustFactor" : 0.27,
 		"nominalWake" : 0,
-		"k0" : 0,
-		"k1" : 0,
-		"k2" : 0,
+		"k0" : 0.293,
+		"k1" : -0.275,
+		"k2" : -0.139,
 		"forwardRotDir" : "right",
 		"pos" : {
 			"bow" : {
-				"x" : 0,
+				"x" : 0.45,
 				"yPort" : 0,
 				"yStbd" : 0
 			},
 			"stern" : {
-				"x" : 0,
+				"x" : -0.45,
 				"yPort" : 0,
 				"yStbd" : 0
 			}

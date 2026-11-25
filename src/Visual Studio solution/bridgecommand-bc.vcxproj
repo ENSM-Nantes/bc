@@ -193,6 +193,7 @@
     <ClCompile Include="..\Buoy.cpp" />
     <ClCompile Include="..\Buoys.cpp" />
     <ClCompile Include="..\Camera.cpp" />
+    <ClCompile Include="..\CanBus.cpp" />
     <ClCompile Include="..\Collision.cpp" />
     <ClCompile Include="..\ControlVisualiser.cpp" />
     <ClCompile Include="..\Credits.cpp" />
@@ -265,6 +266,7 @@
     <ClInclude Include="..\Buoy.hpp" />
     <ClInclude Include="..\Buoys.hpp" />
     <ClInclude Include="..\Camera.hpp" />
+    <ClInclude Include="..\CanBus.hpp" />
     <ClInclude Include="..\Collision.hpp" />
     <ClInclude Include="..\Constants.hpp" />
     <ClInclude Include="..\ControlVisualiser.hpp" />

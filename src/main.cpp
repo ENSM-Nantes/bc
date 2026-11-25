@@ -975,9 +975,19 @@ int main(int argc, char ** argv)
 		  model.getSound()->endHorn();
 	      }
 	    else if (canData[0] == canButtonBell)
-	      std::cout << "CanBus: Bell " << (pressed ? "pressed" : "released") << std::endl;
+	      {
+		if (pressed)
+		  model.getSound()->startBell();
+		else
+		  model.getSound()->endBell();
+	      }
 	    else if (canData[0] == canButtonGong)
-	      std::cout << "CanBus: Gong " << (pressed ? "pressed" : "released") << std::endl;
+	      {
+		if (pressed)
+		  model.getSound()->startGong();
+		else
+		  model.getSound()->endGong();
+	      }
 	  }
       }
       { IPROF("Render setup");

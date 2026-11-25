@@ -13,7 +13,7 @@
         "fuelCons": 177.0,
         "number": 1,
         "power": 4500.0,
-        "rpmMax": 170.0,
+        "rpmMax": 80.0,
         "type": "9M32C"
     },
     "general": {

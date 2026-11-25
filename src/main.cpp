@@ -37,6 +37,7 @@
 #include "NMEA.hpp"
 #include "Sound.hpp"
 #include "ThrusterSerial.hpp"
+#include "CanBus.hpp"
 #include "Utilities.hpp"
 #include "OperatingModeEnum.hpp"
 #include "LoadingQuotes.hpp"
@@ -390,6 +391,8 @@ int main(int argc, char ** argv)
   std::string thrusterInfoComPort = IniFile::iniFileToString(iniFilename, "ThrusterInfo_ComPort");
   irr::u32 thrusterInfoBaudrate = IniFile::iniFileTou32(iniFilename, "ThrusterInfo_Baudrate", 9600);
 
+  std::string canInterface = IniFile::iniFileToString(iniFilename, "CAN_Interface");
+
   //Conning
   std::string nmeaComPortConning = IniFile::iniFileToString(iniFilename, "NMEA_ComPort_Conning");
   irr::u32 nmeaBaudrateConning = IniFile::iniFileTou32(iniFilename, "NMEA_Baudrate_Conning", 4800);
@@ -728,6 +731,12 @@ int main(int argc, char ** argv)
   //Serial com to thruster joystick, usefull to light bow/stern led(s) if ship is equipped
   ThrusterSerial thrusterSerial;
 
+  CanBus canBus;
+  const uint32_t canButtonId = 0x00410180;
+  const uint8_t canButtonHorn = 0x0B;
+  const uint8_t canButtonBell = 0x09;
+  const uint8_t canButtonGong = 0x0A;
+
   //create NMEA serial port and UDP, linked to model
   NMEA nmeaConning;
   NMEA nmeaOpCpn;
@@ -839,6 +848,9 @@ int main(int argc, char ** argv)
   thrusterSerial.Init(thrusterInfoComPort, thrusterInfoBaudrate);
   thrusterSerial.Send(model.getOwnShip()->getThruster().HasBowThruster(), model.getOwnShip()->getThruster().HasSternThruster());
 
+  if (canBus.Open(canInterface))
+    canBus.SetFilters({{canButtonId, 0x1FFFFFFF}});
+
   //load realistic water
   //RealisticWaterSceneNode* realisticWater = new RealisticWaterSceneNode(smgr, 4000, 4000, "./",irr::core::dimension2du(512, 512),smgr->getRootSceneNode());
 
@@ -944,6 +956,29 @@ int main(int argc, char ** argv)
 	 if (!nmeaComPortGateway.empty())  nmeaGateway.SendSerial();
 	 if (!nmeaUDPAddrGateway.empty() && !nmeaUDPPortGateway.empty()) nmeaGateway.SendUdp();
 	 nmeaGateway.ClearQueue();
+      }
+
+      { IPROF("CAN");
+	uint32_t canId;
+	std::vector<uint8_t> canData;
+	bool canExtended;
+	while (canBus.Receive(canId, canData, canExtended))
+	  {
+	    if (!canExtended || canId != canButtonId || canData.size() < 2)
+	      continue;
+	    bool pressed = canData[1] != 0;
+	    if (canData[0] == canButtonHorn)
+	      {
+		if (pressed)
+		  model.getSound()->startHorn();
+		else
+		  model.getSound()->endHorn();
+	      }
+	    else if (canData[0] == canButtonBell)
+	      std::cout << "CanBus: Bell " << (pressed ? "pressed" : "released") << std::endl;
+	    else if (canData[0] == canButtonGong)
+	      std::cout << "CanBus: Gong " << (pressed ? "pressed" : "released") << std::endl;
+	  }
       }
       { IPROF("Render setup");
         driver->setViewPort(irr::core::rect<irr::s32>(0,0,graphicsWidth,graphicsHeight)); //Full screen before beginScene

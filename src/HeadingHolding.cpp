@@ -5,7 +5,7 @@
 
 
 static const float KP = 0.45;
-static const float KD = 2;
+static const float KD = 1;
 static const float RAMP_SPEED = 0.1666; //deg/s
 
 static float wrap180(float aAngle)
@@ -55,13 +55,17 @@ void HeadingHolding::update(sTime& aTime)
   float diffGoal = wrap180(mHdgGoalRamp - currentHeading);
   float rotDeg = mOwnShip->getRateOfTurn() * irr::core::RADTODEG;
 
+  float wheelCmd = KP * diffGoal - (KD * rotDeg);
+
   std::cout << "diffGoal : " << diffGoal << std::endl;
-  std::cout << "Ramp to Goal : " << rampToGoal << std::endl;
+  //std::cout << "Ramp to Goal : " << rampToGoal << std::endl;
   std::cout << "step : " << step << std::endl;
-  std::cout << "rampRate : " << rampRate << std::endl;
+  //std::cout << "rampRate : " << rampRate << std::endl;
   std::cout << "mHdgGoalRamp : " << mHdgGoalRamp << std::endl;
+  std::cout << "wheelCmd : " << wheelCmd << std::endl;
+
   
-  mOwnShip->setWheel(KP * diffGoal - (KD * rotDeg));
+  mOwnShip->setWheel(wheelCmd);
 }
 
 void HeadingHolding::setCommand(bool aEnable, float aHeading)

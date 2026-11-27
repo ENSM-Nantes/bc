@@ -4,7 +4,7 @@
 #include <cmath>
 
 
-static const float KP = 0.18;
+static const float KP = 0.45;
 static const float KD = 2;
 static const float RAMP_SPEED = 0.1666; //deg/s
 
